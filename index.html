@@ -506,137 +506,280 @@
       transform: translateY(-2px);
     }
 
-    /* Hero Data Terminal */
-    .hero-terminal {
-      background: var(--gray-950);
-      border: 1px solid var(--gray-800);
-      border-radius: 4px;
+    /* Federal Performance Monitor */
+    .federal-monitor {
+      background: var(--white);
+      border: 2px solid var(--gray-300);
+      border-radius: 2px;
       overflow: hidden;
-      box-shadow: var(--shadow-xl);
       opacity: 0;
-      animation: slideInRight 0.8s var(--ease-primary) 0.8s forwards;
-      transform: perspective(1000px) rotateY(-2deg) rotateX(2deg);
-      transition: transform 0.3s var(--ease-primary);
+      animation: fadeInSlide 0.8s var(--ease-primary) 0.8s forwards;
     }
 
-    .hero-terminal:hover {
-      transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
-    }
-
-    @keyframes slideInRight {
+    @keyframes fadeInSlide {
       from {
         opacity: 0;
-        transform: perspective(1000px) rotateY(-8deg) rotateX(4deg) translateX(40px);
+        transform: translateX(20px);
       }
       to {
         opacity: 1;
-        transform: perspective(1000px) rotateY(-2deg) rotateX(2deg) translateX(0);
+        transform: translateX(0);
       }
     }
 
-    .terminal-header {
-      background: var(--gray-900);
-      padding: 0.875rem 1.25rem;
-      border-bottom: 1px solid var(--gray-800);
+    .federal-header {
+      background: linear-gradient(180deg, var(--gray-50) 0%, var(--white) 100%);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 2px solid var(--gray-300);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .terminal-dots {
+    .federal-seal {
       display: flex;
-      gap: 0.5rem;
+      align-items: center;
+      gap: 0.75rem;
     }
 
-    .terminal-dots span {
-      width: 11px;
-      height: 11px;
+    .seal-icon {
+      width: 32px;
+      height: 32px;
+      border: 2px solid var(--black);
       border-radius: 50%;
-      background: var(--gray-700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      font-weight: 700;
+      color: var(--black);
+      position: relative;
     }
 
-    .terminal-dots span:nth-child(1) { background: #ff5f56; }
-    .terminal-dots span:nth-child(2) { background: #ffbd2e; }
-    .terminal-dots span:nth-child(3) { background: #27c93f; }
+    .seal-icon::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border: 1px solid var(--black);
+      border-radius: 50%;
+    }
 
-    .terminal-title {
+    .seal-icon::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      right: -1px;
+      width: 8px;
+      height: 8px;
+      background: var(--aw-red);
+      border: 2px solid var(--white);
+      border-radius: 50%;
+    }
+
+    .federal-title {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .federal-title-main {
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--black);
+    }
+
+    .federal-title-sub {
       font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-size: 0.625rem;
       color: var(--gray-500);
       letter-spacing: 0.05em;
     }
 
-    .terminal-content {
-      padding: 2rem 1.5rem;
-    }
-
-    .terminal-label {
-      font-family: var(--font-mono);
-      font-size: 0.6875rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--gray-500);
-      margin-bottom: 0.5rem;
-    }
-
-    .terminal-metric {
-      margin-bottom: 2rem;
-    }
-
-    .terminal-value {
-      font-family: var(--font-mono);
-      font-size: var(--text-mono-xl);
-      color: var(--white);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-      font-variant-numeric: tabular-nums;
-      font-weight: 500;
-    }
-
-    .terminal-description {
-      font-family: var(--font-body);
-      font-size: 0.875rem;
-      color: var(--gray-400);
-      line-height: 1.4;
-    }
-
-    .terminal-divider {
-      height: 1px;
-      background: var(--gray-800);
-      margin: 2rem 0;
-    }
-
-    .terminal-badge {
-      display: inline-flex;
+    .federal-status {
+      display: flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.75rem 1rem;
-      background: rgba(199, 19, 12, 0.1);
-      border: 1px solid rgba(199, 19, 12, 0.3);
+      padding: 0.375rem 0.75rem;
+      background: rgba(22, 163, 74, 0.08);
+      border: 1px solid rgba(22, 163, 74, 0.3);
       border-radius: 2px;
-      margin-top: 1.5rem;
     }
 
-    .terminal-badge-dot {
+    .status-indicator {
       width: 6px;
       height: 6px;
-      background: var(--aw-red);
+      background: #16a34a;
       border-radius: 50%;
       animation: pulse 2s ease-in-out infinite;
     }
 
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 0.5; transform: scale(0.95); }
     }
 
-    .terminal-badge-text {
+    .status-text {
       font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: #16a34a;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .federal-content {
+      padding: 2.5rem 2rem;
+    }
+
+    .data-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .data-primary {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 2px solid var(--gray-200);
+    }
+
+    .data-primary .data-label {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gray-500);
+      font-weight: 600;
+    }
+
+    .data-primary .data-value {
+      font-family: var(--font-mono);
+      font-size: 4.5rem;
+      color: var(--black);
+      line-height: 0.95;
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .data-primary .data-meta {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--gray-600);
+      line-height: 1.4;
+      max-width: 85%;
+    }
+
+    .data-secondary {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .data-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .data-item .data-label {
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gray-500);
+      font-weight: 600;
+    }
+
+    .data-item .data-value {
+      font-family: var(--font-mono);
+      font-size: 2.25rem;
+      color: var(--black);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .federal-footer {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid var(--gray-200);
+    }
+
+    .coverage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .coverage-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .coverage-label {
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray-500);
+      font-weight: 600;
+    }
+
+    .coverage-value {
+      font-family: var(--font-mono);
+      font-size: 1.125rem;
+      color: var(--black);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .verification-stamp {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.875rem;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 2px;
+    }
+
+    .stamp-icon {
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--aw-blue);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--aw-blue);
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .stamp-icon::before {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      border: 1px solid var(--aw-blue);
+    }
+
+    .stamp-text {
+      font-family: var(--font-body);
       font-size: 0.75rem;
       font-weight: 600;
-      color: var(--aw-red);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      color: var(--gray-700);
+      line-height: 1.3;
     }
 
     /* Performance Dashboard */
@@ -1143,6 +1286,19 @@
         text-align: center;
       }
 
+      .data-primary .data-value {
+        font-size: 3rem;
+      }
+
+      .data-item .data-value {
+        font-size: 1.75rem;
+      }
+
+      .data-secondary {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
       .metrics-grid {
         grid-template-columns: 1fr;
       }
@@ -1243,42 +1399,60 @@
           </div>
         </div>
 
-        <aside class="hero-terminal">
-          <div class="terminal-header">
-            <div class="terminal-dots">
-              <span></span>
-              <span></span>
-              <span></span>
+        <aside class="federal-monitor">
+          <div class="federal-header">
+            <div class="federal-seal">
+              <div class="seal-icon">AW</div>
+              <div class="federal-title">
+                <div class="federal-title-main">Performance Monitor</div>
+                <div class="federal-title-sub">National Workforce Initiative</div>
+              </div>
             </div>
-            <div class="terminal-title">metrics.log</div>
+            <div class="federal-status">
+              <span class="status-indicator"></span>
+              <span class="status-text">Live</span>
+            </div>
           </div>
 
-          <div class="terminal-content">
-            <div class="terminal-metric">
-              <div class="terminal-label">Total Placements</div>
-              <div class="terminal-value" data-stat-target="1947832">1,947,832</div>
-              <div class="terminal-description">Lives transformed since 1984</div>
+          <div class="federal-content">
+            <div class="data-grid">
+              <!-- Primary Metric - Hero Number -->
+              <div class="data-primary">
+                <div class="data-label">Total Placements</div>
+                <div class="data-value" data-stat-target="1947832">1,947,832</div>
+                <div class="data-meta">Individuals successfully placed into employment since program inception</div>
+              </div>
+
+              <!-- Secondary Metrics Grid -->
+              <div class="data-secondary">
+                <div class="data-item">
+                  <div class="data-label">Placement Time</div>
+                  <div class="data-value">~4 wks</div>
+                </div>
+
+                <div class="data-item">
+                  <div class="data-label">Retention</div>
+                  <div class="data-value">85%</div>
+                </div>
+              </div>
             </div>
 
-            <div class="terminal-divider"></div>
+            <div class="federal-footer">
+              <div class="coverage-grid">
+                <div class="coverage-item">
+                  <div class="coverage-label">Coverage</div>
+                  <div class="coverage-value">11 + DC</div>
+                </div>
+                <div class="coverage-item">
+                  <div class="coverage-label">Operational</div>
+                  <div class="coverage-value">40 yrs</div>
+                </div>
+              </div>
 
-            <div class="terminal-metric">
-              <div class="terminal-label">Avg. Time to Placement</div>
-              <div class="terminal-value">~4 wks</div>
-              <div class="terminal-description">Industry-leading speed</div>
-            </div>
-
-            <div class="terminal-divider"></div>
-
-            <div class="terminal-metric">
-              <div class="terminal-label">Retention Rate</div>
-              <div class="terminal-value">85%</div>
-              <div class="terminal-description">90-day job retention</div>
-            </div>
-
-            <div class="terminal-badge">
-              <span class="terminal-badge-dot"></span>
-              <span class="terminal-badge-text">Performance Based</span>
+              <div class="verification-stamp">
+                <div class="stamp-icon">✓</div>
+                <div class="stamp-text">Performance-Based Contract Model • Federal Vendor Certified</div>
+              </div>
             </div>
           </div>
         </aside>
