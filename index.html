@@ -1250,75 +1250,358 @@
       border-color: var(--white);
     }
 
-    /* How It Works */
+    /* How It Works - Dynamic Timeline */
     .how-it-works {
-      padding: 8rem 0;
-      background: var(--white);
+      padding: 10rem 0 12rem;
+      background: linear-gradient(to bottom, var(--white) 0%, var(--gray-50) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .how-it-works::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom,
+        transparent 0%,
+        var(--gray-200) 20%,
+        var(--gray-300) 50%,
+        var(--gray-200) 80%,
+        transparent 100%
+      );
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 1s var(--ease-primary);
+    }
+
+    .how-it-works.timeline-visible::before {
+      opacity: 1;
     }
 
     .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3rem;
-      margin-top: 4rem;
+      position: relative;
+      margin-top: 6rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .step-card {
       position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-bottom: 8rem;
       opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.6s var(--ease-primary);
+      transition: opacity 0.8s var(--ease-primary);
     }
 
     .step-card.is-visible {
       opacity: 1;
-      transform: translateY(0);
+    }
+
+    /* Alternating layout */
+    .step-card:nth-child(even) {
+      direction: rtl;
+    }
+
+    .step-card:nth-child(even) > * {
+      direction: ltr;
+    }
+
+    .step-content {
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: 0.2s;
+    }
+
+    .step-card:nth-child(even) .step-content {
+      transform: translateX(60px);
+    }
+
+    .step-card.is-visible .step-content {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .step-number-large {
+      position: absolute;
+      font-family: var(--font-display);
+      font-size: 15rem;
+      font-weight: 400;
+      line-height: 1;
+      color: var(--gray-100);
+      opacity: 0;
+      z-index: 0;
+      top: -4rem;
+      right: -2rem;
+      user-select: none;
+      pointer-events: none;
+      transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: scale(0.8) rotate(-5deg);
+    }
+
+    .step-card:nth-child(even) .step-number-large {
+      right: auto;
+      left: -2rem;
+      transform: scale(0.8) rotate(5deg);
+    }
+
+    .step-card.is-visible .step-number-large {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
     }
 
     .step-number {
+      display: inline-block;
       font-family: var(--font-dashboard);
       font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--aw-red);
+      color: var(--white);
+      background: var(--aw-red);
+      padding: 0.5rem 1rem;
+      border-radius: 2px;
       margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.6s var(--ease-primary);
+      transition-delay: 0.4s;
+    }
+
+    .step-card.is-visible .step-number {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .step-icon-wrapper {
+      position: relative;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: 0.3s;
+    }
+
+    .step-card.is-visible .step-icon-wrapper {
+      opacity: 1;
+      transform: scale(1);
     }
 
     .step-icon {
+      position: relative;
       width: 100%;
-      height: 240px;
+      aspect-ratio: 4/3;
       border-radius: 4px;
       overflow: hidden;
-      margin-bottom: 2rem;
-      position: relative;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .step-icon::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--aw-blue) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.6s var(--ease-primary);
+      z-index: 1;
+      mix-blend-mode: multiply;
+    }
+
+    .step-card:hover .step-icon::before {
+      opacity: 0.15;
+    }
+
+    .step-icon::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border: 2px solid var(--aw-red);
+      border-radius: 4px;
+      opacity: 0;
+      transform: scale(1.05);
+      transition: all 0.4s var(--ease-primary);
+      pointer-events: none;
+    }
+
+    .step-card:hover .step-icon::after {
+      opacity: 1;
+      transform: scale(1);
     }
 
     .step-icon img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: grayscale(100%);
-      transition: filter 0.4s ease;
+      filter: grayscale(100%) contrast(1.1);
+      transition: all 0.8s var(--ease-primary);
+      transform: scale(1.1);
+    }
+
+    .step-card.is-visible .step-icon img {
+      transform: scale(1);
     }
 
     .step-card:hover .step-icon img {
       filter: grayscale(0%);
+      transform: scale(1.05);
+    }
+
+    /* Decorative connecting line */
+    .step-connector {
+      position: absolute;
+      width: 2px;
+      height: 120px;
+      background: linear-gradient(to bottom, var(--aw-red), var(--aw-blue));
+      left: 50%;
+      transform: translateX(-50%) scaleY(0);
+      transform-origin: top;
+      transition: transform 1s var(--ease-primary);
+      transition-delay: 0.6s;
+      top: -60px;
+      border-radius: 2px;
+    }
+
+    .step-card:first-child .step-connector {
+      display: none;
+    }
+
+    .step-card.is-visible .step-connector {
+      transform: translateX(-50%) scaleY(1);
+    }
+
+    /* Floating accent element */
+    .step-accent {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border: 2px solid var(--accent-cyan);
+      border-radius: 50%;
+      opacity: 0;
+      z-index: 0;
+      transition: all 1s var(--ease-primary);
+      transition-delay: 0.8s;
+    }
+
+    .step-card:nth-child(1) .step-accent {
+      bottom: -40px;
+      right: 10%;
+      transform: translate(20px, 20px) rotate(45deg);
+    }
+
+    .step-card:nth-child(2) .step-accent {
+      top: -40px;
+      left: 10%;
+      transform: translate(-20px, -20px) rotate(-30deg);
+    }
+
+    .step-card:nth-child(3) .step-accent {
+      bottom: -40px;
+      right: 15%;
+      transform: translate(20px, 20px) rotate(60deg);
+    }
+
+    .step-card.is-visible .step-accent {
+      opacity: 0.3;
+      transform: translate(0, 0) rotate(0deg);
     }
 
     .step-title {
       font-family: var(--font-display);
-      font-size: var(--text-h3);
+      font-size: var(--text-h2);
       font-weight: 400;
-      line-height: 1.3;
+      line-height: 1.2;
       letter-spacing: -0.02em;
       color: var(--black);
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s var(--ease-primary);
+      transition-delay: 0.5s;
+    }
+
+    .step-card.is-visible .step-title {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .step-description {
+      font-size: var(--text-lg);
       color: var(--gray-600);
       line-height: 1.7;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s var(--ease-primary);
+      transition-delay: 0.6s;
+    }
+
+    .step-card.is-visible .step-description {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .step-card {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-bottom: 6rem;
+      }
+
+      .step-card:nth-child(even) {
+        direction: ltr;
+      }
+
+      .step-content {
+        transform: translateY(-40px);
+      }
+
+      .step-card:nth-child(even) .step-content {
+        transform: translateY(-40px);
+      }
+
+      .step-number-large {
+        font-size: 10rem;
+        top: -2rem;
+      }
+
+      .how-it-works::before {
+        display: none;
+      }
+
+      .step-connector {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .how-it-works {
+        padding: 6rem 0 8rem;
+      }
+
+      .step-number-large {
+        font-size: 6rem;
+        opacity: 0.5 !important;
+      }
+
+      .step-title {
+        font-size: var(--text-h3);
+      }
+
+      .step-description {
+        font-size: var(--text-base);
+      }
+
+      .step-accent {
+        display: none;
+      }
     }
 
     .section-cta {
@@ -2136,36 +2419,63 @@
 
       <div class="steps-grid">
         <article class="step-card">
-          <div class="step-number">01</div>
-          <div class="step-icon">
-            <img src="images/resume-coaching.jpg" alt="Connect" loading="lazy">
+          <div class="step-connector"></div>
+          <div class="step-number-large">01</div>
+          <div class="step-accent"></div>
+
+          <div class="step-content">
+            <div class="step-number">Step 01</div>
+            <h3 class="step-title">We start with you</h3>
+            <p class="step-description">
+              Tell us your goals. Share your challenges. We'll create a personalized plan that addresses everything—from childcare to criminal records to confidence.
+            </p>
           </div>
-          <h3 class="step-title">We start with you</h3>
-          <p class="step-description">
-            Tell us your goals. Share your challenges. We'll create a personalized plan that addresses everything—from childcare to criminal records to confidence.
-          </p>
+
+          <div class="step-icon-wrapper">
+            <div class="step-icon">
+              <img src="images/resume-coaching.jpg" alt="Connect" loading="lazy">
+            </div>
+          </div>
         </article>
 
         <article class="step-card">
-          <div class="step-number">02</div>
-          <div class="step-icon">
-            <img src="images/business-career-and-placement.jpg" alt="Prepare" loading="lazy">
+          <div class="step-connector"></div>
+          <div class="step-number-large">02</div>
+          <div class="step-accent"></div>
+
+          <div class="step-content">
+            <div class="step-number">Step 02</div>
+            <h3 class="step-title">Get job-ready fast</h3>
+            <p class="step-description">
+              Polish your resume. Nail your interviews. Learn new skills. We'll connect you directly with employers who are hiring now—no endless applications.
+            </p>
           </div>
-          <h3 class="step-title">Get job-ready fast</h3>
-          <p class="step-description">
-            Polish your resume. Nail your interviews. Learn new skills. We'll connect you directly with employers who are hiring now—no endless applications.
-          </p>
+
+          <div class="step-icon-wrapper">
+            <div class="step-icon">
+              <img src="images/business-career-and-placement.jpg" alt="Prepare" loading="lazy">
+            </div>
+          </div>
         </article>
 
         <article class="step-card">
-          <div class="step-number">03</div>
-          <div class="step-icon">
-            <img src="images/opportunities.jpg" alt="Succeed" loading="lazy">
+          <div class="step-connector"></div>
+          <div class="step-number-large">03</div>
+          <div class="step-accent"></div>
+
+          <div class="step-content">
+            <div class="step-number">Step 03</div>
+            <h3 class="step-title">Keep growing</h3>
+            <p class="step-description">
+              Your first day isn't our last day. We stick around to help you solve problems, earn raises, and build the career you deserve.
+            </p>
           </div>
-          <h3 class="step-title">Keep growing</h3>
-          <p class="step-description">
-            Your first day isn't our last day. We stick around to help you solve problems, earn raises, and build the career you deserve.
-          </p>
+
+          <div class="step-icon-wrapper">
+            <div class="step-icon">
+              <img src="images/opportunities.jpg" alt="Succeed" loading="lazy">
+            </div>
+          </div>
         </article>
       </div>
 
@@ -2555,6 +2865,28 @@
       }
     }
 
+    // Timeline Background Animation
+    class TimelineAnimation {
+      constructor() {
+        this.timeline = document.querySelector('.how-it-works');
+        if (this.timeline) {
+          this.init();
+        }
+      }
+
+      init() {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('timeline-visible');
+            }
+          });
+        }, { threshold: 0.1 });
+
+        observer.observe(this.timeline);
+      }
+    }
+
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
       // Initialize stat counters
@@ -2565,6 +2897,9 @@
 
       // Initialize scroll reveal
       new ScrollReveal();
+
+      // Initialize timeline animation
+      new TimelineAnimation();
 
       // Smooth scroll
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
