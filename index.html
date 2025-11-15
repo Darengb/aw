@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <!-- Distinctive Font Stack -->
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     /* ============================================
@@ -171,10 +171,10 @@
       gap: 0.75rem;
       text-decoration: none;
       color: var(--black);
-      font-family: var(--font-display);
+      font-family: 'Crimson Text', serif;
       font-size: 1.5rem;
-      font-weight: 400;
-      letter-spacing: -0.02em;
+      font-weight: 600;
+      letter-spacing: -0.01em;
       transition: opacity 0.2s ease;
     }
 
@@ -182,30 +182,10 @@
       opacity: 0.7;
     }
 
-    .nav-logo-mark {
-      width: 40px;
+    .nav-logo-img {
       height: 40px;
-      background: var(--black);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-mono);
-      font-size: 0.875rem;
-      font-weight: 700;
-      color: var(--white);
-      border-radius: 2px;
-      position: relative;
-    }
-
-    .nav-logo-mark::after {
-      content: '';
-      position: absolute;
-      bottom: 2px;
-      right: 2px;
-      width: 6px;
-      height: 6px;
-      background: var(--aw-red);
-      border-radius: 1px;
+      width: auto;
+      display: block;
     }
 
     .nav-links {
@@ -506,13 +486,13 @@
       transform: translateY(-2px);
     }
 
-    /* Federal Performance Monitor */
+    /* Performance Dashboard */
     .federal-monitor {
-      background: var(--white);
-      border: 2px solid var(--gray-300);
-      border-radius: 2px;
-      overflow: hidden;
+      background: transparent;
+      border: none;
+      overflow: visible;
       opacity: 0;
+      position: relative;
       animation: fadeInSlide 0.8s var(--ease-primary) 0.8s forwards;
     }
 
@@ -527,259 +507,290 @@
       }
     }
 
-    .federal-header {
-      background: linear-gradient(180deg, var(--gray-50) 0%, var(--white) 100%);
-      padding: 1.25rem 1.5rem;
-      border-bottom: 2px solid var(--gray-300);
+    /* Dashboard Header */
+    .dashboard-header {
+      background: transparent;
+      padding: 0 0 1rem 0;
+      border-bottom: none;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 0.5rem;
     }
 
-    .federal-seal {
+    .dashboard-title {
       display: flex;
       align-items: center;
       gap: 0.75rem;
     }
 
-    .seal-icon {
-      width: 32px;
+    .dashboard-logo {
       height: 32px;
-      border: 2px solid var(--black);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-mono);
-      font-size: 0.625rem;
-      font-weight: 700;
-      color: var(--black);
-      position: relative;
+      width: auto;
+      display: block;
     }
 
-    .seal-icon::before {
-      content: '';
-      position: absolute;
-      inset: 3px;
-      border: 1px solid var(--black);
-      border-radius: 50%;
-    }
-
-    .seal-icon::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      right: -1px;
-      width: 8px;
-      height: 8px;
-      background: var(--aw-red);
-      border: 2px solid var(--white);
-      border-radius: 50%;
-    }
-
-    .federal-title {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .federal-title-main {
+    .title-main {
       font-family: var(--font-body);
       font-size: 0.8125rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--black);
+      color: var(--aw-blue);
     }
 
-    .federal-title-sub {
+    .title-sub {
       font-family: var(--font-mono);
       font-size: 0.625rem;
       color: var(--gray-500);
       letter-spacing: 0.05em;
     }
 
-    .federal-status {
+    .dashboard-status {
       display: flex;
       align-items: center;
       gap: 0.5rem;
       padding: 0.375rem 0.75rem;
-      background: rgba(22, 163, 74, 0.08);
-      border: 1px solid rgba(22, 163, 74, 0.3);
+      background: rgba(50, 59, 151, 0.08);
+      border: 1px solid rgba(50, 59, 151, 0.25);
       border-radius: 2px;
     }
 
-    .status-indicator {
+    .status-pulse {
       width: 6px;
       height: 6px;
-      background: #16a34a;
+      background: var(--aw-blue);
       border-radius: 50%;
       animation: pulse 2s ease-in-out infinite;
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.95); }
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(50, 59, 151, 0.4); }
+      50% { opacity: 0.8; box-shadow: 0 0 0 4px rgba(50, 59, 151, 0); }
     }
 
-    .status-text {
+    .status-label {
       font-family: var(--font-mono);
       font-size: 0.6875rem;
       font-weight: 600;
-      color: #16a34a;
+      color: var(--aw-blue);
       letter-spacing: 0.05em;
       text-transform: uppercase;
     }
 
-    .federal-content {
-      padding: 2.5rem 2rem;
-    }
-
-    .data-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 2.5rem;
-    }
-
-    .data-primary {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      padding-bottom: 2.5rem;
-      border-bottom: 2px solid var(--gray-200);
-    }
-
-    .data-primary .data-label {
-      font-family: var(--font-mono);
-      font-size: 0.6875rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--gray-500);
-      font-weight: 600;
-    }
-
-    .data-primary .data-value {
-      font-family: var(--font-mono);
-      font-size: 4.5rem;
-      color: var(--black);
-      line-height: 0.95;
-      font-variant-numeric: tabular-nums;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .data-primary .data-meta {
-      font-family: var(--font-body);
-      font-size: 0.875rem;
-      color: var(--gray-600);
-      line-height: 1.4;
-      max-width: 85%;
-    }
-
-    .data-secondary {
+    /* Dashboard Grid */
+    .dashboard-grid {
+      padding: 0;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
+      gap: 1rem;
+      position: relative;
     }
 
-    .data-item {
+    /* Metric Cards */
+    .metric-card-dash {
+      background: var(--white);
+      border: 1px solid var(--gray-300);
+      border-radius: 2px;
+      padding: 1.25rem 1rem;
+      position: relative;
+      transition: all 0.3s var(--ease-primary);
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      align-items: center;
+      text-align: center;
+      min-height: 120px;
+      justify-content: center;
     }
 
-    .data-item .data-label {
+    .metric-card-dash:hover {
+      border-color: var(--gray-400);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+    }
+
+    /* Corner Brackets */
+    .card-corner {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border: 1.5px solid var(--gray-400);
+      opacity: 0.5;
+      transition: opacity 0.3s ease;
+    }
+
+    .metric-card-dash:hover .card-corner {
+      opacity: 1;
+      border-color: var(--aw-red);
+    }
+
+    .card-corner.tl {
+      top: -1px;
+      left: -1px;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    .card-corner.tr {
+      top: -1px;
+      right: -1px;
+      border-left: none;
+      border-bottom: none;
+    }
+
+    .card-corner.bl {
+      bottom: -1px;
+      left: -1px;
+      border-right: none;
+      border-top: none;
+    }
+
+    .card-corner.br {
+      bottom: -1px;
+      right: -1px;
+      border-left: none;
+      border-top: none;
+    }
+
+    /* Hero Metric (Spans 2 columns) */
+    .hero-metric {
+      grid-column: span 2;
+      min-height: 140px;
+      background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+    }
+
+    .hero-metric:hover {
+      background: linear-gradient(135deg, var(--gray-100) 0%, var(--white) 100%);
+    }
+
+    .metric-header {
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-tag {
       font-family: var(--font-mono);
       font-size: 0.625rem;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: var(--gray-500);
-      font-weight: 600;
+      padding: 0.25rem 0.625rem;
+      background: var(--white);
+      border: 1px solid var(--gray-300);
+      border-radius: 2px;
     }
 
-    .data-item .data-value {
+    .metric-stat {
       font-family: var(--font-mono);
-      font-size: 2.25rem;
+      font-size: 3rem;
       color: var(--black);
       line-height: 1;
       font-variant-numeric: tabular-nums;
       font-weight: 700;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
+      margin: 0.5rem 0;
     }
 
-    .federal-footer {
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 2px solid var(--gray-200);
+    .metric-stat.small {
+      font-size: 2rem;
     }
 
-    .coverage-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+    .metric-label-dash {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: var(--gray-600);
+      font-weight: 500;
+      margin-top: 0.375rem;
     }
 
-    .coverage-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
+    .metric-icon-dash {
+      font-size: 1.5rem;
+      opacity: 0.4;
+      filter: grayscale(100%);
+      margin-bottom: 0.5rem;
     }
 
-    .coverage-label {
+    .metric-trend {
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--gray-200);
       font-family: var(--font-mono);
-      font-size: 0.625rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      font-size: 0.6875rem;
       color: var(--gray-500);
-      font-weight: 600;
-    }
-
-    .coverage-value {
-      font-family: var(--font-mono);
-      font-size: 1.125rem;
-      color: var(--black);
-      font-weight: 600;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .verification-stamp {
       display: flex;
       align-items: center;
-      gap: 0.625rem;
-      padding: 0.875rem;
-      background: var(--gray-50);
-      border: 1px solid var(--gray-200);
-      border-radius: 2px;
+      gap: 0.375rem;
+      width: 100%;
+      justify-content: center;
     }
 
-    .stamp-icon {
-      width: 28px;
-      height: 28px;
-      border: 2px solid var(--aw-blue);
+    .trend-icon {
+      color: #16a34a;
+      font-size: 0.875rem;
+    }
+
+    /* Status Card */
+    .status-card {
+      grid-column: span 2;
+      background: var(--gray-50);
+      min-height: 80px;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .badge-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--aw-blue);
+      color: var(--white);
       border-radius: 2px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1rem;
-      color: var(--aw-blue);
+      font-weight: 700;
       flex-shrink: 0;
-      position: relative;
     }
 
-    .stamp-icon::before {
-      content: '';
-      position: absolute;
-      inset: 2px;
-      border: 1px solid var(--aw-blue);
+    .badge-text {
+      text-align: left;
     }
 
-    .stamp-text {
+    .badge-title {
       font-family: var(--font-body);
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--gray-700);
-      line-height: 1.3;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--black);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--gray-600);
+      margin-top: 0.125rem;
+    }
+
+    /* Connection Lines */
+    .connection-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .federal-monitor:hover .connection-lines {
+      opacity: 1;
     }
 
     /* Performance Dashboard */
@@ -1286,17 +1297,21 @@
         text-align: center;
       }
 
-      .data-primary .data-value {
-        font-size: 3rem;
+      .dashboard-grid {
+        gap: 0.75rem;
       }
 
-      .data-item .data-value {
-        font-size: 1.75rem;
+      .metric-stat {
+        font-size: 2rem;
       }
 
-      .data-secondary {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+      .metric-stat.small {
+        font-size: 1.5rem;
+      }
+
+      .metric-card-dash {
+        min-height: 100px;
+        padding: 1rem 0.75rem;
       }
 
       .metrics-grid {
@@ -1348,8 +1363,8 @@
   <nav class="navigation">
     <div class="nav-container">
       <a href="#" class="nav-logo">
-        <div class="nav-logo-mark">AW</div>
-        <span>America Works</span>
+        <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
+        <span>AMERICA WORKS</span>
       </a>
 
       <div class="nav-links">
@@ -1400,61 +1415,104 @@
         </div>
 
         <aside class="federal-monitor">
-          <div class="federal-header">
-            <div class="federal-seal">
-              <div class="seal-icon">AW</div>
-              <div class="federal-title">
-                <div class="federal-title-main">Performance Monitor</div>
-                <div class="federal-title-sub">National Workforce Initiative</div>
+          <!-- Dashboard Header -->
+          <div class="dashboard-header">
+            <div class="dashboard-title">
+              <div>
+                <div class="title-main">Performance Dashboard</div>
+                <div class="title-sub">Lives Changed</div>
               </div>
             </div>
-            <div class="federal-status">
-              <span class="status-indicator"></span>
-              <span class="status-text">Live</span>
+            <div class="dashboard-status">
+              <span class="status-pulse"></span>
+              <span class="status-label">Active</span>
+            </div>
+          </div>
+
+          <!-- Dashboard Grid -->
+          <div class="dashboard-grid">
+            <!-- Hero Metric Card -->
+            <div class="metric-card-dash hero-metric">
+              <div class="card-corner tl"></div>
+              <div class="card-corner tr"></div>
+              <div class="card-corner bl"></div>
+              <div class="card-corner br"></div>
+              <div class="metric-header">
+                <span class="metric-tag">Nationwide</span>
+              </div>
+              <div class="metric-stat" data-stat-target="1947832">1,947,832</div>
+              <div class="metric-label-dash">Total Placements</div>
+              <div class="metric-trend">
+                <span class="trend-icon">↑</span>
+                <span>Since 1984</span>
+              </div>
+            </div>
+
+            <!-- Placement Time Card -->
+            <div class="metric-card-dash">
+              <div class="card-corner tl"></div>
+              <div class="card-corner tr"></div>
+              <div class="card-corner bl"></div>
+              <div class="card-corner br"></div>
+              <div class="metric-icon-dash">⏱</div>
+              <div class="metric-stat small">~4</div>
+              <div class="metric-label-dash">Weeks to Place</div>
+            </div>
+
+            <!-- Retention Card -->
+            <div class="metric-card-dash">
+              <div class="card-corner tl"></div>
+              <div class="card-corner tr"></div>
+              <div class="card-corner bl"></div>
+              <div class="card-corner br"></div>
+              <div class="metric-icon-dash">📊</div>
+              <div class="metric-stat small">85%</div>
+              <div class="metric-label-dash">Retention Rate</div>
+            </div>
+
+            <!-- Coverage Card -->
+            <div class="metric-card-dash">
+              <div class="card-corner tl"></div>
+              <div class="card-corner tr"></div>
+              <div class="card-corner bl"></div>
+              <div class="card-corner br"></div>
+              <div class="metric-icon-dash">📍</div>
+              <div class="metric-stat small">11+DC</div>
+              <div class="metric-label-dash">States Covered</div>
+            </div>
+
+            <!-- Operational Card -->
+            <div class="metric-card-dash">
+              <div class="card-corner tl"></div>
+              <div class="card-corner tr"></div>
+              <div class="card-corner bl"></div>
+              <div class="card-corner br"></div>
+              <div class="metric-icon-dash">🎯</div>
+              <div class="metric-stat small">40</div>
+              <div class="metric-label-dash">Years Operating</div>
+            </div>
+
+            <!-- Status Card -->
+            <div class="metric-card-dash status-card">
+              <div class="card-corner tl"></div>
+              <div class="card-corner tr"></div>
+              <div class="card-corner bl"></div>
+              <div class="card-corner br"></div>
+              <div class="status-badge">
+                <div class="badge-icon">✓</div>
+                <div class="badge-text">
+                  <div class="badge-title">Verified</div>
+                  <div class="badge-subtitle">Federal Vendor</div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="federal-content">
-            <div class="data-grid">
-              <!-- Primary Metric - Hero Number -->
-              <div class="data-primary">
-                <div class="data-label">Total Placements</div>
-                <div class="data-value" data-stat-target="1947832">1,947,832</div>
-                <div class="data-meta">Individuals successfully placed into employment since program inception</div>
-              </div>
-
-              <!-- Secondary Metrics Grid -->
-              <div class="data-secondary">
-                <div class="data-item">
-                  <div class="data-label">Placement Time</div>
-                  <div class="data-value">~4 wks</div>
-                </div>
-
-                <div class="data-item">
-                  <div class="data-label">Retention</div>
-                  <div class="data-value">85%</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="federal-footer">
-              <div class="coverage-grid">
-                <div class="coverage-item">
-                  <div class="coverage-label">Coverage</div>
-                  <div class="coverage-value">11 + DC</div>
-                </div>
-                <div class="coverage-item">
-                  <div class="coverage-label">Operational</div>
-                  <div class="coverage-value">40 yrs</div>
-                </div>
-              </div>
-
-              <div class="verification-stamp">
-                <div class="stamp-icon">✓</div>
-                <div class="stamp-text">Performance-Based Contract Model • Federal Vendor Certified</div>
-              </div>
-            </div>
-          </div>
+          <!-- Connection Lines Overlay -->
+          <svg class="connection-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <line x1="50" y1="35" x2="25" y2="65" stroke="var(--gray-300)" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.5"/>
+            <line x1="50" y1="35" x2="75" y2="65" stroke="var(--gray-300)" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.5"/>
+          </svg>
         </aside>
       </div>
     </div>
