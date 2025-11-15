@@ -13,6 +13,9 @@
   <!-- Distinctive Font Stack -->
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,600;1,400&family=General+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
 
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <style>
     /* ============================================
        TECHNICAL LUXURY DESIGN SYSTEM
@@ -1514,41 +1517,116 @@
     .locations-section {
       padding: 8rem 0;
       background: var(--gray-50);
+      position: relative;
     }
 
-    .states-grid {
+    /* Grid background overlay for the entire section */
+    .locations-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--gray-200) 1px, transparent 1px),
+        linear-gradient(90deg, var(--gray-200) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* Coverage Map Container */
+    .coverage-map-container {
+      max-width: 1000px;
+      margin: 4rem auto 3rem;
+      position: relative;
+    }
+
+    #us-coverage-map {
+      position: relative;
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.04));
+      z-index: 1;
+    }
+
+    /* SVG State Styling */
+    #us-coverage-map path {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      stroke-miterlimit: 10;
+    }
+
+    /* Override original SVG colors */
+    #us-coverage-map path.cls-1,
+    #us-coverage-map path.cls-2 {
+      fill: var(--gray-100) !important;
+      stroke: var(--gray-300) !important;
+      stroke-width: 1px !important;
+    }
+
+    /* Non-served states - Light grayscale */
+    #us-coverage-map path.state-inactive {
+      fill: var(--gray-100) !important;
+      stroke: var(--gray-300) !important;
+      stroke-width: 1px !important;
+    }
+
+    /* Served states - Darker grey */
+    #us-coverage-map path.state-active {
+      fill: var(--gray-700) !important;
+      stroke: var(--gray-600) !important;
+      stroke-width: 1px !important;
+    }
+
+    /* Inactive states - no hover effect */
+    #us-coverage-map path.state-inactive {
+      pointer-events: none;
+    }
+
+    /* Active states hover - AW blue */
+    #us-coverage-map path.state-active:hover {
+      fill: var(--aw-blue) !important;
+      stroke: var(--aw-blue) !important;
+      stroke-width: 2px !important;
+    }
+
+    /* Map Legend */
+    .map-legend {
       display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
+      gap: 2.5rem;
       justify-content: center;
-      margin-top: 4rem;
-      margin-bottom: 3rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--gray-200);
+      position: relative;
+      z-index: 2;
     }
 
-    .state-badge {
-      padding: 0.75rem 1.5rem;
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      border-radius: 6px;
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .legend-dot {
+      width: 24px;
+      height: 16px;
+      background: var(--gray-100);
+      border: 1px solid var(--gray-300);
+      border-radius: 2px;
+    }
+
+    .legend-dot.active {
+      background: var(--gray-700);
+      border-color: var(--gray-600);
+    }
+
+    .legend-item span {
       font-family: var(--font-body);
       font-size: var(--text-sm);
       font-weight: 500;
       color: var(--gray-700);
-      transition: all 0.3s ease;
-      opacity: 0;
-      transform: scale(0.9);
-    }
-
-    .state-badge.is-visible {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .state-badge:hover {
-      background: var(--gray-50);
-      border-color: var(--aw-blue);
-      color: var(--aw-blue);
-      transform: translateY(-2px);
+      letter-spacing: -0.01em;
     }
 
     /* Testimonials */
@@ -1931,7 +2009,7 @@
               <div class="card-corner tr"></div>
               <div class="card-corner bl"></div>
               <div class="card-corner br"></div>
-              <div class="metric-icon-dash">📊</div>
+              <div class="metric-icon-dash"><i data-lucide="bar-chart-3"></i></div>
               <div class="metric-stat small">85%</div>
               <div class="metric-label-dash">Retention Rate</div>
             </div>
@@ -1942,7 +2020,7 @@
               <div class="card-corner tr"></div>
               <div class="card-corner bl"></div>
               <div class="card-corner br"></div>
-              <div class="metric-icon-dash">📍</div>
+              <div class="metric-icon-dash"><i data-lucide="map-pin"></i></div>
               <div class="metric-stat small">11+DC</div>
               <div class="metric-label-dash">States Covered</div>
             </div>
@@ -1953,7 +2031,7 @@
               <div class="card-corner tr"></div>
               <div class="card-corner bl"></div>
               <div class="card-corner br"></div>
-              <div class="metric-icon-dash">🎯</div>
+              <div class="metric-icon-dash"><i data-lucide="target"></i></div>
               <div class="metric-stat small">40</div>
               <div class="metric-label-dash">Years Operating</div>
             </div>
@@ -1965,7 +2043,7 @@
               <div class="card-corner bl"></div>
               <div class="card-corner br"></div>
               <div class="status-badge">
-                <div class="badge-icon">✓</div>
+                <div class="badge-icon"><i data-lucide="check"></i></div>
                 <div class="badge-text">
                   <div class="badge-title">Verified</div>
                   <div class="badge-subtitle">Federal Vendor</div>
@@ -2097,6 +2175,42 @@
     </div>
   </section>
 
+  <!-- Locations -->
+  <section class="locations-section">
+    <div class="container">
+      <header class="section-header">
+        <span class="label-system">Coverage</span>
+        <h2 class="display-md">Help where you need it</h2>
+        <p class="display-subhead">
+          Big enough to scale. Small enough to care. Find America Works in your community or connect with us virtually from anywhere.
+        </p>
+      </header>
+
+      <!-- Interactive Coverage Map -->
+      <div class="coverage-map-container">
+        <div id="us-coverage-map">
+          <!-- SVG will be loaded here by JavaScript -->
+        </div>
+
+        <div class="map-legend">
+          <div class="legend-item">
+            <div class="legend-dot active"></div>
+            <span>We serve this state</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot"></div>
+            <span>Not currently served</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-cta">
+        <a href="#contact" class="btn-link">Find your local office →</a>
+        <p class="cta-subtext">In-person and virtual services available</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Populations We Serve -->
   <section class="populations-served">
     <div class="container">
@@ -2140,7 +2254,7 @@
       </div>
 
       <div class="ticket-to-work-badge">
-        <div class="badge-icon-large">✓</div>
+        <div class="badge-icon-large"><i data-lucide="check"></i></div>
         <div class="badge-content">
           <h3>Official Ticket to Work Provider</h3>
           <p>We're an approved Employment Network, helping Social Security beneficiaries work without losing critical benefits.</p>
@@ -2162,27 +2276,27 @@
 
       <div class="value-props-grid">
         <div class="value-prop">
-          <div class="value-prop-icon">⚡</div>
+          <div class="value-prop-icon"><i data-lucide="zap"></i></div>
           <h3>Risk-free performance</h3>
           <p>You pay only for outcomes achieved</p>
         </div>
         <div class="value-prop">
-          <div class="value-prop-icon">🎯</div>
+          <div class="value-prop-icon"><i data-lucide="target"></i></div>
           <h3>Program expertise</h3>
           <p>TANF to reentry, we've done it all</p>
         </div>
         <div class="value-prop">
-          <div class="value-prop-icon">📊</div>
+          <div class="value-prop-icon"><i data-lucide="bar-chart-3"></i></div>
           <h3>Real-time transparency</h3>
           <p>Data dashboards you can trust</p>
         </div>
         <div class="value-prop">
-          <div class="value-prop-icon">⚖️</div>
+          <div class="value-prop-icon"><i data-lucide="scale"></i></div>
           <h3>Scale without sacrifice</h3>
           <p>High volume, high touch</p>
         </div>
         <div class="value-prop">
-          <div class="value-prop-icon">🤝</div>
+          <div class="value-prop-icon"><i data-lucide="handshake"></i></div>
           <h3>Community connections</h3>
           <p>We know every local job market</p>
         </div>
@@ -2192,55 +2306,23 @@
         <h3>Verified & Validated</h3>
         <div class="credentials-list">
           <div class="credential-item">
-            <span class="credential-icon">✓</span>
+            <span class="credential-icon"><i data-lucide="check"></i></span>
             <span>Federal vendor (NAICS 561311)</span>
           </div>
           <div class="credential-item">
-            <span class="credential-icon">✓</span>
+            <span class="credential-icon"><i data-lucide="check"></i></span>
             <span>Multi-state operator</span>
           </div>
           <div class="credential-item">
-            <span class="credential-icon">✓</span>
+            <span class="credential-icon"><i data-lucide="check"></i></span>
             <span>Woman-owned enterprise</span>
           </div>
           <div class="credential-item">
-            <span class="credential-icon">✓</span>
+            <span class="credential-icon"><i data-lucide="check"></i></span>
             <span>Congressional testimony on record</span>
           </div>
         </div>
         <a href="#contact" class="btn-primary"><span>Schedule a partnership call</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Locations -->
-  <section class="locations-section">
-    <div class="container">
-      <header class="section-header">
-        <span class="label-system">Coverage</span>
-        <h2 class="display-md">Help where you need it</h2>
-        <p class="display-subhead">
-          Big enough to scale. Small enough to care. Find America Works in your community or connect with us virtually from anywhere.
-        </p>
-      </header>
-
-      <div class="states-grid">
-        <span class="state-badge">California</span>
-        <span class="state-badge">District of Columbia</span>
-        <span class="state-badge">Georgia</span>
-        <span class="state-badge">Louisiana</span>
-        <span class="state-badge">Maryland</span>
-        <span class="state-badge">New Jersey</span>
-        <span class="state-badge">New York</span>
-        <span class="state-badge">Pennsylvania</span>
-        <span class="state-badge">Tennessee</span>
-        <span class="state-badge">Vermont</span>
-        <span class="state-badge">Wisconsin</span>
-      </div>
-
-      <div class="section-cta">
-        <a href="#contact" class="btn-link">Find your local office →</a>
-        <p class="cta-subtext">In-person and virtual services available</p>
       </div>
     </div>
   </section>
@@ -2498,6 +2580,68 @@
           }
         });
       });
+
+      // Initialize US Coverage Map
+      const initCoverageMap = () => {
+        const container = document.getElementById('us-coverage-map');
+        if (!container) return;
+
+        try {
+          // Check if US_MAP_SVG is defined
+          if (typeof US_MAP_SVG === 'undefined') {
+            throw new Error('US_MAP_SVG not found');
+          }
+
+          // Insert the SVG
+          container.innerHTML = US_MAP_SVG;
+
+          // Get the SVG element
+          const svg = container.querySelector('svg');
+          if (!svg) return;
+
+          // Update SVG attributes for our use case
+          svg.setAttribute('id', 'us-map-svg');
+          svg.style.width = '100%';
+          svg.style.height = 'auto';
+
+          // Process all path elements
+          const paths = svg.querySelectorAll('path');
+          paths.forEach((path) => {
+            const originalClass = path.getAttribute('class');
+
+            // Keep the original class but add our semantic classes
+            // cls-1 = served states (originally red)
+            // cls-2 = non-served states (originally tan)
+            if (originalClass && originalClass.includes('cls-1')) {
+              path.classList.add('state-active');
+            } else {
+              path.classList.add('state-inactive');
+            }
+          });
+
+          // Remove the old style defs since we're using our own CSS
+          const defs = svg.querySelector('defs');
+          if (defs) {
+            defs.remove();
+          }
+
+        } catch (error) {
+          console.error('Error loading map:', error);
+          container.innerHTML = '<p style="text-align:center;color:var(--gray-500);">Map could not be loaded</p>';
+        }
+      };
+
+      initCoverageMap();
+    });
+  </script>
+
+  <!-- US Map Data -->
+  <script src="us-map-data.js"></script>
+
+  <!-- Initialize Lucide Icons -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      lucide.createIcons();
     });
   </script>
 </body>
