@@ -762,14 +762,26 @@
       letter-spacing: -0.03em;
       margin: 0.75rem 0 0.5rem;
       text-shadow: 0 2px 20px rgba(255, 255, 255, 0.5);
-      background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.9) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      position: relative;
+      display: inline-block;
     }
 
     .metric-stat.small {
       font-size: 3rem;
+    }
+
+    .metric-symbol {
+      opacity: 0.5;
+      position: absolute;
+      right: 100%;
+      margin-right: 0.1em;
+    }
+
+    .metric-symbol-right {
+      right: auto;
+      left: 100%;
+      margin-right: 0;
+      margin-left: 0.1em;
     }
 
     .metric-label-dash {
@@ -2881,7 +2893,7 @@
               <div class="card-corner bl"></div>
               <div class="card-corner br"></div>
               <div class="metric-icon-dash">⏱</div>
-              <div class="metric-stat small">~4</div>
+              <div class="metric-stat small"><span class="metric-symbol">~</span>4</div>
               <div class="metric-label-dash">Weeks to Place</div>
             </div>
 
@@ -2892,7 +2904,7 @@
               <div class="card-corner bl"></div>
               <div class="card-corner br"></div>
               <div class="metric-icon-dash"><i data-lucide="bar-chart-3"></i></div>
-              <div class="metric-stat small">85%</div>
+              <div class="metric-stat small"><span class="metric-symbol">&gt;</span>60%</div>
               <div class="metric-label-dash">Retention Rate</div>
             </div>
 
@@ -2903,7 +2915,7 @@
               <div class="card-corner bl"></div>
               <div class="card-corner br"></div>
               <div class="metric-icon-dash"><i data-lucide="map-pin"></i></div>
-              <div class="metric-stat small">11+</div>
+              <div class="metric-stat small">11<span class="metric-symbol metric-symbol-right">+</span></div>
               <div class="metric-label-dash">States Covered</div>
             </div>
 
@@ -2914,7 +2926,7 @@
               <div class="card-corner bl"></div>
               <div class="card-corner br"></div>
               <div class="metric-icon-dash"><i data-lucide="target"></i></div>
-              <div class="metric-stat small">40</div>
+              <div class="metric-stat small">40<span class="metric-symbol metric-symbol-right">+</span></div>
               <div class="metric-label-dash">Years Operating</div>
             </div>
 
