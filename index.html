@@ -2128,7 +2128,7 @@
 
     @media (max-width: 768px) {
       :root {
-        --text-display-xl: 3rem;
+        --text-display-xl: 4rem;
         --text-display-lg: 2.5rem;
         --text-display-md: 2rem;
         --text-mono-xl: 2.5rem;
@@ -2142,8 +2142,30 @@
         padding-top: 6rem;
       }
 
+      .hero-container {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+        padding: 0 0.75rem;
+      }
+
+      .hero-content {
+        order: 1;
+        text-align: center;
+      }
+
+      .hero-headline {
+        text-align: center;
+        margin-top: 2rem;
+      }
+
+      .federal-monitor {
+        order: 2;
+      }
+
       .hero-ctas {
         flex-direction: column;
+        order: 3;
       }
 
       .hero-ctas .btn-primary,
@@ -2164,9 +2186,18 @@
         font-size: 1.5rem;
       }
 
+      .hero-metric .metric-stat {
+        font-size: 2.5rem;
+      }
+
       .metric-card-dash {
         min-height: 100px;
-        padding: 1rem 0.75rem;
+        padding: 1.25rem 1rem;
+      }
+
+      .hero-metric {
+        min-height: 120px;
+        padding: 1.5rem 1.25rem;
       }
 
       .metrics-grid {
@@ -2536,10 +2567,6 @@
           <div class="legend-item">
             <div class="legend-dot active"></div>
             <span>We serve this state</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot"></div>
-            <span>Not currently served</span>
           </div>
         </div>
       </div>
