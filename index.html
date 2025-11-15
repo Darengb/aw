@@ -1258,27 +1258,51 @@
       overflow: hidden;
     }
 
-    .how-it-works::before {
-      content: '';
+    /* Perfect Progressive Timeline */
+    .timeline-track {
+      position: absolute;
+      left: 50%;
+      top: 120px;
+      bottom: 120px;
+      transform: translateX(-50%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Static background line */
+    .timeline-line-bg {
       position: absolute;
       left: 50%;
       top: 0;
       bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom,
-        transparent 0%,
-        var(--gray-200) 20%,
-        var(--gray-300) 50%,
-        var(--gray-200) 80%,
-        transparent 100%
-      );
+      width: 2px;
+      background: var(--gray-200);
       transform: translateX(-50%);
-      opacity: 0;
-      transition: opacity 1s var(--ease-primary);
     }
 
-    .how-it-works.timeline-visible::before {
-      opacity: 1;
+    /* Progressive fill line */
+    .timeline-line-fill {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 2px;
+      height: 0%;
+      background: var(--aw-red);
+      transform: translateX(-50%);
+      transition: height 0.1s linear;
+      will-change: height;
+    }
+
+    /* Red timeline dots */
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 8px;
+      background: var(--aw-red);
+      border-radius: 50%;
+      z-index: 2;
     }
 
     .steps-grid {
@@ -1454,28 +1478,7 @@
       transform: scale(1.05);
     }
 
-    /* Decorative connecting line */
-    .step-connector {
-      position: absolute;
-      width: 2px;
-      height: 120px;
-      background: linear-gradient(to bottom, var(--aw-red), var(--aw-blue));
-      left: 50%;
-      transform: translateX(-50%) scaleY(0);
-      transform-origin: top;
-      transition: transform 1s var(--ease-primary);
-      transition-delay: 0.6s;
-      top: -60px;
-      border-radius: 2px;
-    }
-
-    .step-card:first-child .step-connector {
-      display: none;
-    }
-
-    .step-card.is-visible .step-connector {
-      transform: translateX(-50%) scaleY(1);
-    }
+    /* Step connectors removed - using single progressive timeline instead */
 
     /* Floating accent element */
     .step-accent {
@@ -2418,8 +2421,16 @@
       </header>
 
       <div class="steps-grid">
-        <article class="step-card">
-          <div class="step-connector"></div>
+        <!-- Progressive timeline -->
+        <div class="timeline-track">
+          <div class="timeline-line-bg"></div>
+          <div class="timeline-line-fill"></div>
+          <div class="timeline-dot" data-step="1"></div>
+          <div class="timeline-dot" data-step="2"></div>
+          <div class="timeline-dot" data-step="3"></div>
+        </div>
+
+        <article class="step-card" data-step="1">
           <div class="step-number-large">01</div>
           <div class="step-accent"></div>
 
@@ -2438,8 +2449,7 @@
           </div>
         </article>
 
-        <article class="step-card">
-          <div class="step-connector"></div>
+        <article class="step-card" data-step="2">
           <div class="step-number-large">02</div>
           <div class="step-accent"></div>
 
@@ -2458,8 +2468,7 @@
           </div>
         </article>
 
-        <article class="step-card">
-          <div class="step-connector"></div>
+        <article class="step-card" data-step="3">
           <div class="step-number-large">03</div>
           <div class="step-accent"></div>
 
@@ -2865,25 +2874,93 @@
       }
     }
 
-    // Timeline Background Animation
+    // Clean Progressive Timeline with Red Dots
     class TimelineAnimation {
       constructor() {
-        this.timeline = document.querySelector('.how-it-works');
-        if (this.timeline) {
+        this.track = document.querySelector('.timeline-track');
+        this.fill = document.querySelector('.timeline-line-fill');
+        this.dots = document.querySelectorAll('.timeline-dot');
+        this.stepCards = document.querySelectorAll('.step-card[data-step]');
+
+        if (this.track && this.fill) {
           this.init();
         }
       }
 
       init() {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('timeline-visible');
-            }
-          });
-        }, { threshold: 0.1 });
+        // Position dots at step cards
+        this.positionDots();
 
-        observer.observe(this.timeline);
+        // Listen to scroll with throttling for 60fps performance
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            window.requestAnimationFrame(() => {
+              this.updateProgress();
+              ticking = false;
+            });
+            ticking = true;
+          }
+        }, { passive: true });
+
+        // Reposition on resize
+        window.addEventListener('resize', () => this.positionDots(), { passive: true });
+
+        // Initial update
+        this.updateProgress();
+      }
+
+      positionDots() {
+        if (this.stepCards.length === 0 || this.dots.length === 0) return;
+
+        // Get positions of first and last step cards
+        const firstCard = this.stepCards[0];
+        const lastCard = this.stepCards[this.stepCards.length - 1];
+
+        const firstCardCenter = firstCard.offsetTop + (firstCard.offsetHeight / 2);
+        const lastCardCenter = lastCard.offsetTop + (lastCard.offsetHeight / 2);
+
+        // Position the timeline track to start at first dot and end at last dot
+        this.track.style.top = `${firstCardCenter}px`;
+        this.track.style.height = `${lastCardCenter - firstCardCenter}px`;
+        this.track.style.bottom = 'auto';
+
+        // Position dots relative to the track
+        const trackTop = firstCardCenter;
+
+        this.stepCards.forEach((card, index) => {
+          const dot = this.dots[index];
+          if (dot) {
+            const cardCenter = card.offsetTop + (card.offsetHeight / 2);
+            const relativePosition = cardCenter - trackTop;
+            dot.style.top = `${relativePosition}px`;
+          }
+        });
+      }
+
+      updateProgress() {
+        const trackRect = this.track.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const trackHeight = this.track.offsetHeight;
+
+        // Fill line based on scroll progress through the timeline
+        const viewportCenter = windowHeight / 2;
+        const trackTopRelativeToCenter = trackRect.top - viewportCenter;
+        const trackBottomRelativeToCenter = trackRect.bottom - viewportCenter;
+
+        let fillPercentage = 0;
+
+        if (trackBottomRelativeToCenter < 0) {
+          fillPercentage = 100;
+        } else if (trackTopRelativeToCenter > 0) {
+          fillPercentage = 0;
+        } else {
+          const scrolledDistance = -trackTopRelativeToCenter;
+          fillPercentage = (scrolledDistance / trackHeight) * 100;
+          fillPercentage = Math.max(0, Math.min(100, fillPercentage));
+        }
+
+        this.fill.style.height = `${fillPercentage}%`;
       }
     }
 
