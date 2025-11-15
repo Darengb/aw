@@ -782,6 +782,8 @@
       left: 100%;
       margin-right: 0;
       margin-left: 0.1em;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
     .metric-label-dash {
@@ -2882,7 +2884,7 @@
               <div class="metric-header">
                 <span class="metric-tag">EST. 1984</span>
               </div>
-              <div class="metric-stat" data-stat-target="1947832">1,947,832</div>
+              <div class="metric-stat"><span data-stat-target="2000000">2,000,000</span><span class="metric-symbol metric-symbol-right">+</span></div>
               <div class="metric-label-dash">Clients Served</div>
             </div>
 
@@ -3420,7 +3422,7 @@
 
     // Stat Counter
     class StatCounter {
-      constructor(element, targetNumber, duration = 2000) {
+      constructor(element, targetNumber, duration = 7000) {
         this.element = element;
         this.target = targetNumber;
         this.duration = duration;
@@ -3459,16 +3461,26 @@
           const elapsed = currentTime - startTime;
           const progress = Math.min(elapsed / this.duration, 1);
 
-          // Easing function (easeOutQuart)
-          const eased = 1 - Math.pow(1 - progress, 4);
+          // Easing function (easeOutQuint - stronger deceleration)
+          const eased = 1 - Math.pow(1 - progress, 6);
+          const calculated = eased * this.target;
 
-          const currentCount = Math.floor(eased * this.target);
-          this.element.textContent = this.formatNumber(currentCount);
+          // When within 0.5 of target, round to target for smooth finish
+          const currentCount = (this.target - calculated) < 0.5 ? this.target : Math.floor(calculated);
+          const formatted = this.formatNumber(currentCount);
+
+          if (this.element.textContent !== formatted) {
+            this.element.textContent = formatted;
+          }
 
           if (progress < 1) {
             requestAnimationFrame(updateCount);
           } else {
-            this.element.textContent = this.formatNumber(this.target);
+            // Show the + symbol when animation completes
+            const symbolElement = this.element.parentElement.querySelector('.metric-symbol-right');
+            if (symbolElement) {
+              symbolElement.style.opacity = '0.5';
+            }
           }
         };
 
