@@ -146,7 +146,35 @@
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--gray-200);
       z-index: 1000;
-      transition: all 0.3s var(--ease-primary);
+      transition: transform 0.3s var(--ease-primary), opacity 0.3s var(--ease-primary);
+    }
+
+    .primary-nav {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .primary-nav.hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .secondary-nav {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .secondary-nav.visible {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .secondary-nav .nav-links a.active {
+      text-decoration: underline;
+      text-underline-offset: 4px;
     }
 
     .nav-container {
@@ -1173,16 +1201,36 @@
   <div class="scroll-progress-bar"></div>
 
   <!-- Navigation -->
-  <nav class="navigation">
+  <!-- Primary Navigation -->
+  <nav class="navigation primary-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
         <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
         <span>AMERICA WORKS</span>
       </a>
       <div class="nav-links">
-        <a href="index.html">Home</a>
         <a href="jobseekers.html">Jobseekers</a>
         <a href="employers.html">Employers</a>
+        <a href="partners.html">Partners</a>
+        <a href="index.html#impact">Impact</a>
+        <a href="index.html#about">About</a>
+        <a href="#contact" class="nav-cta">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Secondary Navigation (Section Links) -->
+  <nav class="navigation secondary-nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
+        <span>AMERICA WORKS</span>
+      </a>
+      <div class="nav-links">
+        <a href="#service-model">Services</a>
+        <a href="#why-partner">Why Partner</a>
+        <a href="#implementation">Process</a>
+        <a href="#faq">FAQ</a>
         <a href="#contact" class="nav-cta">Contact</a>
       </div>
     </div>
@@ -1191,15 +1239,15 @@
   <!-- Hero -->
   <section class="hero">
     <div class="hero-image-bg">
-      <img src="images/team-of-workers-celebrating-success-at-a-shipping.jpg" alt="Government partnership success">
+      <img src="images/business-career-and-placement.jpg" alt="Government partnership success">
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-container">
       <div class="hero-content">
         <div class="hero-label">// Government Partnerships</div>
-        <h1 class="hero-headline">A proven partner for performance-based workforce programs.</h1>
+        <h1 class="hero-headline">Proven performance-based workforce outcomes.</h1>
         <p class="hero-subheadline">
-          For nearly 40 years, America Works has partnered with federal, state, and local agencies to design and deliver work-first programs that move people into employment, support them to stay employed, and help agencies meet policy and performance goals.
+          Partnering with government agencies for 40+ years to deliver performance-based workforce programs that achieve measurable outcomes.
         </p>
         <div class="hero-ctas">
           <a href="#contact" class="btn-primary">
@@ -1280,7 +1328,7 @@
   </section>
 
   <!-- Service Model -->
-  <section class="split-section">
+  <section class="split-section" id="service-model">
     <div class="split-image">
       <img src="images/resume-coaching.jpg" alt="Blended service model">
     </div>
@@ -1358,7 +1406,7 @@
   </section>
 
   <!-- Why Work With Us -->
-  <section class="split-section reverse">
+  <section class="split-section reverse" id="why-partner">
     <div class="split-image">
       <img src="images/business-career-and-placement.jpg" alt="Agency partnership">
     </div>
@@ -1513,7 +1561,7 @@
   </section>
 
   <!-- Implementation -->
-  <section class="section bg-gray">
+  <section class="section bg-gray" id="implementation">
     <div class="container">
       <header class="section-header">
         <div class="section-label">Process</div>
@@ -1589,7 +1637,7 @@
   </section>
 
   <!-- FAQ -->
-  <section class="faq-section">
+  <section class="faq-section" id="faq">
     <div class="container">
       <header class="section-header">
         <div class="section-label">FAQ</div>
@@ -1745,11 +1793,42 @@
     // Initialize Lucide icons
     lucide.createIcons();
 
-    // Scroll progress bar
+    // Scroll progress bar and nav switching
+    const primaryNav = document.querySelector('.primary-nav');
+    const secondaryNav = document.querySelector('.secondary-nav');
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = secondaryNav.querySelectorAll('.nav-links a[href^="#"]');
+
     window.addEventListener('scroll', () => {
       const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = (window.scrollY / windowHeight);
       document.querySelector('.scroll-progress-bar').style.transform = `scaleX(${scrolled})`;
+
+      // Switch between primary and secondary nav
+      if (window.scrollY > 100) {
+        primaryNav.classList.add('hidden');
+        secondaryNav.classList.add('visible');
+      } else {
+        primaryNav.classList.remove('hidden');
+        secondaryNav.classList.remove('visible');
+      }
+
+      // Highlight current section in secondary nav
+      let currentSection = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        const sectionHeight = section.offsetHeight;
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSection}`) {
+          link.classList.add('active');
+        }
+      });
     });
 
     // FAQ accordion

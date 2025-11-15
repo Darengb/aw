@@ -1103,6 +1103,26 @@
       color: rgba(0, 0, 0, 0.6);
     }
 
+    .section-nav-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .section-nav-links a {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--black);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      transition: opacity 0.2s var(--ease-primary);
+    }
+
+    .section-nav-links a:hover {
+      opacity: 0.6;
+    }
+
     .paths-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -1443,15 +1463,11 @@
     .cta-section::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent 0%, var(--aw-red) 30%, var(--aw-blue) 70%, transparent 100%);
-    }
-
-    .cta-section .grid-overlay {
-      opacity: 0.05;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
     }
 
     .cta-section h2 {
@@ -2796,7 +2812,8 @@
 
       <div class="nav-links">
         <a href="jobseekers.html">Jobseekers</a>
-        <a href="employers.html">Partners</a>
+        <a href="employers.html">Employers</a>
+        <a href="partners.html">Partners</a>
         <a href="#impact">Impact</a>
         <a href="#about">About</a>
         <a href="#contact" class="nav-cta">Contact</a>
@@ -2822,7 +2839,7 @@
         </h1>
 
         <div class="hero-ctas">
-          <a href="jobseekers.html" class="btn-secondary"><span>Get Started</span></a>
+          <a href="#paths" class="btn-secondary"><span>Get Started</span></a>
         </div>
       </div>
 
@@ -2930,6 +2947,11 @@
           Whether you're seeking employment or seeking outcomes,
           we deliver with precision and care.
         </p>
+        <div class="section-nav-links">
+          <a href="jobseekers.html">Jobseekers</a>
+          <a href="employers.html">Employers</a>
+          <a href="partners.html">Partners</a>
+        </div>
       </header>
 
       <div class="paths-grid">
@@ -2983,7 +3005,7 @@
 
             <div class="btn-group">
               <a href="employers.html" class="btn-link">For Employers</a>
-              <a href="employers.html" class="btn-link">For Partners</a>
+              <a href="partners.html" class="btn-link">For Partners</a>
             </div>
           </div>
         </article>
@@ -3281,7 +3303,6 @@
 
   <!-- CTA Section -->
   <section class="cta-section" id="contact">
-    <div class="grid-overlay"></div>
     <div class="container">
       <h2>Ready to begin?</h2>
       <p>
@@ -3289,8 +3310,8 @@
         we're ready to deliver results.
       </p>
       <div class="hero-ctas" style="justify-content: center;">
-        <a href="#jobseekers" class="btn-primary"><span>Find Work</span></a>
-        <a href="#partners" class="btn-secondary"><span>Partner With Us</span></a>
+        <a href="jobseekers.html" class="btn-primary"><span>Find Work</span></a>
+        <a href="partners.html" class="btn-secondary"><span>Partner With Us</span></a>
       </div>
     </div>
   </section>
@@ -3321,10 +3342,10 @@
         <div class="footer-section">
           <h4>Partners</h4>
           <ul class="footer-links">
-            <li><a href="#partners">Why Choose Us</a></li>
-            <li><a href="#partners">Performance Model</a></li>
-            <li><a href="#partners">Case Studies</a></li>
-            <li><a href="#partners">Contact</a></li>
+            <li><a href="partners.html">Why Choose Us</a></li>
+            <li><a href="partners.html">Performance Model</a></li>
+            <li><a href="partners.html">Case Studies</a></li>
+            <li><a href="partners.html">Contact</a></li>
           </ul>
         </div>
 

@@ -146,7 +146,35 @@
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--gray-200);
       z-index: 1000;
-      transition: all 0.3s var(--ease-primary);
+      transition: transform 0.3s var(--ease-primary), opacity 0.3s var(--ease-primary);
+    }
+
+    .primary-nav {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .primary-nav.hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .secondary-nav {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .secondary-nav.visible {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .secondary-nav .nav-links a.active {
+      text-decoration: underline;
+      text-underline-offset: 4px;
     }
 
     .nav-container {
@@ -902,14 +930,32 @@
   <div class="scroll-progress-bar"></div>
 
   <!-- Navigation -->
-  <nav class="navigation">
+  <!-- Primary Navigation -->
+  <nav class="navigation primary-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
         <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
         <span>AMERICA WORKS</span>
       </a>
       <div class="nav-links">
-        <a href="index.html">Home</a>
+        <a href="jobseekers.html">Jobseekers</a>
+        <a href="employers.html">Employers</a>
+        <a href="partners.html">Partners</a>
+        <a href="index.html#impact">Impact</a>
+        <a href="index.html#about">About</a>
+        <a href="#contact" class="nav-cta">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Secondary Navigation (Section Links) -->
+  <nav class="navigation secondary-nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
+        <span>AMERICA WORKS</span>
+      </a>
+      <div class="nav-links">
         <a href="#how-we-help">Services</a>
         <a href="#process">Process</a>
         <a href="#stories">Stories</a>
@@ -1199,11 +1245,42 @@
     // Initialize Lucide icons
     lucide.createIcons();
 
-    // Scroll progress bar
+    // Scroll progress bar and nav switching
+    const primaryNav = document.querySelector('.primary-nav');
+    const secondaryNav = document.querySelector('.secondary-nav');
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = secondaryNav.querySelectorAll('.nav-links a[href^="#"]');
+
     window.addEventListener('scroll', () => {
       const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = (window.scrollY / windowHeight);
       document.querySelector('.scroll-progress-bar').style.transform = `scaleX(${scrolled})`;
+
+      // Switch between primary and secondary nav
+      if (window.scrollY > 100) {
+        primaryNav.classList.add('hidden');
+        secondaryNav.classList.add('visible');
+      } else {
+        primaryNav.classList.remove('hidden');
+        secondaryNav.classList.remove('visible');
+      }
+
+      // Highlight current section in secondary nav
+      let currentSection = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        const sectionHeight = section.offsetHeight;
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSection}`) {
+          link.classList.add('active');
+        }
+      });
     });
 
     // Smooth scroll
