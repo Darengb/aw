@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fill your open roles with motivated, pre-screened talent at no cost. America Works provides job-ready candidates with ongoing support.">
+  <title>Employers - America Works</title>
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,600;1,400&family=General+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ============================================
+       PREMIUM EDITORIAL DESIGN SYSTEM
+       America Works - Employers
+       ============================================ */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Typography */
+      --font-display: 'Instrument Serif', serif;
+      --font-body: 'General Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      /* Type Scale */
+      --text-display-xl: 5.5rem;
+      --text-display-lg: 4rem;
+      --text-display-md: 3rem;
+      --text-h1: 2.5rem;
+      --text-h2: 2rem;
+      --text-h3: 1.5rem;
+      --text-xl: 1.5rem;
+      --text-lg: 1.25rem;
+      --text-base: 1.0625rem;
+      --text-sm: 0.9375rem;
+      --text-xs: 0.8125rem;
+
+      /* Brand Colors */
+      --aw-red: #ec140c;
+      --aw-red-dark: #c7130c;
+      --aw-blue: #323b97;
+      --aw-blue-dark: #252e6e;
+      --accent-cyan: #00d4ff;
+      --accent-green: #10b981;
+
+      /* Grays */
+      --black: #000000;
+      --gray-950: #0a0a0a;
+      --gray-900: #18181b;
+      --gray-800: #27272a;
+      --gray-700: #3f3f46;
+      --gray-600: #52525b;
+      --gray-500: #71717a;
+      --gray-400: #a1a1aa;
+      --gray-300: #d4d4d8;
+      --gray-200: #e4e4e7;
+      --gray-100: #f4f4f5;
+      --gray-50: #fafafa;
+      --white: #ffffff;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.05);
+      --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.06);
+
+      /* Spacing */
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+      --space-32: 8rem;
+
+      /* Layout */
+      --container-xl: 87.5rem;
+
+      /* Easing */
+      --ease-primary: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Base */
+    body {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 400;
+      line-height: 1.7;
+      letter-spacing: -0.01em;
+      color: var(--gray-800);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* Grain Texture */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.03"/></svg>');
+      opacity: 1;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* Scroll Progress */
+    .scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: var(--aw-blue);
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 0.1s ease-out;
+      z-index: 9999;
+      box-shadow: 0 0 20px rgba(50, 59, 151, 0.5);
+    }
+
+    /* Navigation */
+    .navigation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+      z-index: 1000;
+      transition: all 0.3s var(--ease-primary);
+    }
+
+    .nav-container {
+      max-width: var(--container-xl);
+      margin: 0 auto;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--black);
+      font-family: 'Crimson Text', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: opacity 0.2s ease;
+    }
+
+    .nav-logo:hover {
+      opacity: 0.7;
+    }
+
+    .nav-logo-img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--gray-700);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--black);
+    }
+
+    .nav-cta {
+      padding: 0.75rem 1.75rem;
+      background: var(--aw-blue);
+      color: var(--white) !important;
+      border-radius: 6px;
+      box-shadow: 0 2px 10px rgba(50, 59, 151, 0.2);
+      transition: all 0.3s var(--ease-primary);
+    }
+
+    .nav-cta:hover {
+      background: var(--aw-blue-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(50, 59, 151, 0.3);
+    }
+
+    /* Hero - Editorial Style */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--gray-950);
+    }
+
+    .hero-image-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-image-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        rgba(50, 59, 151, 0.75) 0%,
+        rgba(0, 122, 255, 0.65) 100%);
+      mix-blend-mode: multiply;
+      z-index: 1;
+    }
+
+    .hero-container {
+      max-width: var(--container-xl);
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
+      color: var(--white);
+    }
+
+    .hero-content {
+      max-width: 900px;
+      opacity: 0;
+      animation: fadeInUp 1s var(--ease-primary) 0.3s forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+      color: var(--white);
+    }
+
+    .hero-subheadline {
+      font-size: var(--text-xl);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 3rem;
+      max-width: 750px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 1.25rem 3rem;
+      background: var(--white);
+      color: var(--gray-950);
+      border: none;
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-secondary {
+      padding: 1.25rem 3rem;
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+
+
+    /* Split Sections - Editorial Layout */
+    .split-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
+      position: relative;
+    }
+
+    .split-section.reverse .split-image {
+      order: 2;
+    }
+
+    .split-section.reverse .split-content {
+      order: 1;
+    }
+
+    .split-image {
+      position: relative;
+      overflow: hidden;
+      background: var(--gray-100);
+    }
+
+    .split-image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .split-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        rgba(50, 59, 151, 0.25) 0%,
+        rgba(255, 255, 255, 0.1) 100%);
+      mix-blend-mode: multiply;
+      z-index: 1;
+      transition: opacity 0.6s ease;
+    }
+
+    .split-section:hover .split-image::before {
+      opacity: 0.7;
+    }
+
+    .split-content {
+      display: flex;
+      align-items: center;
+      padding: var(--space-24) var(--space-20);
+      background: var(--white);
+    }
+
+    .split-content.alt-bg {
+      background: var(--gray-50);
+    }
+
+    .split-content-inner {
+      max-width: 550px;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gray-500);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .section-label::before {
+      content: '// ';
+      color: var(--aw-blue);
+    }
+
+    .split-headline {
+      font-family: var(--font-display);
+      font-size: var(--text-display-md);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+
+    .split-description {
+      font-size: var(--text-lg);
+      line-height: 1.7;
+      color: var(--gray-700);
+      margin-bottom: 2.5rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      font-size: var(--text-base);
+      color: var(--gray-800);
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .feature-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      width: 3px;
+      height: 1.5rem;
+      background: var(--aw-blue);
+      border-radius: 2px;
+    }
+
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--aw-blue);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .btn-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--aw-blue);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .btn-link:hover::after {
+      transform: scaleX(1);
+    }
+
+    .btn-link i {
+      transition: transform 0.3s ease;
+    }
+
+    .btn-link:hover i {
+      transform: translateX(4px);
+    }
+
+    /* Value Props Grid - Editorial Style */
+    .value-props-section {
+      padding: var(--space-32) 0;
+      background: var(--white);
+    }
+
+    .container {
+      max-width: var(--container-xl);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-24);
+    }
+
+    .section-header .section-label {
+      margin-bottom: 1rem;
+    }
+
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-display-md);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-intro {
+      font-size: var(--text-xl);
+      color: var(--gray-600);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      margin-top: var(--space-20);
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .value-card {
+      padding: var(--space-16) var(--space-12);
+      border-right: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+      position: relative;
+      transition: all 0.5s var(--ease-primary);
+      background: var(--white);
+    }
+
+    .value-card:nth-child(2n) {
+      border-right: none;
+    }
+
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--aw-blue);
+      transition: width 0.5s ease;
+    }
+
+    .value-card:hover::before {
+      width: 100%;
+    }
+
+    .value-card:hover {
+      background: var(--gray-50);
+    }
+
+    .value-number {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--aw-blue);
+      opacity: 0.6;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+      line-height: 1;
+    }
+
+    .value-card h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-h2);
+      font-weight: 400;
+      color: var(--black);
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .value-card p {
+      font-size: var(--text-lg);
+      color: var(--gray-700);
+      line-height: 1.7;
+      max-width: 480px;
+    }
+
+    /* Process Grid */
+    .process-section {
+      padding: var(--space-32) 0;
+      background: var(--white);
+      position: relative;
+    }
+
+    .process-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--aw-blue) 50%, transparent 100%);
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: var(--space-16);
+    }
+
+    .process-card {
+      background: var(--gray-50);
+      padding: 2.5rem 2rem;
+      border-radius: 4px;
+      border: 1px solid var(--gray-200);
+      position: relative;
+      transition: all 0.4s var(--ease-primary);
+    }
+
+    .process-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--aw-blue);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .process-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .process-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--gray-300);
+      background: var(--white);
+    }
+
+    .process-number {
+      font-family: var(--font-mono);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--aw-blue);
+      opacity: 0.3;
+      margin-bottom: 1rem;
+      line-height: 1;
+    }
+
+    .process-card h3 {
+      font-family: var(--font-body);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .process-card p {
+      font-size: var(--text-sm);
+      color: var(--gray-700);
+      line-height: 1.7;
+    }
+
+    /* Roles Section */
+    .roles-section {
+      padding: var(--space-32) 0;
+      background: var(--gray-50);
+    }
+
+    .roles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: var(--space-12);
+      margin-bottom: var(--space-8);
+    }
+
+    .role-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: var(--text-base);
+      color: var(--gray-800);
+      font-weight: 500;
+      padding: 1rem;
+      background: var(--white);
+      border-radius: 4px;
+      border: 1px solid var(--gray-200);
+      transition: all 0.3s ease;
+    }
+
+    .role-item:hover {
+      border-color: var(--aw-blue);
+      box-shadow: var(--shadow-md);
+    }
+
+    .role-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--aw-blue);
+      flex-shrink: 0;
+    }
+
+    .note-text {
+      text-align: center;
+      font-size: var(--text-sm);
+      color: var(--gray-600);
+      font-style: italic;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Testimonials */
+    .testimonials-section {
+      padding: var(--space-32) 0;
+      background: var(--white);
+      position: relative;
+    }
+
+    .testimonials-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--aw-blue) 50%, transparent 100%);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: var(--space-16);
+    }
+
+    .testimonial-card {
+      background: var(--gray-50);
+      padding: 3rem 2.5rem;
+      border-radius: 4px;
+      position: relative;
+      transition: all 0.4s var(--ease-primary);
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      font-family: var(--font-display);
+      font-size: 6rem;
+      color: var(--aw-blue);
+      opacity: 0.08;
+      line-height: 1;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      background: var(--white);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .testimonial-text {
+      position: relative;
+      z-index: 1;
+      font-size: var(--text-base);
+      line-height: 1.8;
+      color: var(--gray-800);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      font-size: var(--text-sm);
+      color: var(--gray-600);
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    /* FAQ */
+    .faq-section {
+      padding: var(--space-32) 0;
+      background: var(--gray-50);
+    }
+
+    .faq-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-item:hover {
+      border-color: var(--gray-300);
+      box-shadow: var(--shadow-md);
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 1.75rem 2rem;
+      background: transparent;
+      border: none;
+      text-align: left;
+      font-family: var(--font-body);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      color: var(--black);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      letter-spacing: -0.01em;
+      transition: all 0.2s ease;
+    }
+
+    .faq-question:hover {
+      color: var(--aw-blue);
+    }
+
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      color: var(--aw-blue);
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+    }
+
+    .faq-answer-content {
+      padding: 0 2rem 1.75rem 2rem;
+      font-size: var(--text-base);
+      color: var(--gray-700);
+      line-height: 1.8;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: var(--space-32) 0;
+      background: var(--gray-950);
+      color: var(--white);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-content h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-display-md);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .cta-content p {
+      font-size: var(--text-xl);
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 3rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1.25rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-white {
+      padding: 1.25rem 3rem;
+      background: var(--white);
+      color: var(--gray-950);
+      border: none;
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-outline-white {
+      padding: 1.25rem 3rem;
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-outline-white:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--gray-900);
+      color: var(--gray-400);
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-section h4 {
+      color: var(--white);
+      font-size: var(--text-base);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--gray-400);
+      text-decoration: none;
+      font-size: var(--text-sm);
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid var(--gray-800);
+      text-align: center;
+      font-size: var(--text-sm);
+      color: var(--gray-500);
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .split-section {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .split-section.reverse .split-image,
+      .split-section.reverse .split-content {
+        order: initial;
+      }
+
+      .split-image {
+        min-height: 60vh;
+      }
+
+      .split-content {
+        padding: var(--space-16) var(--space-8);
+      }
+
+      .value-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .value-card {
+        border-right: none;
+      }
+
+      .process-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .roles-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-headline {
+        font-size: 3rem;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+      }
+
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .value-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .value-card {
+        border-right: none;
+      }
+
+      .roles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Scroll Progress -->
+  <div class="scroll-progress-bar"></div>
+
+  <!-- Navigation -->
+  <nav class="navigation">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
+        <span>AMERICA WORKS</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#why-partner">Why Partner</a>
+        <a href="#how-it-works">Process</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="nav-cta">Submit Job Order</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-image-bg">
+      <img src="images/team-of-workers-celebrating-success-at-a-shipping.jpg" alt="Successful team at work">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-label">// Staffing with America Works</div>
+        <h1 class="hero-headline">Fill your open roles with motivated, pre-screened talent—at no cost.</h1>
+        <p class="hero-subheadline">
+          America Works connects you with job-ready candidates and supports them for months after hire, helping you save time, reduce turnover, and build a more reliable workforce.
+        </p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn-primary">
+            <span>Submit a job order</span>
+            <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+          </a>
+          <a href="#contact" class="btn-secondary">
+            <span>Talk to our staffing team</span>
+            <i data-lucide="phone" style="width: 18px; height: 18px;"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Partner -->
+  <section class="value-props-section" id="why-partner">
+    <div class="container">
+      <header class="section-header">
+        <div class="section-label">Partnership</div>
+        <h2>Why partner with America Works for staffing?</h2>
+        <p class="section-intro">
+          Hiring shouldn't mean sorting through hundreds of resumes or paying high agency fees. America Works offers a simple alternative: we recruit, screen, and support candidates—so you can focus on running your business.
+        </p>
+      </header>
+
+      <div class="value-grid">
+        <div class="value-card">
+          <div class="value-number">01</div>
+          <h3>No-fee staffing</h3>
+          <p>Our services are funded through public and partner programs, so employers aren't charged for placements or support.</p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-number">02</div>
+          <h3>Pre-screened, job-ready candidates</h3>
+          <p>We assess skills, motivation, and fit before we send candidates your way, helping you spend time only on serious applicants.</p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-number">03</div>
+          <h3>Retention-focused support</h3>
+          <p>Many candidates complete job-readiness training and receive months of mentoring after hire, helping them make a smooth transition and stay on the job.</p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-number">04</div>
+          <h3>Tax credit & compliance opportunities</h3>
+          <p>A large share of our candidates qualify for federal incentives like the Work Opportunity Tax Credit and can help you meet federal contractor diversity and disability hiring goals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="process-section" id="how-it-works">
+    <div class="container">
+      <header class="section-header">
+        <div class="section-label">Process</div>
+        <h2>How our staffing process works.</h2>
+        <p class="section-intro">
+          We keep the process straightforward for you and supportive for your new hires.
+        </p>
+      </header>
+
+      <div class="process-grid">
+        <div class="process-card">
+          <div class="process-number">01</div>
+          <h3>Tell us what you're hiring for</h3>
+          <p>Start by submitting a job order or talking with our team about your open roles, locations, and requirements—skills, schedule, experience level, and workplace environment.</p>
+        </div>
+
+        <div class="process-card">
+          <div class="process-number">02</div>
+          <h3>We source and screen candidates</h3>
+          <p>Our staff recruits from our talent pool and partner programs, then pre-screens candidates to confirm interest, availability, and fit. Only motivated, qualified candidates are forwarded to you.</p>
+        </div>
+
+        <div class="process-card">
+          <div class="process-number">03</div>
+          <h3>You choose who to hire</h3>
+          <p>We coordinate interviews—at your site or virtually. You make the final hiring decision. Many employers work with us repeatedly to fill ongoing staffing needs.</p>
+        </div>
+
+        <div class="process-card">
+          <div class="process-number">04</div>
+          <h3>We stay involved after hire</h3>
+          <p>After a candidate starts, our team checks in regularly, offers coaching, and helps them navigate challenges. This extra layer of support helps your new employee settle in and stay productive.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Candidates Different -->
+  <section class="split-section">
+    <div class="split-image">
+      <img src="images/resume-coaching.jpg" alt="Job readiness training">
+    </div>
+    <div class="split-content">
+      <div class="split-content-inner">
+        <div class="section-label">Preparation</div>
+        <h2 class="split-headline">Candidates prepared to succeed—not just to show up.</h2>
+        <p class="split-description">
+          Many candidates participate in a structured job-readiness program that covers communication, customer service, workplace expectations, and basic computer and soft skills before they ever meet with you. That means they arrive at interviews with a clearer understanding of what it takes to be successful on the job.
+        </p>
+        <p class="split-description">
+          After hire, we stay in touch with your new employee for a period of time—offering mentoring, guidance, and problem-solving support during and outside of work hours. This reduces early turnover and helps employees stay engaged and dependable.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roles & Industries -->
+  <section class="roles-section">
+    <div class="container">
+      <header class="section-header">
+        <div class="section-label">Industries</div>
+        <h2>Roles and industries we commonly support.</h2>
+        <p class="section-intro">
+          We staff a wide range of entry-level to mid-level positions across industries. Typical roles include:
+        </p>
+      </header>
+
+      <div class="roles-grid">
+        <div class="role-item">
+          <i data-lucide="briefcase" class="role-icon"></i>
+          <span>Administrative & clerical</span>
+        </div>
+        <div class="role-item">
+          <i data-lucide="headphones" class="role-icon"></i>
+          <span>Customer service & call centers</span>
+        </div>
+        <div class="role-item">
+          <i data-lucide="shopping-bag" class="role-icon"></i>
+          <span>Retail & sales</span>
+        </div>
+        <div class="role-item">
+          <i data-lucide="utensils" class="role-icon"></i>
+          <span>Food service & hospitality</span>
+        </div>
+        <div class="role-item">
+          <i data-lucide="shield" class="role-icon"></i>
+          <span>Security and building services</span>
+        </div>
+        <div class="role-item">
+          <i data-lucide="truck" class="role-icon"></i>
+          <span>Drivers and delivery</span>
+        </div>
+        <div class="role-item">
+          <i data-lucide="wrench" class="role-icon"></i>
+          <span>Maintenance and facilities roles</span>
+        </div>
+        <div class="role-item">
+          <i data-lucide="heart" class="role-icon"></i>
+          <span>Healthcare support roles</span>
+        </div>
+        <div class="role-item">
+          <i data-lucide="user" class="role-icon"></i>
+          <span>Receptionist / front-desk</span>
+        </div>
+      </div>
+
+      <p class="note-text">
+        Specific roles vary by location. Your local America Works team can advise you on candidate availability in your area.
+      </p>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="split-section reverse">
+    <div class="split-image">
+      <img src="images/business-career-and-placement.jpg" alt="Business partnership">
+    </div>
+    <div class="split-content alt-bg">
+      <div class="split-content-inner">
+        <div class="section-label">Value</div>
+        <h2 class="split-headline">Business benefits for employers.</h2>
+        <p class="split-description">
+          Working with America Works isn't just the right thing to do—it's good for your bottom line.
+        </p>
+        <ul class="feature-list">
+          <li class="feature-item">Employers are not charged for candidate referrals or ongoing support</li>
+          <li class="feature-item">Many candidates meet eligibility requirements for the federal Work Opportunity Tax Credit (WOTC)</li>
+          <li class="feature-item">We help federal contractors broaden their talent pipeline and support Section 503 and diversity-related workforce goals</li>
+          <li class="feature-item">Reduced time-to-hire with pre-screened, motivated candidates</li>
+        </ul>
+        <a href="#contact" class="btn-link">
+          <span>Learn about tax credits</span>
+          <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials-section">
+    <div class="container">
+      <header class="section-header">
+        <div class="section-label">Partnerships</div>
+        <h2>What employers say about working with us.</h2>
+      </header>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            America Works understands what our roles require and consistently sends candidates who fit. They've made our hiring process much easier.
+          </p>
+          <p class="testimonial-author">— Aegis Global</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            At key venues like Citi Field and Yankee Stadium, America Works has reliably handled our seasonal and event staffing needs year after year.
+          </p>
+          <p class="testimonial-author">— Aramark</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            Because America Works pre-screens candidates and provides support services, we can even conduct interviews on-site in our stores, which saves our managers a lot of time.
+          </p>
+          <p class="testimonial-author">— Burlington</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            They're a dedicated, helpful partner and have played a real role in helping us meet our hiring needs.
+          </p>
+          <p class="testimonial-author">— Fossil</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            We have an ongoing need for dependable, skilled workers. America Works has been a consistent source of reliable talent.
+          </p>
+          <p class="testimonial-author">— H&R Block</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <header class="section-header">
+        <div class="section-label">FAQ</div>
+        <h2>Questions employers often ask.</h2>
+      </header>
+
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What does it cost to use America Works for staffing?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              There is no fee to employers for candidate referrals or support services. Our work is funded through government programs and partner organizations, so you can use America Works alongside your existing hiring channels at no extra cost.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What types of positions can you help fill?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              We commonly staff for administrative, customer service, retail, food service, security, maintenance, driving, healthcare support, and similar entry-level to mid-level roles. If you have a specific position in mind, our local team can tell you whether we have candidates in that area.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How do you screen candidates?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Our staff reviews each candidate's experience, availability, and interest, and often works with them through job-readiness training before we refer them. We focus on sending candidates who are genuinely motivated and appropriately matched to your job requirements.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Are we obligated to hire candidates you send us?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              No. You decide who to interview and who to hire. Our role is to bring you qualified candidates and support them once they join your team.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Do you only work with large companies?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              No. We work with employers of all sizes—from small local businesses to national brands—with both one-time and ongoing staffing needs.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How quickly can you help fill a position?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Timelines depend on your location, role, and current candidate pool. In many cases we can present candidates quickly, especially for common roles. Your local America Works office can give you realistic expectations for your area.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to meet your next great hire?</h2>
+        <p>
+          Whether you need to fill a single role or manage ongoing hiring across multiple sites, America Works can help you find motivated, supported candidates at no cost.
+        </p>
+        <div class="cta-buttons">
+          <a href="#" class="btn-white">
+            <span>Submit a job order</span>
+            <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+          </a>
+          <a href="#" class="btn-outline-white">
+            <span>Talk to our staffing team</span>
+            <i data-lucide="phone" style="width: 18px; height: 18px;"></i>
+          </a>
+          <a href="#" class="btn-outline-white">
+            <span>Find your nearest office</span>
+            <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>America Works</h4>
+          <p style="font-size: var(--text-sm); line-height: 1.7; margin-top: 1rem;">
+            40 years of proven workforce development. Technical excellence meets human impact.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h4>For Employers</h4>
+          <ul class="footer-links">
+            <li><a href="#why-partner">Why Partner</a></li>
+            <li><a href="#how-it-works">Process</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Submit Job Order</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="jobseekers.html">For Jobseekers</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Locations</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <ul class="footer-links">
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 America Works. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Scroll progress bar
+    window.addEventListener('scroll', () => {
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (window.scrollY / windowHeight);
+      document.querySelector('.scroll-progress-bar').style.transform = `scaleX(${scrolled})`;
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const faqItem = button.closest('.faq-item');
+        const isActive = faqItem.classList.contains('active');
+
+        document.querySelectorAll('.faq-item').forEach(item => {
+          item.classList.remove('active');
+        });
+
+        if (!isActive) {
+          faqItem.classList.add('active');
+        }
+      });
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offsetTop = target.offsetTop - 80;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
