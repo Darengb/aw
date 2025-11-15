@@ -251,15 +251,16 @@
       display: flex;
       align-items: center;
       position: relative;
-      background: var(--white);
+      background: transparent;
       overflow: hidden;
       padding: 8rem 0 4rem;
+      isolation: isolate;
     }
 
     .hero-video-background {
       position: absolute;
       inset: 0;
-      z-index: 0;
+      z-index: -2;
       overflow: hidden;
     }
 
@@ -272,26 +273,27 @@
       width: auto;
       height: auto;
       transform: translate(-50%, -50%);
-      opacity: 0.08;
-      filter: grayscale(100%) contrast(1.1);
+      opacity: 1;
+      filter: none;
     }
 
     .hero-video-background::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 30% 40%, transparent 0%, var(--white) 80%);
+      background: rgba(0, 0, 0, 0.4);
     }
 
     .grid-overlay {
       position: absolute;
       inset: 0;
+      background-color: rgba(0, 0, 0, 0.5);
       background-image:
-        linear-gradient(var(--gray-200) 1px, transparent 1px),
-        linear-gradient(90deg, var(--gray-200) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
       background-size: 60px 60px;
-      opacity: 0.4;
-      z-index: 1;
+      opacity: 1;
+      z-index: -1;
     }
 
     .hero-container {
@@ -299,7 +301,6 @@
       margin: 0 auto;
       padding: 0 2rem;
       position: relative;
-      z-index: 2;
     }
 
     .hero-grid {
@@ -307,6 +308,7 @@
       grid-template-columns: 1.4fr 1fr;
       gap: 6rem;
       align-items: center;
+      position: relative;
     }
 
     .hero-eyebrow {
@@ -331,31 +333,32 @@
 
     .badge {
       padding: 0.375rem 0.875rem;
-      background: var(--white);
-      border: 1px solid var(--gray-300);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 2px;
       font-family: var(--font-mono);
       font-size: 0.6875rem;
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--gray-700);
+      color: var(--white);
       transition: all 0.2s ease;
     }
 
     .badge:hover {
-      border-color: var(--black);
-      color: var(--black);
+      border-color: var(--white);
+      background: rgba(255, 255, 255, 0.15);
       transform: translateY(-2px);
     }
 
     .badge-accent {
       border-color: var(--aw-red);
-      color: var(--aw-red);
+      background: rgba(199, 19, 12, 0.15);
+      color: #ff6b65;
     }
 
     .divider {
-      color: var(--gray-400);
+      color: var(--gray-300);
       font-size: 0.5rem;
     }
 
@@ -366,7 +369,7 @@
       line-height: 1.05;
       letter-spacing: -0.04em;
       margin-bottom: 2rem;
-      color: var(--black);
+      color: var(--white);
       opacity: 0;
       animation: fadeInUp 0.8s var(--ease-primary) 0.4s forwards;
     }
@@ -377,13 +380,13 @@
 
     .hero-headline .line-2 {
       display: block;
-      color: var(--gray-700);
+      color: var(--gray-300);
       position: relative;
     }
 
     .hero-headline .accent {
       position: relative;
-      color: var(--black);
+      color: var(--white);
     }
 
     .hero-headline .accent::after {
@@ -408,7 +411,7 @@
       font-size: var(--text-xl);
       line-height: 1.6;
       font-weight: 300;
-      color: var(--gray-600);
+      color: var(--gray-200);
       margin-bottom: 3rem;
       opacity: 0;
       animation: fadeInUp 0.8s var(--ease-primary) 0.6s forwards;
@@ -589,9 +592,11 @@
 
     /* Metric Cards */
     .metric-card-dash {
-      background: var(--white);
-      border: 1px solid var(--gray-300);
-      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 8px;
       padding: 1.25rem 1rem;
       position: relative;
       transition: all 0.3s var(--ease-primary);
@@ -601,13 +606,14 @@
       text-align: center;
       min-height: 120px;
       justify-content: center;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
     }
 
     .metric-card-dash:hover {
-      border-color: var(--gray-400);
+      border-color: rgba(255, 255, 255, 0.3);
       transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-      background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.12);
     }
 
     /* Corner Brackets */
@@ -615,14 +621,14 @@
       position: absolute;
       width: 8px;
       height: 8px;
-      border: 1.5px solid var(--gray-400);
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
       opacity: 0.5;
       transition: opacity 0.3s ease;
     }
 
     .metric-card-dash:hover .card-corner {
       opacity: 1;
-      border-color: var(--aw-red);
+      border-color: rgba(255, 107, 101, 0.8);
     }
 
     .card-corner.tl {
@@ -657,11 +663,11 @@
     .hero-metric {
       grid-column: span 2;
       min-height: 140px;
-      background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+      background: rgba(255, 255, 255, 0.12);
     }
 
     .hero-metric:hover {
-      background: linear-gradient(135deg, var(--gray-100) 0%, var(--white) 100%);
+      background: rgba(255, 255, 255, 0.15);
     }
 
     .metric-header {
@@ -674,22 +680,23 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: var(--gray-500);
+      color: var(--white);
       padding: 0.25rem 0.625rem;
-      background: var(--white);
-      border: 1px solid var(--gray-300);
-      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
     }
 
     .metric-stat {
       font-family: var(--font-mono);
       font-size: 3rem;
-      color: var(--black);
+      color: var(--white);
       line-height: 1;
       font-variant-numeric: tabular-nums;
       font-weight: 700;
       letter-spacing: -0.02em;
       margin: 0.5rem 0;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
     .metric-stat.small {
@@ -699,25 +706,24 @@
     .metric-label-dash {
       font-family: var(--font-body);
       font-size: 0.75rem;
-      color: var(--gray-600);
+      color: var(--gray-200);
       font-weight: 500;
       margin-top: 0.375rem;
     }
 
     .metric-icon-dash {
       font-size: 1.5rem;
-      opacity: 0.4;
-      filter: grayscale(100%);
+      opacity: 0.6;
       margin-bottom: 0.5rem;
     }
 
     .metric-trend {
       margin-top: 0.75rem;
       padding-top: 0.75rem;
-      border-top: 1px solid var(--gray-200);
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
       font-family: var(--font-mono);
       font-size: 0.6875rem;
-      color: var(--gray-500);
+      color: var(--gray-300);
       display: flex;
       align-items: center;
       gap: 0.375rem;
@@ -726,14 +732,14 @@
     }
 
     .trend-icon {
-      color: #16a34a;
+      color: #4ade80;
       font-size: 0.875rem;
     }
 
     /* Status Card */
     .status-card {
       grid-column: span 2;
-      background: var(--gray-50);
+      background: rgba(255, 255, 255, 0.1);
       min-height: 80px;
     }
 
@@ -746,15 +752,16 @@
     .badge-icon {
       width: 32px;
       height: 32px;
-      background: var(--aw-blue);
+      background: rgba(50, 59, 151, 0.8);
       color: var(--white);
-      border-radius: 2px;
+      border-radius: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1rem;
       font-weight: 700;
       flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(50, 59, 151, 0.3);
     }
 
     .badge-text {
@@ -765,7 +772,7 @@
       font-family: var(--font-body);
       font-size: 0.875rem;
       font-weight: 700;
-      color: var(--black);
+      color: var(--white);
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
@@ -773,7 +780,7 @@
     .badge-subtitle {
       font-family: var(--font-mono);
       font-size: 0.6875rem;
-      color: var(--gray-600);
+      color: var(--gray-300);
       margin-top: 0.125rem;
     }
 
