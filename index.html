@@ -1582,6 +1582,27 @@
       .step-connector {
         display: none;
       }
+
+      /* Move timeline line to left on mobile */
+      .timeline-track {
+        left: 1rem;
+        transform: none;
+      }
+
+      .timeline-line-bg,
+      .timeline-line-fill {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .timeline-dot {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .steps-grid {
+        padding-left: 2.5rem;
+      }
     }
 
     @media (max-width: 768px) {
@@ -2913,12 +2934,24 @@
       positionDots() {
         if (this.stepCards.length === 0 || this.dots.length === 0) return;
 
+        const isMobile = window.innerWidth <= 1024;
+
         // Get positions of first and last step cards
         const firstCard = this.stepCards[0];
         const lastCard = this.stepCards[this.stepCards.length - 1];
 
-        const firstCardCenter = firstCard.offsetTop + (firstCard.offsetHeight / 2);
-        const lastCardCenter = lastCard.offsetTop + (lastCard.offsetHeight / 2);
+        let firstCardCenter, lastCardCenter;
+
+        if (isMobile) {
+          // On mobile, align with step content (text) instead of card center
+          const firstContent = firstCard.querySelector('.step-content');
+          const lastContent = lastCard.querySelector('.step-content');
+          firstCardCenter = firstContent.offsetTop + firstCard.offsetTop + 40; // Align with title area
+          lastCardCenter = lastContent.offsetTop + lastCard.offsetTop + 40;
+        } else {
+          firstCardCenter = firstCard.offsetTop + (firstCard.offsetHeight / 2);
+          lastCardCenter = lastCard.offsetTop + (lastCard.offsetHeight / 2);
+        }
 
         // Position the timeline track to start at first dot and end at last dot
         this.track.style.top = `${firstCardCenter}px`;
@@ -2931,7 +2964,13 @@
         this.stepCards.forEach((card, index) => {
           const dot = this.dots[index];
           if (dot) {
-            const cardCenter = card.offsetTop + (card.offsetHeight / 2);
+            let cardCenter;
+            if (isMobile) {
+              const content = card.querySelector('.step-content');
+              cardCenter = card.offsetTop + content.offsetTop + 40; // Align with title area
+            } else {
+              cardCenter = card.offsetTop + (card.offsetHeight / 2);
+            }
             const relativePosition = cardCenter - trackTop;
             dot.style.top = `${relativePosition}px`;
           }
