@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A proven partner for performance-based workforce programs. 40+ years partnering with federal, state, and local agencies.">
+  <title>Government Partners - America Works</title>
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,600;1,400&family=General+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ============================================
+       PREMIUM EDITORIAL DESIGN SYSTEM
+       America Works - Government Partners
+       ============================================ */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Typography */
+      --font-display: 'Instrument Serif', serif;
+      --font-body: 'General Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      /* Type Scale */
+      --text-display-xl: 5.5rem;
+      --text-display-lg: 4rem;
+      --text-display-md: 3rem;
+      --text-h1: 2.5rem;
+      --text-h2: 2rem;
+      --text-h3: 1.5rem;
+      --text-xl: 1.5rem;
+      --text-lg: 1.25rem;
+      --text-base: 1.0625rem;
+      --text-sm: 0.9375rem;
+      --text-xs: 0.8125rem;
+
+      /* Brand Colors */
+      --aw-red: #ec140c;
+      --aw-red-dark: #c7130c;
+      --aw-blue: #323b97;
+      --aw-blue-dark: #252e6e;
+      --accent-cyan: #00d4ff;
+      --accent-green: #10b981;
+
+      /* Grays */
+      --black: #000000;
+      --gray-950: #0a0a0a;
+      --gray-900: #18181b;
+      --gray-800: #27272a;
+      --gray-700: #3f3f46;
+      --gray-600: #52525b;
+      --gray-500: #71717a;
+      --gray-400: #a1a1aa;
+      --gray-300: #d4d4d8;
+      --gray-200: #e4e4e7;
+      --gray-100: #f4f4f5;
+      --gray-50: #fafafa;
+      --white: #ffffff;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.05);
+      --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.06);
+
+      /* Spacing */
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+      --space-32: 8rem;
+
+      /* Layout */
+      --container-xl: 87.5rem;
+
+      /* Easing */
+      --ease-primary: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Base */
+    body {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 400;
+      line-height: 1.7;
+      letter-spacing: -0.01em;
+      color: var(--gray-800);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* Grain Texture */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.03"/></svg>');
+      opacity: 1;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* Scroll Progress */
+    .scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: var(--aw-blue);
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 0.1s ease-out;
+      z-index: 9999;
+      box-shadow: 0 0 20px rgba(50, 59, 151, 0.5);
+    }
+
+    /* Navigation */
+    .navigation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+      z-index: 1000;
+      transition: all 0.3s var(--ease-primary);
+    }
+
+    .nav-container {
+      max-width: var(--container-xl);
+      margin: 0 auto;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--black);
+      font-family: 'Crimson Text', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: opacity 0.2s ease;
+    }
+
+    .nav-logo:hover {
+      opacity: 0.7;
+    }
+
+    .nav-logo-img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--gray-700);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--black);
+    }
+
+    .nav-cta {
+      padding: 0.75rem 1.75rem;
+      background: var(--aw-blue);
+      color: var(--white) !important;
+      border-radius: 6px;
+      box-shadow: 0 2px 10px rgba(50, 59, 151, 0.2);
+      transition: all 0.3s var(--ease-primary);
+    }
+
+    .nav-cta:hover {
+      background: var(--aw-blue-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(50, 59, 151, 0.3);
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--gray-950);
+    }
+
+    .hero-image-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-image-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        rgba(50, 59, 151, 0.85) 0%,
+        rgba(37, 46, 110, 0.75) 100%);
+      mix-blend-mode: multiply;
+      z-index: 1;
+    }
+
+    .hero-container {
+      max-width: var(--container-xl);
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
+      color: var(--white);
+    }
+
+    .hero-content {
+      max-width: 900px;
+      opacity: 0;
+      animation: fadeInUp 1s var(--ease-primary) 0.3s forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+      color: var(--white);
+    }
+
+    .hero-subheadline {
+      font-size: var(--text-xl);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 3rem;
+      max-width: 800px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 1.25rem 3rem;
+      background: var(--white);
+      color: var(--gray-950);
+      border: none;
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-secondary {
+      padding: 1.25rem 3rem;
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    /* Trust Strip */
+    .trust-strip {
+      padding: var(--space-16) 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .trust-grid {
+      max-width: var(--container-xl);
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .trust-item {
+      padding: 2rem 1.5rem;
+      border-right: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+      background: transparent;
+      position: relative;
+      transition: all 0.4s ease;
+    }
+
+    .trust-item:nth-child(4n) {
+      border-right: none;
+    }
+
+    .trust-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--aw-blue);
+      transition: width 0.5s ease;
+    }
+
+    .trust-item:hover::before {
+      width: 100%;
+    }
+
+    .trust-item:hover {
+      background: var(--gray-50);
+    }
+
+    .trust-number {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 400;
+      color: var(--aw-blue);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .trust-label {
+      font-size: var(--text-sm);
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    /* Container */
+    .container {
+      max-width: var(--container-xl);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Section Header */
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-20);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gray-500);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .section-label::before {
+      content: '// ';
+      color: var(--aw-blue);
+    }
+
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-display-md);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-intro {
+      font-size: var(--text-xl);
+      color: var(--gray-600);
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Split Sections */
+    .split-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
+      position: relative;
+    }
+
+    .split-section.reverse .split-image {
+      order: 2;
+    }
+
+    .split-section.reverse .split-content {
+      order: 1;
+    }
+
+    .split-image {
+      position: relative;
+      overflow: hidden;
+      background: var(--gray-100);
+    }
+
+    .split-image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .split-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        rgba(50, 59, 151, 0.25) 0%,
+        rgba(255, 255, 255, 0.1) 100%);
+      mix-blend-mode: multiply;
+      z-index: 1;
+      transition: opacity 0.6s ease;
+    }
+
+    .split-section:hover .split-image::before {
+      opacity: 0.7;
+    }
+
+    .split-content {
+      display: flex;
+      align-items: center;
+      padding: var(--space-24) var(--space-20);
+      background: var(--white);
+    }
+
+    .split-content.alt-bg {
+      background: var(--gray-50);
+    }
+
+    .split-content-inner {
+      max-width: 550px;
+    }
+
+    .split-headline {
+      font-family: var(--font-display);
+      font-size: var(--text-display-md);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+
+    .split-description {
+      font-size: var(--text-lg);
+      line-height: 1.7;
+      color: var(--gray-700);
+      margin-bottom: 2rem;
+    }
+
+    /* Feature Grid - Editorial */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      margin-top: var(--space-16);
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .feature-item {
+      padding: 2rem 1.5rem;
+      border-right: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+      background: transparent;
+      position: relative;
+      transition: all 0.4s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .feature-item:nth-child(2n) {
+      border-right: none;
+    }
+
+    .feature-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--aw-blue);
+      transition: width 0.5s ease;
+    }
+
+    .feature-item:hover::before {
+      width: 100%;
+    }
+
+    .feature-item:hover {
+      background: var(--gray-50);
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: var(--gray-500);
+      flex-shrink: 0;
+      transition: all 0.4s ease;
+    }
+
+    .feature-item:hover .feature-icon {
+      color: var(--aw-blue);
+      transform: scale(1.1);
+    }
+
+    .feature-content h3 {
+      font-family: var(--font-body);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .feature-content p {
+      font-size: var(--text-base);
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    /* List Grid - Editorial */
+    .list-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: var(--space-16);
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .list-item {
+      padding: 2rem 1.5rem;
+      border-right: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+      background: transparent;
+      position: relative;
+      transition: all 0.4s ease;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .list-item:nth-child(3n) {
+      border-right: none;
+    }
+
+    .list-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--aw-blue);
+      transition: width 0.5s ease;
+    }
+
+    .list-item:hover::before {
+      width: 100%;
+    }
+
+    .list-item:hover {
+      background: var(--gray-50);
+    }
+
+    .list-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: var(--gray-500);
+      flex-shrink: 0;
+      transition: all 0.4s ease;
+    }
+
+    .list-item:hover .list-icon {
+      color: var(--aw-blue);
+      transform: scale(1.1);
+    }
+
+    .list-item p {
+      font-size: var(--text-base);
+      color: var(--gray-800);
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    /* Standard Section */
+    .section {
+      padding: var(--space-32) 0;
+    }
+
+    .section.bg-gray {
+      background: var(--gray-50);
+    }
+
+    /* Steps Grid */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: var(--space-16);
+    }
+
+    .step-item {
+      position: relative;
+    }
+
+    .step-number {
+      font-family: var(--font-mono);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--aw-blue);
+      opacity: 0.3;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .step-item h3 {
+      font-family: var(--font-body);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .step-item p {
+      font-size: var(--text-sm);
+      color: var(--gray-700);
+      line-height: 1.7;
+    }
+
+    /* Program Areas */
+    .program-areas {
+      padding: var(--space-32) 0;
+      background: var(--white);
+    }
+
+    .program-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      margin-top: var(--space-16);
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .program-item {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      border-bottom: 1px solid var(--gray-200);
+      background: transparent;
+      transition: all 0.4s ease;
+    }
+
+    .program-label {
+      padding: 2rem 2rem 2rem 0;
+      border-right: 1px solid var(--gray-200);
+      font-family: var(--font-display);
+      font-size: var(--text-h3);
+      font-weight: 400;
+      color: var(--black);
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+
+    .program-content {
+      padding: 2rem 2rem;
+    }
+
+    .program-content p {
+      font-size: var(--text-base);
+      color: var(--gray-700);
+      line-height: 1.7;
+    }
+
+    .program-item:hover {
+      background: var(--gray-50);
+    }
+
+    /* Testimonials */
+    .testimonials {
+      padding: var(--space-32) 0;
+      background: var(--gray-50);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: var(--space-16);
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      padding: 3rem 2.5rem;
+      position: relative;
+      transition: all 0.4s var(--ease-primary);
+      border-left: 3px solid var(--gray-200);
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      font-family: var(--font-display);
+      font-size: 6rem;
+      color: var(--aw-blue);
+      opacity: 0.08;
+      line-height: 1;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+      border-left-color: var(--aw-blue);
+    }
+
+    .testimonial-text {
+      position: relative;
+      z-index: 1;
+      font-size: var(--text-base);
+      line-height: 1.8;
+      color: var(--gray-800);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      font-size: var(--text-sm);
+      color: var(--gray-600);
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    /* FAQ */
+    .faq-section {
+      padding: var(--space-32) 0;
+      background: var(--white);
+    }
+
+    .faq-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-item:hover {
+      border-color: var(--gray-300);
+      box-shadow: var(--shadow-md);
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 1.75rem 2rem;
+      background: transparent;
+      border: none;
+      text-align: left;
+      font-family: var(--font-body);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      color: var(--black);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      letter-spacing: -0.01em;
+      transition: all 0.2s ease;
+    }
+
+    .faq-question:hover {
+      color: var(--aw-blue);
+    }
+
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      color: var(--aw-blue);
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+    }
+
+    .faq-answer-content {
+      padding: 0 2rem 1.75rem 2rem;
+      font-size: var(--text-base);
+      color: var(--gray-700);
+      line-height: 1.8;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: var(--space-32) 0;
+      background: var(--gray-950);
+      color: var(--white);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-content h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-display-md);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .cta-content p {
+      font-size: var(--text-xl);
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 3rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1.25rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-white {
+      padding: 1.25rem 3rem;
+      background: var(--white);
+      color: var(--gray-950);
+      border: none;
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-outline-white {
+      padding: 1.25rem 3rem;
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-outline-white:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--gray-900);
+      color: var(--gray-400);
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-section h4 {
+      color: var(--white);
+      font-size: var(--text-base);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--gray-400);
+      text-decoration: none;
+      font-size: var(--text-sm);
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid var(--gray-800);
+      text-align: center;
+      font-size: var(--text-sm);
+      color: var(--gray-500);
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .split-section {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .split-section.reverse .split-image,
+      .split-section.reverse .split-content {
+        order: initial;
+      }
+
+      .split-image {
+        min-height: 60vh;
+      }
+
+      .split-content {
+        padding: var(--space-16) var(--space-8);
+      }
+
+      .trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .trust-item:nth-child(4n) {
+        border-right: 1px solid var(--gray-200);
+      }
+
+      .trust-item:nth-child(2n) {
+        border-right: none;
+      }
+
+      .list-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .list-item:nth-child(3n) {
+        border-right: 1px solid var(--gray-200);
+      }
+
+      .list-item:nth-child(2n) {
+        border-right: none;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-item {
+        border-right: none;
+      }
+
+      .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .program-item {
+        grid-template-columns: 1fr;
+      }
+
+      .program-label {
+        border-right: none;
+        border-bottom: 1px solid var(--gray-200);
+        padding: 2rem 2rem 1rem 2rem;
+      }
+
+      .program-content {
+        padding: 1rem 2rem 2rem 2rem;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-headline {
+        font-size: 3rem;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+      }
+
+      .trust-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-item {
+        border-right: none;
+      }
+
+      .list-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .list-item {
+        border-right: none;
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Scroll Progress -->
+  <div class="scroll-progress-bar"></div>
+
+  <!-- Navigation -->
+  <nav class="navigation">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
+        <span>AMERICA WORKS</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="jobseekers.html">Jobseekers</a>
+        <a href="employers.html">Employers</a>
+        <a href="#contact" class="nav-cta">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-image-bg">
+      <img src="images/team-of-workers-celebrating-success-at-a-shipping.jpg" alt="Government partnership success">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-label">// Government Partnerships</div>
+        <h1 class="hero-headline">A proven partner for performance-based workforce programs.</h1>
+        <p class="hero-subheadline">
+          For nearly 40 years, America Works has partnered with federal, state, and local agencies to design and deliver work-first programs that move people into employment, support them to stay employed, and help agencies meet policy and performance goals.
+        </p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn-primary">
+            <span>Talk to our partnerships team</span>
+            <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+          </a>
+          <a href="#contact" class="btn-secondary">
+            <span>Discuss your program or RFP</span>
+            <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Strip -->
+  <section class="trust-strip">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <div class="trust-number">40+</div>
+        <div class="trust-label">Years in workforce solutions and welfare-to-work</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-number">~2M</div>
+        <div class="trust-label">Individuals helped increase self-sufficiency through employment</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-number">100s</div>
+        <div class="trust-label">Partnerships with local, state & federal agencies</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-number">Multi-state</div>
+        <div class="trust-label">Hybrid performance-based contracts active in major cities</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who We Partner With -->
+  <section class="section bg-gray">
+    <div class="container">
+      <header class="section-header">
+        <div class="section-label">Partnerships</div>
+        <h2>Who we partner with—and how we help.</h2>
+        <p class="section-intro">
+          America Works collaborates with public agencies and community-based organizations across the country to deliver employment and training services in both urban and rural settings. We tailor each program to local needs while staying true to our work-first, outcomes-driven approach.
+        </p>
+      </header>
+
+      <h3 style="font-family: var(--font-display); font-size: var(--text-h2); text-align: center; margin-bottom: var(--space-8); font-weight: 400; letter-spacing: -0.02em;">We commonly partner with agencies responsible for:</h3>
+
+      <div class="list-grid">
+        <div class="list-item">
+          <div class="list-icon"><i data-lucide="briefcase"></i></div>
+          <p>TANF and SNAP Employment & Training programs</p>
+        </div>
+        <div class="list-item">
+          <div class="list-icon"><i data-lucide="users"></i></div>
+          <p>Workforce programs funded under WIOA</p>
+        </div>
+        <div class="list-item">
+          <div class="list-icon"><i data-lucide="shield"></i></div>
+          <p>Corrections and reentry services</p>
+        </div>
+        <div class="list-item">
+          <div class="list-icon"><i data-lucide="accessibility"></i></div>
+          <p>Disability employment programs (Ticket to Work)</p>
+        </div>
+        <div class="list-item">
+          <div class="list-icon"><i data-lucide="graduation-cap"></i></div>
+          <p>Youth and young-adult workforce initiatives</p>
+        </div>
+        <div class="list-item">
+          <div class="list-icon"><i data-lucide="building"></i></div>
+          <p>Local economic and workforce development agencies</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Model -->
+  <section class="split-section">
+    <div class="split-image">
+      <img src="images/resume-coaching.jpg" alt="Blended service model">
+    </div>
+    <div class="split-content">
+      <div class="split-content-inner">
+        <div class="section-label">Service Model</div>
+        <h2 class="split-headline">Our blended service model</h2>
+        <p class="split-description">
+          Our programs typically combine work readiness, training, job placement, and retention services into a single integrated pathway—so participants move as quickly as possible into work while building skills for advancement.
+        </p>
+        <div class="feature-grid" style="border-top: none; margin-top: 0;">
+          <div class="feature-item" style="border-top: 1px solid var(--gray-200);">
+            <div class="feature-icon"><i data-lucide="check-circle"></i></div>
+            <div class="feature-content">
+              <p>Work readiness (hard + soft skills)</p>
+            </div>
+          </div>
+          <div class="feature-item" style="border-top: 1px solid var(--gray-200);">
+            <div class="feature-icon"><i data-lucide="book-open"></i></div>
+            <div class="feature-content">
+              <p>Training aligned to local labor demand</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i data-lucide="briefcase"></i></div>
+            <div class="feature-content">
+              <p>Job development and placement</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i data-lucide="trending-up"></i></div>
+            <div class="feature-content">
+              <p>Ongoing support and advancement services</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work-First Model -->
+  <section class="section">
+    <div class="container">
+      <header class="section-header">
+        <div class="section-label">Model</div>
+        <h2>A work-first model built around measurable outcomes.</h2>
+        <p class="section-intro">
+          Our approach is grounded in the belief that meaningful employment is the most effective path out of poverty. We design programs that prioritize rapid attachment to work, backed by training, wraparound services, and ongoing support to sustain employment.
+        </p>
+      </header>
+
+      <div class="steps-grid">
+        <div class="step-item">
+          <div class="step-number">01</div>
+          <h3>Work readiness</h3>
+          <p>We build both hard and soft skills that employers need—communication, customer service, computer literacy, workplace expectations and more—so participants are prepared to succeed, not just to interview.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-number">02</div>
+          <h3>Training & education</h3>
+          <p>We connect participants to certificate programs, ESL, high school equivalency, and other training aligned with local labor market demand, so every hour invested supports a viable career goal.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-number">03</div>
+          <h3>Employment & placement</h3>
+          <p>As soon as participants are ready, we match their goals and work history to open opportunities using our employer network. We fast-track them to interviews and help agencies meet placement targets.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-number">04</div>
+          <h3>Support & advancement</h3>
+          <p>Once participants enter employment, we provide transition support, problem-solving, and additional training and certifications, helping them retain their jobs, increase their earnings, and reduce returns to public assistance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Work With Us -->
+  <section class="split-section reverse">
+    <div class="split-image">
+      <img src="images/business-career-and-placement.jpg" alt="Agency partnership">
+    </div>
+    <div class="split-content alt-bg">
+      <div class="split-content-inner">
+        <div class="section-label">Value</div>
+        <h2 class="split-headline">Why agencies choose America Works as a vendor.</h2>
+        <p class="split-description">
+          Agencies work with us because we combine decades of experience with the flexibility to meet local requirements and performance standards.
+        </p>
+
+        <div class="feature-grid" style="border-top: none; margin-top: 0;">
+          <div class="feature-item" style="border-top: 1px solid var(--gray-200);">
+            <div class="feature-icon"><i data-lucide="target"></i></div>
+            <div class="feature-content">
+              <h3>Specialists in workforce solutions</h3>
+              <p>Our sole focus is workforce and welfare-to-work programming, with a long history of helping people who face multiple barriers to employment.</p>
+            </div>
+          </div>
+          <div class="feature-item" style="border-top: 1px solid var(--gray-200);">
+            <div class="feature-icon"><i data-lucide="award"></i></div>
+            <div class="feature-content">
+              <h3>Deep experience</h3>
+              <p>Our leadership has been involved in workforce solutions since the 1960s, and America Works has been helping launch careers since 1984.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i data-lucide="heart"></i></div>
+            <div class="feature-content">
+              <h3>Mission-driven staff</h3>
+              <p>We hire people who care about their communities and are committed to helping individuals and families in need move toward self-sufficiency.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i data-lucide="zap"></i></div>
+            <div class="feature-content">
+              <h3>Rapid implementation</h3>
+              <p>We have opened new offices with as little as a month's notice, allowing agencies to stand up new programs quickly.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i data-lucide="bar-chart-3"></i></div>
+            <div class="feature-content">
+              <h3>Top-performing vendor</h3>
+              <p>America Works consistently ranks among the top vendors wherever we operate, based on performance metrics and contract outcomes.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i data-lucide="sliders"></i></div>
+            <div class="feature-content">
+              <h3>Versatile and adaptable</h3>
+              <p>We can align program design and data reporting to your requirements while maintaining strong results.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Performance-Based Contracting -->
+  <section class="section bg-gray">
+    <div class="container">
+      <header class="section-header">
+        <div class="section-label">Accountability</div>
+        <h2>Built for performance-based contracts.</h2>
+        <p class="section-intro">
+          America Works has been cited in independent research and policy discussions as a leading example of performance-based contracting in welfare-to-work and employment services.
+        </p>
+      </header>
+
+      <h3 style="font-family: var(--font-display); font-size: var(--text-h2); text-align: center; margin-bottom: var(--space-8); font-weight: 400; letter-spacing: -0.02em;">Aligning incentives with your outcomes</h3>
+
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-icon"><i data-lucide="dollar-sign"></i></div>
+          <div class="feature-content">
+            <h3>Outcome-focused fees</h3>
+            <p>Our contracts are typically structured around outcomes such as employment, retention, and earnings, not just activities or participation.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i data-lucide="trending-up"></i></div>
+          <div class="feature-content">
+            <h3>Evidence of cost-effectiveness</h3>
+            <p>Evaluations have found that performance-based models like ours, while sometimes higher-cost upfront, can be more cost-effective over time as clients stay employed longer and rely less on public benefits.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i data-lucide="file-text"></i></div>
+          <div class="feature-content">
+            <h3>Transparent data and reporting</h3>
+            <p>We support robust tracking and reporting to meet monitoring, audit, and evaluation requirements, including participation, placement, retention, and earnings.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="max-width: 800px; margin: var(--space-16) auto 0; padding: 2.5rem 3rem; background: var(--white); border-left: 4px solid var(--aw-blue); position: relative;">
+        <p style="font-size: var(--text-xl); line-height: 1.7; color: var(--gray-800); font-style: italic; margin-bottom: 1rem;">
+          "Providers like America Works demonstrated how individualized performance-based contracts could drive stronger engagement and employment outcomes."
+        </p>
+        <p style="font-size: var(--text-sm); color: var(--gray-600); font-weight: 600;">
+          — Summary of findings from independent reviews of TANF and workforce contracts
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Program Areas -->
+  <section class="program-areas">
+    <div class="container">
+      <header class="section-header">
+        <div class="section-label">Examples</div>
+        <h2>Program areas and example partnerships.</h2>
+        <p class="section-intro">
+          Our work spans multiple funding streams and program types. A few examples:
+        </p>
+      </header>
+
+      <div class="program-grid">
+        <div class="program-item">
+          <div class="program-label">SNAP Employment & Training (SNAP E&T)</div>
+          <div class="program-content">
+            <p><strong>Example:</strong> Multi-million dollar, hybrid performance-based contracts delivering Career Advance, Career Compass, and Youth Pathways services across New York City boroughs.</p>
+          </div>
+        </div>
+        <div class="program-item">
+          <div class="program-label">TANF work programs & family economic security</div>
+          <div class="program-content">
+            <p><strong>Example:</strong> Providers under performance-based TANF contracts in jurisdictions like Washington, DC, focused on participation and employment within a broader two-generation strategy.</p>
+          </div>
+        </div>
+        <div class="program-item">
+          <div class="program-label">WIOA and related workforce initiatives</div>
+          <div class="program-content">
+            <p><strong>Example:</strong> Operation of job search assistance and "back to work" programs compared in rigorous evaluations such as the NYC Job Search Assistance study.</p>
+          </div>
+        </div>
+        <div class="program-item">
+          <div class="program-label">Disability employment programs (Ticket to Work)</div>
+          <div class="program-content">
+            <p><strong>Example:</strong> America Works of New York registered as a national Employment Network under SSA's Ticket to Work program, providing employment supports to SSI/SSDI beneficiaries.</p>
+          </div>
+        </div>
+        <div class="program-item">
+          <div class="program-label">Reentry and justice-involved populations</div>
+          <div class="program-content">
+            <p><strong>Example:</strong> Integration of employment services with corrections and reentry initiatives supported by U.S. Department of Labor and other funders.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Implementation -->
+  <section class="section bg-gray">
+    <div class="container">
+      <header class="section-header">
+        <div class="section-label">Process</div>
+        <h2>How we build and run programs with you.</h2>
+        <p class="section-intro">
+          We know every jurisdiction is different. Our implementation approach is collaborative and structured, so you get a partner—not just a vendor.
+        </p>
+      </header>
+
+      <div class="steps-grid">
+        <div class="step-item">
+          <div class="step-number">01</div>
+          <h3>Co-design & planning</h3>
+          <p>We start by understanding your policy goals, funding streams, and performance requirements. Together, we define target populations, service flows, and outcome metrics that align with your strategy and federal guidelines.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-number">02</div>
+          <h3>Rapid stand-up of operations</h3>
+          <p>We recruit and train staff, secure and equip office locations where needed, and connect with local employer and community networks. Our history includes standing up new locations within about a month of contract award when necessary.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-number">03</div>
+          <h3>Service delivery & continuous improvement</h3>
+          <p>We deliver the full blend of services—outreach, assessment, work readiness, training, placement, and retention—while using data to monitor progress and continuously refine strategies.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-number">04</div>
+          <h3>Reporting, evaluation & scaling</h3>
+          <p>We provide regular performance reports and collaborate on evaluations to support accountability and inform future policy. Successful pilots can be scaled to additional sites or populations.</p>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: var(--space-16);">
+        <a href="#contact" class="btn-primary">
+          <span>Discuss your program or upcoming RFP</span>
+          <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <header class="section-header">
+        <div class="section-label">Testimonials</div>
+        <h2>What people say about partnering with America Works.</h2>
+      </header>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            America Works is a program that has the best staff. They helped me close my TANF case and move into steady employment.
+          </p>
+          <p class="testimonial-author">— Congressional Testimony</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            I remember when I was a member of America Works, the reps really helped me through rough times and helped me find employment—really nice people.
+          </p>
+          <p class="testimonial-author">— Former Client</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            After decades in the welfare-to-work field, America Works' leadership has been at the forefront of advocating for performance-based contracts that tie funding to results.
+          </p>
+          <p class="testimonial-author">— Policy Research Analysis</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="container">
+      <header class="section-header">
+        <div class="section-label">FAQ</div>
+        <h2>Questions agencies often ask.</h2>
+      </header>
+
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What kinds of contracts does America Works typically operate under?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              We work under a range of contract structures, including hybrid and fully performance-based models, cost reimbursement with performance incentives, and braided funding arrangements across TANF, SNAP E&T, WIOA, and local funds. We tailor contract structures to your regulatory environment and reporting needs.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How do you ensure accountability and data quality?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              We build data and reporting requirements into program design from the start, aligning with federal and state rules. Our teams track participation, services, placements, retention, and earnings, and we regularly participate in third-party evaluations and audits.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can you work in both urban and rural areas?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Yes. We have operated programs in large metro areas and smaller communities, adapting services and staffing models to local labor markets and transportation realities.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How quickly can you launch a new program?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              Timelines depend on scope and procurement requirements, but we have a track record of establishing new offices and operations within short timeframes—sometimes within a month of award—when needed.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What populations do you have experience serving?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              We have extensive experience with TANF and SNAP participants, young adults, military veterans, individuals who have experienced homelessness, justice-involved individuals, non-custodial parents, and people receiving disability benefits.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Do you only serve one state or region?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              No. We operate in multiple states and the District of Columbia through a network of legally separate but coordinated entities, offering both in-person and virtual services.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Let's explore what we can build together.</h2>
+        <p>
+          Whether you're planning a new initiative, redesigning an existing program, or exploring performance-based contracting, America Works can be a partner in designing and delivering workforce services that move people into sustainable employment.
+        </p>
+        <div class="cta-buttons">
+          <a href="#" class="btn-white">
+            <span>Talk to our partnerships team</span>
+            <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+          </a>
+          <a href="#" class="btn-outline-white">
+            <span>Share details about your program or RFP</span>
+            <i data-lucide="file-text" style="width: 18px; height: 18px;"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>America Works</h4>
+          <p style="font-size: var(--text-sm); line-height: 1.7; margin-top: 1rem;">
+            40 years of proven workforce development. Technical excellence meets human impact.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h4>For Government Partners</h4>
+          <ul class="footer-links">
+            <li><a href="#partnerships">Partnership Opportunities</a></li>
+            <li><a href="#model">Our Model</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="jobseekers.html">For Jobseekers</a></li>
+            <li><a href="employers.html">For Employers</a></li>
+            <li><a href="#">About Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <ul class="footer-links">
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 America Works. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Scroll progress bar
+    window.addEventListener('scroll', () => {
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (window.scrollY / windowHeight);
+      document.querySelector('.scroll-progress-bar').style.transform = `scaleX(${scrolled})`;
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const faqItem = button.closest('.faq-item');
+        const isActive = faqItem.classList.contains('active');
+
+        document.querySelectorAll('.faq-item').forEach(item => {
+          item.classList.remove('active');
+        });
+
+        if (!isActive) {
+          faqItem.classList.add('active');
+        }
+      });
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offsetTop = target.offsetTop - 80;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
