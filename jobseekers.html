@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="America Works helps jobseekers prepare for work, connect with employers, and build lasting careers. Get support at every step.">
+  <title>Jobseekers - America Works</title>
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,600;1,400&family=General+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ============================================
+       PREMIUM EDITORIAL DESIGN SYSTEM
+       America Works - Jobseekers
+       ============================================ */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Typography */
+      --font-display: 'Instrument Serif', serif;
+      --font-body: 'General Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      /* Type Scale */
+      --text-display-xl: 5.5rem;
+      --text-display-lg: 4rem;
+      --text-display-md: 3rem;
+      --text-h1: 2.5rem;
+      --text-h2: 2rem;
+      --text-h3: 1.5rem;
+      --text-xl: 1.5rem;
+      --text-lg: 1.25rem;
+      --text-base: 1.0625rem;
+      --text-sm: 0.9375rem;
+      --text-xs: 0.8125rem;
+
+      /* Brand Colors */
+      --aw-red: #ec140c;
+      --aw-red-dark: #c7130c;
+      --aw-blue: #323b97;
+      --aw-blue-dark: #252e6e;
+      --accent-cyan: #00d4ff;
+      --accent-green: #10b981;
+
+      /* Grays */
+      --black: #000000;
+      --gray-950: #0a0a0a;
+      --gray-900: #18181b;
+      --gray-800: #27272a;
+      --gray-700: #3f3f46;
+      --gray-600: #52525b;
+      --gray-500: #71717a;
+      --gray-400: #a1a1aa;
+      --gray-300: #d4d4d8;
+      --gray-200: #e4e4e7;
+      --gray-100: #f4f4f5;
+      --gray-50: #fafafa;
+      --white: #ffffff;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.05);
+      --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.06);
+
+      /* Spacing */
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+      --space-32: 8rem;
+
+      /* Layout */
+      --container-xl: 87.5rem;
+
+      /* Easing */
+      --ease-primary: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Base */
+    body {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 400;
+      line-height: 1.7;
+      letter-spacing: -0.01em;
+      color: var(--gray-800);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* Grain Texture */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.03"/></svg>');
+      opacity: 1;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* Scroll Progress */
+    .scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: var(--aw-red);
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 0.1s ease-out;
+      z-index: 9999;
+      box-shadow: 0 0 20px rgba(236, 20, 12, 0.5);
+    }
+
+    /* Navigation */
+    .navigation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+      z-index: 1000;
+      transition: all 0.3s var(--ease-primary);
+    }
+
+    .nav-container {
+      max-width: var(--container-xl);
+      margin: 0 auto;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--black);
+      font-family: 'Crimson Text', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: opacity 0.2s ease;
+    }
+
+    .nav-logo:hover {
+      opacity: 0.7;
+    }
+
+    .nav-logo-img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--gray-700);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--black);
+    }
+
+    .nav-cta {
+      padding: 0.75rem 1.75rem;
+      background: var(--aw-red);
+      color: var(--white) !important;
+      border-radius: 6px;
+      box-shadow: 0 2px 10px rgba(236, 20, 12, 0.2);
+      transition: all 0.3s var(--ease-primary);
+    }
+
+    .nav-cta:hover {
+      background: var(--aw-red-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(236, 20, 12, 0.3);
+    }
+
+    /* Hero - Editorial Style */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--gray-950);
+    }
+
+    .hero-image-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-image-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        rgba(236, 20, 12, 0.75) 0%,
+        rgba(50, 59, 151, 0.65) 100%);
+      mix-blend-mode: multiply;
+      z-index: 1;
+    }
+
+    .hero-container {
+      max-width: var(--container-xl);
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
+      color: var(--white);
+    }
+
+    .hero-content {
+      max-width: 900px;
+      opacity: 0;
+      animation: fadeInUp 1s var(--ease-primary) 0.3s forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+      color: var(--white);
+    }
+
+    .hero-subheadline {
+      font-size: var(--text-xl);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 3rem;
+      max-width: 700px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 1.25rem 3rem;
+      background: var(--white);
+      color: var(--gray-950);
+      border: none;
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-secondary {
+      padding: 1.25rem 3rem;
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    /* Split Sections - Editorial Layout */
+    .split-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
+      position: relative;
+    }
+
+    .split-section.reverse .split-image {
+      order: 2;
+    }
+
+    .split-section.reverse .split-content {
+      order: 1;
+    }
+
+    .split-image {
+      position: relative;
+      overflow: hidden;
+      background: var(--gray-100);
+    }
+
+    .split-image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .split-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        rgba(236, 20, 12, 0.25) 0%,
+        rgba(255, 255, 255, 0.1) 100%);
+      mix-blend-mode: multiply;
+      z-index: 1;
+      transition: opacity 0.6s ease;
+    }
+
+    .split-section.blue .split-image::before {
+      background: linear-gradient(135deg,
+        rgba(50, 59, 151, 0.25) 0%,
+        rgba(255, 255, 255, 0.1) 100%);
+    }
+
+    .split-section:hover .split-image::before {
+      opacity: 0.7;
+    }
+
+    .split-content {
+      display: flex;
+      align-items: center;
+      padding: var(--space-24) var(--space-20);
+      background: var(--white);
+    }
+
+    .split-content-inner {
+      max-width: 550px;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gray-500);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .section-label::before {
+      content: '// ';
+      color: var(--aw-red);
+    }
+
+    .split-section.blue .section-label::before {
+      color: var(--aw-blue);
+    }
+
+    .split-headline {
+      font-family: var(--font-display);
+      font-size: var(--text-display-md);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+
+    .split-description {
+      font-size: var(--text-lg);
+      line-height: 1.7;
+      color: var(--gray-700);
+      margin-bottom: 2.5rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      font-size: var(--text-base);
+      color: var(--gray-800);
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .feature-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      width: 3px;
+      height: 1.5rem;
+      background: var(--aw-red);
+      border-radius: 2px;
+    }
+
+    .split-section.blue .feature-item::before {
+      background: var(--aw-blue);
+    }
+
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--aw-red);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .split-section.blue .btn-link {
+      color: var(--aw-blue);
+    }
+
+    .btn-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--aw-red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .split-section.blue .btn-link::after {
+      background: var(--aw-blue);
+    }
+
+    .btn-link:hover::after {
+      transform: scaleX(1);
+    }
+
+    .btn-link i {
+      transition: transform 0.3s ease;
+    }
+
+    .btn-link:hover i {
+      transform: translateX(4px);
+    }
+
+    /* Process Timeline */
+    .process-section {
+      padding: var(--space-32) 0;
+      background: var(--gray-50);
+    }
+
+    .container {
+      max-width: var(--container-xl);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-24);
+    }
+
+    .section-header .section-label {
+      margin-bottom: 1rem;
+    }
+
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-display-md);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-intro {
+      font-size: var(--text-xl);
+      color: var(--gray-600);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: var(--space-16);
+    }
+
+    .process-card {
+      background: var(--white);
+      padding: 2.5rem 2rem;
+      border-radius: 4px;
+      border: 1px solid var(--gray-200);
+      position: relative;
+      transition: all 0.4s var(--ease-primary);
+    }
+
+    .process-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--aw-red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .process-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .process-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--gray-300);
+    }
+
+    .process-number {
+      font-family: var(--font-mono);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--aw-red);
+      opacity: 0.3;
+      margin-bottom: 1rem;
+      line-height: 1;
+    }
+
+    .process-card h3 {
+      font-family: var(--font-body);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .process-card p {
+      font-size: var(--text-sm);
+      color: var(--gray-700);
+      line-height: 1.7;
+    }
+
+    /* Testimonials */
+    .testimonials-section {
+      padding: var(--space-32) 0;
+      background: var(--white);
+      position: relative;
+    }
+
+    .testimonials-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--aw-red) 50%, transparent 100%);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: var(--space-16);
+    }
+
+    .testimonial-card {
+      background: var(--gray-50);
+      padding: 3rem 2.5rem;
+      border-radius: 4px;
+      position: relative;
+      transition: all 0.4s var(--ease-primary);
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      font-family: var(--font-display);
+      font-size: 6rem;
+      color: var(--aw-red);
+      opacity: 0.08;
+      line-height: 1;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      background: var(--white);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .testimonial-text {
+      position: relative;
+      z-index: 1;
+      font-size: var(--text-base);
+      line-height: 1.8;
+      color: var(--gray-800);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      font-size: var(--text-sm);
+      color: var(--gray-600);
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: var(--space-32) 0;
+      background: var(--gray-950);
+      color: var(--white);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-content h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-display-md);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .cta-content p {
+      font-size: var(--text-xl);
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 3rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1.25rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-white {
+      padding: 1.25rem 3rem;
+      background: var(--white);
+      color: var(--gray-950);
+      border: none;
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-outline-white {
+      padding: 1.25rem 3rem;
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-outline-white:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--gray-900);
+      color: var(--gray-400);
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-section h4 {
+      color: var(--white);
+      font-size: var(--text-base);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--gray-400);
+      text-decoration: none;
+      font-size: var(--text-sm);
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid var(--gray-800);
+      text-align: center;
+      font-size: var(--text-sm);
+      color: var(--gray-500);
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .split-section {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .split-section.reverse .split-image,
+      .split-section.reverse .split-content {
+        order: initial;
+      }
+
+      .split-image {
+        min-height: 60vh;
+      }
+
+      .split-content {
+        padding: var(--space-16) var(--space-8);
+      }
+
+      .process-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-headline {
+        font-size: 3rem;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+      }
+
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Scroll Progress -->
+  <div class="scroll-progress-bar"></div>
+
+  <!-- Navigation -->
+  <nav class="navigation">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
+        <span>AMERICA WORKS</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#how-we-help">Services</a>
+        <a href="#process">Process</a>
+        <a href="#stories">Stories</a>
+        <a href="#contact" class="nav-cta">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-image-bg">
+      <img src="images/young-professional-working.jpg" alt="Professional career development">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-label">// For Jobseekers</div>
+        <h1 class="hero-headline">Your next career starts with one conversation.</h1>
+        <p class="hero-subheadline">
+          We've spent 40 years perfecting the path from unemployment to meaningful work. Personal coaching, direct employer access, and unwavering support—at no cost to you.
+        </p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn-primary">
+            <span>Start your journey</span>
+            <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+          </a>
+          <a href="#how-we-help" class="btn-secondary">
+            <span>Explore our services</span>
+            <i data-lucide="chevron-down" style="width: 18px; height: 18px;"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Job Readiness -->
+  <section class="split-section" id="how-we-help">
+    <div class="split-image">
+      <img src="images/resume-coaching.jpg" alt="Career coaching session">
+    </div>
+    <div class="split-content">
+      <div class="split-content-inner">
+        <div class="section-label">Support</div>
+        <h2 class="split-headline">Build confidence. Master the process.</h2>
+        <p class="split-description">
+          From your first resume draft to your final interview, we're there. Our career specialists don't just hand you a template—they sit with you, listen to your story, and help you present yourself with clarity and strength.
+        </p>
+        <ul class="feature-list">
+          <li class="feature-item">One-on-one resume and cover letter development</li>
+          <li class="feature-item">Interview preparation tailored to your industry</li>
+          <li class="feature-item">Job search strategy that fits your life</li>
+          <li class="feature-item">Skills assessment and career path planning</li>
+        </ul>
+        <a href="#contact" class="btn-link">
+          <span>Get started</span>
+          <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Employer Connections -->
+  <section class="split-section reverse blue">
+    <div class="split-image">
+      <img src="images/business-career-and-placement.jpg" alt="Professional workplace">
+    </div>
+    <div class="split-content">
+      <div class="split-content-inner">
+        <div class="section-label">Connections</div>
+        <h2 class="split-headline">Direct access to employers who are hiring.</h2>
+        <p class="split-description">
+          We don't send you to job boards. We connect you directly with verified employers actively seeking talent. Our 40-year track record means companies trust us to deliver candidates who succeed.
+        </p>
+        <ul class="feature-list">
+          <li class="feature-item">Exclusive access to our employer network</li>
+          <li class="feature-item">Job matching based on your skills and goals</li>
+          <li class="feature-item">Direct introductions and advocacy</li>
+          <li class="feature-item">Opportunities across multiple industries</li>
+        </ul>
+        <a href="#contact" class="btn-link">
+          <span>See opportunities</span>
+          <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Ongoing Support -->
+  <section class="split-section">
+    <div class="split-image">
+      <img src="images/intern.jpg" alt="New employee receiving support">
+    </div>
+    <div class="split-content">
+      <div class="split-content-inner">
+        <div class="section-label">Retention</div>
+        <h2 class="split-headline">We stay with you after day one.</h2>
+        <p class="split-description">
+          Getting hired is just the beginning. We provide 90+ days of post-placement support to ensure you're thriving, not just surviving. Challenges at work? We help you navigate them.
+        </p>
+        <ul class="feature-list">
+          <li class="feature-item">Regular check-ins during your first 90 days</li>
+          <li class="feature-item">Problem-solving support for workplace challenges</li>
+          <li class="feature-item">Career advancement guidance</li>
+          <li class="feature-item">Long-term relationship and re-engagement</li>
+        </ul>
+        <a href="#contact" class="btn-link">
+          <span>Learn more</span>
+          <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Who We Help -->
+  <section class="split-section reverse blue">
+    <div class="split-image">
+      <img src="images/opportunities.jpg" alt="Diverse professionals">
+    </div>
+    <div class="split-content">
+      <div class="split-content-inner">
+        <div class="section-label">Eligibility</div>
+        <h2 class="split-headline">If you're ready to work, we're ready to help.</h2>
+        <p class="split-description">
+          We work with people from all backgrounds—whether you're receiving public assistance, returning from incarceration, transitioning from military service, or simply facing a tough job market. No judgment. Just support.
+        </p>
+        <ul class="feature-list">
+          <li class="feature-item">TANF and SNAP recipients</li>
+          <li class="feature-item">Justice-involved individuals</li>
+          <li class="feature-item">Veterans and military families</li>
+          <li class="feature-item">People with disabilities seeking employment</li>
+          <li class="feature-item">Long-term unemployed</li>
+          <li class="feature-item">Young adults entering the workforce</li>
+        </ul>
+        <a href="#contact" class="btn-link">
+          <span>Check eligibility</span>
+          <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Timeline -->
+  <section class="process-section" id="process">
+    <div class="container">
+      <header class="section-header">
+        <div class="section-label">Process</div>
+        <h2>Four steps from here to hired.</h2>
+        <p class="section-intro">
+          Every person's journey is different, but most follow this path. Simple, supportive, effective.
+        </p>
+      </header>
+
+      <div class="process-grid">
+        <div class="process-card">
+          <div class="process-number">01</div>
+          <h3>Reach out</h3>
+          <p>Contact us directly or get referred by a caseworker. We'll discuss your situation, goals, and available programs in a judgment-free conversation.</p>
+        </div>
+
+        <div class="process-card">
+          <div class="process-number">02</div>
+          <h3>Meet your specialist</h3>
+          <p>Your career specialist listens to your story, understands your barriers, and creates a realistic plan tailored to your life and ambitions.</p>
+        </div>
+
+        <div class="process-card">
+          <div class="process-number">03</div>
+          <h3>Prepare & apply</h3>
+          <p>Build your resume, practice interviews, explore training, and apply for jobs. We connect you with employers actively hiring in your area.</p>
+        </div>
+
+        <div class="process-card">
+          <div class="process-number">04</div>
+          <h3>Start working</h3>
+          <p>Get hired and begin your new role with our support. We stay in touch, help troubleshoot, and ensure you're set up for long-term success.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials-section" id="stories">
+    <div class="container">
+      <header class="section-header">
+        <div class="section-label">Impact</div>
+        <h2>Real stories. Real outcomes.</h2>
+        <p class="section-intro">
+          Every number represents a person. Here are a few of their stories.
+        </p>
+      </header>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            When I came to America Works, I had been out of work for months and didn't know where to start. They helped me rewrite my resume, practice interviews, and connected me with a company that was willing to give me a chance. Now I'm working full time and finally feel like I'm moving forward again.
+          </p>
+          <p class="testimonial-author">— Maria R., New York</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            I was nervous about my background and wasn't sure anyone would hire me. My career specialist at America Works never judged me. They helped me explain my story, prepare for interviews, and stay focused. I'm grateful to have a job and a fresh start.
+          </p>
+          <p class="testimonial-author">— James T., Maryland</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            This was my first real job. America Works helped me figure out what kind of work would fit me, taught me how to interview, and checked in after I started. Having someone in my corner made all the difference.
+          </p>
+          <p class="testimonial-author">— DeShawn W., Indiana</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to start?</h2>
+        <p>
+          You don't have to do this alone. Whether you're looking for your first job, starting over, or trying to move into something better, we're here.
+        </p>
+        <div class="cta-buttons">
+          <a href="#" class="btn-white">
+            <span>Get started today</span>
+            <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+          </a>
+          <a href="#" class="btn-outline-white">
+            <span>Find a location</span>
+            <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>America Works</h4>
+          <p style="font-size: var(--text-sm); line-height: 1.7; margin-top: 1rem;">
+            40 years of proven workforce development. Technical excellence meets human impact.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h4>For Jobseekers</h4>
+          <ul class="footer-links">
+            <li><a href="#how-we-help">Services</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#stories">Success Stories</a></li>
+            <li><a href="#contact">Get Started</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Locations</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <ul class="footer-links">
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 America Works. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Scroll progress bar
+    window.addEventListener('scroll', () => {
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (window.scrollY / windowHeight);
+      document.querySelector('.scroll-progress-bar').style.transform = `scaleX(${scrolled})`;
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offsetTop = target.offsetTop - 80;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
