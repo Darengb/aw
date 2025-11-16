@@ -166,6 +166,7 @@
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(12px) saturate(100%);
       -webkit-backdrop-filter: blur(12px) saturate(100%);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
     }
 
     /* Step 3: Below hero with blur and dark text */
@@ -782,7 +783,7 @@
       left: 100%;
       margin-right: 0;
       margin-left: 0.1em;
-      opacity: 0;
+      opacity: 0.5;
       transition: opacity 0.3s ease;
     }
 
@@ -2272,68 +2273,12 @@
     .value-prop:nth-child(4) { transition-delay: 0.2s; }
     .value-prop:nth-child(5) { transition-delay: 0.25s; }
 
-    .credentials-box {
-      background: var(--gray-50);
-      border: 1px solid var(--gray-200);
-      border-radius: 8px;
-      padding: 3rem;
-      text-align: center;
-      max-width: 900px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .credentials-box h3 {
-      font-family: var(--font-body);
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--black);
-      margin-bottom: 2rem;
-      letter-spacing: -0.01em;
-    }
-
-    .credentials-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .credential-item {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-align: left;
-      font-size: var(--text-sm);
-      color: var(--gray-700);
-      font-weight: 500;
-    }
-
-    .credential-icon {
-      width: 24px;
-      height: 24px;
-      background: transparent;
-      color: var(--aw-blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
 
     @media (max-width: 768px) {
       .value-props-grid {
         grid-template-columns: 1fr;
       }
 
-      .credentials-list {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-
-      .credentials-box {
-        padding: 3rem 2rem;
-      }
     }
 
     /* Locations */
@@ -3224,8 +3169,8 @@
         <div class="value-prop">
           <div class="value-prop-icon"><i data-lucide="bar-chart-3"></i></div>
           <div class="value-prop-content">
-            <h3>Real-time transparency</h3>
-            <p>Data dashboards you can trust</p>
+            <h3>Transparency</h3>
+            <p>Data you can trust</p>
           </div>
         </div>
         <div class="value-prop">
@@ -3242,28 +3187,37 @@
             <p>We know every local job market</p>
           </div>
         </div>
-      </div>
-
-      <div class="credentials-box">
-        <h3>Verified & Validated</h3>
-        <div class="credentials-list">
-          <div class="credential-item">
-            <span class="credential-icon"><i data-lucide="check"></i></span>
-            <span>Federal vendor (NAICS 561311)</span>
-          </div>
-          <div class="credential-item">
-            <span class="credential-icon"><i data-lucide="check"></i></span>
-            <span>Multi-state operator</span>
-          </div>
-          <div class="credential-item">
-            <span class="credential-icon"><i data-lucide="check"></i></span>
-            <span>Woman-owned enterprise</span>
-          </div>
-          <div class="credential-item">
-            <span class="credential-icon"><i data-lucide="check"></i></span>
-            <span>Congressional testimony on record</span>
+        <div class="value-prop">
+          <div class="value-prop-icon"><i data-lucide="shield-check"></i></div>
+          <div class="value-prop-content">
+            <h3>Federal vendor</h3>
+            <p>NAICS 561311</p>
           </div>
         </div>
+        <div class="value-prop">
+          <div class="value-prop-icon"><i data-lucide="map"></i></div>
+          <div class="value-prop-content">
+            <h3>Multi-state operator</h3>
+            <p>Coast to coast presence</p>
+          </div>
+        </div>
+        <div class="value-prop">
+          <div class="value-prop-icon"><i data-lucide="award"></i></div>
+          <div class="value-prop-content">
+            <h3>Woman-owned enterprise</h3>
+            <p>Certified diverse supplier</p>
+          </div>
+        </div>
+        <div class="value-prop">
+          <div class="value-prop-icon"><i data-lucide="landmark"></i></div>
+          <div class="value-prop-content">
+            <h3>Policy expertise</h3>
+            <p>Advised Congress and White House</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 3rem;">
         <a href="#contact" class="btn-primary"><span>Schedule a partnership call</span></a>
       </div>
     </div>
