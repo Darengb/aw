@@ -2945,74 +2945,98 @@
   </section>
 
   <!-- Audience Paths -->
-  <section class="audience-paths" id="paths">
-    <div class="container">
-      <header class="section-header">
-        <span class="label-system">Service Delivery</span>
-        <h2 class="display-md">Three paths to one powerful mission</h2>
-        <p class="display-subhead">
+  <section class="audience-paths py-32 relative" id="paths">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <span class="label-system font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4 block">Service Delivery</span>
+        <h2 class="display-md font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Three paths to one powerful mission</h2>
+        <p class="display-subhead max-w-3xl mx-auto text-xl text-gray-600 leading-relaxed mb-8">
           Whether you're seeking employment or seeking outcomes,
           we deliver with precision and care.
         </p>
-        <div class="section-nav-links">
-          <a href="jobseekers.html">Jobseekers</a>
-          <a href="employers.html">Employers</a>
-          <a href="partners.html">Partners</a>
+        <div class="section-nav-links flex gap-6 justify-center">
+          <a href="jobseekers.html" class="font-body text-sm font-semibold text-gray-700 no-underline transition-colors duration-200 hover:text-aw-blue">Jobseekers</a>
+          <a href="employers.html" class="font-body text-sm font-semibold text-gray-700 no-underline transition-colors duration-200 hover:text-aw-blue">Employers</a>
+          <a href="partners.html" class="font-body text-sm font-semibold text-gray-700 no-underline transition-colors duration-200 hover:text-aw-blue">Partners</a>
         </div>
       </header>
 
-      <div class="paths-grid">
-        <article class="path-card" id="jobseekers">
-          <div class="path-image" data-number="01">
-            <img src="images/young-professional-working.jpg" alt="Professional development" loading="lazy">
+      <div class="paths-grid flex flex-col gap-32">
+        <article class="path-card grid grid-cols-1 lg:grid-cols-2 gap-12 items-center" id="jobseekers">
+          <div class="path-image relative overflow-hidden rounded-2xl aspect-[4/3]" data-number="01">
+            <img src="images/young-professional-working.jpg" alt="Professional development" loading="lazy" class="w-full h-full object-cover">
           </div>
 
           <div class="path-content">
-            <div class="path-number">01 — Jobseekers</div>
-            <h3 class="h2">Your career starts here</h3>
+            <div class="path-number font-mono text-sm font-semibold tracking-wider text-aw-blue mb-4">01 — Jobseekers</div>
+            <h3 class="h2 font-display text-4xl font-normal leading-tight tracking-tight text-gray-900 mb-6">Your career starts here</h3>
 
-            <p class="path-description">
+            <p class="path-description text-lg text-gray-600 leading-relaxed mb-8">
               Life happens. Careers change. We meet you where you are
               and help you get where you're going. Personalized coaching,
               direct employer connections, and support that lasts beyond day one.
             </p>
 
-            <ul class="path-features">
-              <li>One-on-one career coaching and development</li>
-              <li>Direct access to verified hiring employers</li>
-              <li>Skills training aligned with market demand</li>
-              <li>90+ days of post-placement support</li>
+            <ul class="path-features flex flex-col gap-4 mb-8 list-none">
+              <li class="flex items-start gap-3 text-gray-700">
+                <span class="text-aw-red mt-1">→</span>
+                <span>One-on-one career coaching and development</span>
+              </li>
+              <li class="flex items-start gap-3 text-gray-700">
+                <span class="text-aw-red mt-1">→</span>
+                <span>Direct access to verified hiring employers</span>
+              </li>
+              <li class="flex items-start gap-3 text-gray-700">
+                <span class="text-aw-red mt-1">→</span>
+                <span>Skills training aligned with market demand</span>
+              </li>
+              <li class="flex items-start gap-3 text-gray-700">
+                <span class="text-aw-red mt-1">→</span>
+                <span>90+ days of post-placement support</span>
+              </li>
             </ul>
 
-            <a href="jobseekers.html" class="btn-link">Get started</a>
+            <a href="jobseekers.html" class="btn-link inline-flex items-center gap-2 font-body text-sm font-semibold uppercase tracking-wider text-gray-900 no-underline transition-all duration-200 hover:text-aw-blue">Get started</a>
           </div>
         </article>
 
-        <article class="path-card" id="partners">
-          <div class="path-image" data-number="02">
-            <img src="images/team-of-workers-celebrating-success-at-a-shipping.jpg" alt="Team success" loading="lazy">
+        <article class="path-card grid grid-cols-1 lg:grid-cols-2 gap-12 items-center" id="partners">
+          <div class="path-image relative overflow-hidden rounded-2xl aspect-[4/3] lg:order-2" data-number="02">
+            <img src="images/team-of-workers-celebrating-success-at-a-shipping.jpg" alt="Team success" loading="lazy" class="w-full h-full object-cover">
           </div>
 
-          <div class="path-content">
-            <div class="path-number">02 — Government & Partners</div>
-            <h3 class="h2">Performance you can measure</h3>
+          <div class="path-content lg:order-1">
+            <div class="path-number font-mono text-sm font-semibold tracking-wider text-aw-blue mb-4">02 — Government & Partners</div>
+            <h3 class="h2 font-display text-4xl font-normal leading-tight tracking-tight text-gray-900 mb-6">Performance you can measure</h3>
 
-            <p class="path-description">
+            <p class="path-description text-lg text-gray-600 leading-relaxed mb-8">
               We deliver what matters: people employed, staying employed.
               Our performance-based model aligns our success with yours,
               backed by four decades of proven results.
             </p>
 
-            <ul class="path-features">
-              <li>Pay-for-performance contract structures</li>
-              <li>TANF, SNAP, WIOA program expertise</li>
-              <li>Real-time data and transparent reporting</li>
-              <li>Local execution, national infrastructure</li>
+            <ul class="path-features flex flex-col gap-4 mb-8 list-none">
+              <li class="flex items-start gap-3 text-gray-700">
+                <span class="text-aw-red mt-1">→</span>
+                <span>Pay-for-performance contract structures</span>
+              </li>
+              <li class="flex items-start gap-3 text-gray-700">
+                <span class="text-aw-red mt-1">→</span>
+                <span>TANF, SNAP, WIOA program expertise</span>
+              </li>
+              <li class="flex items-start gap-3 text-gray-700">
+                <span class="text-aw-red mt-1">→</span>
+                <span>Real-time data and transparent reporting</span>
+              </li>
+              <li class="flex items-start gap-3 text-gray-700">
+                <span class="text-aw-red mt-1">→</span>
+                <span>Local execution, national infrastructure</span>
+              </li>
             </ul>
 
-            <div class="btn-group">
-              <a href="employers.html" class="btn-link">For Employers</a>
-              <a href="partners.html" class="btn-link">For Partners</a>
+            <div class="btn-group flex gap-6 flex-wrap">
+              <a href="employers.html" class="btn-link inline-flex items-center gap-2 font-body text-sm font-semibold uppercase tracking-wider text-gray-900 no-underline transition-all duration-200 hover:text-aw-blue">For Employers</a>
+              <a href="partners.html" class="btn-link inline-flex items-center gap-2 font-body text-sm font-semibold uppercase tracking-wider text-gray-900 no-underline transition-all duration-200 hover:text-aw-blue">For Partners</a>
             </div>
           </div>
         </article>
