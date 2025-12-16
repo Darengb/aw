@@ -1135,14 +1135,6 @@
     }
 
     .path-card {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      align-items: center;
-      min-height: 75vh;
-      position: relative;
-      overflow: visible;
-      opacity: 0;
       will-change: transform, opacity;
     }
 
@@ -2885,9 +2877,9 @@
       </header>
 
       <div class="paths-grid flex flex-col gap-32">
-        <article class="path-card grid grid-cols-1 lg:grid-cols-2 gap-12 items-center" id="jobseekers">
-          <div class="path-image relative overflow-hidden rounded-2xl aspect-[4/3]" data-number="01">
-            <img src="images/young-professional-working.jpg" alt="Professional development" loading="lazy" class="w-full h-full object-cover">
+        <article class="path-card grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[75vh] relative overflow-visible opacity-0" id="jobseekers">
+          <div class="path-image" data-number="01">
+            <img src="images/young-professional-working.jpg" alt="Professional development" loading="lazy">
           </div>
 
           <div class="path-content">
@@ -2923,9 +2915,9 @@
           </div>
         </article>
 
-        <article class="path-card grid grid-cols-1 lg:grid-cols-2 gap-12 items-center" id="partners">
-          <div class="path-image relative overflow-hidden rounded-2xl aspect-[4/3] lg:order-2" data-number="02">
-            <img src="images/team-of-workers-celebrating-success-at-a-shipping.jpg" alt="Team success" loading="lazy" class="w-full h-full object-cover">
+        <article class="path-card grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[75vh] relative overflow-visible opacity-0" id="partners">
+          <div class="path-image" data-number="02">
+            <img src="images/team-of-workers-celebrating-success-at-a-shipping.jpg" alt="Team success" loading="lazy">
           </div>
 
           <div class="path-content lg:order-1">
