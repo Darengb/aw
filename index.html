@@ -2829,47 +2829,47 @@
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-video-background">
-      <video autoplay muted loop playsinline>
+  <section class="hero min-h-screen flex items-center relative bg-transparent overflow-hidden pt-32 pb-16 isolate">
+    <div class="hero-video-background absolute inset-0 -z-20 overflow-hidden">
+      <video autoplay muted loop playsinline class="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 opacity-100">
         <source src="images/hero-bg-vid.mp4" type="video/mp4">
       </video>
     </div>
-    <div class="grid-overlay"></div>
+    <div class="grid-overlay absolute inset-0 bg-black/20 -z-10 opacity-100"></div>
 
-    <div class="hero-container">
-      <div class="hero-content">
-        <h1 class="hero-headline">
-          <span class="line-1">Real Jobs.</span>
-          <span class="line-2">Real Support.</span>
-          <span class="line-2"><span class="accent">Real Results.</span></span>
+    <div class="max-w-container mx-auto px-8 relative grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-24 items-center">
+      <div class="relative">
+        <h1 class="hero-headline font-display text-display-xl font-normal leading-[1.05] tracking-[-0.02em] mb-14 text-white">
+          <span class="line-1 block font-normal">Real Jobs.</span>
+          <span class="line-2 block text-white/85 relative font-normal">Real Support.</span>
+          <span class="line-2 block text-white/85 relative font-normal"><span class="accent relative text-white">Real Results.</span></span>
         </h1>
 
-        <div class="hero-ctas">
+        <div class="hero-ctas flex gap-5">
           <a href="#paths" class="btn-secondary"><span>Get Started</span></a>
         </div>
       </div>
 
       <!-- Dashboard (Direct child of hero-container for backdrop-filter) -->
-      <aside class="federal-monitor">
+      <aside class="federal-monitor bg-transparent border-none overflow-visible relative">
           <!-- Dashboard Header -->
-          <div class="dashboard-header">
-            <div class="dashboard-title">
+          <div class="dashboard-header bg-transparent pb-4 border-none hidden justify-between items-center mb-2">
+            <div class="flex items-center gap-3">
               <div>
-                <div class="title-main">Performance Dashboard</div>
-                <div class="title-sub">Lives Changed</div>
+                <div class="title-main font-body text-xs font-bold uppercase tracking-[0.08em] text-aw-blue">Performance Dashboard</div>
+                <div class="title-sub font-mono text-[0.625rem] text-gray-500 tracking-wider">Lives Changed</div>
               </div>
             </div>
-            <div class="dashboard-status">
-              <span class="status-pulse"></span>
-              <span class="status-label">Active</span>
+            <div class="dashboard-status flex items-center gap-2 px-3 py-1.5 bg-aw-blue/8 border border-aw-blue/25 rounded-sm">
+              <span class="status-pulse w-1.5 h-1.5 bg-aw-blue rounded-full"></span>
+              <span class="status-label font-mono text-[0.6875rem] font-semibold text-aw-blue tracking-wider uppercase">Active</span>
             </div>
           </div>
 
           <!-- Dashboard Grid -->
-          <div class="dashboard-grid">
+          <div class="dashboard-grid p-0 grid grid-cols-2 gap-4 relative">
             <!-- Hero Metric Card -->
-            <div class="metric-card-dash hero-metric">
+            <div class="metric-card-dash hero-metric bg-transparent border-none rounded-xl p-6 relative transition-all duration-400 flex flex-col items-center text-center min-h-[130px] justify-center">
               <div class="card-corner tl"></div>
               <div class="card-corner tr"></div>
               <div class="card-corner bl"></div>
@@ -2882,7 +2882,7 @@
             </div>
 
             <!-- Placement Time Card -->
-            <div class="metric-card-dash">
+            <div class="metric-card-dash bg-transparent border-none rounded-xl p-6 relative transition-all duration-400 flex flex-col items-center text-center min-h-[130px] justify-center">
               <div class="card-corner tl"></div>
               <div class="card-corner tr"></div>
               <div class="card-corner bl"></div>
@@ -2893,7 +2893,7 @@
             </div>
 
             <!-- Retention Card -->
-            <div class="metric-card-dash">
+            <div class="metric-card-dash bg-transparent border-none rounded-xl p-6 relative transition-all duration-400 flex flex-col items-center text-center min-h-[130px] justify-center">
               <div class="card-corner tl"></div>
               <div class="card-corner tr"></div>
               <div class="card-corner bl"></div>
@@ -2904,7 +2904,7 @@
             </div>
 
             <!-- Coverage Card -->
-            <div class="metric-card-dash">
+            <div class="metric-card-dash bg-transparent border-none rounded-xl p-6 relative transition-all duration-400 flex flex-col items-center text-center min-h-[130px] justify-center">
               <div class="card-corner tl"></div>
               <div class="card-corner tr"></div>
               <div class="card-corner bl"></div>
@@ -2915,7 +2915,7 @@
             </div>
 
             <!-- Operational Card -->
-            <div class="metric-card-dash">
+            <div class="metric-card-dash bg-transparent border-none rounded-xl p-6 relative transition-all duration-400 flex flex-col items-center text-center min-h-[130px] justify-center">
               <div class="card-corner tl"></div>
               <div class="card-corner tr"></div>
               <div class="card-corner bl"></div>
@@ -2926,7 +2926,7 @@
             </div>
 
             <!-- Status Card -->
-            <div class="metric-card-dash status-card">
+            <div class="metric-card-dash status-card bg-transparent border-none rounded-xl p-6 relative transition-all duration-400 flex flex-col items-center text-center min-h-[130px] justify-center">
               <div class="card-corner tl"></div>
               <div class="card-corner tr"></div>
               <div class="card-corner bl"></div>
