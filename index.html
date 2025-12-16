@@ -16,6 +16,55 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Instrument Serif', 'serif'],
+            body: ['General Sans', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            crimson: ['Crimson Text', 'serif'],
+            playfair: ['Playfair Display', 'serif'],
+          },
+          fontSize: {
+            'display-xl': '7rem',
+            'display-lg': '4rem',
+            'display-md': '3rem',
+            'mono-xl': '3.5rem',
+            'mono-lg': '1.75rem',
+          },
+          colors: {
+            'aw-red': {
+              DEFAULT: '#ec140c',
+              dark: '#c7130c',
+            },
+            'aw-blue': {
+              DEFAULT: '#323b97',
+              dark: '#252e6e',
+            },
+            'accent-cyan': '#00d4ff',
+            'accent-violet': '#a855f7',
+            'accent-green': '#10b981',
+          },
+          boxShadow: {
+            'xs': '0 1px 2px rgba(0, 0, 0, 0.03)',
+            'sm': '0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03)',
+            'md': '0 4px 6px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02)',
+            'lg': '0 10px 15px rgba(0, 0, 0, 0.05), 0 4px 6px rgba(0, 0, 0, 0.03)',
+            'xl': '0 20px 25px rgba(0, 0, 0, 0.06), 0 8px 10px rgba(0, 0, 0, 0.02)',
+          },
+          maxWidth: {
+            'container': '87.5rem',
+            'reading': '43.75rem',
+          },
+        },
+      },
+    }
+  </script>
+
   <style>
     /* ============================================
        TECHNICAL LUXURY DESIGN SYSTEM
@@ -2757,24 +2806,24 @@
     }
   </style>
 </head>
-<body>
+<body class="font-body text-[1.0625rem] font-normal leading-[1.7] tracking-[-0.01em] text-gray-800 bg-white antialiased overflow-x-hidden">
   <!-- Scroll Progress Bar -->
   <div class="scroll-progress-bar"></div>
 
   <!-- Navigation -->
-  <nav class="navigation">
-    <div class="nav-container">
-      <a href="#" class="nav-logo">
-        <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
+  <nav class="navigation fixed top-0 left-0 right-0 bg-transparent z-[1000] transition-all duration-300">
+    <div class="max-w-container mx-auto py-5 px-8 flex justify-between items-center">
+      <a href="#" class="nav-logo flex items-center gap-3 font-crimson text-2xl font-semibold tracking-tight text-white no-underline transition-opacity duration-200 hover:opacity-70">
+        <img src="images/aw-logo-simple.png" alt="AW" class="h-10 w-auto block">
         <span>AMERICA WORKS</span>
       </a>
 
-      <div class="nav-links">
-        <a href="jobseekers.html">Jobseekers</a>
-        <a href="employers.html">Employers</a>
-        <a href="partners.html">Partners</a>
-        <a href="about.html">About</a>
-        <a href="#contact" class="nav-cta">Contact</a>
+      <div class="nav-links hidden md:flex items-center gap-12">
+        <a href="jobseekers.html" class="relative font-body text-[0.9375rem] font-semibold tracking-[0.01em] text-white/80 no-underline transition-colors duration-200 hover:text-white">Jobseekers</a>
+        <a href="employers.html" class="relative font-body text-[0.9375rem] font-semibold tracking-[0.01em] text-white/80 no-underline transition-colors duration-200 hover:text-white">Employers</a>
+        <a href="partners.html" class="relative font-body text-[0.9375rem] font-semibold tracking-[0.01em] text-white/80 no-underline transition-colors duration-200 hover:text-white">Partners</a>
+        <a href="about.html" class="relative font-body text-[0.9375rem] font-semibold tracking-[0.01em] text-white/80 no-underline transition-colors duration-200 hover:text-white">About</a>
+        <a href="#contact" class="nav-cta px-7 py-3 bg-aw-blue text-white font-semibold rounded-md shadow-[0_2px_10px_rgba(50,59,151,0.2)] transition-all duration-300 hover:bg-aw-blue-dark hover:-translate-y-0.5 hover:shadow-[0_4px_16px_rgba(50,59,151,0.3)]">Contact</a>
       </div>
     </div>
   </nav>
