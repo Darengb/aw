@@ -1213,7 +1213,7 @@
   <nav class="navigation primary-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
-        <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
+        <img src="images/aw-logo-simple.png" alt="AW" class="h-10 w-auto block">
         <span>AMERICA WORKS</span>
       </a>
       <div class="nav-links">
@@ -1230,7 +1230,7 @@
   <nav class="navigation secondary-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
-        <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
+        <img src="images/aw-logo-simple.png" alt="AW" class="h-10 w-auto block">
         <span>AMERICA WORKS</span>
       </a>
       <div class="nav-links">
@@ -1243,24 +1243,24 @@
   </nav>
 
   <!-- Hero -->
-  <section class="hero">
-    <div class="hero-image-bg">
-      <img src="images/team-of-workers-celebrating-success-at-a-shipping.jpg" alt="Successful team at work">
+  <section class="hero relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="hero-image-bg absolute inset-0 z-0">
+      <img src="images/team-of-workers-celebrating-success-at-a-shipping.jpg" alt="Successful team at work" class="w-full h-full object-cover object-center">
     </div>
-    <div class="hero-overlay"></div>
-    <div class="hero-container">
-      <div class="hero-content">
-        <div class="hero-label">// Staffing with America Works</div>
-        <h1 class="hero-headline">Fill your open roles with motivated, pre-screened talent—at no cost.</h1>
-        <p class="hero-subheadline">
+    <div class="hero-overlay absolute inset-0 z-[1]"></div>
+    <div class="hero-container max-w-container mx-auto px-8 relative z-[2]">
+      <div class="hero-content max-w-4xl">
+        <div class="hero-label font-mono text-xs uppercase tracking-[0.15em] text-white/80 mb-6">// Staffing with America Works</div>
+        <h1 class="hero-headline font-display text-6xl md:text-7xl font-normal leading-tight tracking-tight text-white mb-8">Fill your open roles with motivated, pre-screened talent—at no cost.</h1>
+        <p class="hero-subheadline text-xl text-white/90 leading-relaxed mb-10 max-w-3xl">
           America Works connects you with job-ready candidates and supports them for months after hire, helping you save time, reduce turnover, and build a more reliable workforce.
         </p>
-        <div class="hero-ctas">
-          <a href="#contact" class="btn-primary">
+        <div class="hero-ctas flex flex-wrap gap-5">
+          <a href="#contact" class="btn-primary inline-flex items-center gap-2">
             <span>Submit a job order</span>
             <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
           </a>
-          <a href="#contact" class="btn-secondary">
+          <a href="#contact" class="btn-secondary inline-flex items-center gap-2">
             <span>Talk to our staffing team</span>
             <i data-lucide="phone" style="width: 18px; height: 18px;"></i>
           </a>
