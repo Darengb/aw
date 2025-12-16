@@ -995,24 +995,24 @@
   </nav>
 
   <!-- Hero -->
-  <section class="hero">
-    <div class="hero-image-bg">
-      <img src="images/young-professional-working.jpg" alt="Professional career development">
+  <section class="hero relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="hero-image-bg absolute inset-0 -z-20">
+      <img src="images/young-professional-working.jpg" alt="Professional career development" class="w-full h-full object-cover">
     </div>
-    <div class="hero-overlay"></div>
-    <div class="hero-container">
-      <div class="hero-content">
-        <div class="hero-label">// For Jobseekers</div>
-        <h1 class="hero-headline">Your next career starts with one conversation.</h1>
-        <p class="hero-subheadline">
+    <div class="hero-overlay absolute inset-0 -z-10"></div>
+    <div class="hero-container max-w-container mx-auto px-8 relative">
+      <div class="hero-content max-w-4xl">
+        <div class="hero-label font-mono text-sm font-semibold tracking-wider text-accent-cyan mb-6">// For Jobseekers</div>
+        <h1 class="hero-headline font-display text-6xl md:text-7xl font-normal leading-tight tracking-tight text-white mb-8">Your next career starts with one conversation.</h1>
+        <p class="hero-subheadline text-xl text-white/90 leading-relaxed mb-10 max-w-3xl">
           We've spent 40 years perfecting the path from unemployment to meaningful work. Personal coaching, direct employer access, and unwavering support—at no cost to you.
         </p>
-        <div class="hero-ctas">
-          <a href="#contact" class="btn-primary">
+        <div class="hero-ctas flex flex-wrap gap-5">
+          <a href="#contact" class="btn-primary inline-flex items-center gap-2">
             <span>Start your journey</span>
             <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
           </a>
-          <a href="#how-we-help" class="btn-secondary">
+          <a href="#how-we-help" class="btn-secondary inline-flex items-center gap-2">
             <span>Explore our services</span>
             <i data-lucide="chevron-down" style="width: 18px; height: 18px;"></i>
           </a>
