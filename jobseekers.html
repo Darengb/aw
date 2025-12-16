@@ -1304,7 +1304,7 @@
     lucide.createIcons();
 
     // Navigation Scroll Effect - Three Steps
-    const nav = document.querySelector('.navigation');
+    const navs = document.querySelectorAll('.navigation');
     const hero = document.querySelector('.hero');
     window.addEventListener('scroll', () => {
       const heroHeight = hero ? hero.offsetHeight : 0;
@@ -1314,18 +1314,20 @@
       // Step 2: Scrolled in hero (scrolled class)
       // Step 3: Below hero (below-hero class)
 
-      if (scrollPos === 0) {
-        // Step 1: At very top - transparent, no blur
-        nav.classList.remove('scrolled', 'below-hero');
-      } else if (scrollPos > 0 && scrollPos < heroHeight - 100) {
-        // Step 2: In hero - blur with white text
-        nav.classList.add('scrolled');
-        nav.classList.remove('below-hero');
-      } else {
-        // Step 3: Below hero - blur with dark text
-        nav.classList.remove('scrolled');
-        nav.classList.add('below-hero');
-      }
+      navs.forEach(nav => {
+        if (scrollPos === 0) {
+          // Step 1: At very top - transparent, no blur
+          nav.classList.remove('scrolled', 'below-hero');
+        } else if (scrollPos > 0 && scrollPos < heroHeight - 100) {
+          // Step 2: In hero - blur with white text
+          nav.classList.add('scrolled');
+          nav.classList.remove('below-hero');
+        } else {
+          // Step 3: Below hero - blur with dark text
+          nav.classList.remove('scrolled');
+          nav.classList.add('below-hero');
+        }
+      });
     }, { passive: true });
 
     // Scroll progress bar and nav switching
