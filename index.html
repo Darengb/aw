@@ -166,6 +166,72 @@
       --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 
+    /* Mobile Typography Overrides */
+    @media (max-width: 768px) {
+      :root {
+        --text-display-xl: 4rem;
+        --text-display-lg: 2.5rem;
+        --text-display-md: 2rem;
+        --text-mono-xl: 2.5rem;
+      }
+
+      .hero {
+        padding-top: 6rem;
+        padding-bottom: 3rem;
+      }
+
+      .hero-container,
+      .hero > .max-w-container {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+        padding: 0 0.75rem;
+      }
+
+      .hero-content,
+      .hero > .max-w-container > div:first-child {
+        order: 1;
+        text-align: center;
+      }
+
+      .hero-headline {
+        text-align: center;
+        margin-top: 2rem;
+      }
+
+      .federal-monitor {
+        order: 2;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .hero-ctas .btn-primary,
+      .hero-ctas .btn-secondary {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+
+      .dashboard-grid {
+        gap: 0.75rem;
+      }
+
+      .metric-stat {
+        font-size: 2.5rem;
+      }
+
+      .metric-stat.small {
+        font-size: 2.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
     /* Base Styles */
     body {
       font-family: var(--font-body);
@@ -370,6 +436,15 @@
       transform: translate(-50%, -50%);
       opacity: 1;
       filter: none;
+      object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+      .hero-video-background video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
 
     .hero-video-background::after {
@@ -2752,17 +2827,17 @@
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero min-h-screen flex items-center relative bg-transparent overflow-hidden pt-32 pb-16 isolate">
+  <section class="hero min-h-screen flex items-center relative bg-transparent overflow-hidden isolate">
     <div class="hero-video-background absolute inset-0 -z-20 overflow-hidden">
-      <video autoplay muted loop playsinline class="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 opacity-100">
+      <video autoplay muted loop playsinline class="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 opacity-100 object-cover">
         <source src="images/hero-bg-vid.mp4" type="video/mp4">
       </video>
     </div>
     <div class="grid-overlay absolute inset-0 bg-black/20 -z-10 opacity-100"></div>
 
-    <div class="max-w-container mx-auto px-8 relative grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-24 items-center">
-      <div class="relative">
-        <h1 class="hero-headline font-display text-display-xl font-normal leading-[1.05] tracking-[-0.02em] mb-14 text-white">
+    <div class="hero-container max-w-container mx-auto px-8 md:px-8 relative grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-12 md:gap-24 items-center">
+      <div class="hero-content relative order-1">
+        <h1 class="hero-headline font-display text-display-xl font-normal leading-[1.05] tracking-[-0.02em] mb-8 md:mb-14 text-white">
           <span class="line-1 block font-normal">Real Jobs.</span>
           <span class="line-2 block text-white/85 relative font-normal">Real Support.</span>
           <span class="line-2 block text-white/85 relative font-normal"><span class="accent relative text-white">Real Results.</span></span>
