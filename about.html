@@ -16,6 +16,37 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Instrument Serif', 'serif'],
+            body: ['General Sans', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            crimson: ['Crimson Text', 'serif'],
+          },
+          fontSize: {
+            'display-xl': '5.5rem',
+            'display-lg': '4rem',
+            'display-md': '3rem',
+          },
+          colors: {
+            'aw-red': { DEFAULT: '#ec140c', dark: '#c7130c' },
+            'aw-blue': { DEFAULT: '#323b97', dark: '#252e6e' },
+            'accent-cyan': '#00d4ff',
+            'accent-green': '#10b981',
+          },
+          maxWidth: {
+            'container': '87.5rem',
+          },
+        },
+      },
+    }
+  </script>
+
   <style>
     /* ============================================
        PREMIUM EDITORIAL DESIGN SYSTEM
@@ -135,18 +166,43 @@
       box-shadow: 0 0 20px rgba(236, 20, 12, 0.5);
     }
 
-    /* Navigation */
+    /* Navigation - 3-state scroll system */
     .navigation {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--gray-200);
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom: none;
       z-index: 1000;
-      transition: transform 0.3s var(--ease-primary), opacity 0.3s var(--ease-primary);
+      transition: all 0.3s var(--ease-primary);
+    }
+
+    .navigation.scrolled {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px) saturate(100%);
+      -webkit-backdrop-filter: blur(12px) saturate(100%);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .navigation.below-hero {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px) saturate(100%);
+      -webkit-backdrop-filter: blur(12px) saturate(100%);
+    }
+
+    .navigation.below-hero .nav-logo {
+      color: var(--black);
+    }
+
+    .navigation.below-hero .nav-links a {
+      color: var(--gray-700);
+    }
+
+    .navigation.below-hero .nav-links a:hover {
+      color: var(--black);
     }
 
     .primary-nav {
@@ -191,12 +247,12 @@
       align-items: center;
       gap: 0.75rem;
       text-decoration: none;
-      color: var(--black);
+      color: var(--white);
       font-family: 'Crimson Text', serif;
       font-size: 1.5rem;
       font-weight: 600;
       letter-spacing: -0.01em;
-      transition: opacity 0.2s ease;
+      transition: color 0.2s ease, opacity 0.2s ease;
     }
 
     .nav-logo:hover {
@@ -218,13 +274,13 @@
     .nav-links a {
       font-size: var(--text-sm);
       font-weight: 600;
-      color: var(--gray-700);
+      color: rgba(255, 255, 255, 0.8);
       text-decoration: none;
       transition: color 0.2s ease;
     }
 
     .nav-links a:hover {
-      color: var(--black);
+      color: var(--white);
     }
 
     .nav-cta {
@@ -242,7 +298,7 @@
       box-shadow: 0 4px 16px rgba(50, 59, 151, 0.3);
     }
 
-    /* Hero Section */
+    /* Hero */
     .hero {
       position: relative;
       min-height: 100vh;
@@ -275,17 +331,7 @@
       z-index: 1;
     }
 
-    .hero-container {
-      max-width: var(--container-xl);
-      margin: 0 auto;
-      padding: 0 2rem;
-      position: relative;
-      z-index: 2;
-      color: var(--white);
-    }
-
     .hero-content {
-      max-width: 1000px;
       opacity: 0;
       animation: fadeInUp 1s var(--ease-primary) 0.3s forwards;
     }
@@ -299,210 +345,6 @@
         opacity: 1;
         transform: translateY(0);
       }
-    }
-
-    .hero-label {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: rgba(255, 255, 255, 0.8);
-      margin-bottom: 2rem;
-      font-weight: 600;
-    }
-
-    .hero-headline {
-      font-family: var(--font-display);
-      font-size: clamp(3rem, 8vw, 6rem);
-      font-weight: 400;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      margin-bottom: 2rem;
-      color: var(--white);
-    }
-
-    .hero-subheadline {
-      font-size: var(--text-xl);
-      line-height: 1.6;
-      color: rgba(255, 255, 255, 0.95);
-      margin-bottom: 3rem;
-      max-width: 900px;
-    }
-
-    /* At A Glance Section */
-    .at-a-glance {
-      padding: var(--space-32) 0;
-      background: var(--white);
-      position: relative;
-    }
-
-    .at-a-glance::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent 0%, var(--aw-red) 50%, transparent 100%);
-    }
-
-    .glance-container {
-      max-width: var(--container-xl);
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .glance-header {
-      text-align: center;
-      margin-bottom: var(--space-16);
-    }
-
-    .glance-header .section-label {
-      font-family: var(--font-mono);
-      font-size: 0.6875rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--gray-500);
-      margin-bottom: 1rem;
-      font-weight: 600;
-    }
-
-    .glance-header .section-label::before {
-      content: '// ';
-      color: var(--aw-red);
-    }
-
-    .glance-title {
-      font-family: var(--font-display);
-      font-size: var(--text-display-md);
-      font-weight: 400;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      color: var(--black);
-    }
-
-    .glance-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      border-top: 1px solid var(--gray-200);
-      counter-reset: glance-counter;
-    }
-
-    .glance-item {
-      padding: 4rem 2.5rem 2rem 2.5rem;
-      border-right: 1px solid var(--gray-200);
-      border-bottom: 1px solid var(--gray-200);
-      background: transparent;
-      position: relative;
-      transition: all 0.4s var(--ease-primary);
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 1.25rem;
-      counter-increment: glance-counter;
-      min-height: auto;
-    }
-
-    .glance-item:nth-child(3n) {
-      border-right: none;
-    }
-
-    .glance-item::before {
-      content: '0' counter(glance-counter);
-      position: absolute;
-      top: 1.5rem;
-      left: 2.5rem;
-      font-family: var(--font-mono);
-      font-size: 0.6875rem;
-      font-weight: 500;
-      color: var(--aw-red);
-      letter-spacing: 0.1em;
-      opacity: 0.4;
-      transition: all 0.4s ease;
-    }
-
-    .glance-item::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--aw-red);
-      transition: width 0.6s var(--ease-primary);
-    }
-
-    .glance-item:hover::after {
-      width: 100%;
-    }
-
-    .glance-item:hover::before {
-      opacity: 1;
-      transform: translateY(-2px);
-    }
-
-    .glance-item:hover {
-      background: var(--gray-50);
-    }
-
-    .glance-icon {
-      width: 56px;
-      height: 56px;
-      background: transparent;
-      border: 1.5px solid var(--gray-200);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: all 0.5s var(--ease-primary);
-      margin-top: 0.25rem;
-    }
-
-    .glance-icon i {
-      width: 26px;
-      height: 26px;
-      color: var(--aw-red);
-      stroke: var(--aw-red);
-      transition: all 0.4s ease;
-    }
-
-    .glance-item:hover .glance-icon {
-      background: transparent;
-      border-color: var(--aw-red);
-      border-width: 2px;
-      transform: scale(1.05);
-    }
-
-    .glance-item:hover .glance-icon i {
-      color: var(--aw-red);
-      stroke: var(--aw-red);
-    }
-
-    .glance-content {
-      flex: 1;
-    }
-
-    .glance-content p {
-      font-size: 1.125rem;
-      line-height: 1.6;
-      color: var(--gray-700);
-      margin: 0;
-    }
-
-    .glance-content strong {
-      color: var(--black);
-      font-weight: 600;
-      display: block;
-      margin-bottom: 0.25rem;
-    }
-
-    .hero-ctas {
-      display: flex;
-      gap: 1.25rem;
-      flex-wrap: wrap;
     }
 
     .btn-primary {
@@ -551,87 +393,77 @@
       transform: translateY(-2px);
     }
 
-    /* Container */
-    .container {
-      max-width: var(--container-xl);
-      margin: 0 auto;
-      padding: 0 2rem;
+    /* At A Glance Section - with counters and hover effects */
+    .at-a-glance::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--aw-red) 50%, transparent 100%);
     }
 
-    /* Section */
-    .section {
-      padding: var(--space-32) 0;
+    .glance-grid {
+      counter-reset: glance-counter;
     }
 
-    .section.bg-gray {
-      background: var(--gray-50);
+    .glance-item {
+      counter-increment: glance-counter;
     }
 
-    .section.bg-white {
-      background: var(--white);
-    }
-
-    /* Section Header */
-    .section-header {
-      text-align: center;
-      margin-bottom: var(--space-20);
-    }
-
-    .section-label {
+    .glance-item::before {
+      content: '0' counter(glance-counter);
+      position: absolute;
+      top: 1.5rem;
+      left: 2.5rem;
       font-family: var(--font-mono);
       font-size: 0.6875rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--gray-500);
-      margin-bottom: 1.5rem;
-      font-weight: 600;
-    }
-
-    .section-label::before {
-      content: '// ';
+      font-weight: 500;
       color: var(--aw-red);
+      letter-spacing: 0.1em;
+      opacity: 0.4;
+      transition: all 0.4s ease;
     }
 
-    .section-header h2 {
-      font-family: var(--font-display);
-      font-size: var(--text-display-md);
-      font-weight: 400;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      color: var(--black);
-      margin-bottom: 1.5rem;
+    .glance-item::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--aw-red);
+      transition: width 0.6s var(--ease-primary);
     }
 
-    .section-intro {
-      font-size: var(--text-xl);
-      color: var(--gray-600);
-      max-width: 800px;
-      margin: 0 auto;
-      line-height: 1.6;
+    .glance-item:hover::after {
+      width: 100%;
     }
 
-    /* Evidence Cards - Editorial Grid */
+    .glance-item:hover::before {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+
+    .glance-icon {
+      transition: all 0.5s var(--ease-primary);
+    }
+
+    .glance-item:hover .glance-icon {
+      border-color: var(--aw-red);
+      border-width: 2px;
+      transform: scale(1.05);
+    }
+
+    /* Evidence Cards - with counters */
     .evidence-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0;
-      margin-top: var(--space-16);
-      border-top: 1px solid var(--gray-200);
       counter-reset: evidence-counter;
     }
 
     .evidence-card {
-      background: transparent;
-      border-right: 1px solid var(--gray-200);
-      border-bottom: 1px solid var(--gray-200);
-      padding: 3rem;
-      position: relative;
-      transition: all 0.4s var(--ease-primary);
       counter-increment: evidence-counter;
-    }
-
-    .evidence-card:nth-child(2n) {
-      border-right: none;
     }
 
     .evidence-card::before {
@@ -667,85 +499,7 @@
       opacity: 1;
     }
 
-    .evidence-card:hover {
-      background: var(--gray-50);
-    }
-
-    .evidence-card h3 {
-      font-family: var(--font-serif);
-      font-size: 1.375rem;
-      font-weight: 500;
-      color: var(--black);
-      margin-bottom: 2rem;
-      margin-top: 2rem;
-      letter-spacing: -0.02em;
-      line-height: 1.3;
-    }
-
-    .evidence-card ul {
-      list-style: none;
-      margin-bottom: 2rem;
-      padding-left: 0;
-    }
-
-    .evidence-card li {
-      position: relative;
-      padding-left: 0;
-      margin-bottom: 0.5rem;
-      color: var(--gray-700);
-      line-height: 1.8;
-      font-size: 0.9375rem;
-    }
-
-    .evidence-card li:last-child {
-      margin-bottom: 0;
-    }
-
-    .evidence-card li strong {
-      color: var(--black);
-      font-weight: 600;
-    }
-
-    .evidence-why {
-      padding: 1.5rem 0 0 0;
-      margin-top: 1.5rem;
-      border-top: 1px solid var(--gray-300);
-      color: var(--gray-600);
-      font-size: 0.875rem;
-      line-height: 1.7;
-    }
-
-    .evidence-why strong {
-      color: var(--aw-blue);
-      font-weight: 600;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    /* Population Matrix */
-    .matrix-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0;
-      margin-top: var(--space-16);
-      border-top: 1px solid var(--gray-200);
-    }
-
-    .matrix-item {
-      padding: 2.5rem;
-      border-right: 1px solid var(--gray-200);
-      border-bottom: 1px solid var(--gray-200);
-      background: transparent;
-      transition: all 0.4s ease;
-      position: relative;
-    }
-
-    .matrix-item:nth-child(2n) {
-      border-right: none;
-    }
-
+    /* Matrix Items - hover effects */
     .matrix-item::before {
       content: '';
       position: absolute;
@@ -763,70 +517,7 @@
       transform: scaleX(1);
     }
 
-    .matrix-item:hover {
-      background: var(--gray-50);
-    }
-
-    .matrix-item h3 {
-      font-family: var(--font-display);
-      font-size: var(--text-h2);
-      font-weight: 400;
-      color: var(--black);
-      margin-bottom: 1.25rem;
-      letter-spacing: -0.02em;
-    }
-
-    .matrix-meta {
-      display: flex;
-      gap: 2rem;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .matrix-meta-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .matrix-meta-label {
-      font-family: var(--font-mono);
-      font-size: 0.6875rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--gray-500);
-      font-weight: 600;
-    }
-
-    .matrix-meta-value {
-      font-size: var(--text-sm);
-      color: var(--gray-800);
-      font-weight: 500;
-    }
-
-    .matrix-description {
-      font-size: var(--text-base);
-      color: var(--gray-700);
-      line-height: 1.7;
-    }
-
-    /* Scorecard Grid */
-    .scorecard-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      margin-top: var(--space-16);
-    }
-
-    .scorecard-card {
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      border-radius: 4px;
-      padding: 2.5rem 2rem;
-      position: relative;
-      transition: all 0.4s var(--ease-primary);
-    }
-
+    /* Scorecard Cards - hover effects */
     .scorecard-card::before {
       content: '';
       position: absolute;
@@ -842,34 +533,6 @@
 
     .scorecard-card:hover::before {
       transform: scaleX(1);
-    }
-
-    .scorecard-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-xl);
-      border-color: var(--gray-300);
-    }
-
-    .scorecard-card h3 {
-      font-family: var(--font-body);
-      font-size: var(--text-lg);
-      font-weight: 600;
-      color: var(--black);
-      margin-bottom: 1.25rem;
-      letter-spacing: -0.01em;
-    }
-
-    .scorecard-card ul {
-      list-style: none;
-    }
-
-    .scorecard-card li {
-      position: relative;
-      padding-left: 1.25rem;
-      margin-bottom: 0.875rem;
-      color: var(--gray-700);
-      line-height: 1.7;
-      font-size: var(--text-sm);
     }
 
     .scorecard-card li::before {
@@ -917,7 +580,6 @@
       align-items: center;
     }
 
-    /* Timeline center line spans all columns */
     .timeline-line {
       grid-column: 1 / -1;
       grid-row: 2;
@@ -952,25 +614,19 @@
       padding: 0 1rem;
     }
 
-    /* Position items - WIDER cards spanning multiple columns with offset */
-    /* Top row: cards span 3 columns each */
-    .timeline-item:nth-child(1) { grid-column: 1 / 4; grid-row: 1; }    /* cols 1-3 */
-    .timeline-item:nth-child(3) { grid-column: 5 / 8; grid-row: 1; }    /* cols 5-7 */
-    .timeline-item:nth-child(5) { grid-column: 9 / 12; grid-row: 1; }   /* cols 9-11 */
-    .timeline-item:nth-child(7) { grid-column: 12 / 14; grid-row: 1; }  /* cols 12-13 */
+    .timeline-item:nth-child(1) { grid-column: 1 / 4; grid-row: 1; }
+    .timeline-item:nth-child(3) { grid-column: 5 / 8; grid-row: 1; }
+    .timeline-item:nth-child(5) { grid-column: 9 / 12; grid-row: 1; }
+    .timeline-item:nth-child(7) { grid-column: 12 / 14; grid-row: 1; }
+    .timeline-item:nth-child(2) { grid-column: 3 / 6; grid-row: 3; }
+    .timeline-item:nth-child(4) { grid-column: 7 / 10; grid-row: 3; }
+    .timeline-item:nth-child(6) { grid-column: 10 / 13; grid-row: 3; }
 
-    /* Bottom row: offset by 2 columns, also span 3 columns */
-    .timeline-item:nth-child(2) { grid-column: 3 / 6; grid-row: 3; }    /* cols 3-5 */
-    .timeline-item:nth-child(4) { grid-column: 7 / 10; grid-row: 3; }   /* cols 7-9 */
-    .timeline-item:nth-child(6) { grid-column: 10 / 13; grid-row: 3; }  /* cols 10-12 */
-
-    /* Items above the line */
     .timeline-item:nth-child(odd) {
       transform: translateY(40px);
       align-items: center;
     }
 
-    /* Items below the line */
     .timeline-item:nth-child(even) {
       transform: translateY(-40px);
       align-items: center;
@@ -981,11 +637,6 @@
       transform: translateY(0);
     }
 
-    .timeline-item {
-      position: relative; /* Already set, but important for absolute positioning */
-    }
-
-    /* Dots on timeline - ::after pseudo-element */
     .timeline-item::after {
       content: '';
       position: absolute;
@@ -1000,17 +651,14 @@
       box-shadow: 0 0 0 0 rgba(236, 20, 12, 0.3);
     }
 
-    /* Top row: dot 3rem BELOW card (on the timeline) */
     .timeline-item:nth-child(odd)::after {
       bottom: -3rem;
     }
 
-    /* Bottom row: dot 3rem ABOVE card (on the timeline) */
     .timeline-item:nth-child(even)::after {
       top: -3rem;
     }
 
-    /* Vertical connector lines - ::before pseudo-element */
     .timeline-item::before {
       content: '';
       position: absolute;
@@ -1023,17 +671,14 @@
       z-index: 2;
     }
 
-    /* Top row: connector extends DOWN from card bottom */
     .timeline-item:nth-child(odd)::before {
-      bottom: -3rem; /* Start at card bottom, extend down */
+      bottom: -3rem;
     }
 
-    /* Bottom row: connector extends UP from card top */
     .timeline-item:nth-child(even)::before {
-      top: -3rem; /* Start at card top, extend up */
+      top: -3rem;
     }
 
-    /* Hover effects */
     .timeline-item:hover::before {
       background: var(--aw-red);
     }
@@ -1054,17 +699,6 @@
       50% {
         box-shadow: 0 0 0 16px rgba(236, 20, 12, 0);
       }
-    }
-
-    .timeline-year {
-      font-family: var(--font-mono);
-      font-size: 0.875rem;
-      font-weight: 700;
-      color: var(--aw-red);
-      text-align: center;
-      margin-bottom: 1rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
     }
 
     .timeline-content {
@@ -1102,82 +736,15 @@
       transform: translateY(-6px);
     }
 
-    .timeline-title {
-      font-family: var(--font-body);
-      font-size: var(--text-lg);
-      font-weight: 600;
-      color: var(--black);
-      margin-bottom: 0.875rem;
-      line-height: 1.3;
-      text-align: center;
-    }
-
-    .timeline-description {
-      font-size: var(--text-sm);
-      color: var(--gray-600);
-      line-height: 1.7;
-      text-align: center;
-    }
-
-    /* History Section */
-    .history-section {
-      background: var(--gray-50);
-    }
-
-    .history-content {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .history-text {
-      font-size: var(--text-lg);
-      line-height: 1.8;
-      color: var(--gray-700);
-      margin-bottom: 2rem;
-    }
-
+    /* History Highlight */
     .history-highlight {
       padding: 2rem;
       background: var(--white);
       border-left: 4px solid var(--aw-red);
-      font-size: var(--text-base);
-      line-height: 1.8;
-      color: var(--gray-800);
-      margin-top: 2rem;
     }
 
-    .history-highlight strong {
-      color: var(--black);
-      font-weight: 600;
-    }
-
-    /* Founders Section */
-    .founders-section {
-      background: var(--white);
-    }
-
-    .founders-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 4rem;
-      margin-top: var(--space-16);
-    }
-
-    .founder-card {
-      position: relative;
-    }
-
-    .founder-image {
-      margin-bottom: 2rem;
-      overflow: hidden;
-      border-radius: 4px;
-      border: 1px solid var(--gray-200);
-    }
-
+    /* Founder Card hover */
     .founder-image img {
-      width: 100%;
-      height: auto;
-      display: block;
       transition: transform 0.4s var(--ease-primary);
     }
 
@@ -1185,46 +752,8 @@
       transform: scale(1.02);
     }
 
-    .founder-header {
-      margin-bottom: 2rem;
-      padding-bottom: 2rem;
-      border-bottom: 2px solid var(--gray-200);
-    }
-
-    .founder-name {
-      font-family: var(--font-display);
-      font-size: var(--text-h1);
-      font-weight: 400;
-      color: var(--black);
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.02em;
-    }
-
-    .founder-title {
-      font-family: var(--font-mono);
-      font-size: 0.875rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--aw-red);
-      font-weight: 600;
-    }
-
-    .founder-bio {
-      font-size: var(--text-base);
-      line-height: 1.8;
-      color: var(--gray-700);
-    }
-
-    .founder-bio p {
-      margin-bottom: 1.25rem;
-    }
-
     /* CTA Section */
     .cta-section {
-      padding: var(--space-32) 0;
-      background: var(--gray-950);
-      color: var(--white);
-      text-align: center;
       position: relative;
       overflow: hidden;
     }
@@ -1239,35 +768,6 @@
       background-size: 60px 60px;
     }
 
-    .cta-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .cta-content h2 {
-      font-family: var(--font-display);
-      font-size: var(--text-display-md);
-      font-weight: 400;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
-    }
-
-    .cta-list {
-      list-style: none;
-      max-width: 800px;
-      margin: 0 auto 3rem;
-      text-align: left;
-    }
-
-    .cta-list li {
-      position: relative;
-      padding-left: 2rem;
-      margin-bottom: 1.25rem;
-      font-size: var(--text-lg);
-      color: rgba(255, 255, 255, 0.9);
-      line-height: 1.7;
-    }
-
     .cta-list li::before {
       content: '';
       position: absolute;
@@ -1280,119 +780,10 @@
       box-shadow: 0 0 10px rgba(236, 20, 12, 0.5);
     }
 
-    .cta-list strong {
-      color: var(--white);
-      font-weight: 600;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 1.25rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn-white {
-      padding: 1.25rem 3rem;
-      background: var(--white);
-      color: var(--gray-950);
-      border: none;
-      border-radius: 6px;
-      font-family: var(--font-body);
-      font-size: 0.9375rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s var(--ease-primary);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .btn-white:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-    }
-
-    .btn-outline-white {
-      padding: 1.25rem 3rem;
-      background: transparent;
-      color: var(--white);
-      border: 2px solid rgba(255, 255, 255, 0.5);
-      border-radius: 6px;
-      font-family: var(--font-body);
-      font-size: 0.9375rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s var(--ease-primary);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .btn-outline-white:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: var(--white);
-      transform: translateY(-2px);
-    }
-
-    /* Footer */
-    .footer {
-      background: var(--gray-900);
-      color: var(--gray-400);
-      padding: 4rem 0 2rem;
-    }
-
-    .footer-content {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-
-    .footer-section h4 {
-      color: var(--white);
-      font-size: var(--text-base);
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-    }
-
-    .footer-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .footer-links a {
-      color: var(--gray-400);
-      text-decoration: none;
-      font-size: var(--text-sm);
-      transition: color 0.2s ease;
-    }
-
-    .footer-links a:hover {
-      color: var(--white);
-    }
-
-    .footer-bottom {
-      padding-top: 2rem;
-      border-top: 1px solid var(--gray-800);
-      text-align: center;
-      font-size: var(--text-sm);
-      color: var(--gray-500);
-    }
-
     /* Responsive */
     @media (max-width: 1200px) {
       .glance-grid {
         grid-template-columns: 1fr;
-      }
-
-      .glance-item {
-        border-right: none;
       }
 
       .evidence-grid {
@@ -1401,10 +792,6 @@
 
       .matrix-grid {
         grid-template-columns: 1fr;
-      }
-
-      .matrix-item {
-        border-right: none;
       }
 
       .scorecard-grid {
@@ -1480,37 +867,9 @@
         height: 2px;
       }
 
-      .timeline-dot {
-        position: absolute;
-        left: -5.625rem;
-        top: 0.5rem;
-        bottom: auto;
-        transform: none;
-      }
-
-      .timeline-item:nth-child(odd) .timeline-dot,
-      .timeline-item:nth-child(even) .timeline-dot {
-        position: absolute;
-        left: -5.625rem;
-        top: 0.5rem;
-        bottom: auto;
-        transform: none;
-      }
-
-      .timeline-item:hover .timeline-dot {
-        transform: scale(1.5);
-      }
-
-      .timeline-year {
-        text-align: left;
-      }
-
-      .timeline-title {
-        text-align: left;
-      }
-
-      .timeline-description {
-        text-align: left;
+      .timeline-item:nth-child(odd)::before,
+      .timeline-item:nth-child(even)::before {
+        display: none;
       }
 
       .founders-grid {
@@ -1524,24 +883,13 @@
         display: none;
       }
 
-      .hero-headline {
-        font-size: 3rem;
+      .hero {
+        padding-top: 6rem;
+        padding-bottom: 4rem;
       }
 
-      .glance-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .glance-item {
-        border-right: none;
-      }
-
-      .matrix-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .matrix-item {
-        border-right: none;
+      .hero-container {
+        padding: 0 1rem;
       }
 
       .hero-ctas {
@@ -1558,11 +906,11 @@
   <!-- Scroll Progress -->
   <div class="scroll-progress-bar"></div>
 
-  <!-- Navigation -->
+  <!-- Primary Navigation -->
   <nav class="navigation primary-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
-        <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
+        <img src="images/aw-logo-simple.png" alt="AW" class="h-10 w-auto block">
         <span>AMERICA WORKS</span>
       </a>
       <div class="nav-links">
@@ -1575,11 +923,11 @@
     </div>
   </nav>
 
-  <!-- Secondary Navigation -->
+  <!-- Secondary Navigation (Section Links) -->
   <nav class="navigation secondary-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
-        <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
+        <img src="images/aw-logo-simple.png" alt="AW" class="h-10 w-auto block">
         <span>AMERICA WORKS</span>
       </a>
       <div class="nav-links">
@@ -1593,25 +941,24 @@
   </nav>
 
   <!-- Hero -->
-  <section class="hero">
-    <div class="hero-image-bg">
-      <img src="images/young-professional-working.jpg" alt="Proven impact">
+  <section class="hero relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="hero-image-bg absolute inset-0 z-0">
+      <img src="images/young-professional-working.jpg" alt="Proven impact" class="w-full h-full object-cover object-center">
     </div>
-    <div class="hero-overlay"></div>
-    <div class="hero-container">
-      <div class="hero-content">
-        <div class="hero-label">// Impact & About</div>
-        <h1 class="hero-headline">Proven impact for the hardest-to-serve.</h1>
-        <p class="hero-subheadline">
+    <div class="hero-overlay absolute inset-0 z-[1]"></div>
+    <div class="hero-container max-w-container mx-auto px-8 relative z-[2]">
+      <div class="hero-content max-w-4xl">
+        <div class="hero-label font-mono text-xs uppercase tracking-[0.15em] text-white/80 mb-6">// Impact & About</div>
+        <h1 class="hero-headline font-display text-5xl md:text-6xl font-normal leading-tight tracking-tight text-white mb-8">Proven impact for the hardest-to-serve.</h1>
+        <p class="hero-subheadline text-xl text-white/90 leading-relaxed mb-10 max-w-3xl">
           America Works delivers performance-based employment outcomes for welfare, disability, reentry, and homelessness programs across multiple states under rigorous oversight and evaluation.
         </p>
-
-        <div class="hero-ctas">
-          <a href="#contact" class="btn-primary">
+        <div class="hero-ctas flex flex-wrap gap-5">
+          <a href="#contact" class="btn-primary inline-flex items-center gap-2">
             <span>Request a government partnership briefing</span>
             <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
           </a>
-          <a href="#contact" class="btn-secondary">
+          <a href="#contact" class="btn-secondary inline-flex items-center gap-2">
             <span>Ask for references & evaluation summaries</span>
             <i data-lucide="file-text" style="width: 18px; height: 18px;"></i>
           </a>
@@ -1621,65 +968,65 @@
   </section>
 
   <!-- At A Glance -->
-  <section class="at-a-glance">
-    <div class="glance-container">
-      <div class="glance-header">
-        <div class="section-label">Overview</div>
-        <h2 class="glance-title">America Works at a glance</h2>
-      </div>
+  <section class="at-a-glance py-32 bg-white relative">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-16">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-gray-500 mb-4">// Overview</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900">America Works at a glance</h2>
+      </header>
 
-      <div class="glance-grid">
-        <div class="glance-item">
-          <div class="glance-icon">
-            <i data-lucide="award"></i>
+      <div class="glance-grid grid grid-cols-1 lg:grid-cols-3 gap-0 border-t border-gray-200">
+        <div class="glance-item relative flex items-start gap-5 p-10 pt-16 border-r border-b border-gray-200 bg-transparent hover:bg-gray-50 transition-all duration-300 lg:border-r">
+          <div class="glance-icon w-14 h-14 border border-gray-200 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <i data-lucide="award" class="w-6 h-6 text-aw-red"></i>
           </div>
-          <div class="glance-content">
-            <p><strong>Independently evaluated</strong> by third-party organizations</p>
+          <div class="glance-content flex-1">
+            <p class="text-lg text-gray-700 leading-relaxed"><strong class="text-black font-semibold block mb-1">Independently evaluated</strong> by third-party organizations</p>
           </div>
         </div>
 
-        <div class="glance-item">
-          <div class="glance-icon">
-            <i data-lucide="building-2"></i>
+        <div class="glance-item relative flex items-start gap-5 p-10 pt-16 border-r border-b border-gray-200 bg-transparent hover:bg-gray-50 transition-all duration-300 lg:border-r">
+          <div class="glance-icon w-14 h-14 border border-gray-200 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <i data-lucide="building-2" class="w-6 h-6 text-aw-red"></i>
           </div>
-          <div class="glance-content">
-            <p>Proven performance in <strong>federal and state workforce programs</strong></p>
-          </div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon">
-            <i data-lucide="users"></i>
-          </div>
-          <div class="glance-content">
-            <p>Specializes in <strong>hardest-to-serve populations</strong> (welfare/SNAP, disability, justice-involved, homeless veterans)</p>
+          <div class="glance-content flex-1">
+            <p class="text-lg text-gray-700 leading-relaxed">Proven performance in <strong class="text-black font-semibold">federal and state workforce programs</strong></p>
           </div>
         </div>
 
-        <div class="glance-item">
-          <div class="glance-icon">
-            <i data-lucide="target"></i>
+        <div class="glance-item relative flex items-start gap-5 p-10 pt-16 border-b border-gray-200 bg-transparent hover:bg-gray-50 transition-all duration-300 lg:border-r-0">
+          <div class="glance-icon w-14 h-14 border border-gray-200 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <i data-lucide="users" class="w-6 h-6 text-aw-red"></i>
           </div>
-          <div class="glance-content">
-            <p>Operates under <strong>performance-based contracts</strong>, paid on outcomes</p>
-          </div>
-        </div>
-
-        <div class="glance-item">
-          <div class="glance-icon">
-            <i data-lucide="map"></i>
-          </div>
-          <div class="glance-content">
-            <p><strong>Multi-state, multi-year</strong> contract experience with complex public systems</p>
+          <div class="glance-content flex-1">
+            <p class="text-lg text-gray-700 leading-relaxed">Specializes in <strong class="text-black font-semibold">hardest-to-serve populations</strong> (welfare/SNAP, disability, justice-involved, homeless veterans)</p>
           </div>
         </div>
 
-        <div class="glance-item">
-          <div class="glance-icon">
-            <i data-lucide="landmark"></i>
+        <div class="glance-item relative flex items-start gap-5 p-10 pt-16 border-r border-b border-gray-200 bg-transparent hover:bg-gray-50 transition-all duration-300 lg:border-r">
+          <div class="glance-icon w-14 h-14 border border-gray-200 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <i data-lucide="target" class="w-6 h-6 text-aw-red"></i>
           </div>
-          <div class="glance-content">
-            <p><strong>Advised the White House and Congress</strong> on welfare reform and TANF improvements</p>
+          <div class="glance-content flex-1">
+            <p class="text-lg text-gray-700 leading-relaxed">Operates under <strong class="text-black font-semibold">performance-based contracts</strong>, paid on outcomes</p>
+          </div>
+        </div>
+
+        <div class="glance-item relative flex items-start gap-5 p-10 pt-16 border-r border-b border-gray-200 bg-transparent hover:bg-gray-50 transition-all duration-300 lg:border-r">
+          <div class="glance-icon w-14 h-14 border border-gray-200 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <i data-lucide="map" class="w-6 h-6 text-aw-red"></i>
+          </div>
+          <div class="glance-content flex-1">
+            <p class="text-lg text-gray-700 leading-relaxed"><strong class="text-black font-semibold">Multi-state, multi-year</strong> contract experience with complex public systems</p>
+          </div>
+        </div>
+
+        <div class="glance-item relative flex items-start gap-5 p-10 pt-16 border-b border-gray-200 bg-transparent hover:bg-gray-50 transition-all duration-300">
+          <div class="glance-icon w-14 h-14 border border-gray-200 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <i data-lucide="landmark" class="w-6 h-6 text-aw-red"></i>
+          </div>
+          <div class="glance-content flex-1">
+            <p class="text-lg text-gray-700 leading-relaxed"><strong class="text-black font-semibold">Advised the White House and Congress</strong> on welfare reform and TANF improvements</p>
           </div>
         </div>
       </div>
@@ -1687,112 +1034,112 @@
   </section>
 
   <!-- Independent Evidence -->
-  <section class="section bg-gray" id="evidence">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">Validation</div>
-        <h2>Independent evidence & external validation</h2>
-        <p class="section-intro">
+  <section class="py-32 bg-gray-50" id="evidence">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-20">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-red mb-4">// Validation</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Independent evidence & external validation</h2>
+        <p class="section-intro text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
           America Works has been studied, profiled, and selected by respected evaluators and government agencies. A sampling:
         </p>
       </header>
 
-      <div class="evidence-grid">
+      <div class="evidence-grid grid grid-cols-1 lg:grid-cols-2 gap-0 border-t border-gray-200 mt-16">
         <!-- Ernst & Young -->
-        <div class="evidence-card">
-          <h3>Ernst & Young – Welfare-to-Work Study</h3>
-          <ul>
-            <li>Reviewed early America Works welfare-to-work programs.</li>
-            <li>Found <strong>85–90% of clients still employed one year after placement</strong>.</li>
-            <li>Highlighted performance-based contracts as improving outcomes and value for municipalities.</li>
+        <div class="evidence-card relative bg-transparent border-r border-b border-gray-200 p-12 hover:bg-gray-50 transition-all duration-300 lg:border-r">
+          <h3 class="text-xl font-medium text-black mb-8 mt-8 tracking-tight leading-snug">Ernst & Young – Welfare-to-Work Study</h3>
+          <ul class="list-none mb-8 space-y-2">
+            <li class="text-gray-700 leading-relaxed text-sm">Reviewed early America Works welfare-to-work programs.</li>
+            <li class="text-gray-700 leading-relaxed text-sm">Found <strong class="text-black font-semibold">85–90% of clients still employed one year after placement</strong>.</li>
+            <li class="text-gray-700 leading-relaxed text-sm">Highlighted performance-based contracts as improving outcomes and value for municipalities.</li>
           </ul>
-          <div class="evidence-why">
-            <strong>Why this matters:</strong> Long-term retention for welfare populations, verified by a major global firm.
+          <div class="pt-6 mt-6 border-t border-gray-300 text-gray-600 text-sm leading-relaxed">
+            <strong class="text-aw-blue font-semibold font-mono text-xs uppercase tracking-wide">Why this matters:</strong> Long-term retention for welfare populations, verified by a major global firm.
           </div>
         </div>
 
         <!-- Manhattan Institute -->
-        <div class="evidence-card">
-          <h3>Manhattan Institute – Ticket to Work Case Study</h3>
-          <ul>
-            <li>Profiled America Works as a leading <strong>Ticket to Work Employment Network</strong>.</li>
-            <li>In one year: <strong>1,295</strong> disability beneficiaries enrolled; <strong>626</strong> placed into gainful employment.</li>
-            <li>In New York, <strong>75% of successfully hired clients reached at least 12 months of employment</strong>.</li>
+        <div class="evidence-card relative bg-transparent border-b border-gray-200 p-12 hover:bg-gray-50 transition-all duration-300">
+          <h3 class="text-xl font-medium text-black mb-8 mt-8 tracking-tight leading-snug">Manhattan Institute – Ticket to Work Case Study</h3>
+          <ul class="list-none mb-8 space-y-2">
+            <li class="text-gray-700 leading-relaxed text-sm">Profiled America Works as a leading <strong class="text-black font-semibold">Ticket to Work Employment Network</strong>.</li>
+            <li class="text-gray-700 leading-relaxed text-sm">In one year: <strong class="text-black font-semibold">1,295</strong> disability beneficiaries enrolled; <strong class="text-black font-semibold">626</strong> placed into gainful employment.</li>
+            <li class="text-gray-700 leading-relaxed text-sm">In New York, <strong class="text-black font-semibold">75% of successfully hired clients reached at least 12 months of employment</strong>.</li>
           </ul>
-          <div class="evidence-why">
-            <strong>Why this matters:</strong> Proven sustained employment for disability beneficiaries under a federal, performance-based program.
+          <div class="pt-6 mt-6 border-t border-gray-300 text-gray-600 text-sm leading-relaxed">
+            <strong class="text-aw-blue font-semibold font-mono text-xs uppercase tracking-wide">Why this matters:</strong> Proven sustained employment for disability beneficiaries under a federal, performance-based program.
           </div>
         </div>
 
         <!-- Fraser Institute -->
-        <div class="evidence-card">
-          <h3>Fraser Institute, NYS Dept. of Labor & Others</h3>
-          <ul>
-            <li>New York State data showed <strong>88% of people placed by America Works remained off welfare three years later</strong>.</li>
-            <li>Analyses by the <strong>Fraser Institute</strong>, <strong>Social Market Foundation</strong>, and <strong>National Center for Policy Analysis</strong> highlighted America Works as <strong>both effective and lower-cost</strong> than comparable government programs.</li>
+        <div class="evidence-card relative bg-transparent border-r border-b border-gray-200 p-12 hover:bg-gray-50 transition-all duration-300 lg:border-r">
+          <h3 class="text-xl font-medium text-black mb-8 mt-8 tracking-tight leading-snug">Fraser Institute, NYS Dept. of Labor & Others</h3>
+          <ul class="list-none mb-8 space-y-2">
+            <li class="text-gray-700 leading-relaxed text-sm">New York State data showed <strong class="text-black font-semibold">88% of people placed by America Works remained off welfare three years later</strong>.</li>
+            <li class="text-gray-700 leading-relaxed text-sm">Analyses by the <strong class="text-black font-semibold">Fraser Institute</strong>, <strong class="text-black font-semibold">Social Market Foundation</strong>, and <strong class="text-black font-semibold">National Center for Policy Analysis</strong> highlighted America Works as <strong class="text-black font-semibold">both effective and lower-cost</strong> than comparable government programs.</li>
           </ul>
-          <div class="evidence-why">
-            <strong>Why this matters:</strong> Independent confirmation of <strong>durable welfare exits</strong> and strong value for money.
+          <div class="pt-6 mt-6 border-t border-gray-300 text-gray-600 text-sm leading-relaxed">
+            <strong class="text-aw-blue font-semibold font-mono text-xs uppercase tracking-wide">Why this matters:</strong> Independent confirmation of <strong class="text-black font-semibold">durable welfare exits</strong> and strong value for money.
           </div>
         </div>
 
         <!-- Urban Institute -->
-        <div class="evidence-card">
-          <h3>Urban Institute – Criminal Justice Employment Model</h3>
-          <ul>
-            <li>The <strong>Urban Institute</strong> profiled America Works' <strong>Criminal Justice Program</strong> as a national example of employment-focused reentry.</li>
-            <li>Early evaluation results: hundreds of people leaving incarceration placed into jobs, with strong 90-day and 6-month retention.</li>
+        <div class="evidence-card relative bg-transparent border-b border-gray-200 p-12 hover:bg-gray-50 transition-all duration-300">
+          <h3 class="text-xl font-medium text-black mb-8 mt-8 tracking-tight leading-snug">Urban Institute – Criminal Justice Employment Model</h3>
+          <ul class="list-none mb-8 space-y-2">
+            <li class="text-gray-700 leading-relaxed text-sm">The <strong class="text-black font-semibold">Urban Institute</strong> profiled America Works' <strong class="text-black font-semibold">Criminal Justice Program</strong> as a national example of employment-focused reentry.</li>
+            <li class="text-gray-700 leading-relaxed text-sm">Early evaluation results: hundreds of people leaving incarceration placed into jobs, with strong 90-day and 6-month retention.</li>
           </ul>
-          <div class="evidence-why">
-            <strong>Why this matters:</strong> Shows impact with <strong>justice-involved individuals</strong>, a high-priority, high-risk population.
+          <div class="pt-6 mt-6 border-t border-gray-300 text-gray-600 text-sm leading-relaxed">
+            <strong class="text-aw-blue font-semibold font-mono text-xs uppercase tracking-wide">Why this matters:</strong> Shows impact with <strong class="text-black font-semibold">justice-involved individuals</strong>, a high-priority, high-risk population.
           </div>
         </div>
 
         <!-- Manhattan Institute Issue Brief -->
-        <div class="evidence-card">
-          <h3>Manhattan Institute – "Making Welfare-to-Work Fly"</h3>
-          <ul>
-            <li>Published an issue brief by founder Peter Cove on <strong>performance-based social service contracts</strong>.</li>
-            <li>Highlighted America Works' model as delivering <strong>better results and better value</strong> than traditional training programs.</li>
+        <div class="evidence-card relative bg-transparent border-r border-b border-gray-200 p-12 hover:bg-gray-50 transition-all duration-300 lg:border-r">
+          <h3 class="text-xl font-medium text-black mb-8 mt-8 tracking-tight leading-snug">Manhattan Institute – "Making Welfare-to-Work Fly"</h3>
+          <ul class="list-none mb-8 space-y-2">
+            <li class="text-gray-700 leading-relaxed text-sm">Published an issue brief by founder Peter Cove on <strong class="text-black font-semibold">performance-based social service contracts</strong>.</li>
+            <li class="text-gray-700 leading-relaxed text-sm">Highlighted America Works' model as delivering <strong class="text-black font-semibold">better results and better value</strong> than traditional training programs.</li>
           </ul>
-          <div class="evidence-why">
-            <strong>Why this matters:</strong> Positions the model itself as a <strong>reference point in welfare reform</strong>, not just another vendor.
+          <div class="pt-6 mt-6 border-t border-gray-300 text-gray-600 text-sm leading-relaxed">
+            <strong class="text-aw-blue font-semibold font-mono text-xs uppercase tracking-wide">Why this matters:</strong> Positions the model itself as a <strong class="text-black font-semibold">reference point in welfare reform</strong>, not just another vendor.
           </div>
         </div>
 
         <!-- USDA SNAP -->
-        <div class="evidence-card">
-          <h3>USDA / Mathematica – SNAP E&T Rapid-Cycle Evaluation (DC)</h3>
-          <ul>
-            <li>America Works selected as one of the providers in a <strong>USDA-funded SNAP E&T innovation pilot</strong> in D.C.</li>
-            <li>Implemented an enhanced, goal-based case management model tested by <strong>Mathematica</strong> using rapid-cycle evaluation methods.</li>
+        <div class="evidence-card relative bg-transparent border-b border-gray-200 p-12 hover:bg-gray-50 transition-all duration-300">
+          <h3 class="text-xl font-medium text-black mb-8 mt-8 tracking-tight leading-snug">USDA / Mathematica – SNAP E&T Rapid-Cycle Evaluation (DC)</h3>
+          <ul class="list-none mb-8 space-y-2">
+            <li class="text-gray-700 leading-relaxed text-sm">America Works selected as one of the providers in a <strong class="text-black font-semibold">USDA-funded SNAP E&T innovation pilot</strong> in D.C.</li>
+            <li class="text-gray-700 leading-relaxed text-sm">Implemented an enhanced, goal-based case management model tested by <strong class="text-black font-semibold">Mathematica</strong> using rapid-cycle evaluation methods.</li>
           </ul>
-          <div class="evidence-why">
-            <strong>Why this matters:</strong> Trusted to deliver in a <strong>federally sponsored, data-driven pilot</strong> focused on engagement and outcomes.
+          <div class="pt-6 mt-6 border-t border-gray-300 text-gray-600 text-sm leading-relaxed">
+            <strong class="text-aw-blue font-semibold font-mono text-xs uppercase tracking-wide">Why this matters:</strong> Trusted to deliver in a <strong class="text-black font-semibold">federally sponsored, data-driven pilot</strong> focused on engagement and outcomes.
           </div>
         </div>
 
         <!-- HHS OPRE -->
-        <div class="evidence-card">
-          <h3>U.S. HHS / OPRE – TANF Job Search Evaluation (NYC)</h3>
-          <ul>
-            <li>Included as one of the vendors in the <strong>Job Search Assistance Strategies Evaluation</strong>, alongside Goodwill.</li>
-            <li>Operated job-search assistance sites in Brooklyn and Queens as part of a <strong>federal evaluation of alternative TANF models</strong>.</li>
+        <div class="evidence-card relative bg-transparent border-r border-b border-gray-200 p-12 hover:bg-gray-50 transition-all duration-300 lg:border-r">
+          <h3 class="text-xl font-medium text-black mb-8 mt-8 tracking-tight leading-snug">U.S. HHS / OPRE – TANF Job Search Evaluation (NYC)</h3>
+          <ul class="list-none mb-8 space-y-2">
+            <li class="text-gray-700 leading-relaxed text-sm">Included as one of the vendors in the <strong class="text-black font-semibold">Job Search Assistance Strategies Evaluation</strong>, alongside Goodwill.</li>
+            <li class="text-gray-700 leading-relaxed text-sm">Operated job-search assistance sites in Brooklyn and Queens as part of a <strong class="text-black font-semibold">federal evaluation of alternative TANF models</strong>.</li>
           </ul>
-          <div class="evidence-why">
-            <strong>Why this matters:</strong> Demonstrates the ability to operate within <strong>rigorous federal evaluation frameworks</strong>.
+          <div class="pt-6 mt-6 border-t border-gray-300 text-gray-600 text-sm leading-relaxed">
+            <strong class="text-aw-blue font-semibold font-mono text-xs uppercase tracking-wide">Why this matters:</strong> Demonstrates the ability to operate within <strong class="text-black font-semibold">rigorous federal evaluation frameworks</strong>.
           </div>
         </div>
 
         <!-- HHS ASPE -->
-        <div class="evidence-card">
-          <h3>HHS / ASPE – Federal Review of Welfare Privatization</h3>
-          <ul>
-            <li>The U.S. Department of Health and Human Services (HHS), through its Office of the Assistant Secretary for Planning and Evaluation (ASPE), commissioned "Privatization of Welfare Services: A Review of the Literature."</li>
-            <li>That review identifies America Works as a key example of a for-profit, performance-based employment services provider working with welfare recipients across multiple states.</li>
+        <div class="evidence-card relative bg-transparent border-b border-gray-200 p-12 hover:bg-gray-50 transition-all duration-300">
+          <h3 class="text-xl font-medium text-black mb-8 mt-8 tracking-tight leading-snug">HHS / ASPE – Federal Review of Welfare Privatization</h3>
+          <ul class="list-none mb-8 space-y-2">
+            <li class="text-gray-700 leading-relaxed text-sm">The U.S. Department of Health and Human Services (HHS), through its Office of the Assistant Secretary for Planning and Evaluation (ASPE), commissioned "Privatization of Welfare Services: A Review of the Literature."</li>
+            <li class="text-gray-700 leading-relaxed text-sm">That review identifies America Works as a key example of a for-profit, performance-based employment services provider working with welfare recipients across multiple states.</li>
           </ul>
-          <div class="evidence-why">
-            <strong>Why this matters:</strong> America Works is singled out in a federal research overview as a notable case of performance-based private welfare service delivery.
+          <div class="pt-6 mt-6 border-t border-gray-300 text-gray-600 text-sm leading-relaxed">
+            <strong class="text-aw-blue font-semibold font-mono text-xs uppercase tracking-wide">Why this matters:</strong> America Works is singled out in a federal research overview as a notable case of performance-based private welfare service delivery.
           </div>
         </div>
       </div>
@@ -1800,89 +1147,89 @@
   </section>
 
   <!-- Where We Deliver -->
-  <section class="section bg-white" id="populations">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">Populations</div>
-        <h2>Where America Works already delivers results</h2>
-        <p class="section-intro">
+  <section class="py-32 bg-white" id="populations">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-20">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-red mb-4">// Populations</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Where America Works already delivers results</h2>
+        <p class="section-intro text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
           America Works designs programs around specific populations and funding streams. Below is a snapshot of who we serve and the types of programs we operate.
         </p>
       </header>
 
-      <div class="matrix-grid">
+      <div class="matrix-grid grid grid-cols-1 lg:grid-cols-2 gap-0 border-t border-gray-200 mt-16">
         <!-- Welfare & SNAP -->
-        <div class="matrix-item">
-          <h3>Welfare & SNAP Recipients</h3>
-          <div class="matrix-meta">
-            <div class="matrix-meta-item">
-              <span class="matrix-meta-label">Program Types</span>
-              <span class="matrix-meta-value">TANF, SNAP Employment & Training, welfare-to-work</span>
+        <div class="matrix-item relative p-10 border-r border-b border-gray-200 bg-transparent hover:bg-gray-50 transition-all duration-300 lg:border-r">
+          <h3 class="font-display text-2xl font-normal text-black mb-5 tracking-tight">Welfare & SNAP Recipients</h3>
+          <div class="flex flex-wrap gap-8 mb-4">
+            <div class="flex flex-col gap-1">
+              <span class="font-mono text-xs uppercase tracking-wide text-gray-500 font-semibold">Program Types</span>
+              <span class="text-sm text-gray-800 font-medium">TANF, SNAP Employment & Training, welfare-to-work</span>
             </div>
           </div>
-          <p class="matrix-description">
-            <strong>What we do:</strong> Work-first model with job readiness, rapid job search, employer connections, and retention support.<br><br>
-            <strong>Impact:</strong> Independent evaluations document high 12-month retention and reduced long-term reliance on benefits.
+          <p class="text-base text-gray-700 leading-relaxed">
+            <strong class="text-black font-semibold">What we do:</strong> Work-first model with job readiness, rapid job search, employer connections, and retention support.<br><br>
+            <strong class="text-black font-semibold">Impact:</strong> Independent evaluations document high 12-month retention and reduced long-term reliance on benefits.
           </p>
         </div>
 
         <!-- Disability -->
-        <div class="matrix-item">
-          <h3>Disability Beneficiaries</h3>
-          <div class="matrix-meta">
-            <div class="matrix-meta-item">
-              <span class="matrix-meta-label">Program Types</span>
-              <span class="matrix-meta-value">Ticket to Work (EN), benefits counseling, WIPA-related services</span>
+        <div class="matrix-item relative p-10 border-b border-gray-200 bg-transparent hover:bg-gray-50 transition-all duration-300">
+          <h3 class="font-display text-2xl font-normal text-black mb-5 tracking-tight">Disability Beneficiaries</h3>
+          <div class="flex flex-wrap gap-8 mb-4">
+            <div class="flex flex-col gap-1">
+              <span class="font-mono text-xs uppercase tracking-wide text-gray-500 font-semibold">Program Types</span>
+              <span class="text-sm text-gray-800 font-medium">Ticket to Work (EN), benefits counseling, WIPA-related services</span>
             </div>
           </div>
-          <p class="matrix-description">
-            <strong>What we do:</strong> Benefits counseling, individual work plans, job readiness, placement, and long-term coaching.<br><br>
-            <strong>Impact:</strong> Hundreds of beneficiaries placed each year; majority of successful hires sustaining at least 12 months of work under Ticket to Work milestones.
+          <p class="text-base text-gray-700 leading-relaxed">
+            <strong class="text-black font-semibold">What we do:</strong> Benefits counseling, individual work plans, job readiness, placement, and long-term coaching.<br><br>
+            <strong class="text-black font-semibold">Impact:</strong> Hundreds of beneficiaries placed each year; majority of successful hires sustaining at least 12 months of work under Ticket to Work milestones.
           </p>
         </div>
 
         <!-- Justice-Involved -->
-        <div class="matrix-item">
-          <h3>Justice-Involved Individuals</h3>
-          <div class="matrix-meta">
-            <div class="matrix-meta-item">
-              <span class="matrix-meta-label">Program Types</span>
-              <span class="matrix-meta-value">Reentry employment programs, criminal justice employment initiatives</span>
+        <div class="matrix-item relative p-10 border-r border-b border-gray-200 bg-transparent hover:bg-gray-50 transition-all duration-300 lg:border-r">
+          <h3 class="font-display text-2xl font-normal text-black mb-5 tracking-tight">Justice-Involved Individuals</h3>
+          <div class="flex flex-wrap gap-8 mb-4">
+            <div class="flex flex-col gap-1">
+              <span class="font-mono text-xs uppercase tracking-wide text-gray-500 font-semibold">Program Types</span>
+              <span class="text-sm text-gray-800 font-medium">Reentry employment programs, criminal justice employment initiatives</span>
             </div>
           </div>
-          <p class="matrix-description">
-            <strong>What we do:</strong> Outreach in corrections settings, structured readiness training, supported job search, and follow-up after release.<br><br>
-            <strong>Impact:</strong> Documented placements and multi-month retention outcomes for individuals returning from incarceration.
+          <p class="text-base text-gray-700 leading-relaxed">
+            <strong class="text-black font-semibold">What we do:</strong> Outreach in corrections settings, structured readiness training, supported job search, and follow-up after release.<br><br>
+            <strong class="text-black font-semibold">Impact:</strong> Documented placements and multi-month retention outcomes for individuals returning from incarceration.
           </p>
         </div>
 
         <!-- Homeless & Veterans -->
-        <div class="matrix-item">
-          <h3>Homeless & Homeless Veterans</h3>
-          <div class="matrix-meta">
-            <div class="matrix-meta-item">
-              <span class="matrix-meta-label">Program Types</span>
-              <span class="matrix-meta-value">Homelessness and veteran-focused employment programs</span>
+        <div class="matrix-item relative p-10 border-b border-gray-200 bg-transparent hover:bg-gray-50 transition-all duration-300">
+          <h3 class="font-display text-2xl font-normal text-black mb-5 tracking-tight">Homeless & Homeless Veterans</h3>
+          <div class="flex flex-wrap gap-8 mb-4">
+            <div class="flex flex-col gap-1">
+              <span class="font-mono text-xs uppercase tracking-wide text-gray-500 font-semibold">Program Types</span>
+              <span class="text-sm text-gray-800 font-medium">Homelessness and veteran-focused employment programs</span>
             </div>
           </div>
-          <p class="matrix-description">
-            <strong>What we do:</strong> Employment services integrated with housing and support partners; attention to practical barriers like clothing, transportation, and documentation.<br><br>
-            <strong>Impact:</strong> Thousands of homeless individuals—including homeless veterans—placed into employment using a model adapted from welfare-to-work successes.
+          <p class="text-base text-gray-700 leading-relaxed">
+            <strong class="text-black font-semibold">What we do:</strong> Employment services integrated with housing and support partners; attention to practical barriers like clothing, transportation, and documentation.<br><br>
+            <strong class="text-black font-semibold">Impact:</strong> Thousands of homeless individuals—including homeless veterans—placed into employment using a model adapted from welfare-to-work successes.
           </p>
         </div>
 
         <!-- Youth & Young Adults -->
-        <div class="matrix-item">
-          <h3>Youth, Young Adults & Other High-Barrier Groups</h3>
-          <div class="matrix-meta">
-            <div class="matrix-meta-item">
-              <span class="matrix-meta-label">Program Types</span>
-              <span class="matrix-meta-value">Youth employment, young adult workforce, non-custodial parent programs</span>
+        <div class="matrix-item relative p-10 border-b border-gray-200 bg-transparent hover:bg-gray-50 transition-all duration-300 lg:col-span-2">
+          <h3 class="font-display text-2xl font-normal text-black mb-5 tracking-tight">Youth, Young Adults & Other High-Barrier Groups</h3>
+          <div class="flex flex-wrap gap-8 mb-4">
+            <div class="flex flex-col gap-1">
+              <span class="font-mono text-xs uppercase tracking-wide text-gray-500 font-semibold">Program Types</span>
+              <span class="text-sm text-gray-800 font-medium">Youth employment, young adult workforce, non-custodial parent programs</span>
             </div>
           </div>
-          <p class="matrix-description">
-            <strong>What we do:</strong> Soft-skills training, entry-level job placement, and pathways to better-paying roles via experience and credentials.<br><br>
-            <strong>Impact:</strong> Consistent application of a work-first + wraparound support model across multiple high-priority, high-barrier populations.
+          <p class="text-base text-gray-700 leading-relaxed">
+            <strong class="text-black font-semibold">What we do:</strong> Soft-skills training, entry-level job placement, and pathways to better-paying roles via experience and credentials.<br><br>
+            <strong class="text-black font-semibold">Impact:</strong> Consistent application of a work-first + wraparound support model across multiple high-priority, high-barrier populations.
           </p>
         </div>
       </div>
@@ -1890,45 +1237,45 @@
   </section>
 
   <!-- Government Partner Scorecard -->
-  <section class="section bg-gray">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">Partnership</div>
-        <h2>Government partner scorecard</h2>
-        <p class="section-intro">
+  <section class="py-32 bg-gray-50">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-20">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">// Partnership</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Government partner scorecard</h2>
+        <p class="section-intro text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
           A quick view of why America Works is a low-risk, high-impact partner for large public contracts.
         </p>
       </header>
 
-      <div class="scorecard-grid">
+      <div class="scorecard-grid grid grid-cols-1 lg:grid-cols-3 gap-8 mt-16">
         <!-- Contracting & Scale -->
-        <div class="scorecard-card">
-          <h3>Contracting & Scale</h3>
-          <ul>
-            <li>Multi-state operations across a range of policy and labor-market environments.</li>
-            <li>Experience with multi-million-dollar, multi-year contracts in workforce and human services.</li>
-            <li>Ability to stand up new operations quickly when required by contract timelines.</li>
+        <div class="scorecard-card relative bg-white border border-gray-200 rounded p-10 hover:-translate-y-1 hover:shadow-xl hover:border-gray-300 transition-all duration-300">
+          <h3 class="font-body text-lg font-semibold text-black mb-5 tracking-tight">Contracting & Scale</h3>
+          <ul class="list-none space-y-3">
+            <li class="relative pl-5 text-gray-700 leading-relaxed text-sm">Multi-state operations across a range of policy and labor-market environments.</li>
+            <li class="relative pl-5 text-gray-700 leading-relaxed text-sm">Experience with multi-million-dollar, multi-year contracts in workforce and human services.</li>
+            <li class="relative pl-5 text-gray-700 leading-relaxed text-sm">Ability to stand up new operations quickly when required by contract timelines.</li>
           </ul>
         </div>
 
         <!-- Compliance & Reporting -->
-        <div class="scorecard-card">
-          <h3>Compliance & Reporting</h3>
-          <ul>
-            <li>Comfortable under performance-based contracts with strict audit and monitoring requirements.</li>
-            <li>Built-in tracking of participant engagement, job placements, retention milestones, earnings and benefit changes.</li>
-            <li>History of successful audits and evaluations at city, state, and federal levels.</li>
+        <div class="scorecard-card relative bg-white border border-gray-200 rounded p-10 hover:-translate-y-1 hover:shadow-xl hover:border-gray-300 transition-all duration-300">
+          <h3 class="font-body text-lg font-semibold text-black mb-5 tracking-tight">Compliance & Reporting</h3>
+          <ul class="list-none space-y-3">
+            <li class="relative pl-5 text-gray-700 leading-relaxed text-sm">Comfortable under performance-based contracts with strict audit and monitoring requirements.</li>
+            <li class="relative pl-5 text-gray-700 leading-relaxed text-sm">Built-in tracking of participant engagement, job placements, retention milestones, earnings and benefit changes.</li>
+            <li class="relative pl-5 text-gray-700 leading-relaxed text-sm">History of successful audits and evaluations at city, state, and federal levels.</li>
           </ul>
         </div>
 
         <!-- Prestige & Policy -->
-        <div class="scorecard-card">
-          <h3>Prestige & Policy Involvement</h3>
-          <ul>
-            <li>Praised by a U.S. Vice President as a "fantastic example" of market-oriented solutions.</li>
-            <li>Engaged as expert partners during 1996 welfare reform, working with the White House and congressional leadership.</li>
-            <li>Leadership invited to testify before the U.S. House Committee on Ways and Means on improving TANF outcomes.</li>
-            <li>Leadership recognized with national honors including Socially Responsible Entrepreneur of the Year.</li>
+        <div class="scorecard-card relative bg-white border border-gray-200 rounded p-10 hover:-translate-y-1 hover:shadow-xl hover:border-gray-300 transition-all duration-300">
+          <h3 class="font-body text-lg font-semibold text-black mb-5 tracking-tight">Prestige & Policy Involvement</h3>
+          <ul class="list-none space-y-3">
+            <li class="relative pl-5 text-gray-700 leading-relaxed text-sm">Praised by a U.S. Vice President as a "fantastic example" of market-oriented solutions.</li>
+            <li class="relative pl-5 text-gray-700 leading-relaxed text-sm">Engaged as expert partners during 1996 welfare reform, working with the White House and congressional leadership.</li>
+            <li class="relative pl-5 text-gray-700 leading-relaxed text-sm">Leadership invited to testify before the U.S. House Committee on Ways and Means on improving TANF outcomes.</li>
+            <li class="relative pl-5 text-gray-700 leading-relaxed text-sm">Leadership recognized with national honors including Socially Responsible Entrepreneur of the Year.</li>
           </ul>
         </div>
       </div>
@@ -1937,10 +1284,10 @@
 
   <!-- Timeline -->
   <section class="timeline-section" id="timeline">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">History</div>
-        <h2>40 Years of Work-First Leadership</h2>
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-20">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-red mb-4">// History</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900">40 Years of Work-First Leadership</h2>
       </header>
 
       <div class="timeline-container">
@@ -1951,64 +1298,64 @@
           <div class="timeline-items">
             <!-- Founding -->
             <div class="timeline-item">
-              <div class="timeline-year">1984</div>
+              <div class="font-mono text-sm font-bold text-aw-red text-center mb-4 tracking-wide uppercase">1984</div>
               <div class="timeline-content">
-                <div class="timeline-title">Founding</div>
-                <div class="timeline-description">Peter Cove founded America Works as an experiment to prove his philosophy about helping those in poverty through work.</div>
+                <div class="font-body text-lg font-semibold text-black mb-3 leading-snug text-center">Founding</div>
+                <div class="text-sm text-gray-600 leading-relaxed text-center">Peter Cove founded America Works as an experiment to prove his philosophy about helping those in poverty through work.</div>
               </div>
             </div>
 
             <!-- VP Dan Quayle -->
             <div class="timeline-item">
-              <div class="timeline-year">1992</div>
+              <div class="font-mono text-sm font-bold text-aw-red text-center mb-4 tracking-wide uppercase">1992</div>
               <div class="timeline-content">
-                <div class="timeline-title">VP Dan Quayle Visits</div>
-                <div class="timeline-description">Vice President praised America Works as a "fantastic example" of market-oriented solutions to unemployment and poverty.</div>
+                <div class="font-body text-lg font-semibold text-black mb-3 leading-snug text-center">VP Dan Quayle Visits</div>
+                <div class="text-sm text-gray-600 leading-relaxed text-center">Vice President praised America Works as a "fantastic example" of market-oriented solutions to unemployment and poverty.</div>
               </div>
             </div>
 
             <!-- Entrepreneur Award -->
             <div class="timeline-item">
-              <div class="timeline-year">1995</div>
+              <div class="font-mono text-sm font-bold text-aw-red text-center mb-4 tracking-wide uppercase">1995</div>
               <div class="timeline-content">
-                <div class="timeline-title">Entrepreneur of the Year</div>
-                <div class="timeline-description">Peter Cove awarded Socially Responsible Entrepreneur of The Year for achievements with America Works.</div>
+                <div class="font-body text-lg font-semibold text-black mb-3 leading-snug text-center">Entrepreneur of the Year</div>
+                <div class="text-sm text-gray-600 leading-relaxed text-center">Peter Cove awarded Socially Responsible Entrepreneur of The Year for achievements with America Works.</div>
               </div>
             </div>
 
             <!-- Clinton Partnership -->
             <div class="timeline-item">
-              <div class="timeline-year">1996</div>
+              <div class="font-mono text-sm font-bold text-aw-red text-center mb-4 tracking-wide uppercase">1996</div>
               <div class="timeline-content">
-                <div class="timeline-title">Clinton Partners with AW</div>
-                <div class="timeline-description">Peter Cove and Dr. Lee Bowes brought in as experts to help craft Welfare Reform in 1996.</div>
+                <div class="font-body text-lg font-semibold text-black mb-3 leading-snug text-center">Clinton Partners with AW</div>
+                <div class="text-sm text-gray-600 leading-relaxed text-center">Peter Cove and Dr. Lee Bowes brought in as experts to help craft Welfare Reform in 1996.</div>
               </div>
             </div>
 
             <!-- Manhattan Institute -->
             <div class="timeline-item">
-              <div class="timeline-year">2000</div>
+              <div class="font-mono text-sm font-bold text-aw-red text-center mb-4 tracking-wide uppercase">2000</div>
               <div class="timeline-content">
-                <div class="timeline-title">Making Welfare-to-Work Fly</div>
-                <div class="timeline-description">Manhattan Institute publishes brief demonstrating performance-based contracts provide better results.</div>
+                <div class="font-body text-lg font-semibold text-black mb-3 leading-snug text-center">Making Welfare-to-Work Fly</div>
+                <div class="text-sm text-gray-600 leading-relaxed text-center">Manhattan Institute publishes brief demonstrating performance-based contracts provide better results.</div>
               </div>
             </div>
 
             <!-- Stevies -->
             <div class="timeline-item">
-              <div class="timeline-year">2011</div>
+              <div class="font-mono text-sm font-bold text-aw-red text-center mb-4 tracking-wide uppercase">2011</div>
               <div class="timeline-content">
-                <div class="timeline-title">Stevies Awards</div>
-                <div class="timeline-description">Dr. Lee Bowes awarded the Stevie's Award for Lifetime Achievement for her successes at America Works.</div>
+                <div class="font-body text-lg font-semibold text-black mb-3 leading-snug text-center">Stevies Awards</div>
+                <div class="text-sm text-gray-600 leading-relaxed text-center">Dr. Lee Bowes awarded the Stevie's Award for Lifetime Achievement for her successes at America Works.</div>
               </div>
             </div>
 
             <!-- House Committee -->
             <div class="timeline-item">
-              <div class="timeline-year">2015</div>
+              <div class="font-mono text-sm font-bold text-aw-red text-center mb-4 tracking-wide uppercase">2015</div>
               <div class="timeline-content">
-                <div class="timeline-title">House Committee Testimony</div>
-                <div class="timeline-description">Peter Cove invited to speak on Next Steps for Welfare Reform before the House Committee on Ways and Means.</div>
+                <div class="font-body text-lg font-semibold text-black mb-3 leading-snug text-center">House Committee Testimony</div>
+                <div class="text-sm text-gray-600 leading-relaxed text-center">Peter Cove invited to speak on Next Steps for Welfare Reform before the House Committee on Ways and Means.</div>
               </div>
             </div>
           </div>
@@ -2018,46 +1365,46 @@
   </section>
 
   <!-- History -->
-  <section class="section history-section">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">Mission</div>
-        <h2>A company with a conscience</h2>
+  <section class="py-32 bg-gray-50">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-20">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-red mb-4">// Mission</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900">A company with a conscience</h2>
       </header>
 
-      <div class="history-content">
-        <p class="history-text">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
           Called "a company with a conscience", America Works was founded in 1984 by social activist and entrepreneur, Peter Cove, who wanted to put his ideals about poverty and the American dream into practice.
         </p>
-        <p class="history-text">
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
           Joined by Dr. Lee Bowes as the CEO, America Works has helped nearly 2,000,000 individuals increase their self-sufficiency through gainful employment, including military veterans, welfare and SNAP recipients, young adults, the criminal justice involved, homeless, non-custodial parents, persons receiving disability, among others.
         </p>
-        <div class="history-highlight">
-          <strong>America Works is a 100% Women-Owned Business.</strong> Our mission is to equip each individual who comes to our offices with the right tools so that they are able to provide for themselves and their loved ones. We believe the most effective approach in helping people out of poverty is by assisting them in finding meaningful employment. Our proven methods, services and experienced staff offer the right combination for success.
+        <div class="history-highlight text-base text-gray-800 leading-relaxed mt-8">
+          <strong class="text-black font-semibold">America Works is a 100% Women-Owned Business.</strong> Our mission is to equip each individual who comes to our offices with the right tools so that they are able to provide for themselves and their loved ones. We believe the most effective approach in helping people out of poverty is by assisting them in finding meaningful employment. Our proven methods, services and experienced staff offer the right combination for success.
         </div>
       </div>
     </div>
   </section>
 
   <!-- Founders -->
-  <section class="section founders-section" id="founders">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">Leadership</div>
-        <h2>Our Founders</h2>
+  <section class="py-32 bg-white" id="founders">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-20">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-red mb-4">// Leadership</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900">Our Founders</h2>
       </header>
 
-      <div class="founders-grid">
+      <div class="founders-grid grid grid-cols-1 lg:grid-cols-2 gap-16 mt-16">
         <!-- Peter Cove -->
         <div class="founder-card">
-          <div class="founder-image">
-            <img src="images/PETER-COVE.jpg" alt="Peter Cove">
+          <div class="founder-image mb-8 overflow-hidden rounded border border-gray-200">
+            <img src="images/PETER-COVE.jpg" alt="Peter Cove" class="w-full h-auto block">
           </div>
-          <div class="founder-header">
-            <h3 class="founder-name">Peter Cove</h3>
-            <div class="founder-title">Founder</div>
+          <div class="founder-header mb-8 pb-8 border-b-2 border-gray-200">
+            <h3 class="font-display text-3xl font-normal text-black mb-2 tracking-tight">Peter Cove</h3>
+            <div class="font-mono text-sm uppercase tracking-wide text-aw-red font-semibold">Founder</div>
           </div>
-          <div class="founder-bio">
+          <div class="founder-bio text-base text-gray-700 leading-relaxed space-y-5">
             <p>
               Peter Cove, a social activist and businessmen, is one of the nation's leading advocates for private solutions to workforce development and alleviating poverty.
             </p>
@@ -2072,14 +1419,14 @@
 
         <!-- Dr. Lee Bowes -->
         <div class="founder-card">
-          <div class="founder-image">
-            <img src="images/DR.LEE-BOWES.jpg" alt="Dr. Lee Bowes">
+          <div class="founder-image mb-8 overflow-hidden rounded border border-gray-200">
+            <img src="images/DR.LEE-BOWES.jpg" alt="Dr. Lee Bowes" class="w-full h-auto block">
           </div>
-          <div class="founder-header">
-            <h3 class="founder-name">Dr. Lee Bowes</h3>
-            <div class="founder-title">CEO</div>
+          <div class="founder-header mb-8 pb-8 border-b-2 border-gray-200">
+            <h3 class="font-display text-3xl font-normal text-black mb-2 tracking-tight">Dr. Lee Bowes</h3>
+            <div class="font-mono text-sm uppercase tracking-wide text-aw-red font-semibold">CEO</div>
           </div>
-          <div class="founder-bio">
+          <div class="founder-bio text-base text-gray-700 leading-relaxed space-y-5">
             <p>
               Dr. Lee Bowes is one of the leading experts on Welfare to Work and Prison to Work Workforce Development policies. In the 1990's, Dr. Lee Bowes and her husband, Peter Cove, were instrumental in educating both political parties about the merits of implementing a national "Work First" policy.
             </p>
@@ -2099,21 +1446,21 @@
   </section>
 
   <!-- CTA -->
-  <section class="cta-section" id="contact">
-    <div class="container">
-      <div class="cta-content">
-        <h2>Ready to see what this could look like in your state?</h2>
-        <ul class="cta-list">
-          <li>30–60 minute briefing on how our model would adapt to <strong>your TANF, SNAP E&T, disability, reentry, or youth programs</strong></li>
-          <li>Concrete examples of <strong>program designs and performance metrics</strong> from comparable jurisdictions</li>
-          <li>Opportunity to speak directly with <strong>peer agencies</strong> that have contracted with America Works</li>
+  <section class="cta-section py-32 bg-gray-950 text-white text-center" id="contact">
+    <div class="container max-w-container mx-auto px-8">
+      <div class="cta-content relative z-[2]">
+        <h2 class="font-display text-display-md font-normal mb-6 tracking-tight">Ready to see what this could look like in your state?</h2>
+        <ul class="cta-list list-none max-w-3xl mx-auto mb-12 text-left space-y-5">
+          <li class="relative pl-8 text-lg text-white/90 leading-relaxed">30–60 minute briefing on how our model would adapt to <strong class="text-white font-semibold">your TANF, SNAP E&T, disability, reentry, or youth programs</strong></li>
+          <li class="relative pl-8 text-lg text-white/90 leading-relaxed">Concrete examples of <strong class="text-white font-semibold">program designs and performance metrics</strong> from comparable jurisdictions</li>
+          <li class="relative pl-8 text-lg text-white/90 leading-relaxed">Opportunity to speak directly with <strong class="text-white font-semibold">peer agencies</strong> that have contracted with America Works</li>
         </ul>
-        <div class="cta-buttons">
-          <a href="#" class="btn-white">
+        <div class="cta-buttons flex flex-wrap gap-5 justify-center">
+          <a href="#" class="btn-white inline-flex items-center gap-2 py-5 px-12 bg-white text-gray-950 rounded-md font-body text-sm font-semibold no-underline shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all duration-300">
             <span>Request a government partnership briefing</span>
             <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
           </a>
-          <a href="#" class="btn-outline-white">
+          <a href="#" class="btn-outline-white inline-flex items-center gap-2 py-5 px-12 bg-transparent text-white border-2 border-white/50 rounded-md font-body text-sm font-semibold no-underline hover:bg-white/10 hover:border-white hover:-translate-y-0.5 transition-all duration-300">
             <span>Ask for references & evaluation summaries</span>
             <i data-lucide="file-text" style="width: 18px; height: 18px;"></i>
           </a>
@@ -2123,47 +1470,47 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
+  <footer class="footer bg-gray-900 text-gray-400 pt-16 pb-8">
+    <div class="container max-w-container mx-auto px-8">
+      <div class="footer-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
         <div class="footer-section">
-          <h4>America Works</h4>
-          <p style="font-size: var(--text-sm); line-height: 1.7; margin-top: 1rem;">
+          <h4 class="text-white text-base font-semibold mb-6">America Works</h4>
+          <p class="text-sm leading-relaxed mt-4">
             40 years of proven workforce development. Technical excellence meets human impact.
           </p>
         </div>
 
         <div class="footer-section">
-          <h4>Impact & About</h4>
-          <ul class="footer-links">
-            <li><a href="#evidence">Independent Evidence</a></li>
-            <li><a href="#populations">Populations Served</a></li>
-            <li><a href="#timeline">Timeline</a></li>
-            <li><a href="#founders">Our Founders</a></li>
+          <h4 class="text-white text-base font-semibold mb-6">Impact & About</h4>
+          <ul class="footer-links list-none flex flex-col gap-3">
+            <li><a href="#evidence" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Independent Evidence</a></li>
+            <li><a href="#populations" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Populations Served</a></li>
+            <li><a href="#timeline" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Timeline</a></li>
+            <li><a href="#founders" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Our Founders</a></li>
           </ul>
         </div>
 
         <div class="footer-section">
-          <h4>Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="jobseekers.html">For Jobseekers</a></li>
-            <li><a href="employers.html">For Employers</a></li>
-            <li><a href="partners.html">For Partners</a></li>
+          <h4 class="text-white text-base font-semibold mb-6">Quick Links</h4>
+          <ul class="footer-links list-none flex flex-col gap-3">
+            <li><a href="index.html" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Home</a></li>
+            <li><a href="jobseekers.html" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">For Jobseekers</a></li>
+            <li><a href="employers.html" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">For Employers</a></li>
+            <li><a href="partners.html" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">For Partners</a></li>
           </ul>
         </div>
 
         <div class="footer-section">
-          <h4>Connect</h4>
-          <ul class="footer-links">
-            <li><a href="#">LinkedIn</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Facebook</a></li>
+          <h4 class="text-white text-base font-semibold mb-6">Connect</h4>
+          <ul class="footer-links list-none flex flex-col gap-3">
+            <li><a href="#" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">LinkedIn</a></li>
+            <li><a href="#" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Twitter</a></li>
+            <li><a href="#" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Facebook</a></li>
           </ul>
         </div>
       </div>
 
-      <div class="footer-bottom">
+      <div class="footer-bottom pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
         <p>&copy; 2024 America Works. All rights reserved.</p>
       </div>
     </div>
@@ -2172,6 +1519,26 @@
   <script>
     // Initialize Lucide icons
     lucide.createIcons();
+
+    // Navigation Scroll Effect - Three Steps
+    const navs = document.querySelectorAll('.navigation');
+    const hero = document.querySelector('.hero');
+    window.addEventListener('scroll', () => {
+      const heroHeight = hero ? hero.offsetHeight : 0;
+      const scrollPos = window.pageYOffset;
+
+      navs.forEach(nav => {
+        if (scrollPos === 0) {
+          nav.classList.remove('scrolled', 'below-hero');
+        } else if (scrollPos > 0 && scrollPos < heroHeight - 100) {
+          nav.classList.add('scrolled');
+          nav.classList.remove('below-hero');
+        } else {
+          nav.classList.remove('scrolled');
+          nav.classList.add('below-hero');
+        }
+      });
+    }, { passive: true });
 
     // Scroll progress bar and nav switching
     const primaryNav = document.querySelector('.primary-nav');
@@ -2220,7 +1587,6 @@
     const timelineObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Get the index of this item
           const items = Array.from(document.querySelectorAll('.timeline-item'));
           const index = items.indexOf(entry.target);
 
@@ -2242,7 +1608,6 @@
           const progress = entry.target.querySelector('.timeline-progress');
           if (progress) {
             setTimeout(() => {
-              // Check if mobile or desktop
               if (window.innerWidth <= 1200) {
                 progress.style.height = '100%';
               } else {
