@@ -16,6 +16,68 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Instrument Serif', 'serif'],
+            body: ['General Sans', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            crimson: ['Crimson Text', 'serif'],
+            playfair: ['Playfair Display', 'serif'],
+            dashboard: ['JetBrains Mono', 'monospace'],
+          },
+          fontSize: {
+            'display-xl': '7rem',
+            'display-lg': '4rem',
+            'display-md': '3rem',
+            'mono-xl': '3.5rem',
+            'mono-lg': '1.75rem',
+            'metric-hero': ['5rem', { lineHeight: '1', fontWeight: '200', letterSpacing: '-0.03em' }],
+            'metric': ['3rem', { lineHeight: '1', fontWeight: '200', letterSpacing: '-0.03em' }],
+            'metric-label': ['0.8125rem', { lineHeight: '1', fontWeight: '500', letterSpacing: '0.01em' }],
+            'metric-tag': ['0.625rem', { lineHeight: '1', fontWeight: '500', letterSpacing: '0.15em' }],
+          },
+          colors: {
+            'aw-red': {
+              DEFAULT: '#ec140c',
+              dark: '#c7130c',
+            },
+            'aw-blue': {
+              DEFAULT: '#323b97',
+              dark: '#252e6e',
+            },
+            'accent-cyan': '#00d4ff',
+            'accent-violet': '#a855f7',
+            'accent-green': '#10b981',
+          },
+          boxShadow: {
+            'xs': '0 1px 2px rgba(0, 0, 0, 0.03)',
+            'sm': '0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03)',
+            'md': '0 4px 6px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02)',
+            'lg': '0 10px 15px rgba(0, 0, 0, 0.05), 0 4px 6px rgba(0, 0, 0, 0.03)',
+            'xl': '0 20px 25px rgba(0, 0, 0, 0.06), 0 8px 10px rgba(0, 0, 0, 0.02)',
+            'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.1)',
+            'glass-hover': '0 16px 48px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.15)',
+          },
+          maxWidth: {
+            'container': '87.5rem',
+            'reading': '43.75rem',
+          },
+          padding: {
+            '6xl': '3rem',
+          },
+          textShadow: {
+            'metric': '0 2px 20px rgba(255, 255, 255, 0.5)',
+          },
+        },
+      },
+    }
+  </script>
+
   <style>
     /* ============================================
        TECHNICAL LUXURY DESIGN SYSTEM
@@ -104,7 +166,82 @@
       --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 
+    /* Mobile Typography Overrides */
+    @media (max-width: 768px) {
+      :root {
+        --text-display-xl: 4rem;
+        --text-display-lg: 2.5rem;
+        --text-display-md: 2rem;
+        --text-mono-xl: 2.5rem;
+      }
+
+      .hero {
+        padding-top: 6rem;
+        padding-bottom: 3rem;
+      }
+
+      .hero-container,
+      .hero > .max-w-container {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+        padding: 0 0.75rem;
+      }
+
+      .hero-content,
+      .hero > .max-w-container > div:first-child {
+        order: 1;
+        text-align: center;
+      }
+
+      .hero-headline {
+        text-align: center;
+        margin-top: 2rem;
+      }
+
+      .federal-monitor {
+        order: 2;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .hero-ctas .btn-primary,
+      .hero-ctas .btn-secondary {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+
+      .dashboard-grid {
+        gap: 0.75rem;
+      }
+
+      .metric-stat {
+        font-size: 2.5rem;
+      }
+
+      .metric-stat.small {
+        font-size: 2.5rem;
+      }
+
+      .metric-card-dash {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
     /* Base Styles */
+    html {
+      overflow-x: hidden;
+    }
+
     body {
       font-family: var(--font-body);
       font-size: var(--text-base);
@@ -116,6 +253,8 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
+      width: 100%;
+      max-width: 100vw;
     }
 
     /* Grain Texture Overlay */
@@ -308,6 +447,15 @@
       transform: translate(-50%, -50%);
       opacity: 1;
       filter: none;
+      object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+      .hero-video-background video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
 
     .hero-video-background::after {
@@ -635,38 +783,12 @@
       text-transform: uppercase;
     }
 
-    /* Dashboard Grid */
-    .dashboard-grid {
-      padding: 0;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      position: relative;
-    }
+    /* Dashboard Grid - Handled by Tailwind classes */
 
-    /* Metric Cards */
+    /* Metric Cards - Backdrop filter only (other styles in Tailwind classes) */
     .metric-card-dash {
-      background: transparent;
       backdrop-filter: blur(12px) saturate(100%);
       -webkit-backdrop-filter: blur(12px) saturate(100%);
-      border: none;
-      border-radius: 12px;
-      padding: 1.5rem 3rem;
-      position: relative;
-      transition: all 0.4s var(--ease-primary);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      min-height: 130px;
-      justify-content: center;
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
-    }
-
-    .metric-card-dash:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 16px 48px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
-      background: transparent;
     }
 
     /* Corner Brackets */
@@ -822,55 +944,6 @@
       color: var(--accent-cyan);
       font-size: 0.875rem;
       filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.4));
-    }
-
-    /* Status Card */
-    .status-card {
-      grid-column: span 2;
-      background: rgba(255, 255, 255, 0.1);
-      min-height: 80px;
-      display: none;
-    }
-
-    .status-badge {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .badge-icon {
-      width: 32px;
-      height: 32px;
-      background: rgba(50, 59, 151, 0.8);
-      color: var(--white);
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      font-weight: 700;
-      flex-shrink: 0;
-      box-shadow: 0 4px 12px rgba(50, 59, 151, 0.3);
-    }
-
-    .badge-text {
-      text-align: left;
-    }
-
-    .badge-title {
-      font-family: var(--font-body);
-      font-size: 0.875rem;
-      font-weight: 700;
-      color: var(--white);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .badge-subtitle {
-      font-family: var(--font-mono);
-      font-size: 0.6875rem;
-      color: var(--gray-300);
-      margin-top: 0.125rem;
     }
 
     /* Connection Lines */
@@ -1148,14 +1221,6 @@
     }
 
     .path-card {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      align-items: center;
-      min-height: 75vh;
-      position: relative;
-      overflow: visible;
-      opacity: 0;
       will-change: transform, opacity;
     }
 
@@ -1588,13 +1653,6 @@
     }
 
     .step-card {
-      position: relative;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      margin-bottom: 8rem;
-      opacity: 0;
       transition: opacity 0.8s var(--ease-primary);
     }
 
@@ -2757,138 +2815,123 @@
     }
   </style>
 </head>
-<body>
+<body class="font-body text-[1.0625rem] font-normal leading-[1.7] tracking-[-0.01em] text-gray-800 bg-white antialiased overflow-x-hidden">
   <!-- Scroll Progress Bar -->
   <div class="scroll-progress-bar"></div>
 
   <!-- Navigation -->
-  <nav class="navigation">
-    <div class="nav-container">
-      <a href="#" class="nav-logo">
-        <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
+  <nav class="navigation fixed top-0 left-0 right-0 bg-transparent z-[1000] transition-all duration-300">
+    <div class="max-w-container mx-auto py-5 px-8 flex justify-between items-center">
+      <a href="#" class="nav-logo flex items-center gap-3 font-crimson text-2xl font-semibold tracking-tight text-white no-underline transition-opacity duration-200 hover:opacity-70">
+        <img src="images/aw-logo-simple.png" alt="AW" class="h-10 w-auto block">
         <span>AMERICA WORKS</span>
       </a>
 
-      <div class="nav-links">
-        <a href="jobseekers.html">Jobseekers</a>
-        <a href="employers.html">Employers</a>
-        <a href="partners.html">Partners</a>
-        <a href="about.html">About</a>
-        <a href="#contact" class="nav-cta">Contact</a>
+      <div class="nav-links hidden md:flex items-center gap-12">
+        <a href="jobseekers.html" class="relative font-body text-[0.9375rem] font-semibold tracking-[0.01em] text-white/80 no-underline transition-colors duration-200 hover:text-white">Jobseekers</a>
+        <a href="employers.html" class="relative font-body text-[0.9375rem] font-semibold tracking-[0.01em] text-white/80 no-underline transition-colors duration-200 hover:text-white">Employers</a>
+        <a href="partners.html" class="relative font-body text-[0.9375rem] font-semibold tracking-[0.01em] text-white/80 no-underline transition-colors duration-200 hover:text-white">Partners</a>
+        <a href="about.html" class="relative font-body text-[0.9375rem] font-semibold tracking-[0.01em] text-white/80 no-underline transition-colors duration-200 hover:text-white">About</a>
+        <a href="#contact" class="nav-cta px-7 py-3 bg-aw-blue text-white font-semibold rounded-md shadow-[0_2px_10px_rgba(50,59,151,0.2)] transition-all duration-300 hover:bg-aw-blue-dark hover:-translate-y-0.5 hover:shadow-[0_4px_16px_rgba(50,59,151,0.3)]">Contact</a>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-video-background">
-      <video autoplay muted loop playsinline>
+  <section class="hero min-h-screen flex items-center relative bg-transparent overflow-hidden isolate">
+    <div class="hero-video-background absolute inset-0 -z-20 overflow-hidden">
+      <video autoplay muted loop playsinline class="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 opacity-100 object-cover">
         <source src="images/hero-bg-vid.mp4" type="video/mp4">
       </video>
     </div>
-    <div class="grid-overlay"></div>
+    <div class="grid-overlay absolute inset-0 bg-black/20 -z-10 opacity-100"></div>
 
-    <div class="hero-container">
-      <div class="hero-content">
-        <h1 class="hero-headline">
-          <span class="line-1">Real Jobs.</span>
-          <span class="line-2">Real Support.</span>
-          <span class="line-2"><span class="accent">Real Results.</span></span>
+    <div class="hero-container max-w-container mx-auto px-8 relative grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-12 md:gap-24 items-center">
+      <div class="hero-content relative">
+        <h1 class="hero-headline font-display text-[4rem] md:text-[7rem] font-normal leading-[1.05] tracking-[-0.02em] mb-8 md:mb-14 text-white">
+          <span class="line-1 block font-normal">Real Jobs.</span>
+          <span class="line-2 block text-white/85 relative font-normal">Real Support.</span>
+          <span class="line-2 block text-white/85 relative font-normal"><span class="accent relative text-white">Real Results.</span></span>
         </h1>
 
-        <div class="hero-ctas">
+        <div class="hero-ctas flex gap-5">
           <a href="#paths" class="btn-secondary"><span>Get Started</span></a>
         </div>
       </div>
 
       <!-- Dashboard (Direct child of hero-container for backdrop-filter) -->
-      <aside class="federal-monitor">
+      <aside class="federal-monitor bg-transparent border-none overflow-visible relative">
           <!-- Dashboard Header -->
-          <div class="dashboard-header">
-            <div class="dashboard-title">
+          <div class="dashboard-header bg-transparent pb-4 border-none hidden justify-between items-center mb-2">
+            <div class="flex items-center gap-3">
               <div>
-                <div class="title-main">Performance Dashboard</div>
-                <div class="title-sub">Lives Changed</div>
+                <div class="title-main font-body text-xs font-bold uppercase tracking-[0.08em] text-aw-blue">Performance Dashboard</div>
+                <div class="title-sub font-mono text-[0.625rem] text-gray-500 tracking-wider">Lives Changed</div>
               </div>
             </div>
-            <div class="dashboard-status">
-              <span class="status-pulse"></span>
-              <span class="status-label">Active</span>
+            <div class="dashboard-status flex items-center gap-2 px-3 py-1.5 bg-aw-blue/8 border border-aw-blue/25 rounded-sm">
+              <span class="status-pulse w-1.5 h-1.5 bg-aw-blue rounded-full"></span>
+              <span class="status-label font-mono text-[0.6875rem] font-semibold text-aw-blue tracking-wider uppercase">Active</span>
             </div>
           </div>
 
           <!-- Dashboard Grid -->
-          <div class="dashboard-grid">
+          <div class="dashboard-grid p-0 grid grid-cols-2 gap-4 relative">
             <!-- Hero Metric Card -->
-            <div class="metric-card-dash hero-metric">
+            <div class="metric-card-dash hero-metric col-span-2 min-h-[150px] bg-transparent border-none rounded-xl px-12 py-6 relative transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] flex flex-col items-center text-center justify-center shadow-glass hover:-translate-y-[3px] hover:shadow-glass-hover">
               <div class="card-corner tl"></div>
               <div class="card-corner tr"></div>
               <div class="card-corner bl"></div>
               <div class="card-corner br"></div>
-              <div class="metric-header">
-                <span class="metric-tag">EST. 1984</span>
+              <div class="metric-header mb-2">
+                <span class="metric-tag font-dashboard text-metric-tag uppercase text-white/90 px-3 py-1.5 bg-white/5 rounded-md inline-block">EST. 1984</span>
               </div>
-              <div class="metric-stat"><span data-stat-target="2000000">2,000,000</span><span class="metric-symbol metric-symbol-right">+</span></div>
-              <div class="metric-label-dash">Clients Served</div>
+              <div class="metric-stat font-display text-metric-hero text-white my-3 mb-2 inline-block relative [text-shadow:0_2px_20px_rgba(255,255,255,0.5)] tabular-nums"><span data-stat-target="4000000">4,000,000</span><span class="metric-symbol metric-symbol-right">+</span></div>
+              <div class="metric-label-dash font-body text-metric-label text-white/70 mt-2">Clients Served</div>
             </div>
 
             <!-- Placement Time Card -->
-            <div class="metric-card-dash">
+            <div class="metric-card-dash bg-transparent border-none rounded-xl px-12 py-6 relative transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] flex flex-col items-center text-center min-h-[130px] justify-center shadow-glass hover:-translate-y-[3px] hover:shadow-glass-hover">
               <div class="card-corner tl"></div>
               <div class="card-corner tr"></div>
               <div class="card-corner bl"></div>
               <div class="card-corner br"></div>
-              <div class="metric-icon-dash">⏱</div>
-              <div class="metric-stat small"><span class="metric-symbol">~</span>4</div>
-              <div class="metric-label-dash">Weeks to Place</div>
+              <div class="metric-icon-dash text-2xl opacity-60 mb-2 hidden">⏱</div>
+              <div class="metric-stat small font-display text-metric text-white my-3 mb-2 inline-block relative [text-shadow:0_2px_20px_rgba(255,255,255,0.5)] tabular-nums"><span class="metric-symbol">~</span>4</div>
+              <div class="metric-label-dash font-body text-metric-label text-white/70 mt-2">Weeks to Place</div>
             </div>
 
             <!-- Retention Card -->
-            <div class="metric-card-dash">
+            <div class="metric-card-dash bg-transparent border-none rounded-xl px-12 py-6 relative transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] flex flex-col items-center text-center min-h-[130px] justify-center shadow-glass hover:-translate-y-[3px] hover:shadow-glass-hover">
               <div class="card-corner tl"></div>
               <div class="card-corner tr"></div>
               <div class="card-corner bl"></div>
               <div class="card-corner br"></div>
-              <div class="metric-icon-dash"><i data-lucide="bar-chart-3"></i></div>
-              <div class="metric-stat small"><span class="metric-symbol">&gt;</span>60%</div>
-              <div class="metric-label-dash">Retention Rate</div>
+              <div class="metric-icon-dash text-2xl opacity-60 mb-2 hidden"><i data-lucide="bar-chart-3"></i></div>
+              <div class="metric-stat small font-display text-metric text-white my-3 mb-2 inline-block relative [text-shadow:0_2px_20px_rgba(255,255,255,0.5)] tabular-nums"><span class="metric-symbol">&gt;</span>60%</div>
+              <div class="metric-label-dash font-body text-metric-label text-white/70 mt-2">Retention Rate</div>
             </div>
 
             <!-- Coverage Card -->
-            <div class="metric-card-dash">
+            <div class="metric-card-dash bg-transparent border-none rounded-xl px-12 py-6 relative transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] flex flex-col items-center text-center min-h-[130px] justify-center shadow-glass hover:-translate-y-[3px] hover:shadow-glass-hover">
               <div class="card-corner tl"></div>
               <div class="card-corner tr"></div>
               <div class="card-corner bl"></div>
               <div class="card-corner br"></div>
-              <div class="metric-icon-dash"><i data-lucide="map-pin"></i></div>
-              <div class="metric-stat small">11<span class="metric-symbol metric-symbol-right">+</span></div>
-              <div class="metric-label-dash">States Covered</div>
+              <div class="metric-icon-dash text-2xl opacity-60 mb-2 hidden"><i data-lucide="map-pin"></i></div>
+              <div class="metric-stat small font-display text-metric text-white my-3 mb-2 inline-block relative [text-shadow:0_2px_20px_rgba(255,255,255,0.5)] tabular-nums">11<span class="metric-symbol metric-symbol-right">+</span></div>
+              <div class="metric-label-dash font-body text-metric-label text-white/70 mt-2">States Covered</div>
             </div>
 
             <!-- Operational Card -->
-            <div class="metric-card-dash">
+            <div class="metric-card-dash bg-transparent border-none rounded-xl px-12 py-6 relative transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] flex flex-col items-center text-center min-h-[130px] justify-center shadow-glass hover:-translate-y-[3px] hover:shadow-glass-hover">
               <div class="card-corner tl"></div>
               <div class="card-corner tr"></div>
               <div class="card-corner bl"></div>
               <div class="card-corner br"></div>
-              <div class="metric-icon-dash"><i data-lucide="target"></i></div>
-              <div class="metric-stat small">40<span class="metric-symbol metric-symbol-right">+</span></div>
-              <div class="metric-label-dash">Years Operating</div>
-            </div>
-
-            <!-- Status Card -->
-            <div class="metric-card-dash status-card">
-              <div class="card-corner tl"></div>
-              <div class="card-corner tr"></div>
-              <div class="card-corner bl"></div>
-              <div class="card-corner br"></div>
-              <div class="status-badge">
-                <div class="badge-icon"><i data-lucide="check"></i></div>
-                <div class="badge-text">
-                  <div class="badge-title">Verified</div>
-                  <div class="badge-subtitle">Federal Vendor</div>
-                </div>
-              </div>
+              <div class="metric-icon-dash text-2xl opacity-60 mb-2 hidden"><i data-lucide="target"></i></div>
+              <div class="metric-stat small font-display text-metric text-white my-3 mb-2 inline-block relative [text-shadow:0_2px_20px_rgba(255,255,255,0.5)] tabular-nums">40<span class="metric-symbol metric-symbol-right">+</span></div>
+              <div class="metric-label-dash font-body text-metric-label text-white/70 mt-2">Years Operating</div>
             </div>
           </div>
       </aside>
@@ -2896,33 +2939,33 @@
   </section>
 
   <!-- Audience Paths -->
-  <section class="audience-paths" id="paths">
-    <div class="container">
-      <header class="section-header">
-        <span class="label-system">Service Delivery</span>
-        <h2 class="display-md">Three paths to one powerful mission</h2>
-        <p class="display-subhead">
+  <section class="audience-paths py-32 relative" id="paths">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <span class="label-system font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4 block">Service Delivery</span>
+        <h2 class="display-md font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Three paths to one powerful mission</h2>
+        <p class="display-subhead max-w-3xl mx-auto text-xl text-gray-600 leading-relaxed mb-8">
           Whether you're seeking employment or seeking outcomes,
           we deliver with precision and care.
         </p>
-        <div class="section-nav-links">
-          <a href="jobseekers.html">Jobseekers</a>
-          <a href="employers.html">Employers</a>
-          <a href="partners.html">Partners</a>
+        <div class="section-nav-links flex gap-6 justify-center">
+          <a href="jobseekers.html" class="font-body text-sm font-semibold text-gray-700 no-underline transition-colors duration-200 hover:text-aw-blue">Jobseekers</a>
+          <a href="employers.html" class="font-body text-sm font-semibold text-gray-700 no-underline transition-colors duration-200 hover:text-aw-blue">Employers</a>
+          <a href="partners.html" class="font-body text-sm font-semibold text-gray-700 no-underline transition-colors duration-200 hover:text-aw-blue">Partners</a>
         </div>
       </header>
 
-      <div class="paths-grid">
-        <article class="path-card" id="jobseekers">
+      <div class="paths-grid flex flex-col gap-32">
+        <article class="path-card grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[75vh] relative overflow-visible opacity-0" id="jobseekers">
           <div class="path-image" data-number="01">
             <img src="images/young-professional-working.jpg" alt="Professional development" loading="lazy">
           </div>
 
           <div class="path-content">
-            <div class="path-number">01 — Jobseekers</div>
-            <h3 class="h2">Your career starts here</h3>
+            <div class="path-number font-mono text-sm font-semibold tracking-wider text-aw-blue mb-4">01 — Jobseekers</div>
+            <h3 class="h2 font-display text-4xl font-normal leading-tight tracking-tight text-gray-900 mb-6">Your career starts here</h3>
 
-            <p class="path-description">
+            <p class="path-description text-lg text-gray-600 leading-relaxed mb-8">
               Life happens. Careers change. We meet you where you are
               and help you get where you're going. Personalized coaching,
               direct employer connections, and support that lasts beyond day one.
@@ -2935,20 +2978,20 @@
               <li>90+ days of post-placement support</li>
             </ul>
 
-            <a href="jobseekers.html" class="btn-link">Get started</a>
+            <a href="jobseekers.html" class="btn-link inline-flex items-center gap-2 font-body text-sm font-semibold uppercase tracking-wider text-gray-900 no-underline transition-all duration-200 hover:text-aw-blue">Get started</a>
           </div>
         </article>
 
-        <article class="path-card" id="partners">
+        <article class="path-card grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[75vh] relative overflow-visible opacity-0" id="partners">
           <div class="path-image" data-number="02">
             <img src="images/team-of-workers-celebrating-success-at-a-shipping.jpg" alt="Team success" loading="lazy">
           </div>
 
-          <div class="path-content">
-            <div class="path-number">02 — Government & Partners</div>
-            <h3 class="h2">Performance you can measure</h3>
+          <div class="path-content lg:order-1">
+            <div class="path-number font-mono text-sm font-semibold tracking-wider text-aw-blue mb-4">02 — Government & Partners</div>
+            <h3 class="h2 font-display text-4xl font-normal leading-tight tracking-tight text-gray-900 mb-6">Performance you can measure</h3>
 
-            <p class="path-description">
+            <p class="path-description text-lg text-gray-600 leading-relaxed mb-8">
               We deliver what matters: people employed, staying employed.
               Our performance-based model aligns our success with yours,
               backed by four decades of proven results.
@@ -2961,9 +3004,9 @@
               <li>Local execution, national infrastructure</li>
             </ul>
 
-            <div class="btn-group">
-              <a href="employers.html" class="btn-link">For Employers</a>
-              <a href="partners.html" class="btn-link">For Partners</a>
+            <div class="btn-group flex gap-6 flex-wrap">
+              <a href="employers.html" class="btn-link inline-flex items-center gap-2 font-body text-sm font-semibold uppercase tracking-wider text-gray-900 no-underline transition-all duration-200 hover:text-aw-blue">For Employers</a>
+              <a href="partners.html" class="btn-link inline-flex items-center gap-2 font-body text-sm font-semibold uppercase tracking-wider text-gray-900 no-underline transition-all duration-200 hover:text-aw-blue">For Partners</a>
             </div>
           </div>
         </article>
@@ -2972,17 +3015,17 @@
   </section>
 
   <!-- How It Works -->
-  <section class="how-it-works">
-    <div class="container">
-      <header class="section-header">
-        <span class="label-system">Process</span>
-        <h2 class="display-md">Three steps to your next paycheck</h2>
-        <p class="display-subhead">
+  <section class="how-it-works pt-32 pb-16 bg-gray-50 relative">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <span class="label-system font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4 block">Process</span>
+        <h2 class="display-md font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Three steps to your next paycheck</h2>
+        <p class="display-subhead max-w-3xl mx-auto text-xl text-gray-600 leading-relaxed">
           Most participants start working within weeks. Here's how:
         </p>
       </header>
 
-      <div class="steps-grid">
+      <div class="steps-grid relative flex flex-col gap-16">
         <!-- Progressive timeline -->
         <div class="timeline-track">
           <div class="timeline-line-bg"></div>
@@ -2992,7 +3035,7 @@
           <div class="timeline-dot" data-step="3"></div>
         </div>
 
-        <article class="step-card" data-step="1">
+        <article class="step-card grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative mb-32 opacity-0" data-step="1">
           <div class="step-number-large">01</div>
           <div class="step-accent"></div>
 
@@ -3011,7 +3054,7 @@
           </div>
         </article>
 
-        <article class="step-card" data-step="2">
+        <article class="step-card grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative mb-32 opacity-0" data-step="2">
           <div class="step-number-large">02</div>
           <div class="step-accent"></div>
 
@@ -3030,7 +3073,7 @@
           </div>
         </article>
 
-        <article class="step-card" data-step="3">
+        <article class="step-card grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative mb-32 opacity-0" data-step="3">
           <div class="step-number-large">03</div>
           <div class="step-accent"></div>
 
@@ -3057,23 +3100,23 @@
   </section>
 
   <!-- Locations -->
-  <section class="locations-section">
-    <div class="container">
-      <header class="section-header">
-        <span class="label-system">Coverage</span>
-        <h2 class="display-md">Help where you need it</h2>
-        <p class="display-subhead">
+  <section class="locations-section py-32 relative bg-gray-50">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <span class="label-system font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4 block">Coverage</span>
+        <h2 class="display-md font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Help where you need it</h2>
+        <p class="display-subhead max-w-3xl mx-auto text-xl text-gray-600 leading-relaxed mb-8">
           Big enough to scale. Small enough to care. Find America Works in your community or connect with us virtually from anywhere.
         </p>
       </header>
 
       <!-- Interactive Coverage Map -->
-      <div class="coverage-map-container">
+      <div class="coverage-map-container max-w-[1000px] mx-auto my-16 relative">
         <div id="us-coverage-map">
           <!-- SVG will be loaded here by JavaScript -->
         </div>
 
-        <div class="map-legend">
+        <div class="map-legend flex gap-10 justify-center mt-8 pt-8">
           <div class="legend-item">
             <div class="legend-dot active"></div>
             <span>We serve this state</span>
@@ -3081,25 +3124,25 @@
         </div>
       </div>
 
-      <div class="section-cta">
-        <a href="#contact" class="btn-link">Find your local office →</a>
-        <p class="cta-subtext">In-person and virtual services available</p>
+      <div class="section-cta text-center">
+        <a href="#contact" class="btn-link inline-flex items-center gap-2 font-body text-sm font-semibold uppercase tracking-wider text-gray-900 no-underline transition-all duration-200 hover:text-aw-blue">Find your local office →</a>
+        <p class="cta-subtext mt-3 text-sm text-gray-600">In-person and virtual services available</p>
       </div>
     </div>
   </section>
 
   <!-- Populations We Serve -->
-  <section class="populations-served">
-    <div class="container">
-      <header class="section-header">
-        <span class="label-system">Equity & Access</span>
-        <h2 class="display-md">Everyone deserves a chance to work</h2>
-        <p class="display-subhead">
+  <section class="populations-served py-32 relative bg-white overflow-hidden">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <span class="label-system font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4 block">Equity & Access</span>
+        <h2 class="display-md font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Everyone deserves a chance to work</h2>
+        <p class="display-subhead max-w-3xl mx-auto text-xl text-gray-600 leading-relaxed mb-8">
           We specialize in helping people overcome real barriers
         </p>
       </header>
 
-      <div class="populations-grid">
+      <div class="populations-grid grid grid-cols-4 gap-0 mt-16 relative">
         <div class="population-item">
           <div class="population-marker"><i data-lucide="hand-coins"></i></div>
           <p>TANF and SNAP recipients ready to work</p>
@@ -3141,17 +3184,17 @@
   </section>
 
   <!-- Government Partners -->
-  <section class="government-partners">
-    <div class="container">
-      <header class="section-header">
-        <span class="label-system">Public Sector</span>
-        <h2 class="display-md">The partner agencies trust most</h2>
-        <p class="display-subhead">
+  <section class="government-partners py-32 bg-gray-50">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <span class="label-system font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4 block">Public Sector</span>
+        <h2 class="display-md font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">The partner agencies trust most</h2>
+        <p class="display-subhead max-w-3xl mx-auto text-xl text-gray-600 leading-relaxed mb-8">
           When success is measured in human outcomes, not just compliance metrics, you need a partner who delivers both. America Works brings four decades of experience turning complex program requirements into simple results: employment that lasts.
         </p>
       </header>
 
-      <div class="value-props-grid">
+      <div class="value-props-grid grid grid-cols-3 gap-0 mt-16 mb-20">
         <div class="value-prop">
           <div class="value-prop-icon"><i data-lucide="zap"></i></div>
           <div class="value-prop-content">
@@ -3217,21 +3260,21 @@
         </div>
       </div>
 
-      <div style="text-align: center; margin-top: 3rem;">
+      <div class="text-center mt-12">
         <a href="#contact" class="btn-primary"><span>Schedule a partnership call</span></a>
       </div>
     </div>
   </section>
 
   <!-- Testimonials -->
-  <section class="testimonials-section">
-    <div class="container">
-      <header class="section-header">
-        <span class="label-system">Social Proof</span>
-        <h2 class="display-md">Success speaks louder than promises</h2>
+  <section class="testimonials-section py-32 bg-white">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <span class="label-system font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4 block">Social Proof</span>
+        <h2 class="display-md font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Success speaks louder than promises</h2>
       </header>
 
-      <div class="testimonials-grid">
+      <div class="testimonials-grid grid grid-cols-1 md:grid-cols-3 gap-8">
         <article class="testimonial-card">
           <div class="testimonial-quote">"</div>
           <blockquote>
@@ -3269,14 +3312,14 @@
   </section>
 
   <!-- CTA Section -->
-  <section class="cta-section" id="contact">
-    <div class="container">
-      <h2>Ready to begin?</h2>
-      <p>
+  <section class="cta-section py-32 relative text-center text-white bg-black" id="contact">
+    <div class="container max-w-container mx-auto px-8">
+      <h2 class="font-display text-display-lg font-normal leading-tight tracking-tight mb-6">Ready to begin?</h2>
+      <p class="text-xl mb-12 max-w-[700px] mx-auto text-white/70">
         Whether you're building a career or building a program,
         we're ready to deliver results.
       </p>
-      <div class="hero-ctas" style="justify-content: center;">
+      <div class="hero-ctas flex gap-5 justify-center">
         <a href="jobseekers.html" class="btn-primary"><span>Find Work</span></a>
         <a href="partners.html" class="btn-secondary"><span>Partner With Us</span></a>
       </div>
@@ -3284,12 +3327,12 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
+  <footer class="footer bg-gray-950 text-gray-500 pt-16 pb-8">
+    <div class="container max-w-container mx-auto px-8">
+      <div class="footer-content grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-16 mb-16">
         <div class="footer-section">
-          <h4>America Works</h4>
-          <p>
+          <h4 class="font-body text-sm font-semibold text-white mb-6 uppercase tracking-wide">America Works</h4>
+          <p class="text-sm leading-relaxed text-gray-500">
             Technical excellence in workforce development.
             Proven results since 1984. Performance-based,
             people-focused, purpose-driven.
@@ -3297,41 +3340,41 @@
         </div>
 
         <div class="footer-section">
-          <h4>Jobseekers</h4>
-          <ul class="footer-links">
-            <li><a href="#jobseekers">How It Works</a></li>
-            <li><a href="#jobseekers">Services</a></li>
-            <li><a href="#jobseekers">Success Stories</a></li>
-            <li><a href="#jobseekers">FAQ</a></li>
+          <h4 class="font-body text-sm font-semibold text-white mb-6 uppercase tracking-wide">Jobseekers</h4>
+          <ul class="footer-links list-none">
+            <li class="mb-3"><a href="#jobseekers" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">How It Works</a></li>
+            <li class="mb-3"><a href="#jobseekers" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Services</a></li>
+            <li class="mb-3"><a href="#jobseekers" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Success Stories</a></li>
+            <li class="mb-3"><a href="#jobseekers" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">FAQ</a></li>
           </ul>
         </div>
 
         <div class="footer-section">
-          <h4>Partners</h4>
-          <ul class="footer-links">
-            <li><a href="partners.html">Why Choose Us</a></li>
-            <li><a href="partners.html">Performance Model</a></li>
-            <li><a href="partners.html">Case Studies</a></li>
-            <li><a href="partners.html">Contact</a></li>
+          <h4 class="font-body text-sm font-semibold text-white mb-6 uppercase tracking-wide">Partners</h4>
+          <ul class="footer-links list-none">
+            <li class="mb-3"><a href="partners.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Why Choose Us</a></li>
+            <li class="mb-3"><a href="partners.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Performance Model</a></li>
+            <li class="mb-3"><a href="partners.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Case Studies</a></li>
+            <li class="mb-3"><a href="partners.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Contact</a></li>
           </ul>
         </div>
 
         <div class="footer-section">
-          <h4>Company</h4>
-          <ul class="footer-links">
-            <li><a href="about.html">About</a></li>
-            <li><a href="#contact">Locations</a></li>
-            <li><a href="#contact">Contact</a></li>
+          <h4 class="font-body text-sm font-semibold text-white mb-6 uppercase tracking-wide">Company</h4>
+          <ul class="footer-links list-none">
+            <li class="mb-3"><a href="about.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">About</a></li>
+            <li class="mb-3"><a href="#contact" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Locations</a></li>
+            <li class="mb-3"><a href="#contact" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Contact</a></li>
           </ul>
         </div>
       </div>
 
-      <div class="footer-bottom">
+      <div class="footer-bottom border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-sm">
         <div>&copy; 2024 America Works. All rights reserved.</div>
-        <div class="footer-credentials">
-          <span>Est. 1984</span>
-          <span>Federal Vendor</span>
-          <span>Woman-Owned</span>
+        <div class="footer-credentials flex flex-col md:flex-row gap-8 md:gap-8 font-mono text-xs">
+          <span class="opacity-70">Est. 1984</span>
+          <span class="opacity-70">Federal Vendor</span>
+          <span class="opacity-70">Woman-Owned</span>
         </div>
       </div>
     </div>

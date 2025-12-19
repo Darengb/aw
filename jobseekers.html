@@ -16,6 +16,37 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Instrument Serif', 'serif'],
+            body: ['General Sans', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            crimson: ['Crimson Text', 'serif'],
+          },
+          fontSize: {
+            'display-xl': '5.5rem',
+            'display-lg': '4rem',
+            'display-md': '3rem',
+          },
+          colors: {
+            'aw-red': { DEFAULT: '#ec140c', dark: '#c7130c' },
+            'aw-blue': { DEFAULT: '#323b97', dark: '#252e6e' },
+            'accent-cyan': '#00d4ff',
+            'accent-green': '#10b981',
+          },
+          maxWidth: {
+            'container': '87.5rem',
+          },
+        },
+      },
+    }
+  </script>
+
   <style>
     /* ============================================
        PREMIUM EDITORIAL DESIGN SYSTEM
@@ -136,17 +167,45 @@
     }
 
     /* Navigation */
+    /* Step 1: At top - transparent, no blur */
     .navigation {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--gray-200);
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom: none;
       z-index: 1000;
-      transition: transform 0.3s var(--ease-primary), opacity 0.3s var(--ease-primary);
+      transition: all 0.3s var(--ease-primary);
+    }
+
+    /* Step 2: In hero with blur */
+    .navigation.scrolled {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px) saturate(100%);
+      -webkit-backdrop-filter: blur(12px) saturate(100%);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    }
+
+    /* Step 3: Below hero with blur and dark text */
+    .navigation.below-hero {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px) saturate(100%);
+      -webkit-backdrop-filter: blur(12px) saturate(100%);
+    }
+
+    .navigation.below-hero .nav-logo {
+      color: var(--black);
+    }
+
+    .navigation.below-hero .nav-links a {
+      color: var(--gray-700);
+    }
+
+    .navigation.below-hero .nav-links a:hover {
+      color: var(--black);
     }
 
     .primary-nav {
@@ -191,12 +250,12 @@
       align-items: center;
       gap: 0.75rem;
       text-decoration: none;
-      color: var(--black);
+      color: var(--white);
       font-family: 'Crimson Text', serif;
       font-size: 1.5rem;
       font-weight: 600;
       letter-spacing: -0.01em;
-      transition: opacity 0.2s ease;
+      transition: color 0.2s ease, opacity 0.2s ease;
     }
 
     .nav-logo:hover {
@@ -218,13 +277,13 @@
     .nav-links a {
       font-size: var(--text-sm);
       font-weight: 600;
-      color: var(--gray-700);
+      color: rgba(255, 255, 255, 0.8);
       text-decoration: none;
       transition: color 0.2s ease;
     }
 
     .nav-links a:hover {
-      color: var(--black);
+      color: var(--white);
     }
 
     .nav-cta {
@@ -907,6 +966,15 @@
         display: none;
       }
 
+      .hero {
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+      }
+
+      .hero-container {
+        padding: 0 1rem;
+      }
+
       .hero-headline {
         font-size: 3rem;
       }
@@ -934,7 +1002,7 @@
   <nav class="navigation primary-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
-        <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
+        <img src="images/aw-logo-simple.png" alt="AW" class="h-10 w-auto block">
         <span>AMERICA WORKS</span>
       </a>
       <div class="nav-links">
@@ -951,7 +1019,7 @@
   <nav class="navigation secondary-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
-        <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
+        <img src="images/aw-logo-simple.png" alt="AW" class="h-10 w-auto block">
         <span>AMERICA WORKS</span>
       </a>
       <div class="nav-links">
@@ -964,24 +1032,24 @@
   </nav>
 
   <!-- Hero -->
-  <section class="hero">
-    <div class="hero-image-bg">
-      <img src="images/young-professional-working.jpg" alt="Professional career development">
+  <section class="hero relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="hero-image-bg absolute inset-0 z-0">
+      <img src="images/young-professional-working.jpg" alt="Professional career development" class="w-full h-full object-cover object-center">
     </div>
-    <div class="hero-overlay"></div>
-    <div class="hero-container">
-      <div class="hero-content">
-        <div class="hero-label">// For Jobseekers</div>
-        <h1 class="hero-headline">Your next career starts with one conversation.</h1>
-        <p class="hero-subheadline">
+    <div class="hero-overlay absolute inset-0 z-[1]"></div>
+    <div class="hero-container max-w-container mx-auto px-8 relative z-[2]">
+      <div class="hero-content max-w-4xl">
+        <div class="hero-label font-mono text-xs uppercase tracking-[0.15em] text-white/80 mb-6">// For Jobseekers</div>
+        <h1 class="hero-headline font-display text-6xl md:text-7xl font-normal leading-tight tracking-tight text-white mb-8">Your next career starts with one conversation.</h1>
+        <p class="hero-subheadline text-xl text-white/90 leading-relaxed mb-10 max-w-3xl">
           We've spent 40 years perfecting the path from unemployment to meaningful work. Personal coaching, direct employer access, and unwavering support—at no cost to you.
         </p>
-        <div class="hero-ctas">
-          <a href="#contact" class="btn-primary">
+        <div class="hero-ctas flex flex-wrap gap-5">
+          <a href="#contact" class="btn-primary inline-flex items-center gap-2">
             <span>Start your journey</span>
             <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
           </a>
-          <a href="#how-we-help" class="btn-secondary">
+          <a href="#how-we-help" class="btn-secondary inline-flex items-center gap-2">
             <span>Explore our services</span>
             <i data-lucide="chevron-down" style="width: 18px; height: 18px;"></i>
           </a>
@@ -991,15 +1059,15 @@
   </section>
 
   <!-- Section 1: Job Readiness -->
-  <section class="split-section" id="how-we-help">
-    <div class="split-image">
-      <img src="images/resume-coaching.jpg" alt="Career coaching session">
+  <section class="split-section grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[75vh] relative" id="how-we-help">
+    <div class="split-image relative overflow-hidden bg-gray-100 h-full min-h-[400px] lg:min-h-full">
+      <img src="images/resume-coaching.jpg" alt="Career coaching session" class="absolute inset-0 w-full h-full object-cover object-center">
     </div>
     <div class="split-content">
       <div class="split-content-inner">
-        <div class="section-label">Support</div>
-        <h2 class="split-headline">Build confidence. Master the process.</h2>
-        <p class="split-description">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-red mb-4">Support</div>
+        <h2 class="split-headline font-display text-4xl font-normal leading-tight tracking-tight text-gray-900 mb-6">Build confidence. Master the process.</h2>
+        <p class="split-description text-lg text-gray-600 leading-relaxed mb-8">
           From your first resume draft to your final interview, we're there. Our career specialists don't just hand you a template—they sit with you, listen to your story, and help you present yourself with clarity and strength.
         </p>
         <ul class="feature-list">
@@ -1008,7 +1076,7 @@
           <li class="feature-item">Job search strategy that fits your life</li>
           <li class="feature-item">Skills assessment and career path planning</li>
         </ul>
-        <a href="#contact" class="btn-link">
+        <a href="#contact" class="btn-link inline-flex items-center gap-2">
           <span>Get started</span>
           <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
         </a>
@@ -1017,15 +1085,15 @@
   </section>
 
   <!-- Section 2: Employer Connections -->
-  <section class="split-section reverse blue">
-    <div class="split-image">
-      <img src="images/business-career-and-placement.jpg" alt="Professional workplace">
+  <section class="split-section reverse blue grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[75vh] relative">
+    <div class="split-image relative overflow-hidden bg-gray-100 h-full min-h-[400px] lg:min-h-full">
+      <img src="images/business-career-and-placement.jpg" alt="Professional workplace" class="absolute inset-0 w-full h-full object-cover object-center">
     </div>
     <div class="split-content">
       <div class="split-content-inner">
-        <div class="section-label">Connections</div>
-        <h2 class="split-headline">Direct access to employers who are hiring.</h2>
-        <p class="split-description">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">Connections</div>
+        <h2 class="split-headline font-display text-4xl font-normal leading-tight tracking-tight text-gray-900 mb-6">Direct access to employers who are hiring.</h2>
+        <p class="split-description text-lg text-gray-600 leading-relaxed mb-8">
           We don't send you to job boards. We connect you directly with verified employers actively seeking talent. Our 40-year track record means companies trust us to deliver candidates who succeed.
         </p>
         <ul class="feature-list">
@@ -1034,7 +1102,7 @@
           <li class="feature-item">Direct introductions and advocacy</li>
           <li class="feature-item">Opportunities across multiple industries</li>
         </ul>
-        <a href="#contact" class="btn-link">
+        <a href="#contact" class="btn-link inline-flex items-center gap-2">
           <span>See opportunities</span>
           <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
         </a>
@@ -1043,15 +1111,15 @@
   </section>
 
   <!-- Section 3: Ongoing Support -->
-  <section class="split-section">
-    <div class="split-image">
-      <img src="images/intern.jpg" alt="New employee receiving support">
+  <section class="split-section grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[75vh] relative">
+    <div class="split-image relative overflow-hidden bg-gray-100 h-full min-h-[400px] lg:min-h-full">
+      <img src="images/intern.jpg" alt="New employee receiving support" class="absolute inset-0 w-full h-full object-cover object-center">
     </div>
     <div class="split-content">
       <div class="split-content-inner">
-        <div class="section-label">Retention</div>
-        <h2 class="split-headline">We stay with you after day one.</h2>
-        <p class="split-description">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-red mb-4">Retention</div>
+        <h2 class="split-headline font-display text-4xl font-normal leading-tight tracking-tight text-gray-900 mb-6">We stay with you after day one.</h2>
+        <p class="split-description text-lg text-gray-600 leading-relaxed mb-8">
           Getting hired is just the beginning. We provide 90+ days of post-placement support to ensure you're thriving, not just surviving. Challenges at work? We help you navigate them.
         </p>
         <ul class="feature-list">
@@ -1060,7 +1128,7 @@
           <li class="feature-item">Career advancement guidance</li>
           <li class="feature-item">Long-term relationship and re-engagement</li>
         </ul>
-        <a href="#contact" class="btn-link">
+        <a href="#contact" class="btn-link inline-flex items-center gap-2">
           <span>Learn more</span>
           <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
         </a>
@@ -1069,15 +1137,15 @@
   </section>
 
   <!-- Section 4: Who We Help -->
-  <section class="split-section reverse blue">
-    <div class="split-image">
-      <img src="images/opportunities.jpg" alt="Diverse professionals">
+  <section class="split-section reverse blue grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[75vh] relative">
+    <div class="split-image relative overflow-hidden bg-gray-100 h-full min-h-[400px] lg:min-h-full">
+      <img src="images/opportunities.jpg" alt="Diverse professionals" class="absolute inset-0 w-full h-full object-cover object-center">
     </div>
     <div class="split-content">
       <div class="split-content-inner">
-        <div class="section-label">Eligibility</div>
-        <h2 class="split-headline">If you're ready to work, we're ready to help.</h2>
-        <p class="split-description">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">Eligibility</div>
+        <h2 class="split-headline font-display text-4xl font-normal leading-tight tracking-tight text-gray-900 mb-6">If you're ready to work, we're ready to help.</h2>
+        <p class="split-description text-lg text-gray-600 leading-relaxed mb-8">
           We work with people from all backgrounds—whether you're receiving public assistance, returning from incarceration, transitioning from military service, or simply facing a tough job market. No judgment. Just support.
         </p>
         <ul class="feature-list">
@@ -1088,7 +1156,7 @@
           <li class="feature-item">Long-term unemployed</li>
           <li class="feature-item">Young adults entering the workforce</li>
         </ul>
-        <a href="#contact" class="btn-link">
+        <a href="#contact" class="btn-link inline-flex items-center gap-2">
           <span>Check eligibility</span>
           <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
         </a>
@@ -1097,94 +1165,94 @@
   </section>
 
   <!-- Process Timeline -->
-  <section class="process-section" id="process">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">Process</div>
-        <h2>Four steps from here to hired.</h2>
-        <p class="section-intro">
+  <section class="process-section py-32 bg-gray-50" id="process">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-red mb-4">Process</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Four steps from here to hired.</h2>
+        <p class="section-intro text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
           Every person's journey is different, but most follow this path. Simple, supportive, effective.
         </p>
       </header>
 
-      <div class="process-grid">
-        <div class="process-card">
-          <div class="process-number">01</div>
-          <h3>Reach out</h3>
-          <p>Contact us directly or get referred by a caseworker. We'll discuss your situation, goals, and available programs in a judgment-free conversation.</p>
+      <div class="process-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+        <div class="process-card bg-white p-10 rounded border border-gray-200 relative">
+          <div class="process-number font-mono text-4xl font-bold text-aw-red opacity-30 mb-4 leading-none">01</div>
+          <h3 class="font-body text-lg font-semibold text-gray-900 mb-3 tracking-tight">Reach out</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">Contact us directly or get referred by a caseworker. We'll discuss your situation, goals, and available programs in a judgment-free conversation.</p>
         </div>
 
-        <div class="process-card">
-          <div class="process-number">02</div>
-          <h3>Meet your specialist</h3>
-          <p>Your career specialist listens to your story, understands your barriers, and creates a realistic plan tailored to your life and ambitions.</p>
+        <div class="process-card bg-white p-10 rounded border border-gray-200 relative">
+          <div class="process-number font-mono text-4xl font-bold text-aw-red opacity-30 mb-4 leading-none">02</div>
+          <h3 class="font-body text-lg font-semibold text-gray-900 mb-3 tracking-tight">Meet your specialist</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">Your career specialist listens to your story, understands your barriers, and creates a realistic plan tailored to your life and ambitions.</p>
         </div>
 
-        <div class="process-card">
-          <div class="process-number">03</div>
-          <h3>Prepare & apply</h3>
-          <p>Build your resume, practice interviews, explore training, and apply for jobs. We connect you with employers actively hiring in your area.</p>
+        <div class="process-card bg-white p-10 rounded border border-gray-200 relative">
+          <div class="process-number font-mono text-4xl font-bold text-aw-red opacity-30 mb-4 leading-none">03</div>
+          <h3 class="font-body text-lg font-semibold text-gray-900 mb-3 tracking-tight">Prepare & apply</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">Build your resume, practice interviews, explore training, and apply for jobs. We connect you with employers actively hiring in your area.</p>
         </div>
 
-        <div class="process-card">
-          <div class="process-number">04</div>
-          <h3>Start working</h3>
-          <p>Get hired and begin your new role with our support. We stay in touch, help troubleshoot, and ensure you're set up for long-term success.</p>
+        <div class="process-card bg-white p-10 rounded border border-gray-200 relative">
+          <div class="process-number font-mono text-4xl font-bold text-aw-red opacity-30 mb-4 leading-none">04</div>
+          <h3 class="font-body text-lg font-semibold text-gray-900 mb-3 tracking-tight">Start working</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">Get hired and begin your new role with our support. We stay in touch, help troubleshoot, and ensure you're set up for long-term success.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Testimonials -->
-  <section class="testimonials-section" id="stories">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">Impact</div>
-        <h2>Real stories. Real outcomes.</h2>
-        <p class="section-intro">
+  <section class="testimonials-section py-32 bg-white relative" id="stories">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-red mb-4">Impact</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Real stories. Real outcomes.</h2>
+        <p class="section-intro text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
           Every number represents a person. Here are a few of their stories.
         </p>
       </header>
 
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <p class="testimonial-text">
+      <div class="testimonials-grid grid grid-cols-1 lg:grid-cols-3 gap-8 mt-16">
+        <div class="testimonial-card bg-gray-50 p-12 rounded relative">
+          <p class="testimonial-text relative z-[1] text-base leading-relaxed text-gray-800 mb-6 italic">
             When I came to America Works, I had been out of work for months and didn't know where to start. They helped me rewrite my resume, practice interviews, and connected me with a company that was willing to give me a chance. Now I'm working full time and finally feel like I'm moving forward again.
           </p>
-          <p class="testimonial-author">— Maria R., New York</p>
+          <p class="testimonial-author text-sm text-gray-600 font-semibold not-italic">— Maria R., New York</p>
         </div>
 
-        <div class="testimonial-card">
-          <p class="testimonial-text">
+        <div class="testimonial-card bg-gray-50 p-12 rounded relative">
+          <p class="testimonial-text relative z-[1] text-base leading-relaxed text-gray-800 mb-6 italic">
             I was nervous about my background and wasn't sure anyone would hire me. My career specialist at America Works never judged me. They helped me explain my story, prepare for interviews, and stay focused. I'm grateful to have a job and a fresh start.
           </p>
-          <p class="testimonial-author">— James T., Maryland</p>
+          <p class="testimonial-author text-sm text-gray-600 font-semibold not-italic">— James T., Maryland</p>
         </div>
 
-        <div class="testimonial-card">
-          <p class="testimonial-text">
+        <div class="testimonial-card bg-gray-50 p-12 rounded relative">
+          <p class="testimonial-text relative z-[1] text-base leading-relaxed text-gray-800 mb-6 italic">
             This was my first real job. America Works helped me figure out what kind of work would fit me, taught me how to interview, and checked in after I started. Having someone in my corner made all the difference.
           </p>
-          <p class="testimonial-author">— DeShawn W., Indiana</p>
+          <p class="testimonial-author text-sm text-gray-600 font-semibold not-italic">— DeShawn W., Indiana</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="cta-section" id="contact">
-    <div class="container">
-      <div class="cta-content">
-        <h2>Ready to start?</h2>
-        <p>
+  <section class="cta-section py-32 bg-gray-950 text-white text-center relative overflow-hidden" id="contact">
+    <div class="container max-w-container mx-auto px-8">
+      <div class="cta-content relative z-[2]">
+        <h2 class="font-display text-display-md font-normal mb-6 tracking-tight">Ready to start?</h2>
+        <p class="text-xl text-white/90 mb-12 max-w-3xl mx-auto">
           You don't have to do this alone. Whether you're looking for your first job, starting over, or trying to move into something better, we're here.
         </p>
-        <div class="cta-buttons">
-          <a href="#" class="btn-white">
+        <div class="cta-buttons flex gap-5 justify-center flex-wrap">
+          <a href="#" class="btn-white inline-flex items-center gap-2 py-5 px-12 bg-white text-gray-950 rounded-md font-body text-sm font-semibold no-underline shadow-lg">
             <span>Get started today</span>
             <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
           </a>
-          <a href="#" class="btn-outline-white">
+          <a href="#" class="btn-outline-white inline-flex items-center gap-2 py-5 px-12 bg-transparent text-white border-2 border-white/50 rounded-md font-body text-sm font-semibold no-underline">
             <span>Find a location</span>
             <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
           </a>
@@ -1194,47 +1262,47 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
+  <footer class="footer bg-gray-900 text-gray-400 pt-16 pb-8">
+    <div class="container max-w-container mx-auto px-8">
+      <div class="footer-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
         <div class="footer-section">
-          <h4>America Works</h4>
-          <p style="font-size: var(--text-sm); line-height: 1.7; margin-top: 1rem;">
+          <h4 class="text-white text-base font-semibold mb-6">America Works</h4>
+          <p class="text-sm leading-relaxed mt-4">
             40 years of proven workforce development. Technical excellence meets human impact.
           </p>
         </div>
 
         <div class="footer-section">
-          <h4>For Jobseekers</h4>
-          <ul class="footer-links">
-            <li><a href="#how-we-help">Services</a></li>
-            <li><a href="#process">Process</a></li>
-            <li><a href="#stories">Success Stories</a></li>
-            <li><a href="#contact">Get Started</a></li>
+          <h4 class="text-white text-base font-semibold mb-6">For Jobseekers</h4>
+          <ul class="footer-links list-none flex flex-col gap-3">
+            <li><a href="#how-we-help" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Services</a></li>
+            <li><a href="#process" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Process</a></li>
+            <li><a href="#stories" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Success Stories</a></li>
+            <li><a href="#contact" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Get Started</a></li>
           </ul>
         </div>
 
         <div class="footer-section">
-          <h4>Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="#">Locations</a></li>
-            <li><a href="#">FAQ</a></li>
+          <h4 class="text-white text-base font-semibold mb-6">Quick Links</h4>
+          <ul class="footer-links list-none flex flex-col gap-3">
+            <li><a href="index.html" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Home</a></li>
+            <li><a href="about.html" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">About</a></li>
+            <li><a href="#" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Locations</a></li>
+            <li><a href="#" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">FAQ</a></li>
           </ul>
         </div>
 
         <div class="footer-section">
-          <h4>Connect</h4>
-          <ul class="footer-links">
-            <li><a href="#">LinkedIn</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Facebook</a></li>
+          <h4 class="text-white text-base font-semibold mb-6">Connect</h4>
+          <ul class="footer-links list-none flex flex-col gap-3">
+            <li><a href="#" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">LinkedIn</a></li>
+            <li><a href="#" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Twitter</a></li>
+            <li><a href="#" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Facebook</a></li>
           </ul>
         </div>
       </div>
 
-      <div class="footer-bottom">
+      <div class="footer-bottom pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
         <p>&copy; 2024 America Works. All rights reserved.</p>
       </div>
     </div>
@@ -1243,6 +1311,33 @@
   <script>
     // Initialize Lucide icons
     lucide.createIcons();
+
+    // Navigation Scroll Effect - Three Steps
+    const navs = document.querySelectorAll('.navigation');
+    const hero = document.querySelector('.hero');
+    window.addEventListener('scroll', () => {
+      const heroHeight = hero ? hero.offsetHeight : 0;
+      const scrollPos = window.pageYOffset;
+
+      // Step 1: At top (no classes)
+      // Step 2: Scrolled in hero (scrolled class)
+      // Step 3: Below hero (below-hero class)
+
+      navs.forEach(nav => {
+        if (scrollPos === 0) {
+          // Step 1: At very top - transparent, no blur
+          nav.classList.remove('scrolled', 'below-hero');
+        } else if (scrollPos > 0 && scrollPos < heroHeight - 100) {
+          // Step 2: In hero - blur with white text
+          nav.classList.add('scrolled');
+          nav.classList.remove('below-hero');
+        } else {
+          // Step 3: Below hero - blur with dark text
+          nav.classList.remove('scrolled');
+          nav.classList.add('below-hero');
+        }
+      });
+    }, { passive: true });
 
     // Scroll progress bar and nav switching
     const primaryNav = document.querySelector('.primary-nav');

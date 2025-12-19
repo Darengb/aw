@@ -16,6 +16,37 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Instrument Serif', 'serif'],
+            body: ['General Sans', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            crimson: ['Crimson Text', 'serif'],
+          },
+          fontSize: {
+            'display-xl': '5.5rem',
+            'display-lg': '4rem',
+            'display-md': '3rem',
+          },
+          colors: {
+            'aw-red': { DEFAULT: '#ec140c', dark: '#c7130c' },
+            'aw-blue': { DEFAULT: '#323b97', dark: '#252e6e' },
+            'accent-cyan': '#00d4ff',
+            'accent-green': '#10b981',
+          },
+          maxWidth: {
+            'container': '87.5rem',
+          },
+        },
+      },
+    }
+  </script>
+
   <style>
     /* ============================================
        PREMIUM EDITORIAL DESIGN SYSTEM
@@ -136,17 +167,45 @@
     }
 
     /* Navigation */
+    /* Step 1: At top - transparent, no blur */
     .navigation {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--gray-200);
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom: none;
       z-index: 1000;
-      transition: transform 0.3s var(--ease-primary), opacity 0.3s var(--ease-primary);
+      transition: all 0.3s var(--ease-primary);
+    }
+
+    /* Step 2: In hero with blur */
+    .navigation.scrolled {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px) saturate(100%);
+      -webkit-backdrop-filter: blur(12px) saturate(100%);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    }
+
+    /* Step 3: Below hero with blur and dark text */
+    .navigation.below-hero {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px) saturate(100%);
+      -webkit-backdrop-filter: blur(12px) saturate(100%);
+    }
+
+    .navigation.below-hero .nav-logo {
+      color: var(--black);
+    }
+
+    .navigation.below-hero .nav-links a {
+      color: var(--gray-700);
+    }
+
+    .navigation.below-hero .nav-links a:hover {
+      color: var(--black);
     }
 
     .primary-nav {
@@ -191,12 +250,12 @@
       align-items: center;
       gap: 0.75rem;
       text-decoration: none;
-      color: var(--black);
+      color: var(--white);
       font-family: 'Crimson Text', serif;
       font-size: 1.5rem;
       font-weight: 600;
       letter-spacing: -0.01em;
-      transition: opacity 0.2s ease;
+      transition: color 0.2s ease, opacity 0.2s ease;
     }
 
     .nav-logo:hover {
@@ -218,13 +277,13 @@
     .nav-links a {
       font-size: var(--text-sm);
       font-weight: 600;
-      color: var(--gray-700);
+      color: rgba(255, 255, 255, 0.8);
       text-decoration: none;
       transition: color 0.2s ease;
     }
 
     .nav-links a:hover {
-      color: var(--black);
+      color: var(--white);
     }
 
     .nav-cta {
@@ -1162,6 +1221,15 @@
         display: none;
       }
 
+      .hero {
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+      }
+
+      .hero-container {
+        padding: 0 1rem;
+      }
+
       .hero-headline {
         font-size: 3rem;
       }
@@ -1205,7 +1273,7 @@
   <nav class="navigation primary-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
-        <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
+        <img src="images/aw-logo-simple.png" alt="AW" class="h-10 w-auto block">
         <span>AMERICA WORKS</span>
       </a>
       <div class="nav-links">
@@ -1222,7 +1290,7 @@
   <nav class="navigation secondary-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
-        <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
+        <img src="images/aw-logo-simple.png" alt="AW" class="h-10 w-auto block">
         <span>AMERICA WORKS</span>
       </a>
       <div class="nav-links">
@@ -1236,24 +1304,24 @@
   </nav>
 
   <!-- Hero -->
-  <section class="hero">
-    <div class="hero-image-bg">
-      <img src="images/business-career-and-placement.jpg" alt="Government partnership success">
+  <section class="hero relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="hero-image-bg absolute inset-0 z-0">
+      <img src="images/business-career-and-placement.jpg" alt="Government partnership success" class="w-full h-full object-cover object-center">
     </div>
-    <div class="hero-overlay"></div>
-    <div class="hero-container">
-      <div class="hero-content">
-        <div class="hero-label">// Government Partnerships</div>
-        <h1 class="hero-headline">Proven performance-based workforce outcomes.</h1>
-        <p class="hero-subheadline">
+    <div class="hero-overlay absolute inset-0 z-[1]"></div>
+    <div class="hero-container max-w-container mx-auto px-8 relative z-[2]">
+      <div class="hero-content max-w-4xl">
+        <div class="hero-label font-mono text-xs uppercase tracking-[0.15em] text-white/80 mb-6">// Government Partnerships</div>
+        <h1 class="hero-headline font-display text-6xl md:text-7xl font-normal leading-tight tracking-tight text-white mb-8">Proven performance-based workforce outcomes.</h1>
+        <p class="hero-subheadline text-xl text-white/90 leading-relaxed mb-10 max-w-3xl">
           Partnering with government agencies for 40+ years to deliver performance-based workforce programs that achieve measurable outcomes.
         </p>
-        <div class="hero-ctas">
-          <a href="#contact" class="btn-primary">
+        <div class="hero-ctas flex flex-wrap gap-5">
+          <a href="#contact" class="btn-primary inline-flex items-center gap-2">
             <span>Talk to our partnerships team</span>
             <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
           </a>
-          <a href="#contact" class="btn-secondary">
+          <a href="#contact" class="btn-secondary inline-flex items-center gap-2">
             <span>Discuss your program or RFP</span>
             <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
           </a>
@@ -1264,7 +1332,7 @@
 
   <!-- Trust Strip -->
   <section class="trust-strip">
-    <div class="trust-grid">
+    <div class="trust-grid max-w-container mx-auto px-8">
       <div class="trust-item">
         <div class="trust-number">40+</div>
         <div class="trust-label">Years in workforce solutions and welfare-to-work</div>
@@ -1285,42 +1353,42 @@
   </section>
 
   <!-- Who We Partner With -->
-  <section class="section bg-gray">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">Partnerships</div>
-        <h2>Who we partner with—and how we help.</h2>
-        <p class="section-intro">
+  <section class="section bg-gray py-32 bg-gray-50">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">Partnerships</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Who we partner with—and how we help.</h2>
+        <p class="section-intro text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
           America Works collaborates with public agencies and community-based organizations across the country to deliver employment and training services in both urban and rural settings. We tailor each program to local needs while staying true to our work-first, outcomes-driven approach.
         </p>
       </header>
 
-      <h3 style="font-family: var(--font-display); font-size: var(--text-h2); text-align: center; margin-bottom: var(--space-8); font-weight: 400; letter-spacing: -0.02em;">We commonly partner with agencies responsible for:</h3>
+      <h3 class="font-display text-2xl text-center mb-8 font-normal tracking-tight">We commonly partner with agencies responsible for:</h3>
 
-      <div class="list-grid">
-        <div class="list-item">
-          <div class="list-icon"><i data-lucide="briefcase"></i></div>
-          <p>TANF and SNAP Employment & Training programs</p>
+      <div class="list-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 list-none">
+        <div class="flex items-center gap-4 bg-white p-6 rounded border border-gray-200">
+          <div class="list-icon text-aw-blue"><i data-lucide="briefcase" class="w-6 h-6"></i></div>
+          <p class="text-gray-900 font-medium">TANF and SNAP Employment & Training programs</p>
         </div>
-        <div class="list-item">
-          <div class="list-icon"><i data-lucide="users"></i></div>
-          <p>Workforce programs funded under WIOA</p>
+        <div class="flex items-center gap-4 bg-white p-6 rounded border border-gray-200">
+          <div class="list-icon text-aw-blue"><i data-lucide="users" class="w-6 h-6"></i></div>
+          <p class="text-gray-900 font-medium">Workforce programs funded under WIOA</p>
         </div>
-        <div class="list-item">
-          <div class="list-icon"><i data-lucide="shield"></i></div>
-          <p>Corrections and reentry services</p>
+        <div class="flex items-center gap-4 bg-white p-6 rounded border border-gray-200">
+          <div class="list-icon text-aw-blue"><i data-lucide="shield" class="w-6 h-6"></i></div>
+          <p class="text-gray-900 font-medium">Corrections and reentry services</p>
         </div>
-        <div class="list-item">
-          <div class="list-icon"><i data-lucide="accessibility"></i></div>
-          <p>Disability employment programs (Ticket to Work)</p>
+        <div class="flex items-center gap-4 bg-white p-6 rounded border border-gray-200">
+          <div class="list-icon text-aw-blue"><i data-lucide="accessibility" class="w-6 h-6"></i></div>
+          <p class="text-gray-900 font-medium">Disability employment programs (Ticket to Work)</p>
         </div>
-        <div class="list-item">
-          <div class="list-icon"><i data-lucide="graduation-cap"></i></div>
-          <p>Youth and young-adult workforce initiatives</p>
+        <div class="flex items-center gap-4 bg-white p-6 rounded border border-gray-200">
+          <div class="list-icon text-aw-blue"><i data-lucide="graduation-cap" class="w-6 h-6"></i></div>
+          <p class="text-gray-900 font-medium">Youth and young-adult workforce initiatives</p>
         </div>
-        <div class="list-item">
-          <div class="list-icon"><i data-lucide="building"></i></div>
-          <p>Local economic and workforce development agencies</p>
+        <div class="flex items-center gap-4 bg-white p-6 rounded border border-gray-200">
+          <div class="list-icon text-aw-blue"><i data-lucide="building" class="w-6 h-6"></i></div>
+          <p class="text-gray-900 font-medium">Local economic and workforce development agencies</p>
         </div>
       </div>
     </div>
@@ -1333,34 +1401,34 @@
     </div>
     <div class="split-content">
       <div class="split-content-inner">
-        <div class="section-label">Service Model</div>
-        <h2 class="split-headline">Our blended service model</h2>
-        <p class="split-description">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">Service Model</div>
+        <h2 class="split-headline font-display text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-gray-900 mb-6">Our blended service model</h2>
+        <p class="split-description text-lg text-gray-600 leading-relaxed mb-8">
           Our programs typically combine work readiness, training, job placement, and retention services into a single integrated pathway—so participants move as quickly as possible into work while building skills for advancement.
         </p>
-        <div class="feature-grid" style="border-top: none; margin-top: 0;">
-          <div class="feature-item" style="border-top: 1px solid var(--gray-200);">
-            <div class="feature-icon"><i data-lucide="check-circle"></i></div>
+        <div class="feature-grid grid grid-cols-1 md:grid-cols-2 gap-0">
+          <div class="feature-item flex items-start gap-4 py-4 border-t border-gray-200">
+            <div class="feature-icon text-aw-blue"><i data-lucide="check-circle" class="w-5 h-5"></i></div>
             <div class="feature-content">
-              <p>Work readiness (hard + soft skills)</p>
+              <p class="text-gray-800">Work readiness (hard + soft skills)</p>
             </div>
           </div>
-          <div class="feature-item" style="border-top: 1px solid var(--gray-200);">
-            <div class="feature-icon"><i data-lucide="book-open"></i></div>
+          <div class="feature-item flex items-start gap-4 py-4 border-t border-gray-200">
+            <div class="feature-icon text-aw-blue"><i data-lucide="book-open" class="w-5 h-5"></i></div>
             <div class="feature-content">
-              <p>Training aligned to local labor demand</p>
+              <p class="text-gray-800">Training aligned to local labor demand</p>
             </div>
           </div>
-          <div class="feature-item">
-            <div class="feature-icon"><i data-lucide="briefcase"></i></div>
+          <div class="feature-item flex items-start gap-4 py-4 border-t border-gray-200">
+            <div class="feature-icon text-aw-blue"><i data-lucide="briefcase" class="w-5 h-5"></i></div>
             <div class="feature-content">
-              <p>Job development and placement</p>
+              <p class="text-gray-800">Job development and placement</p>
             </div>
           </div>
-          <div class="feature-item">
-            <div class="feature-icon"><i data-lucide="trending-up"></i></div>
+          <div class="feature-item flex items-start gap-4 py-4 border-t border-gray-200">
+            <div class="feature-icon text-aw-blue"><i data-lucide="trending-up" class="w-5 h-5"></i></div>
             <div class="feature-content">
-              <p>Ongoing support and advancement services</p>
+              <p class="text-gray-800">Ongoing support and advancement services</p>
             </div>
           </div>
         </div>
@@ -1369,36 +1437,36 @@
   </section>
 
   <!-- Work-First Model -->
-  <section class="section">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">Model</div>
-        <h2>A work-first model built around measurable outcomes.</h2>
-        <p class="section-intro">
+  <section class="section py-32 bg-white">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">Model</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">A work-first model built around measurable outcomes.</h2>
+        <p class="section-intro text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
           Our approach is grounded in the belief that meaningful employment is the most effective path out of poverty. We design programs that prioritize rapid attachment to work, backed by training, wraparound services, and ongoing support to sustain employment.
         </p>
       </header>
 
-      <div class="steps-grid">
+      <div class="steps-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <div class="step-item">
-          <div class="step-number">01</div>
-          <h3>Work readiness</h3>
-          <p>We build both hard and soft skills that employers need—communication, customer service, computer literacy, workplace expectations and more—so participants are prepared to succeed, not just to interview.</p>
+          <div class="step-number font-display text-6xl text-gray-200 mb-4">01</div>
+          <h3 class="font-display text-xl text-gray-900 mb-3">Work readiness</h3>
+          <p class="text-gray-600 leading-relaxed">We build both hard and soft skills that employers need—communication, customer service, computer literacy, workplace expectations and more—so participants are prepared to succeed, not just to interview.</p>
         </div>
         <div class="step-item">
-          <div class="step-number">02</div>
-          <h3>Training & education</h3>
-          <p>We connect participants to certificate programs, ESL, high school equivalency, and other training aligned with local labor market demand, so every hour invested supports a viable career goal.</p>
+          <div class="step-number font-display text-6xl text-gray-200 mb-4">02</div>
+          <h3 class="font-display text-xl text-gray-900 mb-3">Training & education</h3>
+          <p class="text-gray-600 leading-relaxed">We connect participants to certificate programs, ESL, high school equivalency, and other training aligned with local labor market demand, so every hour invested supports a viable career goal.</p>
         </div>
         <div class="step-item">
-          <div class="step-number">03</div>
-          <h3>Employment & placement</h3>
-          <p>As soon as participants are ready, we match their goals and work history to open opportunities using our employer network. We fast-track them to interviews and help agencies meet placement targets.</p>
+          <div class="step-number font-display text-6xl text-gray-200 mb-4">03</div>
+          <h3 class="font-display text-xl text-gray-900 mb-3">Employment & placement</h3>
+          <p class="text-gray-600 leading-relaxed">As soon as participants are ready, we match their goals and work history to open opportunities using our employer network. We fast-track them to interviews and help agencies meet placement targets.</p>
         </div>
         <div class="step-item">
-          <div class="step-number">04</div>
-          <h3>Support & advancement</h3>
-          <p>Once participants enter employment, we provide transition support, problem-solving, and additional training and certifications, helping them retain their jobs, increase their earnings, and reduce returns to public assistance.</p>
+          <div class="step-number font-display text-6xl text-gray-200 mb-4">04</div>
+          <h3 class="font-display text-xl text-gray-900 mb-3">Support & advancement</h3>
+          <p class="text-gray-600 leading-relaxed">Once participants enter employment, we provide transition support, problem-solving, and additional training and certifications, helping them retain their jobs, increase their earnings, and reduce returns to public assistance.</p>
         </div>
       </div>
     </div>
@@ -1411,53 +1479,53 @@
     </div>
     <div class="split-content alt-bg">
       <div class="split-content-inner">
-        <div class="section-label">Value</div>
-        <h2 class="split-headline">Why agencies choose America Works as a vendor.</h2>
-        <p class="split-description">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">Value</div>
+        <h2 class="split-headline font-display text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-gray-900 mb-6">Why agencies choose America Works as a vendor.</h2>
+        <p class="split-description text-lg text-gray-600 leading-relaxed mb-8">
           Agencies work with us because we combine decades of experience with the flexibility to meet local requirements and performance standards.
         </p>
 
-        <div class="feature-grid" style="border-top: none; margin-top: 0;">
-          <div class="feature-item" style="border-top: 1px solid var(--gray-200);">
-            <div class="feature-icon"><i data-lucide="target"></i></div>
+        <div class="feature-grid grid grid-cols-1 md:grid-cols-2 gap-0">
+          <div class="feature-item flex items-start gap-4 py-4 border-t border-gray-200">
+            <div class="feature-icon text-aw-blue"><i data-lucide="target" class="w-5 h-5"></i></div>
             <div class="feature-content">
-              <h3>Specialists in workforce solutions</h3>
-              <p>Our sole focus is workforce and welfare-to-work programming, with a long history of helping people who face multiple barriers to employment.</p>
+              <h3 class="font-semibold text-gray-900 mb-1">Specialists in workforce solutions</h3>
+              <p class="text-sm text-gray-600">Our sole focus is workforce and welfare-to-work programming, with a long history of helping people who face multiple barriers to employment.</p>
             </div>
           </div>
-          <div class="feature-item" style="border-top: 1px solid var(--gray-200);">
-            <div class="feature-icon"><i data-lucide="award"></i></div>
+          <div class="feature-item flex items-start gap-4 py-4 border-t border-gray-200">
+            <div class="feature-icon text-aw-blue"><i data-lucide="award" class="w-5 h-5"></i></div>
             <div class="feature-content">
-              <h3>Deep experience</h3>
-              <p>Our leadership has been involved in workforce solutions since the 1960s, and America Works has been helping launch careers since 1984.</p>
+              <h3 class="font-semibold text-gray-900 mb-1">Deep experience</h3>
+              <p class="text-sm text-gray-600">Our leadership has been involved in workforce solutions since the 1960s, and America Works has been helping launch careers since 1984.</p>
             </div>
           </div>
-          <div class="feature-item">
-            <div class="feature-icon"><i data-lucide="heart"></i></div>
+          <div class="feature-item flex items-start gap-4 py-4 border-t border-gray-200">
+            <div class="feature-icon text-aw-blue"><i data-lucide="heart" class="w-5 h-5"></i></div>
             <div class="feature-content">
-              <h3>Mission-driven staff</h3>
-              <p>We hire people who care about their communities and are committed to helping individuals and families in need move toward self-sufficiency.</p>
+              <h3 class="font-semibold text-gray-900 mb-1">Mission-driven staff</h3>
+              <p class="text-sm text-gray-600">We hire people who care about their communities and are committed to helping individuals and families in need move toward self-sufficiency.</p>
             </div>
           </div>
-          <div class="feature-item">
-            <div class="feature-icon"><i data-lucide="zap"></i></div>
+          <div class="feature-item flex items-start gap-4 py-4 border-t border-gray-200">
+            <div class="feature-icon text-aw-blue"><i data-lucide="zap" class="w-5 h-5"></i></div>
             <div class="feature-content">
-              <h3>Rapid implementation</h3>
-              <p>We have opened new offices with as little as a month's notice, allowing agencies to stand up new programs quickly.</p>
+              <h3 class="font-semibold text-gray-900 mb-1">Rapid implementation</h3>
+              <p class="text-sm text-gray-600">We have opened new offices with as little as a month's notice, allowing agencies to stand up new programs quickly.</p>
             </div>
           </div>
-          <div class="feature-item">
-            <div class="feature-icon"><i data-lucide="bar-chart-3"></i></div>
+          <div class="feature-item flex items-start gap-4 py-4 border-t border-gray-200">
+            <div class="feature-icon text-aw-blue"><i data-lucide="bar-chart-3" class="w-5 h-5"></i></div>
             <div class="feature-content">
-              <h3>Top-performing vendor</h3>
-              <p>America Works consistently ranks among the top vendors wherever we operate, based on performance metrics and contract outcomes.</p>
+              <h3 class="font-semibold text-gray-900 mb-1">Top-performing vendor</h3>
+              <p class="text-sm text-gray-600">America Works consistently ranks among the top vendors wherever we operate, based on performance metrics and contract outcomes.</p>
             </div>
           </div>
-          <div class="feature-item">
-            <div class="feature-icon"><i data-lucide="sliders"></i></div>
+          <div class="feature-item flex items-start gap-4 py-4 border-t border-gray-200">
+            <div class="feature-icon text-aw-blue"><i data-lucide="sliders" class="w-5 h-5"></i></div>
             <div class="feature-content">
-              <h3>Versatile and adaptable</h3>
-              <p>We can align program design and data reporting to your requirements while maintaining strong results.</p>
+              <h3 class="font-semibold text-gray-900 mb-1">Versatile and adaptable</h3>
+              <p class="text-sm text-gray-600">We can align program design and data reporting to your requirements while maintaining strong results.</p>
             </div>
           </div>
         </div>
@@ -1466,47 +1534,47 @@
   </section>
 
   <!-- Performance-Based Contracting -->
-  <section class="section bg-gray">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">Accountability</div>
-        <h2>Built for performance-based contracts.</h2>
-        <p class="section-intro">
+  <section class="section bg-gray py-32 bg-gray-50">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">Accountability</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Built for performance-based contracts.</h2>
+        <p class="section-intro text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
           America Works has been cited in independent research and policy discussions as a leading example of performance-based contracting in welfare-to-work and employment services.
         </p>
       </header>
 
-      <h3 style="font-family: var(--font-display); font-size: var(--text-h2); text-align: center; margin-bottom: var(--space-8); font-weight: 400; letter-spacing: -0.02em;">Aligning incentives with your outcomes</h3>
+      <h3 class="font-display text-2xl text-center mb-12 font-normal tracking-tight text-gray-900">Aligning incentives with your outcomes</h3>
 
-      <div class="feature-grid">
-        <div class="feature-item">
-          <div class="feature-icon"><i data-lucide="dollar-sign"></i></div>
+      <div class="feature-grid grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="feature-item flex items-start gap-4 p-6 bg-white rounded-lg border border-gray-200">
+          <div class="feature-icon text-aw-blue"><i data-lucide="dollar-sign" class="w-6 h-6"></i></div>
           <div class="feature-content">
-            <h3>Outcome-focused fees</h3>
-            <p>Our contracts are typically structured around outcomes such as employment, retention, and earnings, not just activities or participation.</p>
+            <h3 class="font-semibold text-gray-900 mb-2">Outcome-focused fees</h3>
+            <p class="text-gray-600">Our contracts are typically structured around outcomes such as employment, retention, and earnings, not just activities or participation.</p>
           </div>
         </div>
-        <div class="feature-item">
-          <div class="feature-icon"><i data-lucide="trending-up"></i></div>
+        <div class="feature-item flex items-start gap-4 p-6 bg-white rounded-lg border border-gray-200">
+          <div class="feature-icon text-aw-blue"><i data-lucide="trending-up" class="w-6 h-6"></i></div>
           <div class="feature-content">
-            <h3>Evidence of cost-effectiveness</h3>
-            <p>Evaluations have found that performance-based models like ours, while sometimes higher-cost upfront, can be more cost-effective over time as clients stay employed longer and rely less on public benefits.</p>
+            <h3 class="font-semibold text-gray-900 mb-2">Evidence of cost-effectiveness</h3>
+            <p class="text-gray-600">Evaluations have found that performance-based models like ours, while sometimes higher-cost upfront, can be more cost-effective over time as clients stay employed longer and rely less on public benefits.</p>
           </div>
         </div>
-        <div class="feature-item">
-          <div class="feature-icon"><i data-lucide="file-text"></i></div>
+        <div class="feature-item flex items-start gap-4 p-6 bg-white rounded-lg border border-gray-200">
+          <div class="feature-icon text-aw-blue"><i data-lucide="file-text" class="w-6 h-6"></i></div>
           <div class="feature-content">
-            <h3>Transparent data and reporting</h3>
-            <p>We support robust tracking and reporting to meet monitoring, audit, and evaluation requirements, including participation, placement, retention, and earnings.</p>
+            <h3 class="font-semibold text-gray-900 mb-2">Transparent data and reporting</h3>
+            <p class="text-gray-600">We support robust tracking and reporting to meet monitoring, audit, and evaluation requirements, including participation, placement, retention, and earnings.</p>
           </div>
         </div>
       </div>
 
-      <div style="max-width: 800px; margin: var(--space-16) auto 0; padding: 2.5rem 3rem; background: var(--white); border-left: 4px solid var(--aw-blue); position: relative;">
-        <p style="font-size: var(--text-xl); line-height: 1.7; color: var(--gray-800); font-style: italic; margin-bottom: 1rem;">
+      <div class="max-w-3xl mx-auto mt-16 p-10 bg-white border-l-4 border-aw-blue">
+        <p class="text-xl leading-relaxed text-gray-800 italic mb-4">
           "Providers like America Works demonstrated how individualized performance-based contracts could drive stronger engagement and employment outcomes."
         </p>
-        <p style="font-size: var(--text-sm); color: var(--gray-600); font-weight: 600;">
+        <p class="text-sm text-gray-600 font-semibold">
           — Summary of findings from independent reviews of TANF and workforce contracts
         </p>
       </div>
@@ -1514,45 +1582,45 @@
   </section>
 
   <!-- Program Areas -->
-  <section class="program-areas">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">Examples</div>
-        <h2>Program areas and example partnerships.</h2>
-        <p class="section-intro">
+  <section class="program-areas py-32 bg-white">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">Examples</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Program areas and example partnerships.</h2>
+        <p class="section-intro text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
           Our work spans multiple funding streams and program types. A few examples:
         </p>
       </header>
 
-      <div class="program-grid">
-        <div class="program-item">
-          <div class="program-label">SNAP Employment & Training (SNAP E&T)</div>
-          <div class="program-content">
-            <p><strong>Example:</strong> Multi-million dollar, hybrid performance-based contracts delivering Career Advance, Career Compass, and Youth Pathways services across New York City boroughs.</p>
+      <div class="program-grid grid grid-cols-1 gap-6 max-w-4xl mx-auto">
+        <div class="program-item bg-gray-50 rounded-lg overflow-hidden">
+          <div class="program-label font-semibold text-gray-900 p-6 pb-2">SNAP Employment & Training (SNAP E&T)</div>
+          <div class="program-content px-6 pb-6">
+            <p class="text-gray-600"><strong class="text-gray-800">Example:</strong> Multi-million dollar, hybrid performance-based contracts delivering Career Advance, Career Compass, and Youth Pathways services across New York City boroughs.</p>
           </div>
         </div>
-        <div class="program-item">
-          <div class="program-label">TANF work programs & family economic security</div>
-          <div class="program-content">
-            <p><strong>Example:</strong> Providers under performance-based TANF contracts in jurisdictions like Washington, DC, focused on participation and employment within a broader two-generation strategy.</p>
+        <div class="program-item bg-gray-50 rounded-lg overflow-hidden">
+          <div class="program-label font-semibold text-gray-900 p-6 pb-2">TANF work programs & family economic security</div>
+          <div class="program-content px-6 pb-6">
+            <p class="text-gray-600"><strong class="text-gray-800">Example:</strong> Providers under performance-based TANF contracts in jurisdictions like Washington, DC, focused on participation and employment within a broader two-generation strategy.</p>
           </div>
         </div>
-        <div class="program-item">
-          <div class="program-label">WIOA and related workforce initiatives</div>
-          <div class="program-content">
-            <p><strong>Example:</strong> Operation of job search assistance and "back to work" programs compared in rigorous evaluations such as the NYC Job Search Assistance study.</p>
+        <div class="program-item bg-gray-50 rounded-lg overflow-hidden">
+          <div class="program-label font-semibold text-gray-900 p-6 pb-2">WIOA and related workforce initiatives</div>
+          <div class="program-content px-6 pb-6">
+            <p class="text-gray-600"><strong class="text-gray-800">Example:</strong> Operation of job search assistance and "back to work" programs compared in rigorous evaluations such as the NYC Job Search Assistance study.</p>
           </div>
         </div>
-        <div class="program-item">
-          <div class="program-label">Disability employment programs (Ticket to Work)</div>
-          <div class="program-content">
-            <p><strong>Example:</strong> America Works of New York registered as a national Employment Network under SSA's Ticket to Work program, providing employment supports to SSI/SSDI beneficiaries.</p>
+        <div class="program-item bg-gray-50 rounded-lg overflow-hidden">
+          <div class="program-label font-semibold text-gray-900 p-6 pb-2">Disability employment programs (Ticket to Work)</div>
+          <div class="program-content px-6 pb-6">
+            <p class="text-gray-600"><strong class="text-gray-800">Example:</strong> America Works of New York registered as a national Employment Network under SSA's Ticket to Work program, providing employment supports to SSI/SSDI beneficiaries.</p>
           </div>
         </div>
-        <div class="program-item">
-          <div class="program-label">Reentry and justice-involved populations</div>
-          <div class="program-content">
-            <p><strong>Example:</strong> Integration of employment services with corrections and reentry initiatives supported by U.S. Department of Labor and other funders.</p>
+        <div class="program-item bg-gray-50 rounded-lg overflow-hidden">
+          <div class="program-label font-semibold text-gray-900 p-6 pb-2">Reentry and justice-involved populations</div>
+          <div class="program-content px-6 pb-6">
+            <p class="text-gray-600"><strong class="text-gray-800">Example:</strong> Integration of employment services with corrections and reentry initiatives supported by U.S. Department of Labor and other funders.</p>
           </div>
         </div>
       </div>
@@ -1560,157 +1628,157 @@
   </section>
 
   <!-- Implementation -->
-  <section class="section bg-gray" id="implementation">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">Process</div>
-        <h2>How we build and run programs with you.</h2>
-        <p class="section-intro">
+  <section class="section bg-gray py-32 bg-gray-50" id="implementation">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">Process</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">How we build and run programs with you.</h2>
+        <p class="section-intro text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
           We know every jurisdiction is different. Our implementation approach is collaborative and structured, so you get a partner—not just a vendor.
         </p>
       </header>
 
-      <div class="steps-grid">
+      <div class="steps-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <div class="step-item">
-          <div class="step-number">01</div>
-          <h3>Co-design & planning</h3>
-          <p>We start by understanding your policy goals, funding streams, and performance requirements. Together, we define target populations, service flows, and outcome metrics that align with your strategy and federal guidelines.</p>
+          <div class="step-number font-display text-6xl text-gray-200 mb-4">01</div>
+          <h3 class="font-display text-xl text-gray-900 mb-3">Co-design & planning</h3>
+          <p class="text-gray-600 leading-relaxed">We start by understanding your policy goals, funding streams, and performance requirements. Together, we define target populations, service flows, and outcome metrics that align with your strategy and federal guidelines.</p>
         </div>
         <div class="step-item">
-          <div class="step-number">02</div>
-          <h3>Rapid stand-up of operations</h3>
-          <p>We recruit and train staff, secure and equip office locations where needed, and connect with local employer and community networks. Our history includes standing up new locations within about a month of contract award when necessary.</p>
+          <div class="step-number font-display text-6xl text-gray-200 mb-4">02</div>
+          <h3 class="font-display text-xl text-gray-900 mb-3">Rapid stand-up of operations</h3>
+          <p class="text-gray-600 leading-relaxed">We recruit and train staff, secure and equip office locations where needed, and connect with local employer and community networks. Our history includes standing up new locations within about a month of contract award when necessary.</p>
         </div>
         <div class="step-item">
-          <div class="step-number">03</div>
-          <h3>Service delivery & continuous improvement</h3>
-          <p>We deliver the full blend of services—outreach, assessment, work readiness, training, placement, and retention—while using data to monitor progress and continuously refine strategies.</p>
+          <div class="step-number font-display text-6xl text-gray-200 mb-4">03</div>
+          <h3 class="font-display text-xl text-gray-900 mb-3">Service delivery & continuous improvement</h3>
+          <p class="text-gray-600 leading-relaxed">We deliver the full blend of services—outreach, assessment, work readiness, training, placement, and retention—while using data to monitor progress and continuously refine strategies.</p>
         </div>
         <div class="step-item">
-          <div class="step-number">04</div>
-          <h3>Reporting, evaluation & scaling</h3>
-          <p>We provide regular performance reports and collaborate on evaluations to support accountability and inform future policy. Successful pilots can be scaled to additional sites or populations.</p>
+          <div class="step-number font-display text-6xl text-gray-200 mb-4">04</div>
+          <h3 class="font-display text-xl text-gray-900 mb-3">Reporting, evaluation & scaling</h3>
+          <p class="text-gray-600 leading-relaxed">We provide regular performance reports and collaborate on evaluations to support accountability and inform future policy. Successful pilots can be scaled to additional sites or populations.</p>
         </div>
       </div>
 
-      <div style="text-align: center; margin-top: var(--space-16);">
-        <a href="#contact" class="btn-primary">
+      <div class="text-center mt-16">
+        <a href="#contact" class="btn-primary inline-flex items-center gap-2 bg-aw-blue text-white px-8 py-4 rounded font-semibold hover:bg-aw-blue-dark transition-colors">
           <span>Discuss your program or upcoming RFP</span>
-          <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+          <i data-lucide="arrow-right" class="w-[18px] h-[18px]"></i>
         </a>
       </div>
     </div>
   </section>
 
   <!-- Testimonials -->
-  <section class="testimonials">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">Testimonials</div>
-        <h2>What people say about partnering with America Works.</h2>
+  <section class="testimonials py-32 bg-white">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">Testimonials</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">What people say about partnering with America Works.</h2>
       </header>
 
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <p class="testimonial-text">
+      <div class="testimonials-grid grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="testimonial-card bg-gray-50 p-8 rounded-lg">
+          <p class="testimonial-text text-lg text-gray-700 leading-relaxed mb-6 italic">
             America Works is a program that has the best staff. They helped me close my TANF case and move into steady employment.
           </p>
-          <p class="testimonial-author">— Congressional Testimony</p>
+          <p class="testimonial-author text-sm font-semibold text-gray-600">— Congressional Testimony</p>
         </div>
 
-        <div class="testimonial-card">
-          <p class="testimonial-text">
+        <div class="testimonial-card bg-gray-50 p-8 rounded-lg">
+          <p class="testimonial-text text-lg text-gray-700 leading-relaxed mb-6 italic">
             I remember when I was a member of America Works, the reps really helped me through rough times and helped me find employment—really nice people.
           </p>
-          <p class="testimonial-author">— Former Client</p>
+          <p class="testimonial-author text-sm font-semibold text-gray-600">— Former Client</p>
         </div>
 
-        <div class="testimonial-card">
-          <p class="testimonial-text">
+        <div class="testimonial-card bg-gray-50 p-8 rounded-lg">
+          <p class="testimonial-text text-lg text-gray-700 leading-relaxed mb-6 italic">
             After decades in the welfare-to-work field, America Works' leadership has been at the forefront of advocating for performance-based contracts that tie funding to results.
           </p>
-          <p class="testimonial-author">— Policy Research Analysis</p>
+          <p class="testimonial-author text-sm font-semibold text-gray-600">— Policy Research Analysis</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="faq-section" id="faq">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">FAQ</div>
-        <h2>Questions agencies often ask.</h2>
+  <section class="faq-section py-32 bg-gray-50" id="faq">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">FAQ</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Questions agencies often ask.</h2>
       </header>
 
-      <div class="faq-container">
-        <div class="faq-item">
-          <button class="faq-question">
+      <div class="faq-container max-w-3xl mx-auto">
+        <div class="faq-item border-b border-gray-200">
+          <button class="faq-question w-full flex items-center justify-between py-6 text-left font-semibold text-gray-900 hover:text-aw-blue transition-colors">
             <span>What kinds of contracts does America Works typically operate under?</span>
-            <i data-lucide="chevron-down" class="faq-icon"></i>
+            <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-gray-400 transition-transform"></i>
           </button>
-          <div class="faq-answer">
-            <div class="faq-answer-content">
+          <div class="faq-answer overflow-hidden max-h-0 transition-all duration-300">
+            <div class="faq-answer-content pb-6 text-gray-600 leading-relaxed">
               We work under a range of contract structures, including hybrid and fully performance-based models, cost reimbursement with performance incentives, and braided funding arrangements across TANF, SNAP E&T, WIOA, and local funds. We tailor contract structures to your regulatory environment and reporting needs.
             </div>
           </div>
         </div>
 
-        <div class="faq-item">
-          <button class="faq-question">
+        <div class="faq-item border-b border-gray-200">
+          <button class="faq-question w-full flex items-center justify-between py-6 text-left font-semibold text-gray-900 hover:text-aw-blue transition-colors">
             <span>How do you ensure accountability and data quality?</span>
-            <i data-lucide="chevron-down" class="faq-icon"></i>
+            <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-gray-400 transition-transform"></i>
           </button>
-          <div class="faq-answer">
-            <div class="faq-answer-content">
+          <div class="faq-answer overflow-hidden max-h-0 transition-all duration-300">
+            <div class="faq-answer-content pb-6 text-gray-600 leading-relaxed">
               We build data and reporting requirements into program design from the start, aligning with federal and state rules. Our teams track participation, services, placements, retention, and earnings, and we regularly participate in third-party evaluations and audits.
             </div>
           </div>
         </div>
 
-        <div class="faq-item">
-          <button class="faq-question">
+        <div class="faq-item border-b border-gray-200">
+          <button class="faq-question w-full flex items-center justify-between py-6 text-left font-semibold text-gray-900 hover:text-aw-blue transition-colors">
             <span>Can you work in both urban and rural areas?</span>
-            <i data-lucide="chevron-down" class="faq-icon"></i>
+            <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-gray-400 transition-transform"></i>
           </button>
-          <div class="faq-answer">
-            <div class="faq-answer-content">
+          <div class="faq-answer overflow-hidden max-h-0 transition-all duration-300">
+            <div class="faq-answer-content pb-6 text-gray-600 leading-relaxed">
               Yes. We have operated programs in large metro areas and smaller communities, adapting services and staffing models to local labor markets and transportation realities.
             </div>
           </div>
         </div>
 
-        <div class="faq-item">
-          <button class="faq-question">
+        <div class="faq-item border-b border-gray-200">
+          <button class="faq-question w-full flex items-center justify-between py-6 text-left font-semibold text-gray-900 hover:text-aw-blue transition-colors">
             <span>How quickly can you launch a new program?</span>
-            <i data-lucide="chevron-down" class="faq-icon"></i>
+            <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-gray-400 transition-transform"></i>
           </button>
-          <div class="faq-answer">
-            <div class="faq-answer-content">
+          <div class="faq-answer overflow-hidden max-h-0 transition-all duration-300">
+            <div class="faq-answer-content pb-6 text-gray-600 leading-relaxed">
               Timelines depend on scope and procurement requirements, but we have a track record of establishing new offices and operations within short timeframes—sometimes within a month of award—when needed.
             </div>
           </div>
         </div>
 
-        <div class="faq-item">
-          <button class="faq-question">
+        <div class="faq-item border-b border-gray-200">
+          <button class="faq-question w-full flex items-center justify-between py-6 text-left font-semibold text-gray-900 hover:text-aw-blue transition-colors">
             <span>What populations do you have experience serving?</span>
-            <i data-lucide="chevron-down" class="faq-icon"></i>
+            <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-gray-400 transition-transform"></i>
           </button>
-          <div class="faq-answer">
-            <div class="faq-answer-content">
+          <div class="faq-answer overflow-hidden max-h-0 transition-all duration-300">
+            <div class="faq-answer-content pb-6 text-gray-600 leading-relaxed">
               We have extensive experience with TANF and SNAP participants, young adults, military veterans, individuals who have experienced homelessness, justice-involved individuals, non-custodial parents, and people receiving disability benefits.
             </div>
           </div>
         </div>
 
-        <div class="faq-item">
-          <button class="faq-question">
+        <div class="faq-item border-b border-gray-200">
+          <button class="faq-question w-full flex items-center justify-between py-6 text-left font-semibold text-gray-900 hover:text-aw-blue transition-colors">
             <span>Do you only serve one state or region?</span>
-            <i data-lucide="chevron-down" class="faq-icon"></i>
+            <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-gray-400 transition-transform"></i>
           </button>
-          <div class="faq-answer">
-            <div class="faq-answer-content">
+          <div class="faq-answer overflow-hidden max-h-0 transition-all duration-300">
+            <div class="faq-answer-content pb-6 text-gray-600 leading-relaxed">
               No. We operate in multiple states and the District of Columbia through a network of legally separate but coordinated entities, offering both in-person and virtual services.
             </div>
           </div>
@@ -1797,11 +1865,29 @@
     const secondaryNav = document.querySelector('.secondary-nav');
     const sections = document.querySelectorAll('section[id]');
     const navLinks = secondaryNav.querySelectorAll('.nav-links a[href^="#"]');
+    const hero = document.querySelector('.hero');
+    const heroHeight = hero ? hero.offsetHeight : 600;
 
     window.addEventListener('scroll', () => {
       const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = (window.scrollY / windowHeight);
       document.querySelector('.scroll-progress-bar').style.transform = `scaleX(${scrolled})`;
+
+      // Three-state navigation scroll for both navs
+      const allNavs = document.querySelectorAll('.navigation');
+      allNavs.forEach(nav => {
+        if (window.scrollY > heroHeight - 80) {
+          // Below hero - white background with dark text
+          nav.classList.add('scrolled', 'below-hero');
+        } else if (window.scrollY > 50) {
+          // In hero with blur
+          nav.classList.add('scrolled');
+          nav.classList.remove('below-hero');
+        } else {
+          // At top - transparent
+          nav.classList.remove('scrolled', 'below-hero');
+        }
+      });
 
       // Switch between primary and secondary nav
       if (window.scrollY > 100) {

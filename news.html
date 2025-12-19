@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="America Works in the news - Media coverage, interviews, and articles about workforce development and employment programs.">
+  <title>News - America Works</title>
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,600;1,400&family=General+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Instrument Serif', 'serif'],
+            body: ['General Sans', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            crimson: ['Crimson Text', 'serif'],
+          },
+          fontSize: {
+            'display-xl': '5.5rem',
+            'display-lg': '4rem',
+            'display-md': '3rem',
+          },
+          colors: {
+            'aw-red': { DEFAULT: '#ec140c', dark: '#c7130c' },
+            'aw-blue': { DEFAULT: '#323b97', dark: '#252e6e' },
+            'accent-cyan': '#00d4ff',
+            'accent-green': '#10b981',
+          },
+          maxWidth: {
+            'container': '87.5rem',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --font-display: 'Instrument Serif', serif;
+      --font-body: 'General Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --aw-red: #ec140c;
+      --aw-red-dark: #c7130c;
+      --aw-blue: #323b97;
+      --aw-blue-dark: #252e6e;
+      --black: #000000;
+      --gray-950: #0a0a0a;
+      --gray-900: #18181b;
+      --gray-800: #27272a;
+      --gray-700: #3f3f46;
+      --gray-600: #52525b;
+      --gray-500: #71717a;
+      --gray-400: #a1a1aa;
+      --gray-300: #d4d4d8;
+      --gray-200: #e4e4e7;
+      --gray-100: #f4f4f5;
+      --gray-50: #fafafa;
+      --white: #ffffff;
+      --container-xl: 87.5rem;
+      --ease-primary: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 1.0625rem;
+      font-weight: 400;
+      line-height: 1.7;
+      letter-spacing: -0.01em;
+      color: var(--gray-800);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* Grain Texture */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.03"/></svg>');
+      opacity: 1;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* Scroll Progress */
+    .scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: var(--aw-red);
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 0.1s ease-out;
+      z-index: 9999;
+      box-shadow: 0 0 20px rgba(236, 20, 12, 0.5);
+    }
+
+    /* Navigation */
+    .navigation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom: none;
+      z-index: 1000;
+      transition: all 0.3s var(--ease-primary);
+    }
+
+    .navigation.below-hero {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px) saturate(100%);
+      -webkit-backdrop-filter: blur(12px) saturate(100%);
+      box-shadow: 0 1px 0 var(--gray-200);
+    }
+
+    .navigation.below-hero .nav-logo {
+      color: var(--black);
+    }
+
+    .navigation.below-hero .nav-links a {
+      color: var(--gray-700);
+    }
+
+    .navigation.below-hero .nav-links a:hover {
+      color: var(--black);
+    }
+
+    .nav-container {
+      max-width: var(--container-xl);
+      margin: 0 auto;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--white);
+      font-family: 'Crimson Text', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-logo:hover {
+      opacity: 0.7;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+    }
+
+    .nav-cta {
+      padding: 0.75rem 1.75rem;
+      background: var(--aw-blue);
+      color: var(--white) !important;
+      border-radius: 6px;
+      box-shadow: 0 2px 10px rgba(50, 59, 151, 0.2);
+      transition: all 0.3s var(--ease-primary);
+    }
+
+    .nav-cta:hover {
+      background: var(--aw-blue-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(50, 59, 151, 0.3);
+    }
+
+    /* News Cards */
+    .news-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 4px;
+      padding: 2rem;
+      transition: all 0.4s var(--ease-primary);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .news-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--aw-red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s var(--ease-primary);
+    }
+
+    .news-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .news-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.04);
+      border-color: var(--gray-300);
+    }
+
+    .news-card:nth-child(even)::before {
+      background: var(--aw-blue);
+    }
+
+    .news-source {
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gray-500);
+      margin-bottom: 0.75rem;
+    }
+
+    .news-title {
+      font-family: var(--font-display);
+      font-size: 1.375rem;
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--black);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    .news-excerpt {
+      font-size: 0.9375rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .news-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--aw-red);
+      text-decoration: none;
+      transition: gap 0.3s ease;
+    }
+
+    .news-card:nth-child(even) .news-link {
+      color: var(--aw-blue);
+    }
+
+    .news-link:hover {
+      gap: 0.75rem;
+    }
+
+    /* Footer */
+    .footer-links {
+      list-style: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Scroll Progress -->
+  <div class="scroll-progress-bar"></div>
+
+  <!-- Navigation -->
+  <nav class="navigation below-hero">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/aw-logo-simple.png" alt="AW" class="h-10 w-auto block">
+        <span>AMERICA WORKS</span>
+      </a>
+      <div class="nav-links">
+        <a href="jobseekers.html">Jobseekers</a>
+        <a href="employers.html">Employers</a>
+        <a href="partners.html">Partners</a>
+        <a href="events.html">Events</a>
+        <a href="about.html">About</a>
+        <a href="#contact" class="nav-cta">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="pt-32 pb-16 bg-white border-b border-gray-200">
+    <div class="max-w-container mx-auto px-8">
+      <div class="max-w-3xl">
+        <div class="font-mono text-xs uppercase tracking-[0.15em] text-gray-500 mb-4">// In The News</div>
+        <h1 class="font-display text-4xl md:text-5xl font-normal leading-tight tracking-tight text-black mb-6">
+          America Works in the Media
+        </h1>
+        <p class="text-xl text-gray-600 leading-relaxed max-w-2xl">
+          Coverage, interviews, and articles featuring our work in workforce development and employment programs.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- News Section -->
+  <section class="py-24 bg-gray-50">
+    <div class="max-w-container mx-auto px-8">
+      <!-- News Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Article 1 -->
+        <article class="news-card">
+          <div class="news-source">YouTube</div>
+          <h2 class="news-title">OPEN: Ticket to Work</h2>
+          <p class="news-excerpt">
+            Ticket To Work Representative in their Bronx Office join Bob Lee for a look at their upcoming ticket to work open house.
+          </p>
+          <a href="https://www.youtube.com/watch?v=C7qI0ppL_Iw&feature=youtu.be" target="_blank" rel="noopener noreferrer" class="news-link">
+            <span>Watch Video</span>
+            <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+          </a>
+        </article>
+
+        <!-- Article 2 -->
+        <article class="news-card">
+          <div class="news-source">Wall Street Journal</div>
+          <h2 class="news-title">An Antipoverty Veteran Now Wages War on Dependency</h2>
+          <p class="news-excerpt">
+            Peter Cove dropped out of a graduate program at the University of Wisconsin-Madison more than 50 years ago...
+          </p>
+          <a href="https://www.wsj.com/articles/an-antipoverty-veteran-now-wages-war-on-dependency-1486512266" target="_blank" rel="noopener noreferrer" class="news-link">
+            <span>Read Article</span>
+            <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+          </a>
+        </article>
+
+        <!-- Article 3 -->
+        <article class="news-card">
+          <div class="news-source">American Radio Journal</div>
+          <h2 class="news-title">Lowman Henry's Newsmaker Interview</h2>
+          <p class="news-excerpt">
+            Lowman Henry with Veronique De Rugy on Border Adjustment Tax - available in mp3 format for download.
+          </p>
+          <a href="http://americanradiojournal.com/commentary.php?id=1" target="_blank" rel="noopener noreferrer" class="news-link">
+            <span>Listen Now</span>
+            <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+          </a>
+        </article>
+
+        <!-- Article 4 -->
+        <article class="news-card">
+          <div class="news-source">New York Post</div>
+          <h2 class="news-title">New hope for kids aging out of foster care</h2>
+          <p class="news-excerpt">
+            'You learn things from the program. They teach you to write a résumé, to talk in an interview. They teach you how to keep smiling,' says K...
+          </p>
+          <a href="http://nypost.com/2017/02/27/new-hope-for-kids-aging-out-of-foster-care/" target="_blank" rel="noopener noreferrer" class="news-link">
+            <span>Read Article</span>
+            <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+          </a>
+        </article>
+
+        <!-- Article 5 -->
+        <article class="news-card">
+          <div class="news-source">Forbes</div>
+          <h2 class="news-title">Progressives Need To Rethink Poverty Solutions</h2>
+          <p class="news-excerpt">
+            More than 50 years ago I entered the war on poverty as a foot soldier with all the eager enthusiasm one could muster. The attempt to eliminate p...
+          </p>
+          <a href="https://www.forbes.com/sites/realspin/2017/03/01/progressives-need-to-rethink-poverty-solutions/#7cab42c0797f" target="_blank" rel="noopener noreferrer" class="news-link">
+            <span>Read Article</span>
+            <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+          </a>
+        </article>
+
+        <!-- Article 6 -->
+        <article class="news-card">
+          <div class="news-source">PJ Media</div>
+          <h2 class="news-title">'Poor No More:' a Blueprint for Dismantling the 'Welfare Industrial Complex'</h2>
+          <p class="news-excerpt">
+            Has America lost the "War on Poverty?" Since 1964, the federal government has spent over $19 trillion on welfare programs, and all that money ha...
+          </p>
+          <a href="https://pjmedia.com/trending/2017/03/02/poor-no-more-a-blueprint-for-dismantling-the-welfare-industrial-complex/" target="_blank" rel="noopener noreferrer" class="news-link">
+            <span>Read Article</span>
+            <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+          </a>
+        </article>
+
+        <!-- Article 7 -->
+        <article class="news-card">
+          <div class="news-source">Bloomberg</div>
+          <h2 class="news-title">U.S. Disability Programs Need a Work Requirement</h2>
+          <p class="news-excerpt">
+            The U.S. faces a social and fiscal crisis: Millions of Americans of prime working age do not have jobs, while the cost of federal disability pro...
+          </p>
+          <a href="https://www.bloomberg.com/view/articles/2017-03-10/u-s-disability-programs-need-a-work-requirement" target="_blank" rel="noopener noreferrer" class="news-link">
+            <span>Read Article</span>
+            <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+          </a>
+        </article>
+
+        <!-- Article 8 -->
+        <article class="news-card">
+          <div class="news-source">Manhattan Institute</div>
+          <h2 class="news-title">The Ticket to Work Program: Helping the Disabled to Achieve Self-Sufficiency</h2>
+          <p class="news-excerpt">
+            The Ticket to Work Program provides men and women on federal disability with a "ticket" or voucher that they can use to obtain free vocation...
+          </p>
+          <a href="https://www.manhattan-institute.org/html/ticket-work-program-10108.html" target="_blank" rel="noopener noreferrer" class="news-link">
+            <span>Read Article</span>
+            <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+          </a>
+        </article>
+
+        <!-- Article 9 -->
+        <article class="news-card">
+          <div class="news-source">PBS</div>
+          <h2 class="news-title">Ticket to Work</h2>
+          <p class="news-excerpt">
+            An exclusive new study says that Social Security's "Ticket to Work" is a winner! Find out how the program would be affected if President T...
+          </p>
+          <a href="http://www.pbs.org/video/2365977261/" target="_blank" rel="noopener noreferrer" class="news-link">
+            <span>Watch Video</span>
+            <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+          </a>
+        </article>
+
+        <!-- Article 10 -->
+        <article class="news-card">
+          <div class="news-source">The Hill</div>
+          <h2 class="news-title">Helping the disabled to find work is next step to growing employment rate</h2>
+          <p class="news-excerpt">
+            President Trump consistently emphasizes growing employment...
+          </p>
+          <a href="http://thehill.com/blogs/pundits-blog/labor/325362-helping-the-disabled-to-find-work-is-next-step-to-growing-employment" target="_blank" rel="noopener noreferrer" class="news-link">
+            <span>Read Article</span>
+            <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-24 bg-gray-950 text-white text-center relative overflow-hidden" id="contact">
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
+    <div class="max-w-container mx-auto px-8 relative z-10">
+      <h2 class="font-display text-display-md font-normal mb-6 tracking-tight">Want to learn more?</h2>
+      <p class="text-xl text-white/80 mb-10 max-w-2xl mx-auto">
+        Get in touch to learn about our programs, partnerships, or media inquiries.
+      </p>
+      <div class="flex gap-5 justify-center flex-wrap">
+        <a href="about.html" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-950 font-semibold rounded transition-all hover:shadow-lg hover:-translate-y-0.5">
+          <span>About America Works</span>
+          <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+        </a>
+        <a href="partners.html" class="inline-flex items-center gap-2 px-8 py-4 bg-transparent text-white font-semibold border-2 border-white/50 rounded transition-all hover:bg-white/10 hover:border-white">
+          <span>Partner With Us</span>
+          <i data-lucide="handshake" style="width: 18px; height: 18px;"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-950 text-gray-500 pt-16 pb-8">
+    <div class="max-w-container mx-auto px-8">
+      <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-16 mb-16">
+        <div>
+          <h4 class="font-body text-sm font-semibold text-white mb-6 uppercase tracking-wide">America Works</h4>
+          <p class="text-sm leading-relaxed text-gray-500">
+            Technical excellence in workforce development.
+            Proven results since 1984. Performance-based,
+            people-focused, purpose-driven.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-body text-sm font-semibold text-white mb-6 uppercase tracking-wide">Jobseekers</h4>
+          <ul class="footer-links">
+            <li class="mb-3"><a href="jobseekers.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">How It Works</a></li>
+            <li class="mb-3"><a href="jobseekers.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Services</a></li>
+            <li class="mb-3"><a href="events.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Events</a></li>
+            <li class="mb-3"><a href="#" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-body text-sm font-semibold text-white mb-6 uppercase tracking-wide">Partners</h4>
+          <ul class="footer-links">
+            <li class="mb-3"><a href="partners.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Why Choose Us</a></li>
+            <li class="mb-3"><a href="partners.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Performance Model</a></li>
+            <li class="mb-3"><a href="employers.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Employers</a></li>
+            <li class="mb-3"><a href="#contact" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-body text-sm font-semibold text-white mb-6 uppercase tracking-wide">Company</h4>
+          <ul class="footer-links">
+            <li class="mb-3"><a href="about.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">About</a></li>
+            <li class="mb-3"><a href="news.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">News</a></li>
+            <li class="mb-3"><a href="#contact" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-sm">
+        <div>&copy; 2024 America Works. All rights reserved.</div>
+        <div class="flex flex-col md:flex-row gap-8 font-mono text-xs">
+          <span class="opacity-70">Est. 1984</span>
+          <span class="opacity-70">Federal Vendor</span>
+          <span class="opacity-70">Woman-Owned</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Scroll Progress Bar
+    function updateScrollProgress() {
+      const scrollProgress = document.querySelector('.scroll-progress-bar');
+      const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+      scrollProgress.style.transform = `scaleX(${scrollPercent})`;
+    }
+
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+
+    // Stagger animation for news cards
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, index * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.news-card').forEach((card) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+      observer.observe(card);
+    });
+  </script>
+</body>
+</html>

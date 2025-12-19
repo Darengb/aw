@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="America Works events - Job fairs, career workshops, hiring events, and professional development opportunities near you.">
+  <title>Events - America Works</title>
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,600;1,400&family=General+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Instrument Serif', 'serif'],
+            body: ['General Sans', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            crimson: ['Crimson Text', 'serif'],
+          },
+          fontSize: {
+            'display-xl': '5.5rem',
+            'display-lg': '4rem',
+            'display-md': '3rem',
+          },
+          colors: {
+            'aw-red': { DEFAULT: '#ec140c', dark: '#c7130c' },
+            'aw-blue': { DEFAULT: '#323b97', dark: '#252e6e' },
+            'accent-cyan': '#00d4ff',
+            'accent-green': '#10b981',
+          },
+          maxWidth: {
+            'container': '87.5rem',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* ============================================
+       AMERICA WORKS - EVENTS PAGE
+       Editorial Design System
+       ============================================ */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Typography */
+      --font-display: 'Instrument Serif', serif;
+      --font-body: 'General Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      /* Brand Colors */
+      --aw-red: #ec140c;
+      --aw-red-dark: #c7130c;
+      --aw-blue: #323b97;
+      --aw-blue-dark: #252e6e;
+
+      /* Grays */
+      --black: #000000;
+      --gray-950: #0a0a0a;
+      --gray-900: #18181b;
+      --gray-800: #27272a;
+      --gray-700: #3f3f46;
+      --gray-600: #52525b;
+      --gray-500: #71717a;
+      --gray-400: #a1a1aa;
+      --gray-300: #d4d4d8;
+      --gray-200: #e4e4e7;
+      --gray-100: #f4f4f5;
+      --gray-50: #fafafa;
+      --white: #ffffff;
+
+      /* Layout */
+      --container-xl: 87.5rem;
+
+      /* Easing */
+      --ease-primary: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Base */
+    body {
+      font-family: var(--font-body);
+      font-size: 1.0625rem;
+      font-weight: 400;
+      line-height: 1.7;
+      letter-spacing: -0.01em;
+      color: var(--gray-800);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* Grain Texture */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.03"/></svg>');
+      opacity: 1;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* Scroll Progress */
+    .scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: var(--aw-red);
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 0.1s ease-out;
+      z-index: 9999;
+      box-shadow: 0 0 20px rgba(236, 20, 12, 0.5);
+    }
+
+    /* Navigation */
+    .navigation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom: none;
+      z-index: 1000;
+      transition: all 0.3s var(--ease-primary);
+    }
+
+    .navigation.below-hero {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px) saturate(100%);
+      -webkit-backdrop-filter: blur(12px) saturate(100%);
+      box-shadow: 0 1px 0 var(--gray-200);
+    }
+
+    .navigation.below-hero .nav-logo {
+      color: var(--black);
+    }
+
+    .navigation.below-hero .nav-links a {
+      color: var(--gray-700);
+    }
+
+    .navigation.below-hero .nav-links a:hover {
+      color: var(--black);
+    }
+
+    .nav-container {
+      max-width: var(--container-xl);
+      margin: 0 auto;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--white);
+      font-family: 'Crimson Text', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-logo:hover {
+      opacity: 0.7;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+    }
+
+    .nav-cta {
+      padding: 0.75rem 1.75rem;
+      background: var(--aw-blue);
+      color: var(--white) !important;
+      border-radius: 6px;
+      box-shadow: 0 2px 10px rgba(50, 59, 151, 0.2);
+      transition: all 0.3s var(--ease-primary);
+    }
+
+    .nav-cta:hover {
+      background: var(--aw-blue-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(50, 59, 151, 0.3);
+    }
+
+    /* Filter Tabs */
+    .filter-tab {
+      background: var(--white);
+      color: var(--gray-700);
+      border: 1px solid var(--gray-300);
+    }
+
+    .filter-tab:hover {
+      border-color: var(--gray-400);
+    }
+
+    .filter-tab.active {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+    }
+
+    /* Event Cards */
+    .event-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: all 0.4s var(--ease-primary);
+      position: relative;
+    }
+
+    .event-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--aw-red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s var(--ease-primary);
+    }
+
+    .event-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .event-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.04);
+      border-color: var(--gray-300);
+    }
+
+    .event-card:nth-child(even)::before {
+      background: var(--aw-blue);
+    }
+
+    .event-date-block {
+      background: var(--gray-50);
+      padding: 1.5rem;
+      text-align: center;
+      border-bottom: 1px solid var(--gray-200);
+      transition: background 0.3s ease;
+    }
+
+    .event-card:hover .event-date-block {
+      background: var(--gray-100);
+    }
+
+    .event-month {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--aw-red);
+    }
+
+    .event-card:nth-child(even) .event-month {
+      color: var(--aw-blue);
+    }
+
+    .event-day {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 400;
+      line-height: 1;
+      color: var(--black);
+      margin: 0.25rem 0;
+    }
+
+    .event-year {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--gray-500);
+    }
+
+    .event-content {
+      padding: 1.75rem;
+    }
+
+    .event-type {
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gray-500);
+      margin-bottom: 0.75rem;
+    }
+
+    .event-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--black);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    .event-description {
+      font-size: 0.9375rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .event-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .event-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      color: var(--gray-600);
+    }
+
+    .event-meta-item i {
+      width: 16px;
+      height: 16px;
+      color: var(--gray-400);
+    }
+
+    .event-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--aw-red);
+      text-decoration: none;
+      transition: gap 0.3s ease;
+    }
+
+    .event-card:nth-child(even) .event-cta {
+      color: var(--aw-blue);
+    }
+
+    .event-cta:hover {
+      gap: 0.75rem;
+    }
+
+    /* Accordion */
+    .event-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 1.25rem;
+      padding: 0;
+      background: none;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--aw-red);
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .event-card:nth-child(even) .event-toggle {
+      color: var(--aw-blue);
+    }
+
+    .event-toggle:hover {
+      color: var(--aw-red-dark);
+    }
+
+    .event-card:nth-child(even) .event-toggle:hover {
+      color: var(--aw-blue-dark);
+    }
+
+    .event-toggle-icon {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.3s var(--ease-primary);
+    }
+
+    .event-card.expanded .event-toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .event-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s var(--ease-primary), padding 0.4s var(--ease-primary);
+    }
+
+    .event-card.expanded .event-details {
+      max-height: 300px;
+    }
+
+    .event-details-inner {
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--gray-200);
+      margin-top: 1.25rem;
+    }
+
+    .event-details p {
+      font-size: 0.9375rem;
+      color: var(--gray-600);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .event-details ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .event-details li {
+      position: relative;
+      padding-left: 1rem;
+      font-size: 0.875rem;
+      color: var(--gray-700);
+      margin-bottom: 0.5rem;
+    }
+
+    .event-details li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      width: 4px;
+      height: 4px;
+      background: var(--aw-red);
+      border-radius: 50%;
+    }
+
+    .event-card:nth-child(even) .event-details li::before {
+      background: var(--aw-blue);
+    }
+
+    /* Footer */
+    .footer-links {
+      list-style: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Scroll Progress -->
+  <div class="scroll-progress-bar"></div>
+
+  <!-- Navigation -->
+  <nav class="navigation below-hero">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/aw-logo-simple.png" alt="AW" class="h-10 w-auto block">
+        <span>AMERICA WORKS</span>
+      </a>
+      <div class="nav-links">
+        <a href="jobseekers.html">Jobseekers</a>
+        <a href="employers.html">Employers</a>
+        <a href="partners.html">Partners</a>
+        <a href="events.html">Events</a>
+        <a href="about.html">About</a>
+        <a href="#contact" class="nav-cta">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="pt-32 pb-16 bg-white border-b border-gray-200">
+    <div class="max-w-container mx-auto px-8">
+      <div class="max-w-3xl">
+        <div class="font-mono text-xs uppercase tracking-[0.15em] text-gray-500 mb-4">// Upcoming Events</div>
+        <h1 class="font-display text-4xl md:text-5xl font-normal leading-tight tracking-tight text-black mb-6">
+          Connect. Learn. <span class="italic">Get Hired.</span>
+        </h1>
+        <p class="text-xl text-gray-600 leading-relaxed max-w-2xl">
+          Job fairs, career workshops, and hiring events across the country. Find opportunities to advance your career and connect with employers who are ready to hire.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events Section -->
+  <section class="py-24 bg-gray-50">
+    <div class="max-w-container mx-auto px-8">
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+        <div>
+          <div class="font-mono text-xs uppercase tracking-[0.15em] text-gray-500 mb-3">// Calendar</div>
+          <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-black">Upcoming Events</h2>
+        </div>
+        <div class="flex gap-4 filter-tabs">
+          <button class="filter-tab active px-4 py-2 text-sm font-semibold rounded transition-all" data-filter="all">All Events</button>
+          <button class="filter-tab px-4 py-2 text-sm font-semibold rounded transition-all" data-filter="job-fair">Job Fairs</button>
+          <button class="filter-tab px-4 py-2 text-sm font-semibold rounded transition-all" data-filter="workshop">Workshops</button>
+        </div>
+      </div>
+
+      <!-- Events Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Event 1 - Featured -->
+        <div class="event-card" data-category="job-fair">
+          <div class="event-date-block">
+            <div class="inline-block px-2 py-0.5 bg-aw-red text-white text-[0.6rem] font-mono font-semibold uppercase tracking-wider rounded mb-2">Featured</div>
+            <div class="event-month">January</div>
+            <div class="event-day">15</div>
+            <div class="event-year">2025</div>
+          </div>
+          <div class="event-content">
+            <div class="event-type">Mega Job Fair</div>
+            <h3 class="event-title">NYC Winter Hiring Event</h3>
+            <p class="event-description">
+              Meet 50+ employers hiring across healthcare, retail, and hospitality. On-the-spot interviews available.
+            </p>
+            <div class="event-meta">
+              <div class="event-meta-item">
+                <i data-lucide="map-pin"></i>
+                <span>Jacob Javits Center, NYC</span>
+              </div>
+              <div class="event-meta-item">
+                <i data-lucide="clock"></i>
+                <span>9:00 AM - 4:00 PM</span>
+              </div>
+            </div>
+            <button class="event-toggle">
+              <span>Learn More</span>
+              <i data-lucide="chevron-down" class="event-toggle-icon"></i>
+            </button>
+            <div class="event-details">
+              <div class="event-details-inner">
+                <p>Our largest hiring event of the season featuring employers from multiple industries ready to interview and hire on the spot.</p>
+                <ul>
+                  <li>Bring multiple copies of your resume</li>
+                  <li>Professional attire required</li>
+                  <li>Free entry - registration recommended</li>
+                  <li>Interview prep available on-site</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 2 -->
+        <div class="event-card" data-category="workshop">
+          <div class="event-date-block">
+            <div class="event-month">January</div>
+            <div class="event-day">22</div>
+            <div class="event-year">2025</div>
+          </div>
+          <div class="event-content">
+            <div class="event-type">Workshop</div>
+            <h3 class="event-title">Resume Building Masterclass</h3>
+            <p class="event-description">
+              Learn how to craft a resume that gets noticed. Our career specialists will work with you one-on-one.
+            </p>
+            <div class="event-meta">
+              <div class="event-meta-item">
+                <i data-lucide="map-pin"></i>
+                <span>America Works Brooklyn Office</span>
+              </div>
+              <div class="event-meta-item">
+                <i data-lucide="clock"></i>
+                <span>2:00 PM - 5:00 PM</span>
+              </div>
+            </div>
+            <button class="event-toggle">
+              <span>Learn More</span>
+              <i data-lucide="chevron-down" class="event-toggle-icon"></i>
+            </button>
+            <div class="event-details">
+              <div class="event-details-inner">
+                <p>Get personalized feedback on your resume from experienced career coaches who know what employers want.</p>
+                <ul>
+                  <li>Bring a draft resume if you have one</li>
+                  <li>Laptops available on-site</li>
+                  <li>Leave with a polished, job-ready resume</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 3 -->
+        <div class="event-card" data-category="job-fair">
+          <div class="event-date-block">
+            <div class="event-month">February</div>
+            <div class="event-day">03</div>
+            <div class="event-year">2025</div>
+          </div>
+          <div class="event-content">
+            <div class="event-type">Hiring Event</div>
+            <h3 class="event-title">Healthcare Careers Fair</h3>
+            <p class="event-description">
+              Connect with hospitals, clinics, and healthcare facilities actively hiring.
+            </p>
+            <div class="event-meta">
+              <div class="event-meta-item">
+                <i data-lucide="map-pin"></i>
+                <span>Baltimore Convention Center</span>
+              </div>
+              <div class="event-meta-item">
+                <i data-lucide="clock"></i>
+                <span>10:00 AM - 3:00 PM</span>
+              </div>
+            </div>
+            <button class="event-toggle">
+              <span>Learn More</span>
+              <i data-lucide="chevron-down" class="event-toggle-icon"></i>
+            </button>
+            <div class="event-details">
+              <div class="event-details-inner">
+                <p>Positions range from entry-level to experienced professionals in nursing, administration, and allied health.</p>
+                <ul>
+                  <li>20+ healthcare employers attending</li>
+                  <li>CNA, LPN, RN positions available</li>
+                  <li>Administrative and support roles</li>
+                  <li>Some employers hiring on the spot</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 4 -->
+        <div class="event-card" data-category="workshop">
+          <div class="event-date-block">
+            <div class="event-month">February</div>
+            <div class="event-day">10</div>
+            <div class="event-year">2025</div>
+          </div>
+          <div class="event-content">
+            <div class="event-type">Workshop</div>
+            <h3 class="event-title">Interview Skills Bootcamp</h3>
+            <p class="event-description">
+              Practice makes perfect. Join our intensive interview prep session with mock interviews.
+            </p>
+            <div class="event-meta">
+              <div class="event-meta-item">
+                <i data-lucide="map-pin"></i>
+                <span>Virtual Event</span>
+              </div>
+              <div class="event-meta-item">
+                <i data-lucide="clock"></i>
+                <span>1:00 PM - 4:00 PM EST</span>
+              </div>
+            </div>
+            <button class="event-toggle">
+              <span>Learn More</span>
+              <i data-lucide="chevron-down" class="event-toggle-icon"></i>
+            </button>
+            <div class="event-details">
+              <div class="event-details-inner">
+                <p>Get personalized feedback from career coaches in a supportive virtual environment.</p>
+                <ul>
+                  <li>Mock interview practice sessions</li>
+                  <li>Common question preparation</li>
+                  <li>Body language and presentation tips</li>
+                  <li>Zoom link sent after registration</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 5 -->
+        <div class="event-card" data-category="job-fair">
+          <div class="event-date-block">
+            <div class="event-month">February</div>
+            <div class="event-day">18</div>
+            <div class="event-year">2025</div>
+          </div>
+          <div class="event-content">
+            <div class="event-type">Job Fair</div>
+            <h3 class="event-title">Retail & Hospitality Hiring Day</h3>
+            <p class="event-description">
+              Major retailers and hospitality brands are hiring for immediate opportunities.
+            </p>
+            <div class="event-meta">
+              <div class="event-meta-item">
+                <i data-lucide="map-pin"></i>
+                <span>America Works Manhattan Office</span>
+              </div>
+              <div class="event-meta-item">
+                <i data-lucide="clock"></i>
+                <span>11:00 AM - 6:00 PM</span>
+              </div>
+            </div>
+            <button class="event-toggle">
+              <span>Learn More</span>
+              <i data-lucide="chevron-down" class="event-toggle-icon"></i>
+            </button>
+            <div class="event-details">
+              <div class="event-details-inner">
+                <p>Perfect for those seeking immediate employment. Many positions start within two weeks of hire.</p>
+                <ul>
+                  <li>Full-time and part-time positions</li>
+                  <li>Flexible scheduling available</li>
+                  <li>Entry-level friendly</li>
+                  <li>Same-day offers possible</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 6 -->
+        <div class="event-card" data-category="other">
+          <div class="event-date-block">
+            <div class="event-month">March</div>
+            <div class="event-day">05</div>
+            <div class="event-year">2025</div>
+          </div>
+          <div class="event-content">
+            <div class="event-type">Career Development</div>
+            <h3 class="event-title">Professional Networking Night</h3>
+            <p class="event-description">
+              Build your professional network with industry professionals and recruiters.
+            </p>
+            <div class="event-meta">
+              <div class="event-meta-item">
+                <i data-lucide="map-pin"></i>
+                <span>The Roosevelt Hotel, NYC</span>
+              </div>
+              <div class="event-meta-item">
+                <i data-lucide="clock"></i>
+                <span>6:00 PM - 9:00 PM</span>
+              </div>
+            </div>
+            <button class="event-toggle">
+              <span>Learn More</span>
+              <i data-lucide="chevron-down" class="event-toggle-icon"></i>
+            </button>
+            <div class="event-details">
+              <div class="event-details-inner">
+                <p>A relaxed setting to make connections that could lead to your next opportunity.</p>
+                <ul>
+                  <li>Light refreshments provided</li>
+                  <li>Business casual attire</li>
+                  <li>Bring business cards if you have them</li>
+                  <li>Open to all career levels</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter CTA -->
+  <section class="py-24 bg-white">
+    <div class="max-w-container mx-auto px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="font-mono text-xs uppercase tracking-[0.15em] text-gray-500 mb-4">// Stay Updated</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-black mb-6">Never miss an opportunity.</h2>
+        <p class="text-xl text-gray-600 mb-10">
+          Subscribe to get notified about upcoming job fairs, workshops, and hiring events in your area.
+        </p>
+        <form class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            class="flex-1 px-5 py-4 bg-gray-50 border border-gray-300 rounded text-base focus:outline-none focus:border-aw-red focus:ring-2 focus:ring-aw-red/20 transition-all"
+          >
+          <button type="submit" class="px-8 py-4 bg-aw-red text-white font-semibold rounded transition-all hover:bg-aw-red-dark hover:shadow-lg">
+            Subscribe
+          </button>
+        </form>
+        <p class="text-sm text-gray-500 mt-4">We respect your privacy. Unsubscribe at any time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-24 bg-gray-950 text-white text-center relative overflow-hidden" id="contact">
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
+    <div class="max-w-container mx-auto px-8 relative z-10">
+      <h2 class="font-display text-display-md font-normal mb-6 tracking-tight">Can't find an event near you?</h2>
+      <p class="text-xl text-white/80 mb-10 max-w-2xl mx-auto">
+        Reach out to us directly. We can connect you with opportunities and services regardless of location.
+      </p>
+      <div class="flex gap-5 justify-center flex-wrap">
+        <a href="jobseekers.html" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-950 font-semibold rounded transition-all hover:shadow-lg hover:-translate-y-0.5">
+          <span>Start Your Journey</span>
+          <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+        </a>
+        <a href="#" class="inline-flex items-center gap-2 px-8 py-4 bg-transparent text-white font-semibold border-2 border-white/50 rounded transition-all hover:bg-white/10 hover:border-white">
+          <span>Find a Location</span>
+          <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-950 text-gray-500 pt-16 pb-8">
+    <div class="max-w-container mx-auto px-8">
+      <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-16 mb-16">
+        <div>
+          <h4 class="font-body text-sm font-semibold text-white mb-6 uppercase tracking-wide">America Works</h4>
+          <p class="text-sm leading-relaxed text-gray-500">
+            Technical excellence in workforce development.
+            Proven results since 1984. Performance-based,
+            people-focused, purpose-driven.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-body text-sm font-semibold text-white mb-6 uppercase tracking-wide">Jobseekers</h4>
+          <ul class="footer-links">
+            <li class="mb-3"><a href="jobseekers.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">How It Works</a></li>
+            <li class="mb-3"><a href="jobseekers.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Services</a></li>
+            <li class="mb-3"><a href="events.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Events</a></li>
+            <li class="mb-3"><a href="#" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-body text-sm font-semibold text-white mb-6 uppercase tracking-wide">Partners</h4>
+          <ul class="footer-links">
+            <li class="mb-3"><a href="partners.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Why Choose Us</a></li>
+            <li class="mb-3"><a href="partners.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Performance Model</a></li>
+            <li class="mb-3"><a href="employers.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Employers</a></li>
+            <li class="mb-3"><a href="#contact" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-body text-sm font-semibold text-white mb-6 uppercase tracking-wide">Company</h4>
+          <ul class="footer-links">
+            <li class="mb-3"><a href="about.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">About</a></li>
+            <li class="mb-3"><a href="#contact" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Locations</a></li>
+            <li class="mb-3"><a href="events.html" class="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Events</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-sm">
+        <div>&copy; 2024 America Works. All rights reserved.</div>
+        <div class="flex flex-col md:flex-row gap-8 font-mono text-xs">
+          <span class="opacity-70">Est. 1984</span>
+          <span class="opacity-70">Federal Vendor</span>
+          <span class="opacity-70">Woman-Owned</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Scroll Progress Bar
+    function updateScrollProgress() {
+      const scrollProgress = document.querySelector('.scroll-progress-bar');
+      const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+      scrollProgress.style.transform = `scaleX(${scrollPercent})`;
+    }
+
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+
+    // Stagger animation for event cards
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, index * 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.event-card').forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+      observer.observe(card);
+    });
+
+    // Accordion toggle for event cards
+    document.querySelectorAll('.event-toggle').forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const card = toggle.closest('.event-card');
+        const isExpanded = card.classList.contains('expanded');
+
+        // Close all other cards
+        document.querySelectorAll('.event-card.expanded').forEach(openCard => {
+          if (openCard !== card) {
+            openCard.classList.remove('expanded');
+            openCard.querySelector('.event-toggle span').textContent = 'Learn More';
+          }
+        });
+
+        // Toggle current card
+        card.classList.toggle('expanded');
+        toggle.querySelector('span').textContent = isExpanded ? 'Learn More' : 'Show Less';
+
+        // Re-initialize icons after text change
+        lucide.createIcons();
+      });
+    });
+
+    // Filter tabs
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const eventCards = document.querySelectorAll('.event-card');
+
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Update active tab
+        filterTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const filter = tab.dataset.filter;
+
+        // Filter cards
+        eventCards.forEach(card => {
+          const category = card.dataset.category;
+
+          if (filter === 'all' || category === filter) {
+            card.style.display = '';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

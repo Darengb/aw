@@ -16,6 +16,37 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Instrument Serif', 'serif'],
+            body: ['General Sans', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            crimson: ['Crimson Text', 'serif'],
+          },
+          fontSize: {
+            'display-xl': '5.5rem',
+            'display-lg': '4rem',
+            'display-md': '3rem',
+          },
+          colors: {
+            'aw-red': { DEFAULT: '#ec140c', dark: '#c7130c' },
+            'aw-blue': { DEFAULT: '#323b97', dark: '#252e6e' },
+            'accent-cyan': '#00d4ff',
+            'accent-green': '#10b981',
+          },
+          maxWidth: {
+            'container': '87.5rem',
+          },
+        },
+      },
+    }
+  </script>
+
   <style>
     /* ============================================
        PREMIUM EDITORIAL DESIGN SYSTEM
@@ -136,17 +167,45 @@
     }
 
     /* Navigation */
+    /* Step 1: At top - transparent, no blur */
     .navigation {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--gray-200);
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom: none;
       z-index: 1000;
-      transition: transform 0.3s var(--ease-primary), opacity 0.3s var(--ease-primary);
+      transition: all 0.3s var(--ease-primary);
+    }
+
+    /* Step 2: In hero with blur */
+    .navigation.scrolled {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px) saturate(100%);
+      -webkit-backdrop-filter: blur(12px) saturate(100%);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    }
+
+    /* Step 3: Below hero with blur and dark text */
+    .navigation.below-hero {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px) saturate(100%);
+      -webkit-backdrop-filter: blur(12px) saturate(100%);
+    }
+
+    .navigation.below-hero .nav-logo {
+      color: var(--black);
+    }
+
+    .navigation.below-hero .nav-links a {
+      color: var(--gray-700);
+    }
+
+    .navigation.below-hero .nav-links a:hover {
+      color: var(--black);
     }
 
     .primary-nav {
@@ -191,12 +250,12 @@
       align-items: center;
       gap: 0.75rem;
       text-decoration: none;
-      color: var(--black);
+      color: var(--white);
       font-family: 'Crimson Text', serif;
       font-size: 1.5rem;
       font-weight: 600;
       letter-spacing: -0.01em;
-      transition: opacity 0.2s ease;
+      transition: color 0.2s ease, opacity 0.2s ease;
     }
 
     .nav-logo:hover {
@@ -218,13 +277,13 @@
     .nav-links a {
       font-size: var(--text-sm);
       font-weight: 600;
-      color: var(--gray-700);
+      color: rgba(255, 255, 255, 0.8);
       text-decoration: none;
       transition: color 0.2s ease;
     }
 
     .nav-links a:hover {
-      color: var(--black);
+      color: var(--white);
     }
 
     .nav-cta {
@@ -1115,6 +1174,15 @@
         display: none;
       }
 
+      .hero {
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+      }
+
+      .hero-container {
+        padding: 0 1rem;
+      }
+
       .hero-headline {
         font-size: 3rem;
       }
@@ -1154,7 +1222,7 @@
   <nav class="navigation primary-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
-        <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
+        <img src="images/aw-logo-simple.png" alt="AW" class="h-10 w-auto block">
         <span>AMERICA WORKS</span>
       </a>
       <div class="nav-links">
@@ -1171,7 +1239,7 @@
   <nav class="navigation secondary-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
-        <img src="images/aw-logo-simple.png" alt="AW" class="nav-logo-img">
+        <img src="images/aw-logo-simple.png" alt="AW" class="h-10 w-auto block">
         <span>AMERICA WORKS</span>
       </a>
       <div class="nav-links">
@@ -1184,24 +1252,24 @@
   </nav>
 
   <!-- Hero -->
-  <section class="hero">
-    <div class="hero-image-bg">
-      <img src="images/team-of-workers-celebrating-success-at-a-shipping.jpg" alt="Successful team at work">
+  <section class="hero relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="hero-image-bg absolute inset-0 z-0">
+      <img src="images/team-of-workers-celebrating-success-at-a-shipping.jpg" alt="Successful team at work" class="w-full h-full object-cover object-center">
     </div>
-    <div class="hero-overlay"></div>
-    <div class="hero-container">
-      <div class="hero-content">
-        <div class="hero-label">// Staffing with America Works</div>
-        <h1 class="hero-headline">Fill your open roles with motivated, pre-screened talent—at no cost.</h1>
-        <p class="hero-subheadline">
+    <div class="hero-overlay absolute inset-0 z-[1]"></div>
+    <div class="hero-container max-w-container mx-auto px-8 relative z-[2]">
+      <div class="hero-content max-w-4xl">
+        <div class="hero-label font-mono text-xs uppercase tracking-[0.15em] text-white/80 mb-6">// Staffing with America Works</div>
+        <h1 class="hero-headline font-display text-6xl md:text-7xl font-normal leading-tight tracking-tight text-white mb-8">Fill your open roles with motivated, pre-screened talent—at no cost.</h1>
+        <p class="hero-subheadline text-xl text-white/90 leading-relaxed mb-10 max-w-3xl">
           America Works connects you with job-ready candidates and supports them for months after hire, helping you save time, reduce turnover, and build a more reliable workforce.
         </p>
-        <div class="hero-ctas">
-          <a href="#contact" class="btn-primary">
+        <div class="hero-ctas flex flex-wrap gap-5">
+          <a href="#contact" class="btn-primary inline-flex items-center gap-2">
             <span>Submit a job order</span>
             <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
           </a>
-          <a href="#contact" class="btn-secondary">
+          <a href="#contact" class="btn-secondary inline-flex items-center gap-2">
             <span>Talk to our staffing team</span>
             <i data-lucide="phone" style="width: 18px; height: 18px;"></i>
           </a>
@@ -1211,96 +1279,96 @@
   </section>
 
   <!-- Why Partner -->
-  <section class="value-props-section" id="why-partner">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">Partnership</div>
-        <h2>Why partner with America Works for staffing?</h2>
-        <p class="section-intro">
+  <section class="value-props-section py-32 bg-gray-50" id="why-partner">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">Partnership</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Why partner with America Works for staffing?</h2>
+        <p class="section-intro text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
           Hiring shouldn't mean sorting through hundreds of resumes or paying high agency fees. America Works offers a simple alternative: we recruit, screen, and support candidates—so you can focus on running your business.
         </p>
       </header>
 
-      <div class="value-grid">
-        <div class="value-card">
-          <div class="value-number">01</div>
-          <h3>No-fee staffing</h3>
-          <p>Our services are funded through public and partner programs, so employers aren't charged for placements or support.</p>
+      <div class="value-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+        <div class="value-card bg-white p-10 rounded border border-gray-200 relative">
+          <div class="value-number font-mono text-4xl font-bold text-aw-blue opacity-30 mb-4 leading-none">01</div>
+          <h3 class="font-body text-lg font-semibold text-gray-900 mb-3 tracking-tight">No-fee staffing</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">Our services are funded through public and partner programs, so employers aren't charged for placements or support.</p>
         </div>
 
-        <div class="value-card">
-          <div class="value-number">02</div>
-          <h3>Pre-screened, job-ready candidates</h3>
-          <p>We assess skills, motivation, and fit before we send candidates your way, helping you spend time only on serious applicants.</p>
+        <div class="value-card bg-white p-10 rounded border border-gray-200 relative">
+          <div class="value-number font-mono text-4xl font-bold text-aw-blue opacity-30 mb-4 leading-none">02</div>
+          <h3 class="font-body text-lg font-semibold text-gray-900 mb-3 tracking-tight">Pre-screened, job-ready candidates</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">We assess skills, motivation, and fit before we send candidates your way, helping you spend time only on serious applicants.</p>
         </div>
 
-        <div class="value-card">
-          <div class="value-number">03</div>
-          <h3>Retention-focused support</h3>
-          <p>Many candidates complete job-readiness training and receive months of mentoring after hire, helping them make a smooth transition and stay on the job.</p>
+        <div class="value-card bg-white p-10 rounded border border-gray-200 relative">
+          <div class="value-number font-mono text-4xl font-bold text-aw-blue opacity-30 mb-4 leading-none">03</div>
+          <h3 class="font-body text-lg font-semibold text-gray-900 mb-3 tracking-tight">Retention-focused support</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">Many candidates complete job-readiness training and receive months of mentoring after hire, helping them make a smooth transition and stay on the job.</p>
         </div>
 
-        <div class="value-card">
-          <div class="value-number">04</div>
-          <h3>Tax credit & compliance opportunities</h3>
-          <p>A large share of our candidates qualify for federal incentives like the Work Opportunity Tax Credit and can help you meet federal contractor diversity and disability hiring goals.</p>
+        <div class="value-card bg-white p-10 rounded border border-gray-200 relative">
+          <div class="value-number font-mono text-4xl font-bold text-aw-blue opacity-30 mb-4 leading-none">04</div>
+          <h3 class="font-body text-lg font-semibold text-gray-900 mb-3 tracking-tight">Tax credit & compliance opportunities</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">A large share of our candidates qualify for federal incentives like the Work Opportunity Tax Credit and can help you meet federal contractor diversity and disability hiring goals.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- How It Works -->
-  <section class="process-section" id="how-it-works">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">Process</div>
-        <h2>How our staffing process works.</h2>
-        <p class="section-intro">
+  <section class="process-section py-32 bg-white" id="how-it-works">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">Process</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">How our staffing process works.</h2>
+        <p class="section-intro text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
           We keep the process straightforward for you and supportive for your new hires.
         </p>
       </header>
 
-      <div class="process-grid">
-        <div class="process-card">
-          <div class="process-number">01</div>
-          <h3>Tell us what you're hiring for</h3>
-          <p>Start by submitting a job order or talking with our team about your open roles, locations, and requirements—skills, schedule, experience level, and workplace environment.</p>
+      <div class="process-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+        <div class="process-card bg-gray-50 p-10 rounded border border-gray-200 relative">
+          <div class="process-number font-mono text-4xl font-bold text-aw-blue opacity-30 mb-4 leading-none">01</div>
+          <h3 class="font-body text-lg font-semibold text-gray-900 mb-3 tracking-tight">Tell us what you're hiring for</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">Start by submitting a job order or talking with our team about your open roles, locations, and requirements—skills, schedule, experience level, and workplace environment.</p>
         </div>
 
-        <div class="process-card">
-          <div class="process-number">02</div>
-          <h3>We source and screen candidates</h3>
-          <p>Our staff recruits from our talent pool and partner programs, then pre-screens candidates to confirm interest, availability, and fit. Only motivated, qualified candidates are forwarded to you.</p>
+        <div class="process-card bg-gray-50 p-10 rounded border border-gray-200 relative">
+          <div class="process-number font-mono text-4xl font-bold text-aw-blue opacity-30 mb-4 leading-none">02</div>
+          <h3 class="font-body text-lg font-semibold text-gray-900 mb-3 tracking-tight">We source and screen candidates</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">Our staff recruits from our talent pool and partner programs, then pre-screens candidates to confirm interest, availability, and fit. Only motivated, qualified candidates are forwarded to you.</p>
         </div>
 
-        <div class="process-card">
-          <div class="process-number">03</div>
-          <h3>You choose who to hire</h3>
-          <p>We coordinate interviews—at your site or virtually. You make the final hiring decision. Many employers work with us repeatedly to fill ongoing staffing needs.</p>
+        <div class="process-card bg-gray-50 p-10 rounded border border-gray-200 relative">
+          <div class="process-number font-mono text-4xl font-bold text-aw-blue opacity-30 mb-4 leading-none">03</div>
+          <h3 class="font-body text-lg font-semibold text-gray-900 mb-3 tracking-tight">You choose who to hire</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">We coordinate interviews—at your site or virtually. You make the final hiring decision. Many employers work with us repeatedly to fill ongoing staffing needs.</p>
         </div>
 
-        <div class="process-card">
-          <div class="process-number">04</div>
-          <h3>We stay involved after hire</h3>
-          <p>After a candidate starts, our team checks in regularly, offers coaching, and helps them navigate challenges. This extra layer of support helps your new employee settle in and stay productive.</p>
+        <div class="process-card bg-gray-50 p-10 rounded border border-gray-200 relative">
+          <div class="process-number font-mono text-4xl font-bold text-aw-blue opacity-30 mb-4 leading-none">04</div>
+          <h3 class="font-body text-lg font-semibold text-gray-900 mb-3 tracking-tight">We stay involved after hire</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">After a candidate starts, our team checks in regularly, offers coaching, and helps them navigate challenges. This extra layer of support helps your new employee settle in and stay productive.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Candidates Different -->
-  <section class="split-section">
-    <div class="split-image">
-      <img src="images/resume-coaching.jpg" alt="Job readiness training">
+  <section class="split-section grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[75vh] relative">
+    <div class="split-image relative overflow-hidden bg-gray-100 h-full min-h-[400px] lg:min-h-full">
+      <img src="images/resume-coaching.jpg" alt="Job readiness training" class="absolute inset-0 w-full h-full object-cover object-center">
     </div>
     <div class="split-content">
       <div class="split-content-inner">
-        <div class="section-label">Preparation</div>
-        <h2 class="split-headline">Candidates prepared to succeed—not just to show up.</h2>
-        <p class="split-description">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">Preparation</div>
+        <h2 class="split-headline font-display text-4xl font-normal leading-tight tracking-tight text-gray-900 mb-6">Candidates prepared to succeed—not just to show up.</h2>
+        <p class="split-description text-lg text-gray-600 leading-relaxed mb-6">
           Many candidates participate in a structured job-readiness program that covers communication, customer service, workplace expectations, and basic computer and soft skills before they ever meet with you. That means they arrive at interviews with a clearer understanding of what it takes to be successful on the job.
         </p>
-        <p class="split-description">
+        <p class="split-description text-lg text-gray-600 leading-relaxed mb-8">
           After hire, we stay in touch with your new employee for a period of time—offering mentoring, guidance, and problem-solving support during and outside of work hours. This reduces early turnover and helps employees stay engaged and dependable.
         </p>
       </div>
@@ -1308,71 +1376,71 @@
   </section>
 
   <!-- Roles & Industries -->
-  <section class="roles-section">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">Industries</div>
-        <h2>Roles and industries we commonly support.</h2>
-        <p class="section-intro">
+  <section class="roles-section py-32 bg-gray-50">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">Industries</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Roles and industries we commonly support.</h2>
+        <p class="section-intro text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
           We staff a wide range of entry-level to mid-level positions across industries. Typical roles include:
         </p>
       </header>
 
-      <div class="roles-grid">
-        <div class="role-item">
-          <i data-lucide="briefcase" class="role-icon"></i>
-          <span>Administrative & clerical</span>
+      <div class="roles-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
+        <div class="role-item flex items-center gap-4 bg-white p-6 rounded border border-gray-200">
+          <i data-lucide="briefcase" class="role-icon text-aw-blue w-6 h-6"></i>
+          <span class="text-gray-900 font-medium">Administrative & clerical</span>
         </div>
-        <div class="role-item">
-          <i data-lucide="headphones" class="role-icon"></i>
-          <span>Customer service & call centers</span>
+        <div class="role-item flex items-center gap-4 bg-white p-6 rounded border border-gray-200">
+          <i data-lucide="headphones" class="role-icon text-aw-blue w-6 h-6"></i>
+          <span class="text-gray-900 font-medium">Customer service & call centers</span>
         </div>
-        <div class="role-item">
-          <i data-lucide="shopping-bag" class="role-icon"></i>
-          <span>Retail & sales</span>
+        <div class="role-item flex items-center gap-4 bg-white p-6 rounded border border-gray-200">
+          <i data-lucide="shopping-bag" class="role-icon text-aw-blue w-6 h-6"></i>
+          <span class="text-gray-900 font-medium">Retail & sales</span>
         </div>
-        <div class="role-item">
-          <i data-lucide="utensils" class="role-icon"></i>
-          <span>Food service & hospitality</span>
+        <div class="role-item flex items-center gap-4 bg-white p-6 rounded border border-gray-200">
+          <i data-lucide="utensils" class="role-icon text-aw-blue w-6 h-6"></i>
+          <span class="text-gray-900 font-medium">Food service & hospitality</span>
         </div>
-        <div class="role-item">
-          <i data-lucide="shield" class="role-icon"></i>
-          <span>Security and building services</span>
+        <div class="role-item flex items-center gap-4 bg-white p-6 rounded border border-gray-200">
+          <i data-lucide="shield" class="role-icon text-aw-blue w-6 h-6"></i>
+          <span class="text-gray-900 font-medium">Security and building services</span>
         </div>
-        <div class="role-item">
-          <i data-lucide="truck" class="role-icon"></i>
-          <span>Drivers and delivery</span>
+        <div class="role-item flex items-center gap-4 bg-white p-6 rounded border border-gray-200">
+          <i data-lucide="truck" class="role-icon text-aw-blue w-6 h-6"></i>
+          <span class="text-gray-900 font-medium">Drivers and delivery</span>
         </div>
-        <div class="role-item">
-          <i data-lucide="wrench" class="role-icon"></i>
-          <span>Maintenance and facilities roles</span>
+        <div class="role-item flex items-center gap-4 bg-white p-6 rounded border border-gray-200">
+          <i data-lucide="wrench" class="role-icon text-aw-blue w-6 h-6"></i>
+          <span class="text-gray-900 font-medium">Maintenance and facilities roles</span>
         </div>
-        <div class="role-item">
-          <i data-lucide="heart" class="role-icon"></i>
-          <span>Healthcare support roles</span>
+        <div class="role-item flex items-center gap-4 bg-white p-6 rounded border border-gray-200">
+          <i data-lucide="heart" class="role-icon text-aw-blue w-6 h-6"></i>
+          <span class="text-gray-900 font-medium">Healthcare support roles</span>
         </div>
-        <div class="role-item">
-          <i data-lucide="user" class="role-icon"></i>
-          <span>Receptionist / front-desk</span>
+        <div class="role-item flex items-center gap-4 bg-white p-6 rounded border border-gray-200">
+          <i data-lucide="user" class="role-icon text-aw-blue w-6 h-6"></i>
+          <span class="text-gray-900 font-medium">Receptionist / front-desk</span>
         </div>
       </div>
 
-      <p class="note-text">
+      <p class="note-text text-center text-sm text-gray-500 mt-12">
         Specific roles vary by location. Your local America Works team can advise you on candidate availability in your area.
       </p>
     </div>
   </section>
 
   <!-- Benefits -->
-  <section class="split-section reverse">
-    <div class="split-image">
-      <img src="images/business-career-and-placement.jpg" alt="Business partnership">
+  <section class="split-section reverse grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[75vh] relative">
+    <div class="split-image relative overflow-hidden bg-gray-100 h-full min-h-[400px] lg:min-h-full">
+      <img src="images/business-career-and-placement.jpg" alt="Business partnership" class="absolute inset-0 w-full h-full object-cover object-center">
     </div>
     <div class="split-content alt-bg">
       <div class="split-content-inner">
-        <div class="section-label">Value</div>
-        <h2 class="split-headline">Business benefits for employers.</h2>
-        <p class="split-description">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">Value</div>
+        <h2 class="split-headline font-display text-4xl font-normal leading-tight tracking-tight text-gray-900 mb-6">Business benefits for employers.</h2>
+        <p class="split-description text-lg text-gray-600 leading-relaxed mb-8">
           Working with America Works isn't just the right thing to do—it's good for your bottom line.
         </p>
         <ul class="feature-list">
@@ -1381,7 +1449,7 @@
           <li class="feature-item">We help federal contractors broaden their talent pipeline and support Section 503 and diversity-related workforce goals</li>
           <li class="feature-item">Reduced time-to-hire with pre-screened, motivated candidates</li>
         </ul>
-        <a href="#contact" class="btn-link">
+        <a href="#contact" class="btn-link inline-flex items-center gap-2">
           <span>Learn about tax credits</span>
           <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
         </a>
@@ -1390,61 +1458,61 @@
   </section>
 
   <!-- Testimonials -->
-  <section class="testimonials-section">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">Partnerships</div>
-        <h2>What employers say about working with us.</h2>
+  <section class="testimonials-section py-32 bg-white relative">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">Partnerships</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">What employers say about working with us.</h2>
       </header>
 
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <p class="testimonial-text">
+      <div class="testimonials-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+        <div class="testimonial-card bg-gray-50 p-12 rounded relative">
+          <p class="testimonial-text relative z-[1] text-base leading-relaxed text-gray-800 mb-6 italic">
             America Works understands what our roles require and consistently sends candidates who fit. They've made our hiring process much easier.
           </p>
-          <p class="testimonial-author">— Aegis Global</p>
+          <p class="testimonial-author text-sm text-gray-600 font-semibold not-italic">— Aegis Global</p>
         </div>
 
-        <div class="testimonial-card">
-          <p class="testimonial-text">
+        <div class="testimonial-card bg-gray-50 p-12 rounded relative">
+          <p class="testimonial-text relative z-[1] text-base leading-relaxed text-gray-800 mb-6 italic">
             At key venues like Citi Field and Yankee Stadium, America Works has reliably handled our seasonal and event staffing needs year after year.
           </p>
-          <p class="testimonial-author">— Aramark</p>
+          <p class="testimonial-author text-sm text-gray-600 font-semibold not-italic">— Aramark</p>
         </div>
 
-        <div class="testimonial-card">
-          <p class="testimonial-text">
+        <div class="testimonial-card bg-gray-50 p-12 rounded relative">
+          <p class="testimonial-text relative z-[1] text-base leading-relaxed text-gray-800 mb-6 italic">
             Because America Works pre-screens candidates and provides support services, we can even conduct interviews on-site in our stores, which saves our managers a lot of time.
           </p>
-          <p class="testimonial-author">— Burlington</p>
+          <p class="testimonial-author text-sm text-gray-600 font-semibold not-italic">— Burlington</p>
         </div>
 
-        <div class="testimonial-card">
-          <p class="testimonial-text">
+        <div class="testimonial-card bg-gray-50 p-12 rounded relative">
+          <p class="testimonial-text relative z-[1] text-base leading-relaxed text-gray-800 mb-6 italic">
             They're a dedicated, helpful partner and have played a real role in helping us meet our hiring needs.
           </p>
-          <p class="testimonial-author">— Fossil</p>
+          <p class="testimonial-author text-sm text-gray-600 font-semibold not-italic">— Fossil</p>
         </div>
 
-        <div class="testimonial-card">
-          <p class="testimonial-text">
+        <div class="testimonial-card bg-gray-50 p-12 rounded relative">
+          <p class="testimonial-text relative z-[1] text-base leading-relaxed text-gray-800 mb-6 italic">
             We have an ongoing need for dependable, skilled workers. America Works has been a consistent source of reliable talent.
           </p>
-          <p class="testimonial-author">— H&R Block</p>
+          <p class="testimonial-author text-sm text-gray-600 font-semibold not-italic">— H&R Block</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="faq-section" id="faq">
-    <div class="container">
-      <header class="section-header">
-        <div class="section-label">FAQ</div>
-        <h2>Questions employers often ask.</h2>
+  <section class="faq-section py-32 bg-gray-50" id="faq">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <div class="section-label font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4">FAQ</div>
+        <h2 class="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Questions employers often ask.</h2>
       </header>
 
-      <div class="faq-container">
+      <div class="faq-container max-w-4xl mx-auto">
         <div class="faq-item">
           <button class="faq-question">
             <span>What does it cost to use America Works for staffing?</span>
@@ -1521,23 +1589,23 @@
   </section>
 
   <!-- CTA -->
-  <section class="cta-section" id="contact">
-    <div class="container">
-      <div class="cta-content">
-        <h2>Ready to meet your next great hire?</h2>
-        <p>
+  <section class="cta-section py-32 bg-gray-950 text-white text-center relative overflow-hidden" id="contact">
+    <div class="container max-w-container mx-auto px-8">
+      <div class="cta-content relative z-[2]">
+        <h2 class="font-display text-display-md font-normal mb-6 tracking-tight">Ready to meet your next great hire?</h2>
+        <p class="text-xl text-white/90 mb-12 max-w-3xl mx-auto">
           Whether you need to fill a single role or manage ongoing hiring across multiple sites, America Works can help you find motivated, supported candidates at no cost.
         </p>
-        <div class="cta-buttons">
-          <a href="#" class="btn-white">
+        <div class="cta-buttons flex gap-5 justify-center flex-wrap">
+          <a href="#" class="btn-white inline-flex items-center gap-2 py-5 px-12 bg-white text-gray-950 rounded-md font-body text-sm font-semibold no-underline shadow-lg">
             <span>Submit a job order</span>
             <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
           </a>
-          <a href="#" class="btn-outline-white">
+          <a href="#" class="btn-outline-white inline-flex items-center gap-2 py-5 px-12 bg-transparent text-white border-2 border-white/50 rounded-md font-body text-sm font-semibold no-underline">
             <span>Talk to our staffing team</span>
             <i data-lucide="phone" style="width: 18px; height: 18px;"></i>
           </a>
-          <a href="#" class="btn-outline-white">
+          <a href="#" class="btn-outline-white inline-flex items-center gap-2 py-5 px-12 bg-transparent text-white border-2 border-white/50 rounded-md font-body text-sm font-semibold no-underline">
             <span>Find your nearest office</span>
             <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
           </a>
@@ -1547,47 +1615,47 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
+  <footer class="footer bg-gray-900 text-gray-400 pt-16 pb-8">
+    <div class="container max-w-container mx-auto px-8">
+      <div class="footer-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
         <div class="footer-section">
-          <h4>America Works</h4>
-          <p style="font-size: var(--text-sm); line-height: 1.7; margin-top: 1rem;">
+          <h4 class="text-white text-base font-semibold mb-6">America Works</h4>
+          <p class="text-sm leading-relaxed mt-4">
             40 years of proven workforce development. Technical excellence meets human impact.
           </p>
         </div>
 
         <div class="footer-section">
-          <h4>For Employers</h4>
-          <ul class="footer-links">
-            <li><a href="#why-partner">Why Partner</a></li>
-            <li><a href="#how-it-works">Process</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contact">Submit Job Order</a></li>
+          <h4 class="text-white text-base font-semibold mb-6">For Employers</h4>
+          <ul class="footer-links list-none flex flex-col gap-3">
+            <li><a href="#why-partner" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Why Partner</a></li>
+            <li><a href="#how-it-works" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Process</a></li>
+            <li><a href="#faq" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">FAQ</a></li>
+            <li><a href="#contact" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Submit Job Order</a></li>
           </ul>
         </div>
 
         <div class="footer-section">
-          <h4>Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="jobseekers.html">For Jobseekers</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Locations</a></li>
+          <h4 class="text-white text-base font-semibold mb-6">Quick Links</h4>
+          <ul class="footer-links list-none flex flex-col gap-3">
+            <li><a href="index.html" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Home</a></li>
+            <li><a href="jobseekers.html" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">For Jobseekers</a></li>
+            <li><a href="#" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">About Us</a></li>
+            <li><a href="#" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Locations</a></li>
           </ul>
         </div>
 
         <div class="footer-section">
-          <h4>Connect</h4>
-          <ul class="footer-links">
-            <li><a href="#">LinkedIn</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Facebook</a></li>
+          <h4 class="text-white text-base font-semibold mb-6">Connect</h4>
+          <ul class="footer-links list-none flex flex-col gap-3">
+            <li><a href="#" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">LinkedIn</a></li>
+            <li><a href="#" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Twitter</a></li>
+            <li><a href="#" class="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Facebook</a></li>
           </ul>
         </div>
       </div>
 
-      <div class="footer-bottom">
+      <div class="footer-bottom pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
         <p>&copy; 2024 America Works. All rights reserved.</p>
       </div>
     </div>
@@ -1596,6 +1664,33 @@
   <script>
     // Initialize Lucide icons
     lucide.createIcons();
+
+    // Navigation Scroll Effect - Three Steps
+    const navs = document.querySelectorAll('.navigation');
+    const hero = document.querySelector('.hero');
+    window.addEventListener('scroll', () => {
+      const heroHeight = hero ? hero.offsetHeight : 0;
+      const scrollPos = window.pageYOffset;
+
+      // Step 1: At top (no classes)
+      // Step 2: Scrolled in hero (scrolled class)
+      // Step 3: Below hero (below-hero class)
+
+      navs.forEach(nav => {
+        if (scrollPos === 0) {
+          // Step 1: At very top - transparent, no blur
+          nav.classList.remove('scrolled', 'below-hero');
+        } else if (scrollPos > 0 && scrollPos < heroHeight - 100) {
+          // Step 2: In hero - blur with white text
+          nav.classList.add('scrolled');
+          nav.classList.remove('below-hero');
+        } else {
+          // Step 3: Below hero - blur with dark text
+          nav.classList.remove('scrolled');
+          nav.classList.add('below-hero');
+        }
+      });
+    }, { passive: true });
 
     // Scroll progress bar and nav switching
     const primaryNav = document.querySelector('.primary-nav');
