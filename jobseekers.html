@@ -991,6 +991,22 @@
         grid-template-columns: repeat(2, 1fr);
       }
     }
+
+    /* Inline Quote Styling */
+    .inline-quote {
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    .inline-quote::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: #ec140c;
+      border-radius: 2px;
+    }
   </style>
 </head>
 <body>
@@ -1060,6 +1076,34 @@
     </div>
   </section>
 
+  <!-- Google Reviews -->
+  <section class="py-24 bg-white">
+    <div class="container max-w-container mx-auto px-8">
+      <div class="testimonials-grid grid grid-cols-1 lg:grid-cols-3 gap-8 mt-0">
+        <div class="testimonial-card bg-gray-50 p-12 rounded relative">
+          <p class="testimonial-text relative z-[1] text-base leading-relaxed text-gray-800 mb-6 italic">
+            When I was in foster care America Works helped me not just get on my feet, but also help me find a better person in me.
+          </p>
+          <p class="testimonial-author text-sm text-gray-600 font-semibold not-italic">— Taino, Google Reviews</p>
+        </div>
+
+        <div class="testimonial-card bg-gray-50 p-12 rounded relative">
+          <p class="testimonial-text relative z-[1] text-base leading-relaxed text-gray-800 mb-6 italic">
+            I've learned a lot about myself working with the job trainer and developers. Highly recommended for those interested in their job search.
+          </p>
+          <p class="testimonial-author text-sm text-gray-600 font-semibold not-italic">— Mecia, Google Reviews</p>
+        </div>
+
+        <div class="testimonial-card bg-gray-50 p-12 rounded relative">
+          <p class="testimonial-text relative z-[1] text-base leading-relaxed text-gray-800 mb-6 italic">
+            This place has been an absolute help to me and my family. From my case workers to the Director. Nice people and great services.
+          </p>
+          <p class="testimonial-author text-sm text-gray-600 font-semibold not-italic">— Shanita, Google Reviews</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Section 1: Job Readiness -->
   <section class="split-section grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[75vh] relative" id="how-we-help">
     <div class="split-image relative overflow-hidden bg-gray-100 h-full min-h-[400px] lg:min-h-full">
@@ -1108,6 +1152,34 @@
           <span>See opportunities</span>
           <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Google Reviews: Meeting People Where They Are -->
+  <section class="py-24 bg-white">
+    <div class="container max-w-container mx-auto px-8">
+      <div class="testimonials-grid grid grid-cols-1 lg:grid-cols-3 gap-8 mt-0">
+        <div class="testimonial-card bg-gray-50 p-12 rounded relative">
+          <p class="testimonial-text relative z-[1] text-base leading-relaxed text-gray-800 mb-6 italic">
+            From Homeless to Formerly Homeless. From Unemployed to Employed. From feeling alone to now having a team of support. I now proudly work at Yankee Stadium.
+          </p>
+          <p class="testimonial-author text-sm text-gray-600 font-semibold not-italic">— Clark, Google Reviews</p>
+        </div>
+
+        <div class="testimonial-card bg-gray-50 p-12 rounded relative">
+          <p class="testimonial-text relative z-[1] text-base leading-relaxed text-gray-800 mb-6 italic">
+            I can't thank them enough for helping me at my lowest. Broke, homeless, unemployed. The employees are genuinely helpful. They want everyone to become a success story.
+          </p>
+          <p class="testimonial-author text-sm text-gray-600 font-semibold not-italic">— Troy, Google Reviews</p>
+        </div>
+
+        <div class="testimonial-card bg-gray-50 p-12 rounded relative">
+          <p class="testimonial-text relative z-[1] text-base leading-relaxed text-gray-800 mb-6 italic">
+            Coming from a domestic violence situation where I lost everything, America Works has been very supportive. I am grateful to have them in my life.
+          </p>
+          <p class="testimonial-author text-sm text-gray-600 font-semibold not-italic">— Sherbay, Google Reviews</p>
+        </div>
       </div>
     </div>
   </section>

@@ -2813,6 +2813,22 @@
         transition-duration: 0.01ms !important;
       }
     }
+
+    /* Inline Quote Styling */
+    .inline-quote {
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    .inline-quote::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: #ec140c;
+      border-radius: 2px;
+    }
   </style>
 </head>
 <body class="font-body text-[1.0625rem] font-normal leading-[1.7] tracking-[-0.01em] text-gray-800 bg-white antialiased overflow-x-hidden">
@@ -2984,6 +3000,44 @@
           </div>
         </article>
 
+        <!-- Google Reviews: Personal Service -->
+        <div class="py-16 px-8 lg:px-16">
+          <div class="testimonials-grid grid grid-cols-1 md:grid-cols-3 gap-8 mt-0">
+            <article class="testimonial-card is-visible">
+              <div class="testimonial-quote">"</div>
+              <blockquote>
+                <p>I was truly impressed with the dedication these people show their clients. Their enthusiasm is above par. The empathy shown to me was awesome.</p>
+                <footer>
+                  <cite>Carlos</cite>
+                  <span class="testimonial-role">Google Reviews</span>
+                </footer>
+              </blockquote>
+            </article>
+
+            <article class="testimonial-card is-visible">
+              <div class="testimonial-quote">"</div>
+              <blockquote>
+                <p>What an organization. I have felt like I matter there than anywhere in a long time. The staff are professional professionals if that makes sense.</p>
+                <footer>
+                  <cite>John</cite>
+                  <span class="testimonial-role">Google Reviews</span>
+                </footer>
+              </blockquote>
+            </article>
+
+            <article class="testimonial-card is-visible">
+              <div class="testimonial-quote">"</div>
+              <blockquote>
+                <p>Great experience for people re-entering the workforce. The environment is friendly and welcoming and everyone is ready to help.</p>
+                <footer>
+                  <cite>Angela</cite>
+                  <span class="testimonial-role">Google Reviews</span>
+                </footer>
+              </blockquote>
+            </article>
+          </div>
+        </div>
+
         <article class="path-card grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[75vh] relative overflow-visible opacity-0" id="partners">
           <div class="path-image" data-number="02">
             <img src="images/team-of-workers-celebrating-success-at-a-shipping.jpg" alt="Team success" loading="lazy">
@@ -3129,6 +3183,46 @@
       <div class="section-cta text-center">
         <a href="#contact" class="btn-link inline-flex items-center gap-2 font-body text-sm font-semibold uppercase tracking-wider text-gray-900 no-underline transition-all duration-200 hover:text-aw-blue">Find your local office →</a>
         <p class="cta-subtext mt-3 text-sm text-gray-600">In-person and virtual services available</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Google Reviews: Exceeded Expectations -->
+  <section class="py-24 bg-gray-50">
+    <div class="container max-w-container mx-auto px-8">
+      <div class="testimonials-grid grid grid-cols-1 md:grid-cols-3 gap-8 mt-0">
+        <article class="testimonial-card is-visible">
+          <div class="testimonial-quote">"</div>
+          <blockquote>
+            <p>I am a very skeptical person when it comes to people offering assistance, but America Works was much more.</p>
+            <footer>
+              <cite>Anthony</cite>
+              <span class="testimonial-role">Google Reviews</span>
+            </footer>
+          </blockquote>
+        </article>
+
+        <article class="testimonial-card is-visible">
+          <div class="testimonial-quote">"</div>
+          <blockquote>
+            <p>I tried to get a job on my own for months without any luck, and they had me going on interviews by my second day!</p>
+            <footer>
+              <cite>Joshua</cite>
+              <span class="testimonial-role">Google Reviews</span>
+            </footer>
+          </blockquote>
+        </article>
+
+        <article class="testimonial-card is-visible">
+          <div class="testimonial-quote">"</div>
+          <blockquote>
+            <p>America Works really takes their time with their clients and gives us more understanding on job searching.</p>
+            <footer>
+              <cite>Tatyanna</cite>
+              <span class="testimonial-role">Google Reviews</span>
+            </footer>
+          </blockquote>
+        </article>
       </div>
     </div>
   </section>
