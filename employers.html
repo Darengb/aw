@@ -867,11 +867,11 @@
     }
 
     .testimonial-card {
-      background: var(--gray-50);
+      background: var(--white);
       padding: 3rem 2.5rem;
-      border-radius: 4px;
       position: relative;
       transition: all 0.4s var(--ease-primary);
+      border-left: 3px solid var(--gray-200);
     }
 
     .testimonial-card::before {
@@ -888,8 +888,8 @@
 
     .testimonial-card:hover {
       transform: translateY(-4px);
-      background: var(--white);
       box-shadow: var(--shadow-xl);
+      border-left-color: var(--aw-blue);
     }
 
     .testimonial-text {
@@ -921,17 +921,12 @@
     }
 
     .faq-item {
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      border-radius: 4px;
-      margin-bottom: 1rem;
-      overflow: hidden;
+      border-bottom: 1px solid var(--gray-200);
       transition: all 0.3s ease;
     }
 
     .faq-item:hover {
-      border-color: var(--gray-300);
-      box-shadow: var(--shadow-md);
+      background: var(--gray-50);
     }
 
     .faq-question {
