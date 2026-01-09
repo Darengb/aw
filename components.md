@@ -4,17 +4,15 @@ This document catalogs reusable components across jobseekers.html, employers.htm
 
 ---
 
-## Design Decisions & Recommendations
+## Design System
 
-### Color Theming (KEEP - Intentional)
-- **Jobseekers & About:** Red accent (`--aw-red`) — warmer, more personal tone
-- **Employers & Partners:** Blue accent (`--aw-blue`) — professional, corporate tone
+### Color Theming
+- **Jobseekers & About:** Red accent (`--aw-red`)
+- **Employers & Partners:** Blue accent (`--aw-blue`)
 
-This applies to: nav CTA buttons, scroll progress bar, hero overlays, quote marks, section label prefixes, button colors, hover accents.
+Applies to: nav CTA buttons, scroll progress bar, hero overlays, quote marks, section label prefixes, button colors, hover accents.
 
-### Section Background Rule (STANDARDIZE)
-
-Use consistent backgrounds based on content type, not position:
+### Section Backgrounds
 
 | Section Type | Background |
 |--------------|------------|
@@ -26,26 +24,6 @@ Use consistent backgrounds based on content type, not position:
 | FAQ | Gray-50 |
 | CTA | Dark (gray-950) |
 | Footer | Dark (gray-900) |
-
-This ensures users develop consistent expectations and prevents adjacent same-colored sections.
-
-### Components to Consolidate (Unintentional Differences)
-
-| Component | Current State | Recommendation |
-|-----------|---------------|----------------|
-| **Process/Steps Grid** | 3 different implementations across pages | Unify into one `.process-grid` with card/no-card modifier |
-| **Testimonial Cards** | Partners has left border accent; Jobseekers doesn't | Standardize on Partners version (with border) using page colors |
-| **FAQ Accordion** | Employers uses full border box; Partners uses border-bottom only | Pick one style (recommend border-bottom for cleaner look) |
-| **Feature lists in split sections** | Partners has elaborate bordered grid; Jobseekers has simple bullets | Unify to one pattern |
-| **CTA button arrows** | Inconsistent presence | Always include arrow on primary CTAs |
-
-### Components That Are Fine As-Is (Intentional Variation)
-
-- Split section `.reverse` alternating (creates visual rhythm)
-- Split section `.alt-bg` modifier (provides contrast)
-- Secondary nav links per page (different sections to link to)
-- Testimonial grid columns (2 vs 3 based on content amount)
-- About page unique components (timeline, evidence grid, founder cards)
 
 ---
 
@@ -193,11 +171,10 @@ tailwind.config = {
 </section>
 ```
 
-**Variations:**
+**Modifiers:**
 - `.reverse`: Image on right, content on left
 - `.blue`: Blue accent color instead of red
-- `.alt-bg`: Gray background on content side (Employers, Partners)
-- Image overlay gradient color varies with `.blue` class
+- `.alt-bg`: Gray background on content side
 
 ### Feature List (inside Split Section)
 **Used on:** Jobseekers (4x), Employers (1x), Partners (2x)
@@ -207,7 +184,7 @@ tailwind.config = {
   <li class="feature-item">Item text</li>
 </ul>
 ```
-- Left border accent bar (red or blue)
+- Left border accent bar (red or blue based on theme)
 
 ---
 
@@ -224,7 +201,6 @@ tailwind.config = {
     <h3>Title</h3>
     <p>Description</p>
   </div>
-  <!-- repeat -->
 </div>
 ```
 
@@ -234,16 +210,16 @@ tailwind.config = {
 | Jobseekers | gray-50 | red | white |
 | Employers | white | blue | gray-50 |
 | Partners | gray-50 | blue | gray-50→white on hover |
-| About (steps-grid) | white/gray-50 | - | - |
+| About (steps-grid) | white/gray-50 | — | — |
 
-**Note:** About page uses `.steps-grid` with similar structure but different styling (no cards, just numbered items)
+**Note:** About page uses `.steps-grid` with similar structure but no card backgrounds.
 
 ---
 
 ## 7. Card Components
 
 ### Testimonial Card (`.testimonial-card`)
-**Used on:** Jobseekers (9 cards across 3 sections), Employers (5 cards), Partners (3 cards)
+**Used on:** Jobseekers (9 cards), Employers (5 cards), Partners (3 cards)
 
 **Structure:**
 ```html
@@ -253,14 +229,21 @@ tailwind.config = {
 </div>
 ```
 
-**Features:**
-- Large quotation mark pseudo-element (`::before`)
-- Italic text
-- Hover: lift + shadow
+**Styling:**
+```css
+.testimonial-card {
+  background: var(--white);
+  border-left: 3px solid var(--gray-200);
+}
+.testimonial-card:hover {
+  border-left-color: var(--theme-color); /* red or blue */
+  box-shadow: var(--shadow-xl);
+}
+```
 
-**Variations:**
+- Large quotation mark pseudo-element (`::before`)
 - Quote mark color: Red (Jobseekers) or Blue (Employers, Partners)
-- Grid columns: 3 (Jobseekers), 2 or 3 (Employers), 2 or 3 (Partners)
+- Grid columns: 2 or 3 depending on content
 
 ### Value/Feature Card (`.value-card`)
 **Used on:** Employers (4 cards)
@@ -290,8 +273,8 @@ tailwind.config = {
 
 ## 8. Grid/List Components
 
-### Trust Strip / Stats Grid
-**Used on:** Partners (`.trust-strip`)
+### Trust Strip / Stats Grid (`.trust-strip`)
+**Used on:** Partners
 
 ```html
 <div class="trust-grid grid-cols-4">
@@ -315,35 +298,35 @@ tailwind.config = {
 </div>
 ```
 
-### Feature Grid (editorial style)
-**Used on:** Partners (`.feature-grid`)
+### Feature Grid (`.feature-grid`)
+**Used on:** Partners
 - 2-column grid of icon + title + description items
 
-### Glance Grid
-**Used on:** About (`.glance-grid`)
+### Glance Grid (`.glance-grid`)
+**Used on:** About
 - Similar to trust-grid but with icons and longer descriptions
 - Counter-based numbering
 
-### Evidence Grid
-**Used on:** About (`.evidence-grid`)
+### Evidence Grid (`.evidence-grid`)
+**Used on:** About
 - 2-column grid of detailed evidence cards
 - Counter numbering, hover effects
 
-### Matrix Grid
-**Used on:** About (`.matrix-grid`)
+### Matrix Grid (`.matrix-grid`)
+**Used on:** About
 - 2-column grid for population/program descriptions
 - Hover top-border animation
 
-### Scorecard Grid
-**Used on:** About (`.scorecard-grid`)
+### Scorecard Grid (`.scorecard-grid`)
+**Used on:** About
 - 3-column grid of bullet-list cards
 
 ---
 
 ## 9. Program/Accordion Components
 
-### Program Grid
-**Used on:** Partners (`.program-grid`)
+### Program Grid (`.program-grid`)
+**Used on:** Partners
 
 ```html
 <div class="program-grid">
@@ -355,9 +338,10 @@ tailwind.config = {
 ```
 - Label + content two-column layout within each row
 
-### FAQ Accordion
+### FAQ Accordion (`.faq-item`)
 **Used on:** Employers, Partners
 
+**Structure:**
 ```html
 <div class="faq-item">
   <button class="faq-question">
@@ -370,7 +354,15 @@ tailwind.config = {
 </div>
 ```
 
-**Variation:** Partners has slightly different styling (border-bottom instead of full border)
+**Styling:**
+```css
+.faq-item {
+  border-bottom: 1px solid var(--gray-200);
+}
+.faq-item:hover {
+  background: var(--gray-50);
+}
+```
 
 ---
 
@@ -397,8 +389,8 @@ tailwind.config = {
 
 ## 11. Timeline Component
 
-### Timeline
-**Used on:** About only (`.timeline-section`)
+### Timeline (`.timeline-section`)
+**Used on:** About only
 
 Complex two-row alternating design with:
 - Horizontal timeline line
@@ -487,7 +479,6 @@ Complex two-row alternating design with:
         <h4>Column Title</h4>
         <ul class="footer-links">...</ul>
       </div>
-      <!-- 4 columns total -->
     </div>
     <div class="footer-bottom">
       <p>© 2024 America Works...</p>
@@ -518,52 +509,3 @@ Complex two-row alternating design with:
 
 ### Custom Scrollbar (`.custom-scrollbar`)
 **Used on:** Jobseekers (case studies content wrapper)
-
----
-
-## Consolidation Plan
-
-### Process Grid → Unified Component
-Merge these three patterns into one `.process-grid`:
-- **Process Grid:** Numbered cards (Jobseekers, Employers)
-- **Steps Grid:** Numbered items without cards (Partners, About)
-- **Value Grid:** Editorial grid with borders (Employers)
-
-**Target implementation:**
-```html
-<div class="process-grid [process-grid--cards] [process-grid--minimal]">
-  <div class="process-item">
-    <span class="process-number">01</span>
-    <h3>Title</h3>
-    <p>Description</p>
-  </div>
-</div>
-```
-- Default: minimal style (no cards)
-- `--cards`: adds card backgrounds
-- Colors inherit from page theme
-
-### Editorial Grids → Keep Separate
-These serve distinct purposes and should remain separate components:
-- **Trust Grid:** Stats with big numbers (Partners intro)
-- **Glance Grid:** Icons + short descriptions (About intro)
-- **Evidence Grid:** Detailed citation cards (About only)
-
-### Testimonial Cards → Standardize with Border
-All testimonial cards should use this pattern:
-```css
-.testimonial-card {
-  background: var(--white);
-  border-left: 3px solid var(--gray-200);
-  /* On hover: border-left-color changes to theme color */
-}
-```
-Grid columns (2 or 3) remain flexible based on content.
-
-### FAQ Accordion → Border-Bottom Style
-Standardize on the cleaner border-bottom approach:
-```css
-.faq-item {
-  border-bottom: 1px solid var(--gray-200);
-}
-```
