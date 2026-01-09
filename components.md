@@ -1,16 +1,18 @@
 # Component Library
 
-This document catalogs reusable components across jobseekers.html, employers.html, partners.html, and about.html.
+This document catalogs reusable components across index.html, jobseekers.html, employers.html, partners.html, and about.html.
 
 ---
 
 ## Design System
 
 ### Color Theming
-- **Jobseekers & About:** Red accent (`--aw-red`)
+- **Index, Jobseekers & About:** Red accent (`--aw-red`)
 - **Employers & Partners:** Blue accent (`--aw-blue`)
 
 Applies to: nav CTA buttons, scroll progress bar, hero overlays, quote marks, section label prefixes, button colors, hover accents.
+
+**Exception:** Index page nav CTA uses blue (`--aw-blue`) despite red theme elsewhere.
 
 ### Section Backgrounds
 
@@ -219,7 +221,7 @@ tailwind.config = {
 ## 7. Card Components
 
 ### Testimonial Card (`.testimonial-card`)
-**Used on:** Jobseekers (9 cards), Employers (5 cards), Partners (3 cards)
+**Used on:** Index, Jobseekers (9 cards), Employers (5 cards), Partners (3 cards)
 
 **Structure:**
 ```html
@@ -509,3 +511,52 @@ Complex two-row alternating design with:
 
 ### Custom Scrollbar (`.custom-scrollbar`)
 **Used on:** Jobseekers (case studies content wrapper)
+
+---
+
+## 16. Homepage-Specific Components (index.html)
+
+These components are unique to the homepage and intentionally different from other pages.
+
+### Dashboard Hero
+**Used on:** Index only
+
+Two-column layout with:
+- Left: Hero text content (headline, subheadline, CTAs)
+- Right: "Federal Monitor" dashboard with live metrics
+
+**Note:** Other pages use a simpler full-width hero with background image.
+
+### Metric Cards (`.metric-card-dash`)
+**Used on:** Index only
+
+Dashboard-style stat cards with:
+- Large monospace numbers
+- Animated counters
+- Status indicators (pulse dots)
+- Grid layout
+
+### Horizontal Timeline (`.timeline-track`)
+**Used on:** Index only
+
+Progressive horizontal timeline with:
+- Red dots marking milestones
+- Animated fill line on scroll
+- Step cards below the line
+
+**Note:** Different from About page's vertical alternating timeline.
+
+### Value Props Grid (`.value-prop`)
+**Used on:** Index only
+
+Large editorial grid cards for core value propositions.
+
+### Path Cards (`.path-card`)
+**Used on:** Index only
+
+Audience navigation cards (Jobseekers, Employers, Partners) with hover effects.
+
+### Population Items (`.population-item`)
+**Used on:** Index only
+
+Grid of population types served with counter numbering.
