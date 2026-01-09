@@ -11,7 +11,7 @@ Convert the America Works multi-HTML static site into a Vite + React + TypeScrip
 | Decision | Choice |
 |----------|--------|
 | Language | TypeScript |
-| Components | Comprehensive (35+ shared components) |
+| Components | Comprehensive (~32 shared components) |
 | CSS approach | Hybrid: Tailwind for utilities, custom CSS for hero/gradients/animations |
 | Theming | CSS classes (`.theme-red`, `.theme-blue`) on page wrapper |
 | Animations | Preserve all scroll behaviors via React hooks/Intersection Observer |
@@ -63,7 +63,10 @@ site/
 │   │   │   ├── TestimonialCard.tsx
 │   │   │   ├── ValueCard.tsx
 │   │   │   ├── RoleItem.tsx
-│   │   │   └── PathCard.tsx
+│   │   │   ├── PathCard.tsx
+│   │   │   ├── MetricCard.tsx
+│   │   │   ├── ValueProp.tsx
+│   │   │   └── PopulationItem.tsx
 │   │   │
 │   │   ├── grids/
 │   │   │   ├── TrustStrip.tsx
@@ -78,7 +81,8 @@ site/
 │   │   │   ├── FAQAccordion.tsx
 │   │   │   ├── ProgramGrid.tsx
 │   │   │   ├── CaseStudiesTabs.tsx
-│   │   │   └── HomeTimeline.tsx
+│   │   │   ├── HomeTimeline.tsx
+│   │   │   └── AboutTimeline.tsx
 │   │   │
 │   │   └── ui/
 │   │       ├── Button.tsx
@@ -141,6 +145,9 @@ site/
 | `ValueCard` | Employers | number, title, description |
 | `RoleItem` | Employers | icon, label |
 | `PathCard` | Index | title, description, href, icon |
+| `MetricCard` | Index | value, label, status, animated |
+| `ValueProp` | Index | number, title, description |
+| `PopulationItem` | Index | icon, title, description |
 
 ### Grid Components
 | Component | Source | Notes |
@@ -159,7 +166,8 @@ site/
 | `FAQAccordion` | Employers, Partners | Border-bottom style, expand/collapse |
 | `ProgramGrid` | Partners | Label + content rows |
 | `CaseStudiesTabs` | Jobseekers | Tabbed content with scrollable area |
-| `HomeTimeline` | Index | Horizontal progressive timeline |
+| `HomeTimeline` | Index | Horizontal progressive timeline with scroll animation |
+| `AboutTimeline` | About | Vertical alternating timeline with scroll animation |
 
 ### UI Components
 | Component | Notes |
@@ -189,6 +197,20 @@ site/
 | Partners | `.theme-blue` |
 | Events | `.theme-blue` |
 | News | `.theme-blue` |
+
+**Exception:** Home page nav CTA uses blue (`--aw-blue`) despite red theme elsewhere.
+
+### Section Backgrounds
+| Section Type | Background |
+|--------------|------------|
+| Hero | Dark (gray-950 with image overlay) |
+| Stats/Trust strips | White |
+| Split sections | White (content side can use gray-50 with `.alt-bg`) |
+| Process/Steps grids | Gray-50 |
+| Testimonials | White |
+| FAQ | Gray-50 |
+| CTA | Dark (gray-950) |
+| Footer | Dark (gray-900) |
 
 ---
 
@@ -242,11 +264,11 @@ export default {
 
 | Current File | Key Components to Extract |
 |--------------|---------------------------|
-| `index.html` | HomeHero, HomeTimeline, PathCard, MetricCard |
+| `index.html` | HomeHero, HomeTimeline, PathCard, MetricCard, ValueProp, PopulationItem |
 | `jobseekers.html` | PageHero, SplitSection, CaseStudiesTabs, TestimonialCard |
-| `employers.html` | ValueCard, RoleItem, FAQAccordion |
-| `partners.html` | TrustStrip, ProgramGrid, FeatureGrid |
-| `about.html` | Timeline (vertical), EvidenceGrid, MatrixGrid, GlanceGrid |
+| `employers.html` | ValueCard, RoleItem, FAQAccordion, ProcessGrid |
+| `partners.html` | TrustStrip, ProgramGrid, FeatureGrid, ListGrid |
+| `about.html` | AboutTimeline (vertical), EvidenceGrid, MatrixGrid, GlanceGrid, ScorecardGrid |
 | `components.md` | Component patterns reference |
 
 ---

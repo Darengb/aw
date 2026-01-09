@@ -22,6 +22,7 @@ See `vite-spec.md` for full specification.
   npx tailwindcss init -p
   ```
 - [ ] Configure `tailwind.config.ts` with brand colors and fonts
+- [ ] Add Google Fonts links to `index.html` (Instrument Serif, General Sans, JetBrains Mono, Crimson Text)
 - [ ] Create `src/styles/globals.css` with Tailwind directives and CSS variables
 - [ ] Create `src/styles/animations.css` for scroll animations
 - [ ] Create `src/styles/components.css` for complex component styles
@@ -101,6 +102,15 @@ See `vite-spec.md` for full specification.
   - Icon + label
 - [ ] Create `src/components/cards/PathCard.tsx`
   - Audience navigation cards (home page)
+- [ ] Create `src/components/cards/MetricCard.tsx`
+  - Dashboard stat cards with animated counters
+  - Props: value, label, status, animated
+- [ ] Create `src/components/cards/ValueProp.tsx`
+  - Large editorial grid cards
+  - Props: number, title, description
+- [ ] Create `src/components/cards/PopulationItem.tsx`
+  - Population type cards with icon
+  - Props: icon, title, description
 - [ ] **Commit**: "Phase 6: Card components"
 
 ---
@@ -129,6 +139,9 @@ See `vite-spec.md` for full specification.
 - [ ] Create `src/components/interactive/HomeTimeline.tsx`
   - Horizontal progressive timeline
   - Scroll-triggered fill animation
+- [ ] Create `src/components/interactive/AboutTimeline.tsx`
+  - Vertical alternating timeline
+  - Scroll-triggered animations
 - [ ] **Commit**: "Phase 8: Interactive components"
 
 ---
@@ -146,13 +159,13 @@ See `vite-spec.md` for full specification.
 
 ## Phase 10: Page - Home
 
-- [ ] Create `src/pages/Home.tsx`
-- [ ] Implement HomeHero section
-- [ ] Implement value propositions section
+- [ ] Create `src/pages/Home.tsx` with `.theme-red`
+- [ ] Implement HomeHero section (with MetricCard grid)
+- [ ] Implement ValueProp section (value propositions)
 - [ ] Implement "How it works" with HomeTimeline
-- [ ] Implement populations served section
-- [ ] Implement testimonials section
-- [ ] Implement path cards (audience navigation)
+- [ ] Implement PopulationItem section (populations served)
+- [ ] Implement testimonials section (TestimonialCard)
+- [ ] Implement PathCard section (audience navigation)
 - [ ] Implement CTA section
 - [ ] Verify all scroll animations work
 - [ ] **Commit**: "Phase 10: Home page"
@@ -213,7 +226,7 @@ See `vite-spec.md` for full specification.
 - [ ] Implement glance grid (intro stats)
 - [ ] Implement evidence grid
 - [ ] Implement matrix grid (populations)
-- [ ] Implement vertical timeline
+- [ ] Implement AboutTimeline (vertical with scroll animation)
 - [ ] Implement scorecard grid
 - [ ] Implement founders section
 - [ ] Implement CTA section
