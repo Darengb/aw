@@ -62,43 +62,43 @@ See `vite-spec.md` for full specification.
 
 > No dependencies - other components need Button
 
-- [ ] Create `src/components/ui/Button.tsx`
+- [x] Create `src/components/ui/Button.tsx`
   - Variants: primary, secondary, white, outline, link
   - Arrow icon option
-- [ ] Create `src/components/ui/FeatureList.tsx`
+- [x] Create `src/components/ui/FeatureList.tsx`
   - Bullet list with accent border
-- [ ] **Commit**: "Phase 4A: UI components"
+- [x] **Commit**: "Phase 4A: UI components"
 
 ### Phase 4B: Grid Components ⚡
 
 > Minimal dependencies - just types and CSS
 
-- [ ] Create `src/components/grids/TrustStrip.tsx` (Partners)
-- [ ] Create `src/components/grids/ListGrid.tsx` (Partners)
-- [ ] Create `src/components/grids/FeatureGrid.tsx` (Partners)
-- [ ] Create `src/components/grids/GlanceGrid.tsx` (About)
-- [ ] Create `src/components/grids/EvidenceGrid.tsx` (About)
-- [ ] Create `src/components/grids/MatrixGrid.tsx` (About)
-- [ ] Create `src/components/grids/ScorecardGrid.tsx` (About)
-- [ ] **Commit**: "Phase 4B: Grid components"
+- [x] Create `src/components/grids/TrustStrip.tsx` (Partners)
+- [x] Create `src/components/grids/ListGrid.tsx` (Partners)
+- [x] Create `src/components/grids/FeatureGrid.tsx` (Partners)
+- [x] Create `src/components/grids/GlanceGrid.tsx` (About)
+- [x] Create `src/components/grids/EvidenceGrid.tsx` (About)
+- [x] Create `src/components/grids/MatrixGrid.tsx` (About)
+- [x] Create `src/components/grids/ScorecardGrid.tsx` (About)
+- [x] **Commit**: "Phase 4B: Grid components"
 
 ### Phase 4C: Interactive Components ⚡
 
 > Depends on Phase 2 hooks (useIntersectionObserver)
 
-- [ ] Create `src/components/interactive/FAQAccordion.tsx`
+- [x] Create `src/components/interactive/FAQAccordion.tsx`
   - Expand/collapse with animation
   - Border-bottom style
-- [ ] Create `src/components/interactive/ProgramGrid.tsx` (Partners)
-- [ ] Create `src/components/interactive/CaseStudiesTabs.tsx` (Jobseekers)
+- [x] Create `src/components/interactive/ProgramGrid.tsx` (Partners)
+- [x] Create `src/components/interactive/CaseStudiesTabs.tsx` (Jobseekers)
   - Tabbed content with video area
-- [ ] Create `src/components/interactive/HomeTimeline.tsx`
+- [x] Create `src/components/interactive/HomeTimeline.tsx`
   - Horizontal progressive timeline
   - Scroll-triggered fill animation
-- [ ] Create `src/components/interactive/AboutTimeline.tsx`
+- [x] Create `src/components/interactive/AboutTimeline.tsx`
   - Vertical alternating timeline
   - Scroll-triggered animations
-- [ ] **Commit**: "Phase 4C: Interactive components"
+- [x] **Commit**: "Phase 4C: Interactive components"
 
 ---
 

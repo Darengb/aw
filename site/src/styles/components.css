@@ -718,3 +718,128 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: var(--gray-400);
 }
+
+/* ============================================
+   GRID COMPONENT STYLES
+   ============================================ */
+
+/* Glance Grid - Counter Styles */
+.glance-grid {
+  counter-reset: glance-counter;
+}
+
+.glance-item {
+  counter-increment: glance-counter;
+}
+
+.glance-item::before {
+  content: '0' counter(glance-counter);
+  position: absolute;
+  top: 1.5rem;
+  left: 2.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--theme-color);
+  letter-spacing: 0.1em;
+  opacity: 0.4;
+  transition: all 0.4s ease;
+}
+
+.glance-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--theme-color);
+  transition: width 0.6s var(--ease-primary);
+}
+
+.glance-item:hover::after {
+  width: 100%;
+}
+
+.glance-item:hover::before {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* Evidence Grid - Counter Styles */
+.evidence-grid {
+  counter-reset: evidence-counter;
+}
+
+.evidence-card {
+  counter-increment: evidence-counter;
+}
+
+.evidence-card::before {
+  content: '0' counter(evidence-counter);
+  position: absolute;
+  top: 2rem;
+  left: 3rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--theme-color);
+  letter-spacing: 0.1em;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.evidence-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--theme-color);
+  transition: width 0.5s var(--ease-primary);
+}
+
+.evidence-card:hover::after {
+  width: 100%;
+}
+
+.evidence-card:hover::before {
+  opacity: 1;
+}
+
+/* Matrix Item - Hover Effects */
+.matrix-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 3px;
+  background: var(--theme-color);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.matrix-item:hover::before {
+  transform: scaleX(1);
+}
+
+/* Scorecard Card - Hover Effects */
+.scorecard-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--theme-color);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.scorecard-card:hover::before {
+  transform: scaleX(1);
+}
