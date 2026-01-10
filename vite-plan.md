@@ -281,10 +281,10 @@ See `vite-spec.md` for full specification.
 
 ## Completion Checklist
 
-- [ ] All pages render without errors
-- [ ] All scroll animations function correctly
-- [ ] Nav transitions between 3 states
-- [ ] Theme colors (red/blue) apply per page
-- [ ] Mobile responsive
-- [ ] Build completes successfully
-- [ ] Ready for deployment testing
+- [x] All pages render without errors
+- [x] All scroll animations function correctly
+- [x] Nav transitions between 3 states
+- [x] Theme colors (red/blue) apply per page
+- [x] Mobile responsive
+- [x] Build completes successfully
+- [x] Ready for deployment testing
