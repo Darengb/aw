@@ -110,56 +110,56 @@ See `vite-spec.md` for full specification.
 
 > Depends on Button component
 
-- [ ] Create `src/components/heroes/PageHero.tsx`
+- [x] Create `src/components/heroes/PageHero.tsx`
   - Props: title, subtitle, label, backgroundImage, theme
   - Used by: Jobseekers, Employers, Partners, About, Events, News
-- [ ] Create `src/components/heroes/HomeHero.tsx`
+- [x] Create `src/components/heroes/HomeHero.tsx`
   - Full dashboard with metrics panel
   - Animated counters
   - Extract from index.html
-- [ ] **Commit**: "Phase 5A: Hero components"
+- [x] **Commit**: "Phase 5A: Hero components"
 
 ### Phase 5B: Section Components ⚡
 
 > Depends on Button component
 
-- [ ] Create `src/components/sections/SectionHeader.tsx`
+- [x] Create `src/components/sections/SectionHeader.tsx`
   - Props: label, headline, intro, centered
-- [ ] Create `src/components/sections/SplitSection.tsx`
+- [x] Create `src/components/sections/SplitSection.tsx`
   - Props: reverse, blue, altBg, image, children
   - Image overlay with theme color
-- [ ] Create `src/components/sections/ProcessGrid.tsx`
+- [x] Create `src/components/sections/ProcessGrid.tsx`
   - Props: items, variant ('cards' | 'minimal')
   - Numbered cards with hover effects
-- [ ] Create `src/components/sections/CTASection.tsx`
+- [x] Create `src/components/sections/CTASection.tsx`
   - Dark background with grid pattern
   - Props: headline, description, primaryCta, secondaryCta
-- [ ] **Commit**: "Phase 5B: Section components"
+- [x] **Commit**: "Phase 5B: Section components"
 
 ### Phase 5C: Card Components ⚡
 
 > Minimal dependencies
 
-- [ ] Create `src/components/cards/TestimonialCard.tsx`
+- [x] Create `src/components/cards/TestimonialCard.tsx`
   - Border-left accent style
   - Quote mark decoration
   - Props: quote, author, source
-- [ ] Create `src/components/cards/ValueCard.tsx`
+- [x] Create `src/components/cards/ValueCard.tsx`
   - Numbered cards with top-line hover animation
-- [ ] Create `src/components/cards/RoleItem.tsx`
+- [x] Create `src/components/cards/RoleItem.tsx`
   - Icon + label
-- [ ] Create `src/components/cards/PathCard.tsx`
+- [x] Create `src/components/cards/PathCard.tsx`
   - Audience navigation cards (home page)
-- [ ] Create `src/components/cards/MetricCard.tsx`
+- [x] Create `src/components/cards/MetricCard.tsx`
   - Dashboard stat cards with animated counters
   - Props: value, label, status, animated
-- [ ] Create `src/components/cards/ValueProp.tsx`
+- [x] Create `src/components/cards/ValueProp.tsx`
   - Large editorial grid cards
   - Props: number, title, description
-- [ ] Create `src/components/cards/PopulationItem.tsx`
+- [x] Create `src/components/cards/PopulationItem.tsx`
   - Population type cards with icon
   - Props: icon, title, description
-- [ ] **Commit**: "Phase 5C: Card components"
+- [x] **Commit**: "Phase 5C: Card components"
 
 ---
 
