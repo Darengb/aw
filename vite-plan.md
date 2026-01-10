@@ -39,18 +39,18 @@ See `vite-spec.md` for full specification.
 
 > Depends on Phase 2 hooks - must complete before component phases
 
-- [ ] Create `src/components/layout/Nav.tsx`
+- [x] Create `src/components/layout/Nav.tsx`
   - 3-state scroll behavior (top, in-hero, below-hero)
   - Mobile menu toggle
-- [ ] Create `src/components/layout/SecondaryNav.tsx`
+- [x] Create `src/components/layout/SecondaryNav.tsx`
   - Page-specific anchor links
   - Appears below hero
-- [ ] Create `src/components/layout/Footer.tsx`
-- [ ] Create `src/components/layout/ScrollProgressBar.tsx`
-- [ ] Create `src/components/ui/GrainOverlay.tsx`
-- [ ] Set up React Router in `src/App.tsx` with layout shell
-- [ ] Verify layout renders on all routes
-- [ ] **Commit**: "Phase 3: Layout components and routing"
+- [x] Create `src/components/layout/Footer.tsx`
+- [x] Create `src/components/layout/ScrollProgressBar.tsx`
+- [x] Create `src/components/ui/GrainOverlay.tsx`
+- [x] Set up React Router in `src/App.tsx` with layout shell
+- [x] Verify layout renders on all routes
+- [x] **Commit**: "Phase 3: Layout components and routing"
 
 ---
 

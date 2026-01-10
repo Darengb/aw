@@ -1,34 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { Nav } from './components/layout/Nav'
+import { Footer } from './components/layout/Footer'
+import { ScrollProgressBar } from './components/layout/ScrollProgressBar'
+import { GrainOverlay } from './components/ui/GrainOverlay'
+import type { Theme } from './lib/types'
 
-function App() {
-  const [count, setCount] = useState(0)
+// Pages
+import Home from './pages/Home'
+import Jobseekers from './pages/Jobseekers'
+import Employers from './pages/Employers'
+import Partners from './pages/Partners'
+import About from './pages/About'
+import Events from './pages/Events'
+import News from './pages/News'
+import NotFound from './pages/NotFound'
+
+// Theme configuration per route
+const routeThemes: Record<string, Theme> = {
+  '/': 'red',
+  '/jobseekers': 'red',
+  '/about': 'red',
+  '/employers': 'blue',
+  '/partners': 'blue',
+  '/events': 'blue',
+  '/news': 'blue',
+}
+
+function AppContent() {
+  const location = useLocation()
+  const theme = routeThemes[location.pathname] || 'red'
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className={`theme-${theme}`}>
+      <ScrollProgressBar theme={theme} />
+      <Nav theme={theme} />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/jobseekers" element={<Jobseekers />} />
+          <Route path="/employers" element={<Employers />} />
+          <Route path="/partners" element={<Partners />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/news" element={<News />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+      <Footer />
+      <GrainOverlay />
+    </div>
+  )
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   )
 }
 
