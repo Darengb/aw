@@ -8,28 +8,28 @@ See `vite-spec.md` for full specification.
 
 ## Phase 1: Project Setup
 
-- [ ] Create new Vite + React + TypeScript project in `site/` folder
+- [x] Create new Vite + React + TypeScript project in `site/` folder
   ```bash
   npm create vite@latest site -- --template react-ts
   ```
-- [ ] Install core dependencies
+- [x] Install core dependencies
   ```bash
   npm install react-router-dom lucide-react gray-matter
   npm install -D tailwindcss postcss autoprefixer @types/node
   ```
-- [ ] Initialize Tailwind CSS
+- [x] Initialize Tailwind CSS
   ```bash
   npx tailwindcss init -p
   ```
-- [ ] Configure `tailwind.config.ts` with brand colors and fonts
-- [ ] Add Google Fonts links to `index.html` (Instrument Serif, General Sans, JetBrains Mono, Crimson Text)
-- [ ] Create `src/styles/globals.css` with Tailwind directives and CSS variables
-- [ ] Create `src/styles/animations.css` for scroll animations
-- [ ] Create `src/styles/components.css` for complex component styles
-- [ ] Import styles in `src/main.tsx`
-- [ ] Copy images from current `images/` to `site/public/images/`
-- [ ] Verify dev server runs: `npm run dev`
-- [ ] **Commit**: "Phase 1: Project setup with Tailwind"
+- [x] Configure `tailwind.config.ts` with brand colors and fonts
+- [x] Add Google Fonts links to `index.html` (Instrument Serif, General Sans, JetBrains Mono, Crimson Text)
+- [x] Create `src/styles/globals.css` with Tailwind directives and CSS variables
+- [x] Create `src/styles/animations.css` for scroll animations
+- [x] Create `src/styles/components.css` for complex component styles
+- [x] Import styles in `src/main.tsx`
+- [x] Copy images from current `images/` to `site/public/images/`
+- [x] Verify dev server runs: `npm run dev`
+- [x] **Commit**: "Phase 1: Project setup with Tailwind"
 
 ---
 
