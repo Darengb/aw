@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import type { MetricCardProps } from '../../lib/types'
 import { TrendingUp } from 'lucide-react'
 
@@ -10,6 +10,24 @@ export function MetricCard({ value, label, status = 'active', animated = false }
   // Parse numeric value for animation
   const numericValue = typeof value === 'string' ? parseFloat(value.replace(/[^0-9.-]/g, '')) : value
   const suffix = typeof value === 'string' ? value.replace(/[0-9.-]/g, '') : ''
+
+  const animateValue = useCallback(() => {
+    const duration = 2000
+    const steps = 60
+    const stepDuration = duration / steps
+    const increment = numericValue / steps
+    let current = 0
+
+    const timer = setInterval(() => {
+      current += increment
+      if (current >= numericValue) {
+        setDisplayValue(numericValue)
+        clearInterval(timer)
+      } else {
+        setDisplayValue(Math.floor(current))
+      }
+    }, stepDuration)
+  }, [numericValue])
 
   useEffect(() => {
     if (!animated || hasAnimated.current) return
@@ -31,25 +49,7 @@ export function MetricCard({ value, label, status = 'active', animated = false }
     }
 
     return () => observer.disconnect()
-  }, [animated, numericValue])
-
-  const animateValue = () => {
-    const duration = 2000
-    const steps = 60
-    const stepDuration = duration / steps
-    const increment = numericValue / steps
-    let current = 0
-
-    const timer = setInterval(() => {
-      current += increment
-      if (current >= numericValue) {
-        setDisplayValue(numericValue)
-        clearInterval(timer)
-      } else {
-        setDisplayValue(Math.floor(current))
-      }
-    }, stepDuration)
-  }
+  }, [animated, animateValue])
 
   const statusStyles = {
     active: 'border-accent-cyan/30',

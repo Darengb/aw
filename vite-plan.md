@@ -178,7 +178,7 @@ See `vite-spec.md` for full specification.
 - [x] Implement PathCard section (audience navigation)
 - [x] Implement CTA section
 - [x] Verify all scroll animations work
-- [ ] **Commit**: "Phase 6A: Home page"
+- [x] **Commit**: "Phase 6A: Home page"
 
 ### Phase 6B: Jobseekers Page ⚡
 
@@ -190,7 +190,7 @@ See `vite-spec.md` for full specification.
 - [x] Implement testimonials (3 sections)
 - [x] Implement CTA section
 - [x] Configure SecondaryNav links
-- [ ] **Commit**: "Phase 6B: Jobseekers page"
+- [x] **Commit**: "Phase 6B: Jobseekers page"
 
 ### Phase 6C: Employers Page ⚡
 
@@ -204,7 +204,7 @@ See `vite-spec.md` for full specification.
 - [x] Implement FAQ accordion
 - [x] Implement CTA section
 - [x] Configure SecondaryNav links
-- [ ] **Commit**: "Phase 6C: Employers page"
+- [x] **Commit**: "Phase 6C: Employers page"
 
 ### Phase 6D: Partners Page ⚡
 
@@ -219,7 +219,7 @@ See `vite-spec.md` for full specification.
 - [x] Implement FAQ accordion
 - [x] Implement CTA section
 - [x] Configure SecondaryNav links
-- [ ] **Commit**: "Phase 6D: Partners page"
+- [x] **Commit**: "Phase 6D: Partners page"
 
 ### Phase 6E: About Page ⚡
 
@@ -233,7 +233,7 @@ See `vite-spec.md` for full specification.
 - [x] Implement founders section
 - [x] Implement CTA section
 - [x] Configure SecondaryNav links
-- [ ] **Commit**: "Phase 6E: About page"
+- [x] **Commit**: "Phase 6E: About page"
 
 ### Phase 6F: Events, News & NotFound ⚡
 
@@ -245,7 +245,7 @@ See `vite-spec.md` for full specification.
 - [x] Create `src/pages/News.tsx`
   - List news items with external links
 - [x] Create `src/pages/NotFound.tsx`
-- [ ] **Commit**: "Phase 6F: Events, News, and NotFound pages"
+- [x] **Commit**: "Phase 6F: Events, News, and NotFound pages"
 
 ---
 
@@ -253,14 +253,14 @@ See `vite-spec.md` for full specification.
 
 > Integration testing - must run after all pages complete
 
-- [ ] Run `npm run build` and fix any errors
-- [ ] Test all routes navigate correctly
-- [ ] Verify scroll progress bar works on all pages
-- [ ] Verify nav state transitions work
-- [ ] Verify theme colors apply correctly per page
-- [ ] Test responsive behavior on mobile
-- [ ] Run lint on all files and fix errors
-- [ ] **Commit**: "Phase 7: Final polish and fixes"
+- [x] Run `npm run build` and fix any errors
+- [x] Test all routes navigate correctly
+- [x] Verify scroll progress bar works on all pages
+- [x] Verify nav state transitions work
+- [x] Verify theme colors apply correctly per page
+- [x] Test responsive behavior on mobile
+- [x] Run lint on all files and fix errors
+- [x] **Commit**: "Phase 7: Final polish and fixes"
 
 ---
 
