@@ -6,23 +6,13 @@ See `vite-spec.md` for full specification.
 
 ---
 
-## Phase 1: Project Setup
+## Phase 1: Project Setup ✅
 
 - [x] Create new Vite + React + TypeScript project in `site/` folder
-  ```bash
-  npm create vite@latest site -- --template react-ts
-  ```
 - [x] Install core dependencies
-  ```bash
-  npm install react-router-dom lucide-react gray-matter
-  npm install -D tailwindcss postcss autoprefixer @types/node
-  ```
 - [x] Initialize Tailwind CSS
-  ```bash
-  npx tailwindcss init -p
-  ```
 - [x] Configure `tailwind.config.ts` with brand colors and fonts
-- [x] Add Google Fonts links to `index.html` (Instrument Serif, General Sans, JetBrains Mono, Crimson Text)
+- [x] Add Google Fonts links to `index.html`
 - [x] Create `src/styles/globals.css` with Tailwind directives and CSS variables
 - [x] Create `src/styles/animations.css` for scroll animations
 - [x] Create `src/styles/components.css` for complex component styles
@@ -33,7 +23,9 @@ See `vite-spec.md` for full specification.
 
 ---
 
-## Phase 2: Hooks & Utilities
+## Phase 2: Hooks & Utilities (Sequential)
+
+> Foundation layer - must complete before Phase 3
 
 - [ ] Create `src/lib/types.ts` with shared TypeScript interfaces
 - [ ] Create `src/hooks/useScrollProgress.ts`
@@ -43,7 +35,9 @@ See `vite-spec.md` for full specification.
 
 ---
 
-## Phase 3: Layout Components
+## Phase 3: Layout & Router (Sequential)
+
+> Depends on Phase 2 hooks - must complete before component phases
 
 - [ ] Create `src/components/layout/Nav.tsx`
   - 3-state scroll behavior (top, in-hero, below-hero)
@@ -60,7 +54,61 @@ See `vite-spec.md` for full specification.
 
 ---
 
-## Phase 4: Hero Components
+## Parallel Batch A: Independent Components
+
+> These 3 phases can run simultaneously after Phase 3
+
+### Phase 4A: UI Components ⚡
+
+> No dependencies - other components need Button
+
+- [ ] Create `src/components/ui/Button.tsx`
+  - Variants: primary, secondary, white, outline, link
+  - Arrow icon option
+- [ ] Create `src/components/ui/FeatureList.tsx`
+  - Bullet list with accent border
+- [ ] **Commit**: "Phase 4A: UI components"
+
+### Phase 4B: Grid Components ⚡
+
+> Minimal dependencies - just types and CSS
+
+- [ ] Create `src/components/grids/TrustStrip.tsx` (Partners)
+- [ ] Create `src/components/grids/ListGrid.tsx` (Partners)
+- [ ] Create `src/components/grids/FeatureGrid.tsx` (Partners)
+- [ ] Create `src/components/grids/GlanceGrid.tsx` (About)
+- [ ] Create `src/components/grids/EvidenceGrid.tsx` (About)
+- [ ] Create `src/components/grids/MatrixGrid.tsx` (About)
+- [ ] Create `src/components/grids/ScorecardGrid.tsx` (About)
+- [ ] **Commit**: "Phase 4B: Grid components"
+
+### Phase 4C: Interactive Components ⚡
+
+> Depends on Phase 2 hooks (useIntersectionObserver)
+
+- [ ] Create `src/components/interactive/FAQAccordion.tsx`
+  - Expand/collapse with animation
+  - Border-bottom style
+- [ ] Create `src/components/interactive/ProgramGrid.tsx` (Partners)
+- [ ] Create `src/components/interactive/CaseStudiesTabs.tsx` (Jobseekers)
+  - Tabbed content with video area
+- [ ] Create `src/components/interactive/HomeTimeline.tsx`
+  - Horizontal progressive timeline
+  - Scroll-triggered fill animation
+- [ ] Create `src/components/interactive/AboutTimeline.tsx`
+  - Vertical alternating timeline
+  - Scroll-triggered animations
+- [ ] **Commit**: "Phase 4C: Interactive components"
+
+---
+
+## Parallel Batch B: Components Needing Button
+
+> These 3 phases can run simultaneously after Phase 4A completes
+
+### Phase 5A: Hero Components ⚡
+
+> Depends on Button component
 
 - [ ] Create `src/components/heroes/PageHero.tsx`
   - Props: title, subtitle, label, backgroundImage, theme
@@ -69,11 +117,11 @@ See `vite-spec.md` for full specification.
   - Full dashboard with metrics panel
   - Animated counters
   - Extract from index.html
-- [ ] **Commit**: "Phase 4: Hero components"
+- [ ] **Commit**: "Phase 5A: Hero components"
 
----
+### Phase 5B: Section Components ⚡
 
-## Phase 5: Section Components
+> Depends on Button component
 
 - [ ] Create `src/components/sections/SectionHeader.tsx`
   - Props: label, headline, intro, centered
@@ -86,11 +134,11 @@ See `vite-spec.md` for full specification.
 - [ ] Create `src/components/sections/CTASection.tsx`
   - Dark background with grid pattern
   - Props: headline, description, primaryCta, secondaryCta
-- [ ] **Commit**: "Phase 5: Section components"
+- [ ] **Commit**: "Phase 5B: Section components"
 
----
+### Phase 5C: Card Components ⚡
 
-## Phase 6: Card Components
+> Minimal dependencies
 
 - [ ] Create `src/components/cards/TestimonialCard.tsx`
   - Border-left accent style
@@ -111,53 +159,15 @@ See `vite-spec.md` for full specification.
 - [ ] Create `src/components/cards/PopulationItem.tsx`
   - Population type cards with icon
   - Props: icon, title, description
-- [ ] **Commit**: "Phase 6: Card components"
+- [ ] **Commit**: "Phase 5C: Card components"
 
 ---
 
-## Phase 7: Grid Components
+## Parallel Batch C: Page Implementations
 
-- [ ] Create `src/components/grids/TrustStrip.tsx` (Partners)
-- [ ] Create `src/components/grids/ListGrid.tsx` (Partners)
-- [ ] Create `src/components/grids/FeatureGrid.tsx` (Partners)
-- [ ] Create `src/components/grids/GlanceGrid.tsx` (About)
-- [ ] Create `src/components/grids/EvidenceGrid.tsx` (About)
-- [ ] Create `src/components/grids/MatrixGrid.tsx` (About)
-- [ ] Create `src/components/grids/ScorecardGrid.tsx` (About)
-- [ ] **Commit**: "Phase 7: Grid components"
+> All 6 pages can be built simultaneously after all component phases complete
 
----
-
-## Phase 8: Interactive Components
-
-- [ ] Create `src/components/interactive/FAQAccordion.tsx`
-  - Expand/collapse with animation
-  - Border-bottom style
-- [ ] Create `src/components/interactive/ProgramGrid.tsx` (Partners)
-- [ ] Create `src/components/interactive/CaseStudiesTabs.tsx` (Jobseekers)
-  - Tabbed content with video area
-- [ ] Create `src/components/interactive/HomeTimeline.tsx`
-  - Horizontal progressive timeline
-  - Scroll-triggered fill animation
-- [ ] Create `src/components/interactive/AboutTimeline.tsx`
-  - Vertical alternating timeline
-  - Scroll-triggered animations
-- [ ] **Commit**: "Phase 8: Interactive components"
-
----
-
-## Phase 9: UI Components
-
-- [ ] Create `src/components/ui/Button.tsx`
-  - Variants: primary, secondary, white, outline, link
-  - Arrow icon option
-- [ ] Create `src/components/ui/FeatureList.tsx`
-  - Bullet list with accent border
-- [ ] **Commit**: "Phase 9: UI components"
-
----
-
-## Phase 10: Page - Home
+### Phase 6A: Home Page ⚡
 
 - [ ] Create `src/pages/Home.tsx` with `.theme-red`
 - [ ] Implement HomeHero section (with MetricCard grid)
@@ -168,11 +178,9 @@ See `vite-spec.md` for full specification.
 - [ ] Implement PathCard section (audience navigation)
 - [ ] Implement CTA section
 - [ ] Verify all scroll animations work
-- [ ] **Commit**: "Phase 10: Home page"
+- [ ] **Commit**: "Phase 6A: Home page"
 
----
-
-## Phase 11: Page - Jobseekers
+### Phase 6B: Jobseekers Page ⚡
 
 - [ ] Create `src/pages/Jobseekers.tsx` with `.theme-red`
 - [ ] Implement PageHero
@@ -182,11 +190,9 @@ See `vite-spec.md` for full specification.
 - [ ] Implement testimonials (3 sections)
 - [ ] Implement CTA section
 - [ ] Configure SecondaryNav links
-- [ ] **Commit**: "Phase 11: Jobseekers page"
+- [ ] **Commit**: "Phase 6B: Jobseekers page"
 
----
-
-## Phase 12: Page - Employers
+### Phase 6C: Employers Page ⚡
 
 - [ ] Create `src/pages/Employers.tsx` with `.theme-blue`
 - [ ] Implement PageHero
@@ -198,11 +204,9 @@ See `vite-spec.md` for full specification.
 - [ ] Implement FAQ accordion
 - [ ] Implement CTA section
 - [ ] Configure SecondaryNav links
-- [ ] **Commit**: "Phase 12: Employers page"
+- [ ] **Commit**: "Phase 6C: Employers page"
 
----
-
-## Phase 13: Page - Partners
+### Phase 6D: Partners Page ⚡
 
 - [ ] Create `src/pages/Partners.tsx` with `.theme-blue`
 - [ ] Implement PageHero
@@ -215,11 +219,9 @@ See `vite-spec.md` for full specification.
 - [ ] Implement FAQ accordion
 - [ ] Implement CTA section
 - [ ] Configure SecondaryNav links
-- [ ] **Commit**: "Phase 13: Partners page"
+- [ ] **Commit**: "Phase 6D: Partners page"
 
----
-
-## Phase 14: Page - About
+### Phase 6E: About Page ⚡
 
 - [ ] Create `src/pages/About.tsx` with `.theme-red`
 - [ ] Implement PageHero
@@ -231,11 +233,9 @@ See `vite-spec.md` for full specification.
 - [ ] Implement founders section
 - [ ] Implement CTA section
 - [ ] Configure SecondaryNav links
-- [ ] **Commit**: "Phase 14: About page"
+- [ ] **Commit**: "Phase 6E: About page"
 
----
-
-## Phase 15: Pages - Events & News
+### Phase 6F: Events, News & NotFound ⚡
 
 - [ ] Create `src/lib/content.ts` for markdown loading
 - [ ] Create sample markdown files in `src/content/events/`
@@ -245,11 +245,13 @@ See `vite-spec.md` for full specification.
 - [ ] Create `src/pages/News.tsx`
   - List news items with external links
 - [ ] Create `src/pages/NotFound.tsx`
-- [ ] **Commit**: "Phase 15: Events, News, and NotFound pages"
+- [ ] **Commit**: "Phase 6F: Events, News, and NotFound pages"
 
 ---
 
-## Phase 16: Final Polish
+## Phase 7: Final Polish (Sequential)
+
+> Integration testing - must run after all pages complete
 
 - [ ] Run `npm run build` and fix any errors
 - [ ] Test all routes navigate correctly
@@ -258,7 +260,22 @@ See `vite-spec.md` for full specification.
 - [ ] Verify theme colors apply correctly per page
 - [ ] Test responsive behavior on mobile
 - [ ] Run lint on all files and fix errors
-- [ ] **Commit**: "Phase 16: Final polish and fixes"
+- [ ] **Commit**: "Phase 7: Final polish and fixes"
+
+---
+
+## Execution Summary
+
+| Step | Type | Phases | Sub-agents |
+|------|------|--------|------------|
+| 1 | Sequential | Phase 2 (Hooks) | - |
+| 2 | Sequential | Phase 3 (Layout) | - |
+| 3 | **Parallel** | 4A, 4B, 4C | 3 |
+| 4 | **Parallel** | 5A, 5B, 5C | 3 |
+| 5 | **Parallel** | 6A-6F | 6 |
+| 6 | Sequential | Phase 7 (Polish) | - |
+
+**Legend:** ⚡ = Can run in parallel with other ⚡ phases in same batch
 
 ---
 
