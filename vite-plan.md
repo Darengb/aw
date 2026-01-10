@@ -169,82 +169,82 @@ See `vite-spec.md` for full specification.
 
 ### Phase 6A: Home Page ⚡
 
-- [ ] Create `src/pages/Home.tsx` with `.theme-red`
-- [ ] Implement HomeHero section (with MetricCard grid)
-- [ ] Implement ValueProp section (value propositions)
-- [ ] Implement "How it works" with HomeTimeline
-- [ ] Implement PopulationItem section (populations served)
-- [ ] Implement testimonials section (TestimonialCard)
-- [ ] Implement PathCard section (audience navigation)
-- [ ] Implement CTA section
-- [ ] Verify all scroll animations work
+- [x] Create `src/pages/Home.tsx` with `.theme-red`
+- [x] Implement HomeHero section (with MetricCard grid)
+- [x] Implement ValueProp section (value propositions)
+- [x] Implement "How it works" with HomeTimeline
+- [x] Implement PopulationItem section (populations served)
+- [x] Implement testimonials section (TestimonialCard)
+- [x] Implement PathCard section (audience navigation)
+- [x] Implement CTA section
+- [x] Verify all scroll animations work
 - [ ] **Commit**: "Phase 6A: Home page"
 
 ### Phase 6B: Jobseekers Page ⚡
 
-- [ ] Create `src/pages/Jobseekers.tsx` with `.theme-red`
-- [ ] Implement PageHero
-- [ ] Implement split sections (4x)
-- [ ] Implement process grid
-- [ ] Implement case studies tabs
-- [ ] Implement testimonials (3 sections)
-- [ ] Implement CTA section
-- [ ] Configure SecondaryNav links
+- [x] Create `src/pages/Jobseekers.tsx` with `.theme-red`
+- [x] Implement PageHero
+- [x] Implement split sections (4x)
+- [x] Implement process grid
+- [x] Implement case studies tabs
+- [x] Implement testimonials (3 sections)
+- [x] Implement CTA section
+- [x] Configure SecondaryNav links
 - [ ] **Commit**: "Phase 6B: Jobseekers page"
 
 ### Phase 6C: Employers Page ⚡
 
-- [ ] Create `src/pages/Employers.tsx` with `.theme-blue`
-- [ ] Implement PageHero
-- [ ] Implement value cards section
-- [ ] Implement split sections
-- [ ] Implement process grid
-- [ ] Implement roles section with RoleItems
-- [ ] Implement testimonials
-- [ ] Implement FAQ accordion
-- [ ] Implement CTA section
-- [ ] Configure SecondaryNav links
+- [x] Create `src/pages/Employers.tsx` with `.theme-blue`
+- [x] Implement PageHero
+- [x] Implement value cards section
+- [x] Implement split sections
+- [x] Implement process grid
+- [x] Implement roles section with RoleItems
+- [x] Implement testimonials
+- [x] Implement FAQ accordion
+- [x] Implement CTA section
+- [x] Configure SecondaryNav links
 - [ ] **Commit**: "Phase 6C: Employers page"
 
 ### Phase 6D: Partners Page ⚡
 
-- [ ] Create `src/pages/Partners.tsx` with `.theme-blue`
-- [ ] Implement PageHero
-- [ ] Implement trust strip (stats)
-- [ ] Implement services section with feature grid
-- [ ] Implement split sections
-- [ ] Implement program grid
-- [ ] Implement process grid
-- [ ] Implement testimonials
-- [ ] Implement FAQ accordion
-- [ ] Implement CTA section
-- [ ] Configure SecondaryNav links
+- [x] Create `src/pages/Partners.tsx` with `.theme-blue`
+- [x] Implement PageHero
+- [x] Implement trust strip (stats)
+- [x] Implement services section with feature grid
+- [x] Implement split sections
+- [x] Implement program grid
+- [x] Implement process grid
+- [x] Implement testimonials
+- [x] Implement FAQ accordion
+- [x] Implement CTA section
+- [x] Configure SecondaryNav links
 - [ ] **Commit**: "Phase 6D: Partners page"
 
 ### Phase 6E: About Page ⚡
 
-- [ ] Create `src/pages/About.tsx` with `.theme-red`
-- [ ] Implement PageHero
-- [ ] Implement glance grid (intro stats)
-- [ ] Implement evidence grid
-- [ ] Implement matrix grid (populations)
-- [ ] Implement AboutTimeline (vertical with scroll animation)
-- [ ] Implement scorecard grid
-- [ ] Implement founders section
-- [ ] Implement CTA section
-- [ ] Configure SecondaryNav links
+- [x] Create `src/pages/About.tsx` with `.theme-red`
+- [x] Implement PageHero
+- [x] Implement glance grid (intro stats)
+- [x] Implement evidence grid
+- [x] Implement matrix grid (populations)
+- [x] Implement AboutTimeline (vertical with scroll animation)
+- [x] Implement scorecard grid
+- [x] Implement founders section
+- [x] Implement CTA section
+- [x] Configure SecondaryNav links
 - [ ] **Commit**: "Phase 6E: About page"
 
 ### Phase 6F: Events, News & NotFound ⚡
 
-- [ ] Create `src/lib/content.ts` for markdown loading
-- [ ] Create sample markdown files in `src/content/events/`
-- [ ] Create sample markdown files in `src/content/news/`
-- [ ] Create `src/pages/Events.tsx`
+- [x] Create `src/lib/content.ts` for markdown loading
+- [x] Create sample markdown files in `src/content/events/`
+- [x] Create sample markdown files in `src/content/news/`
+- [x] Create `src/pages/Events.tsx`
   - List upcoming events from markdown
-- [ ] Create `src/pages/News.tsx`
+- [x] Create `src/pages/News.tsx`
   - List news items with external links
-- [ ] Create `src/pages/NotFound.tsx`
+- [x] Create `src/pages/NotFound.tsx`
 - [ ] **Commit**: "Phase 6F: Events, News, and NotFound pages"
 
 ---
