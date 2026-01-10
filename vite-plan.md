@@ -27,11 +27,11 @@ See `vite-spec.md` for full specification.
 
 > Foundation layer - must complete before Phase 3
 
-- [ ] Create `src/lib/types.ts` with shared TypeScript interfaces
-- [ ] Create `src/hooks/useScrollProgress.ts`
-- [ ] Create `src/hooks/useNavScrollState.ts`
-- [ ] Create `src/hooks/useIntersectionObserver.ts`
-- [ ] **Commit**: "Phase 2: Add scroll behavior hooks"
+- [x] Create `src/lib/types.ts` with shared TypeScript interfaces
+- [x] Create `src/hooks/useScrollProgress.ts`
+- [x] Create `src/hooks/useNavScrollState.ts`
+- [x] Create `src/hooks/useIntersectionObserver.ts`
+- [x] **Commit**: "Phase 2: Add scroll behavior hooks"
 
 ---
 
