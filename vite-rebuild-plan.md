@@ -129,7 +129,7 @@ The current Vite site components are "approximations" rather than faithful conve
 - [x] 7.4 Build `ListGrid.tsx` (icon + text items)
 - [x] 7.5 Assemble `Partners.tsx` matching original exactly
 - [x] 7.6 Verify Partners.tsx matches partners.html
-- [ ] 7.7 Commit Phase 7
+- [x] 7.7 Commit Phase 7
 
 ---
 
@@ -137,13 +137,13 @@ The current Vite site components are "approximations" rather than faithful conve
 
 **Objective:** Build components unique to about.html, then assemble page.
 
-- [ ] 8.1 Build `AboutTimeline.tsx` (vertical alternating timeline)
-- [ ] 8.2 Build `GlanceGrid.tsx` (counter items)
-- [ ] 8.3 Build `EvidenceGrid.tsx` (detailed evidence cards)
-- [ ] 8.4 Build `MatrixGrid.tsx` (population/program descriptions)
-- [ ] 8.5 Build `ScorecardGrid.tsx` (bullet-list cards)
-- [ ] 8.6 Assemble `About.tsx` matching original exactly
-- [ ] 8.7 Verify About.tsx matches about.html
+- [x] 8.1 Build `AboutTimeline.tsx` (vertical alternating timeline)
+- [x] 8.2 Build `GlanceGrid.tsx` (counter items)
+- [x] 8.3 Build `EvidenceGrid.tsx` (detailed evidence cards)
+- [x] 8.4 Build `MatrixGrid.tsx` (population/program descriptions)
+- [x] 8.5 Build `ScorecardGrid.tsx` (bullet-list cards)
+- [x] 8.6 Assemble `About.tsx` matching original exactly
+- [x] 8.7 Verify About.tsx matches about.html
 - [ ] 8.8 Commit Phase 8
 
 ---

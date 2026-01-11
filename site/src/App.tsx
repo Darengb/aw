@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Jobseekers from './pages/Jobseekers'
 import Employers from './pages/Employers'
 import Partners from './pages/Partners'
+import About from './pages/About'
 
 // Placeholder pages until they are built
 const PlaceholderPage = ({ name }: { name: string }) => (
@@ -41,7 +42,7 @@ function AppContent() {
           <Route path="/jobseekers" element={<Jobseekers />} />
           <Route path="/employers" element={<Employers />} />
           <Route path="/partners" element={<Partners />} />
-          <Route path="/about" element={<PlaceholderPage name="About" />} />
+          <Route path="/about" element={<About />} />
           <Route path="/events" element={<PlaceholderPage name="Events" />} />
           <Route path="/news" element={<PlaceholderPage name="News" />} />
           <Route path="*" element={<PlaceholderPage name="404 - Not Found" />} />
