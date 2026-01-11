@@ -1,22 +1,16 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import { Nav } from './components/layout/Nav'
-import { Footer } from './components/layout/Footer'
-import { ScrollProgressBar } from './components/layout/ScrollProgressBar'
-import { GrainOverlay } from './components/ui/GrainOverlay'
-import type { Theme } from './lib/types'
+import Nav from './components/layout/Nav'
+import Footer from './components/layout/Footer'
 
-// Pages
-import Home from './pages/Home'
-import Jobseekers from './pages/Jobseekers'
-import Employers from './pages/Employers'
-import Partners from './pages/Partners'
-import About from './pages/About'
-import Events from './pages/Events'
-import News from './pages/News'
-import NotFound from './pages/NotFound'
+// Placeholder pages until they are built
+const PlaceholderPage = ({ name }: { name: string }) => (
+  <div className="min-h-screen flex items-center justify-center bg-gray-950 text-white">
+    <h1 className="text-4xl font-display">{name} - Coming Soon</h1>
+  </div>
+)
 
 // Theme configuration per route
-const routeThemes: Record<string, Theme> = {
+const routeThemes: Record<string, 'red' | 'blue'> = {
   '/': 'red',
   '/jobseekers': 'red',
   '/about': 'red',
@@ -32,22 +26,25 @@ function AppContent() {
 
   return (
     <div className={`theme-${theme}`}>
-      <ScrollProgressBar theme={theme} />
-      <Nav theme={theme} />
+      {/* Scroll Progress Bar */}
+      <div className="scroll-progress-bar" />
+
+      <Nav />
+
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/jobseekers" element={<Jobseekers />} />
-          <Route path="/employers" element={<Employers />} />
-          <Route path="/partners" element={<Partners />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/news" element={<News />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<PlaceholderPage name="Home" />} />
+          <Route path="/jobseekers" element={<PlaceholderPage name="Jobseekers" />} />
+          <Route path="/employers" element={<PlaceholderPage name="Employers" />} />
+          <Route path="/partners" element={<PlaceholderPage name="Partners" />} />
+          <Route path="/about" element={<PlaceholderPage name="About" />} />
+          <Route path="/events" element={<PlaceholderPage name="Events" />} />
+          <Route path="/news" element={<PlaceholderPage name="News" />} />
+          <Route path="*" element={<PlaceholderPage name="404 - Not Found" />} />
         </Routes>
       </main>
+
       <Footer />
-      <GrainOverlay />
     </div>
   )
 }

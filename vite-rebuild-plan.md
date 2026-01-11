@@ -43,10 +43,10 @@ The current Vite site components are "approximations" rather than faithful conve
 
 **Objective:** Build Nav and Footer first (shared across all pages).
 
-- [ ] 3.1 Build `Nav.tsx` from index.html (3-state scroll behavior)
-- [ ] 3.2 Build `Footer.tsx` from index.html (4-column layout)
-- [ ] 3.3 Build `App.tsx` shell with router
-- [ ] 3.4 Verify Nav/Footer render correctly
+- [x] 3.1 Build `Nav.tsx` from index.html (3-state scroll behavior)
+- [x] 3.2 Build `Footer.tsx` from index.html (4-column layout)
+- [x] 3.3 Build `App.tsx` shell with router
+- [x] 3.4 Verify Nav/Footer render correctly
 - [ ] 3.5 Commit Phase 3
 
 ---
