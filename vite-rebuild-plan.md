@@ -179,7 +179,7 @@ The current Vite site components are "approximations" rather than faithful conve
 
 ### Final
 - [x] 10.8 Fix any remaining discrepancies
-- [ ] 10.9 Final commit
+- [x] 10.9 Final commit
 
 ---
 
