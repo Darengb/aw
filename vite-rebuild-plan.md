@@ -21,10 +21,10 @@ The current Vite site components are "approximations" rather than faithful conve
 - [x] 1.1 Extract CSS from `index.html` (navigation, hero, timeline, cards, dashboard)
 - [x] 1.2 Extract CSS from `jobseekers.html` (split sections, case studies, process cards)
 - [x] 1.3 Extract CSS from `employers.html` (value cards, role items, FAQ accordion)
-- [ ] 1.4 Extract CSS from `partners.html` (trust strip, program grid, feature grid)
-- [ ] 1.5 Extract CSS from `about.html` (vertical timeline, evidence grid, matrix grid)
-- [ ] 1.6 Organize into `globals.css`, `animations.css`, `components.css`
-- [ ] 1.7 Commit Phase 1
+- [x] 1.4 Extract CSS from `partners.html` (trust strip, program grid, feature grid)
+- [x] 1.5 Extract CSS from `about.html` (vertical timeline, evidence grid, matrix grid)
+- [x] 1.6 Organize into `globals.css`, `animations.css`, `components.css`
+- [x] 1.7 Commit Phase 1
 
 ---
 
