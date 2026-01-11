@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review Styles - America Works</title>
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Distinctive Font Stack -->
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,600;1,400&family=General+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Crimson+Text:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Instrument Serif', 'serif'],
+            body: ['General Sans', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            crimson: ['Crimson Text', 'serif'],
+            playfair: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            'aw-red': {
+              DEFAULT: '#ec140c',
+              dark: '#c7130c',
+            },
+            'aw-blue': {
+              DEFAULT: '#323b97',
+              dark: '#252e6e',
+            },
+          },
+          maxWidth: {
+            'container': '87.5rem',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Star rating */
+    .stars {
+      display: flex;
+      gap: 2px;
+    }
+    .star {
+      color: #fbbf24;
+    }
+
+    /* Card hover effects */
+    .review-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px rgba(0, 0, 0, 0.08), 0 8px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Quote decoration */
+    .quote-mark {
+      font-family: 'Instrument Serif', serif;
+      font-size: 6rem;
+      line-height: 1;
+      color: rgba(50, 59, 151, 0.08);
+      position: absolute;
+      top: -1rem;
+      left: 1rem;
+    }
+
+    /* Featured box gradient border */
+    .featured-box {
+      position: relative;
+      background: white;
+    }
+    .featured-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #ec140c 0%, #323b97 100%);
+    }
+
+    /* Inline quote styling */
+    .inline-quote {
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    .inline-quote::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: #ec140c;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body class="font-body text-gray-800 bg-gray-100">
+
+  <!-- Header -->
+  <header class="bg-gray-900 text-white py-8">
+    <div class="max-w-container mx-auto px-8">
+      <h1 class="font-display text-4xl mb-2">Review Style Options</h1>
+      <p class="text-gray-400">Three layout styles for customer testimonials</p>
+    </div>
+  </header>
+
+  <!-- ============================================
+       STYLE 1: CARDS WITH STARS
+       ============================================ -->
+  <section class="py-20 bg-white">
+    <div class="max-w-container mx-auto px-8">
+      <!-- Section Label -->
+      <div class="mb-12">
+        <span class="font-mono text-xs font-semibold tracking-widest text-aw-red uppercase">Style 1</span>
+        <h2 class="font-display text-3xl text-gray-900 mt-2">Cards with Stars</h2>
+        <p class="text-gray-500 mt-2">Best for: Grouped testimonial sections, social proof grids</p>
+      </div>
+
+      <!-- 3-Column Grid - Horizontal scroll on mobile -->
+      <div class="flex md:grid md:grid-cols-3 gap-8 overflow-x-auto pb-4 md:pb-0 snap-x snap-mandatory md:snap-none -mx-8 px-8 md:mx-0 md:px-0">
+
+        <!-- Card 1: Carlos -->
+        <div class="review-card relative bg-gray-50 rounded-lg p-8 border border-gray-200 flex flex-col min-w-[300px] md:min-w-0 snap-start">
+          <span class="quote-mark">"</span>
+          <div class="relative z-10 flex flex-col flex-1">
+            <!-- Stars -->
+            <div class="stars mb-4">
+              <svg class="star w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="star w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="star w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="star w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="star w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            </div>
+            <!-- Quote -->
+            <p class="text-gray-700 leading-relaxed font-crimson text-xl italic flex-1">
+              "I was truly impressed with the level of dedication these people show their clients. Their enthusiasm is above par. The resources and empathy shown to me was awesome."
+            </p>
+            <!-- Attribution -->
+            <div class="flex items-center gap-3 mt-6 pt-6 border-t border-gray-200">
+              <div class="w-10 h-10 rounded-full bg-aw-blue flex items-center justify-center text-white font-semibold text-sm">C</div>
+              <div>
+                <p class="font-semibold text-gray-900">Carlos</p>
+                <p class="text-sm text-gray-500">Google Reviews</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: John -->
+        <div class="review-card relative bg-gray-50 rounded-lg p-8 border border-gray-200 flex flex-col min-w-[300px] md:min-w-0 snap-start">
+          <span class="quote-mark">"</span>
+          <div class="relative z-10 flex flex-col flex-1">
+            <!-- Stars -->
+            <div class="stars mb-4">
+              <svg class="star w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="star w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="star w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="star w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="star w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            </div>
+            <!-- Quote -->
+            <p class="text-gray-700 leading-relaxed font-crimson text-xl italic flex-1">
+              "What an organization. I have felt like I matter there than anywhere in a long time. The staff are professional professionals if that makes sense."
+            </p>
+            <!-- Attribution -->
+            <div class="flex items-center gap-3 mt-6 pt-6 border-t border-gray-200">
+              <div class="w-10 h-10 rounded-full bg-aw-red flex items-center justify-center text-white font-semibold text-sm">J</div>
+              <div>
+                <p class="font-semibold text-gray-900">John</p>
+                <p class="text-sm text-gray-500">Google Reviews</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Angela -->
+        <div class="review-card relative bg-gray-50 rounded-lg p-8 border border-gray-200 flex flex-col min-w-[300px] md:min-w-0 snap-start">
+          <span class="quote-mark">"</span>
+          <div class="relative z-10 flex flex-col flex-1">
+            <!-- Stars -->
+            <div class="stars mb-4">
+              <svg class="star w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="star w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="star w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="star w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="star w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            </div>
+            <!-- Quote -->
+            <p class="text-gray-700 leading-relaxed font-crimson text-xl italic flex-1">
+              "Great experience for people re-entering the workforce or need assistance in employment tools. The environment is friendly and welcoming and everyone is ready to help you become a better employment option."
+            </p>
+            <!-- Attribution -->
+            <div class="flex items-center gap-3 mt-6 pt-6 border-t border-gray-200">
+              <div class="w-10 h-10 rounded-full bg-aw-blue flex items-center justify-center text-white font-semibold text-sm">A</div>
+              <div>
+                <p class="font-semibold text-gray-900">Angela</p>
+                <p class="text-sm text-gray-500">Google Reviews</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       STYLE 2: SIMPLE INLINE QUOTES - 4 SECTIONS
+       ============================================ -->
+
+  <!-- Section 1: Personal Service / Treated Like Clients -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-container mx-auto px-8">
+      <div class="flex gap-8 md:gap-12 overflow-x-auto pb-4 md:pb-0 -mx-8 px-8 md:mx-0 md:px-0 snap-x snap-mandatory md:snap-none">
+        <div class="inline-quote flex-1 min-w-[280px] md:min-w-0 snap-start">
+          <p class="font-display text-xl md:text-2xl text-gray-800 font-semibold leading-[1.5]">
+            "I was truly impressed with the dedication these people show their clients. Their enthusiasm is above par. The empathy shown to me was awesome."
+          </p>
+          <p class="mt-4 text-sm text-gray-500 font-medium tracking-wide uppercase">— Carlos, Google Reviews</p>
+        </div>
+        <div class="inline-quote flex-1 min-w-[280px] md:min-w-0 snap-start">
+          <p class="font-display text-xl md:text-2xl text-gray-800 font-semibold leading-[1.5]">
+            "What an organization. I have felt like I matter there than anywhere in a long time. The staff are professional professionals if that makes sense."
+          </p>
+          <p class="mt-4 text-sm text-gray-500 font-medium tracking-wide uppercase">— John, Google Reviews</p>
+        </div>
+        <div class="inline-quote flex-1 min-w-[280px] md:min-w-0 snap-start">
+          <p class="font-display text-xl md:text-2xl text-gray-800 font-semibold leading-[1.5]">
+            "Great experience for people re-entering the workforce. The environment is friendly and welcoming and everyone is ready to help."
+          </p>
+          <p class="mt-4 text-sm text-gray-500 font-medium tracking-wide uppercase">— Angela, Google Reviews</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Exceeded Expectations -->
+  <section class="py-16 bg-white">
+    <div class="max-w-container mx-auto px-8">
+      <div class="flex gap-8 md:gap-12 overflow-x-auto pb-4 md:pb-0 -mx-8 px-8 md:mx-0 md:px-0 snap-x snap-mandatory md:snap-none">
+        <div class="inline-quote flex-1 min-w-[280px] md:min-w-0 snap-start">
+          <p class="font-display text-xl md:text-2xl text-gray-800 font-semibold leading-[1.5]">
+            "I am a very skeptical person when it comes to people offering assistance, but America Works was much more."
+          </p>
+          <p class="mt-4 text-sm text-gray-500 font-medium tracking-wide uppercase">— Anthony, Google Reviews</p>
+        </div>
+        <div class="inline-quote flex-1 min-w-[280px] md:min-w-0 snap-start">
+          <p class="font-display text-xl md:text-2xl text-gray-800 font-semibold leading-[1.5]">
+            "I tried to get a job on my own for months without any luck, and they had me going on interviews by my second day!"
+          </p>
+          <p class="mt-4 text-sm text-gray-500 font-medium tracking-wide uppercase">— Joshua, Google Reviews</p>
+        </div>
+        <div class="inline-quote flex-1 min-w-[280px] md:min-w-0 snap-start">
+          <p class="font-display text-xl md:text-2xl text-gray-800 font-semibold leading-[1.5]">
+            "America Works really takes their time with their clients and gives us more understanding on job searching."
+          </p>
+          <p class="mt-4 text-sm text-gray-500 font-medium tracking-wide uppercase">— Tatyanna, Google Reviews</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Meeting People Where They Are -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-container mx-auto px-8">
+      <div class="flex gap-8 md:gap-12 overflow-x-auto pb-4 md:pb-0 -mx-8 px-8 md:mx-0 md:px-0 snap-x snap-mandatory md:snap-none">
+        <div class="inline-quote flex-1 min-w-[280px] md:min-w-0 snap-start">
+          <p class="font-display text-xl md:text-2xl text-gray-800 font-semibold leading-[1.5]">
+            "From Homeless to Formerly Homeless. From Unemployed to Employed. From feeling alone to now having a team of support. I now proudly work at Yankee Stadium."
+          </p>
+          <p class="mt-4 text-sm text-gray-500 font-medium tracking-wide uppercase">— Clark, Google Reviews</p>
+        </div>
+        <div class="inline-quote flex-1 min-w-[280px] md:min-w-0 snap-start">
+          <p class="font-display text-xl md:text-2xl text-gray-800 font-semibold leading-[1.5]">
+            "I can't thank them enough for helping me at my lowest. Broke, homeless, unemployed. The employees are genuinely helpful. They want everyone to become a success story."
+          </p>
+          <p class="mt-4 text-sm text-gray-500 font-medium tracking-wide uppercase">— Troy, Google Reviews</p>
+        </div>
+        <div class="inline-quote flex-1 min-w-[280px] md:min-w-0 snap-start">
+          <p class="font-display text-xl md:text-2xl text-gray-800 font-semibold leading-[1.5]">
+            "Coming from a domestic violence situation where I lost everything, America Works has been very supportive. I am grateful to have them in my life."
+          </p>
+          <p class="mt-4 text-sm text-gray-500 font-medium tracking-wide uppercase">— Sherbay, Google Reviews</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Personalized Attention -->
+  <section class="py-16 bg-white">
+    <div class="max-w-container mx-auto px-8">
+      <div class="flex gap-8 md:gap-12 overflow-x-auto pb-4 md:pb-0 -mx-8 px-8 md:mx-0 md:px-0 snap-x snap-mandatory md:snap-none">
+        <div class="inline-quote flex-1 min-w-[280px] md:min-w-0 snap-start">
+          <p class="font-display text-xl md:text-2xl text-gray-800 font-semibold leading-[1.5]">
+            "When I was in foster care America Works helped me not just get on my feet, but also help me find a better person in me."
+          </p>
+          <p class="mt-4 text-sm text-gray-500 font-medium tracking-wide uppercase">— Taino, Google Reviews</p>
+        </div>
+        <div class="inline-quote flex-1 min-w-[280px] md:min-w-0 snap-start">
+          <p class="font-display text-xl md:text-2xl text-gray-800 font-semibold leading-[1.5]">
+            "I've learned a lot about myself working with the job trainer and developers. Highly recommended for those interested in their job search."
+          </p>
+          <p class="mt-4 text-sm text-gray-500 font-medium tracking-wide uppercase">— Mecia, Google Reviews</p>
+        </div>
+        <div class="inline-quote flex-1 min-w-[280px] md:min-w-0 snap-start">
+          <p class="font-display text-xl md:text-2xl text-gray-800 font-semibold leading-[1.5]">
+            "This place has been an absolute help to me and my family. From my case workers to the Director. Nice people and great services."
+          </p>
+          <p class="mt-4 text-sm text-gray-500 font-medium tracking-wide uppercase">— Shanita, Google Reviews</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Usage Guide -->
+  <section class="py-16 bg-gray-900 text-white">
+    <div class="max-w-container mx-auto px-8">
+      <h2 class="font-display text-2xl mb-8">Usage Recommendations</h2>
+      <div class="grid md:grid-cols-2 gap-8 text-sm max-w-3xl">
+        <div>
+          <h3 class="font-semibold text-aw-red mb-2">Style 1: Cards with Stars</h3>
+          <p class="text-gray-400">Use for dedicated testimonial sections. Works well in 2-3 column grids. Good for showing multiple reviews at once.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-aw-red mb-2">Style 2: Simple Inline</h3>
+          <p class="text-gray-400">Sprinkle between content sections. Subtle but effective. Best for short, punchy quotes that don't interrupt flow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

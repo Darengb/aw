@@ -20,18 +20,18 @@ export function PathCard({ title, description, href, icon }: PathCardProps) {
         {/* Content side */}
         <div className="path-content py-16 px-0 lg:pr-16 relative">
           {/* Path number/icon */}
-          <div className="path-number font-mono text-xs font-medium uppercase tracking-[0.2em] text-black/35 mb-6 opacity-0 translate-y-5 group-[.is-visible]:opacity-100 group-[.is-visible]:translate-y-0 transition-all duration-800 ease-out delay-200">
+          <div className="path-number font-mono text-xs font-medium uppercase tracking-[0.2em] text-black/35 mb-6">
             {IconComponent && <IconComponent className="inline-block mr-2 w-4 h-4" size={16} />}
             <span>Learn more</span>
           </div>
 
           {/* Title */}
-          <h2 className="font-playfair text-5xl font-normal leading-tight tracking-tight text-[#0a0a0a] mb-6 italic opacity-0 translate-y-8 group-[.is-visible]:opacity-100 group-[.is-visible]:translate-y-0 transition-all duration-1000 ease-out delay-300">
+          <h2 className="font-display text-5xl font-normal leading-tight tracking-tight text-[#0a0a0a] mb-6">
             {title}
           </h2>
 
           {/* Description */}
-          <p className="path-description text-black/65 mb-8 leading-relaxed text-lg max-w-[540px] opacity-0 translate-y-5 group-[.is-visible]:opacity-100 group-[.is-visible]:translate-y-0 transition-all duration-800 ease-out delay-500">
+          <p className="path-description text-black/65 mb-8 leading-relaxed text-lg max-w-[540px]">
             {description}
           </p>
 

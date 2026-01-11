@@ -147,7 +147,7 @@ export function Home() {
       {/* Hero Section with video background and metrics dashboard */}
       <HomeHero
         title={`Workforce\ndevelopment that *works*`}
-        backgroundVideo="/images/hero.mp4"
+        backgroundVideo="/images/hero-bg-vid.mp4"
         primaryCta={{
           label: 'Find Work',
           href: '/jobseekers',

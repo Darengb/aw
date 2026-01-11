@@ -1,8 +1,9 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* ============================================
    TECHNICAL LUXURY DESIGN SYSTEM
-   America Works - Vite Edition
    ============================================ */
 
 * {
@@ -14,7 +15,7 @@
 :root {
   /* Typography */
   --font-display: 'Instrument Serif', serif;
-  --font-body: 'General Sans', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --font-dashboard: 'JetBrains Mono', monospace;
 
@@ -86,6 +87,10 @@
   /* Easing */
   --ease-primary: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Glass Effects */
+  --shadow-glass: 0 4px 30px rgba(255, 255, 255, 0.1);
+  --shadow-glass-hover: 0 8px 40px rgba(255, 255, 255, 0.15);
 
   /* Theme Color - default to red, overridden by theme classes */
   --theme-color: var(--aw-red);
