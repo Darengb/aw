@@ -144,7 +144,7 @@ The current Vite site components are "approximations" rather than faithful conve
 - [x] 8.5 Build `ScorecardGrid.tsx` (bullet-list cards)
 - [x] 8.6 Assemble `About.tsx` matching original exactly
 - [x] 8.7 Verify About.tsx matches about.html
-- [ ] 8.8 Commit Phase 8
+- [x] 8.8 Commit Phase 8
 
 ---
 
@@ -152,12 +152,12 @@ The current Vite site components are "approximations" rather than faithful conve
 
 **Objective:** Convert scroll animations and behaviors to React hooks.
 
-- [ ] 9.1 Build `useNavScrollState.ts` (3-state: transparent → scrolled → below-hero)
-- [ ] 9.2 Build `useIntersectionObserver.ts` (generic scroll-triggered animations)
-- [ ] 9.3 Build `useScrollProgress.ts` (timeline progress, scroll bar)
-- [ ] 9.4 Build `useCountUp.ts` (animated number counters)
-- [ ] 9.5 Apply hooks to all components needing animation
-- [ ] 9.6 Verify all scroll animations work
+- [x] 9.1 Build `useNavScrollState.ts` (3-state: transparent → scrolled → below-hero)
+- [x] 9.2 Build `useIntersectionObserver.ts` (generic scroll-triggered animations)
+- [x] 9.3 Build `useScrollProgress.ts` (timeline progress, scroll bar)
+- [x] 9.4 Build `useCountUp.ts` (animated number counters)
+- [x] 9.5 Apply hooks to all components needing animation
+- [x] 9.6 Verify all scroll animations work
 - [ ] 9.7 Commit Phase 9
 
 ---

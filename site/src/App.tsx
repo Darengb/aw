@@ -6,6 +6,7 @@ import Jobseekers from './pages/Jobseekers'
 import Employers from './pages/Employers'
 import Partners from './pages/Partners'
 import About from './pages/About'
+import { useScrollProgress } from './hooks/useScrollProgress'
 
 // Placeholder pages until they are built
 const PlaceholderPage = ({ name }: { name: string }) => (
@@ -28,11 +29,15 @@ const routeThemes: Record<string, 'red' | 'blue'> = {
 function AppContent() {
   const location = useLocation()
   const theme = routeThemes[location.pathname] || 'red'
+  const scrollProgress = useScrollProgress()
 
   return (
     <div className={`theme-${theme}`}>
       {/* Scroll Progress Bar */}
-      <div className="scroll-progress-bar" />
+      <div
+        className="scroll-progress-bar"
+        style={{ transform: `scaleX(${scrollProgress})` }}
+      />
 
       <Nav />
 
