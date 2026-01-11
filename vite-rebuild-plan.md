@@ -47,7 +47,7 @@ The current Vite site components are "approximations" rather than faithful conve
 - [x] 3.2 Build `Footer.tsx` from index.html (4-column layout)
 - [x] 3.3 Build `App.tsx` shell with router
 - [x] 3.4 Verify Nav/Footer render correctly
-- [ ] 3.5 Commit Phase 3
+- [x] 3.5 Commit Phase 3
 
 ---
 
@@ -56,23 +56,23 @@ The current Vite site components are "approximations" rather than faithful conve
 **Objective:** Build all components needed for Home.tsx using index.html as source.
 
 ### 4A: Hero & Dashboard
-- [ ] 4A.1 Build `HomeHero.tsx` (video background + glass metrics dashboard)
-- [ ] 4A.2 Build `MetricCard.tsx` (animated counters in dashboard)
+- [x] 4A.1 Build `HomeHero.tsx` (video background + glass metrics dashboard)
+- [x] 4A.2 Build `MetricCard.tsx` (animated counters in dashboard)
 
 ### 4B: Cards & Grids
-- [ ] 4B.1 Build `GoogleReviewCard.tsx` (Google logo, 5 stars, distinct from testimonials)
-- [ ] 4B.2 Build `TestimonialCard.tsx` (quote mark decoration, cite + role footer)
-- [ ] 4B.3 Build `PathCard.tsx` (large cards with icons, hover effects)
-- [ ] 4B.4 Build `PopulationItem.tsx` (icon + title + desc)
-- [ ] 4B.5 Build `ValueProp.tsx` (numbered grid items)
+- [x] 4B.1 Build `GoogleReviewCard.tsx` (Google logo, 5 stars, distinct from testimonials)
+- [x] 4B.2 Build `TestimonialCard.tsx` (quote mark decoration, cite + role footer)
+- [x] 4B.3 Build `PathCard.tsx` (large cards with icons, hover effects)
+- [x] 4B.4 Build `PopulationItem.tsx` (icon + title + desc)
+- [x] 4B.5 Build `ValueProp.tsx` (numbered grid items)
 
 ### 4C: Sections
-- [ ] 4C.1 Build `SectionHeader.tsx` (label + headline + intro)
-- [ ] 4C.2 Build `HomeTimeline.tsx` (**VERTICAL** timeline with scroll-fill animation)
-- [ ] 4C.3 Build `CTASection.tsx` (dual CTA buttons)
+- [x] 4C.1 Build `SectionHeader.tsx` (label + headline + intro)
+- [x] 4C.2 Build `HomeTimeline.tsx` (**VERTICAL** timeline with scroll-fill animation)
+- [x] 4C.3 Build `CTASection.tsx` (dual CTA buttons)
 
 ### 4D: Assemble Home Page
-- [ ] 4D.1 Build `Home.tsx` assembling all components in correct order:
+- [x] 4D.1 Build `Home.tsx` assembling all components in correct order:
   ```
   HomeHero (video + dashboard)
   Audience Paths section
@@ -87,7 +87,7 @@ The current Vite site components are "approximations" rather than faithful conve
   TestimonialCard grid (3 cards)
   CTASection
   ```
-- [ ] 4D.2 Verify Home.tsx matches index.html exactly
+- [x] 4D.2 Verify Home.tsx matches index.html exactly
 - [ ] 4D.3 Commit Phase 4
 
 ---
