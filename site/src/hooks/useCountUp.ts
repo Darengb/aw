@@ -25,14 +25,13 @@ export function useCountUp({
   prefix = '',
   enabled = true,
 }: UseCountUpOptions): string {
-  const [count, setCount] = useState(start)
+  const [count, setCount] = useState(enabled ? start : start)
   const countRef = useRef(start)
   const startTimeRef = useRef<number | null>(null)
   const frameRef = useRef<number | null>(null)
 
   useEffect(() => {
     if (!enabled) {
-      setCount(start)
       return
     }
 
@@ -88,13 +87,12 @@ export function useCountUpValue({
   delay = 0,
   enabled = true,
 }: Omit<UseCountUpOptions, 'decimals' | 'suffix' | 'prefix'>): number {
-  const [count, setCount] = useState(start)
+  const [count, setCount] = useState(enabled ? start : start)
   const startTimeRef = useRef<number | null>(null)
   const frameRef = useRef<number | null>(null)
 
   useEffect(() => {
     if (!enabled) {
-      setCount(start)
       return
     }
 

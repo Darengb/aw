@@ -158,7 +158,7 @@ The current Vite site components are "approximations" rather than faithful conve
 - [x] 9.4 Build `useCountUp.ts` (animated number counters)
 - [x] 9.5 Apply hooks to all components needing animation
 - [x] 9.6 Verify all scroll animations work
-- [ ] 9.7 Commit Phase 9
+- [x] 9.7 Commit Phase 9
 
 ---
 
@@ -167,18 +167,18 @@ The current Vite site components are "approximations" rather than faithful conve
 **Objective:** Ensure 98% match across all pages.
 
 ### Build & Lint
-- [ ] 10.1 Run `npm run build` - fix all errors
-- [ ] 10.2 Run `npm run lint` on changed files - fix errors
+- [x] 10.1 Run `npm run build` - fix all errors
+- [x] 10.2 Run `npm run lint` on changed files - fix errors
 
 ### Visual Verification (per page)
-- [ ] 10.3 Home: Layout, text, colors, fonts, spacing, hover, scroll animations, mobile
-- [ ] 10.4 Jobseekers: Layout, text, colors, fonts, spacing, hover, scroll animations, mobile
-- [ ] 10.5 Employers: Layout, text, colors, fonts, spacing, hover, scroll animations, mobile
-- [ ] 10.6 Partners: Layout, text, colors, fonts, spacing, hover, scroll animations, mobile
-- [ ] 10.7 About: Layout, text, colors, fonts, spacing, hover, scroll animations, mobile
+- [x] 10.3 Home: Layout, text, colors, fonts, spacing, hover, scroll animations, mobile
+- [x] 10.4 Jobseekers: Layout, text, colors, fonts, spacing, hover, scroll animations, mobile
+- [x] 10.5 Employers: Layout, text, colors, fonts, spacing, hover, scroll animations, mobile
+- [x] 10.6 Partners: Layout, text, colors, fonts, spacing, hover, scroll animations, mobile
+- [x] 10.7 About: Layout, text, colors, fonts, spacing, hover, scroll animations, mobile
 
 ### Final
-- [ ] 10.8 Fix any remaining discrepancies
+- [x] 10.8 Fix any remaining discrepancies
 - [ ] 10.9 Final commit
 
 ---
