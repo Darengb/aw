@@ -987,6 +987,15 @@
       padding: 0 2rem;
     }
 
+    /* Hide scrollbar utility */
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
     .section-header {
       margin-bottom: 5rem;
       text-align: center;
@@ -1886,8 +1895,8 @@
     @media (max-width: 1024px) {
       .step-card {
         grid-template-columns: 1fr;
-        gap: 2rem;
-        margin-bottom: 6rem;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
       }
 
       .step-card:nth-child(even) {
@@ -2732,7 +2741,6 @@
       }
 
       .paths-grid {
-        margin-top: 4rem;
       }
 
       .path-card {
@@ -2904,7 +2912,7 @@
                 <span class="metric-tag font-dashboard text-metric-tag uppercase text-white/90 px-3 py-1.5 bg-white/5 rounded-md inline-block">EST. 1984</span>
               </div>
               <div class="metric-stat font-display text-metric-hero text-white my-3 mb-2 inline-block relative [text-shadow:0_2px_20px_rgba(255,255,255,0.5)] tabular-nums"><span data-stat-target="4000000">4,000,000</span><span class="metric-symbol metric-symbol-right">+</span></div>
-              <div class="metric-label-dash font-body text-metric-label text-white/70 mt-2">Clients Served</div>
+              <div class="metric-label-dash font-body text-metric-label text-white/70 mt-2">Placed in Jobs</div>
             </div>
 
             <!-- Placement Time Card -->
@@ -2955,8 +2963,8 @@
     </div>
   </section>
 
-  <!-- Audience Paths -->
-  <section class="audience-paths py-32 relative" id="paths">
+  <!-- Service Delivery -->
+  <section class="audience-paths pt-16 pb-0 relative" id="paths">
     <div class="container max-w-container mx-auto px-8">
       <header class="section-header text-center mb-24">
         <span class="label-system font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4 block">Service Delivery</span>
@@ -2971,7 +2979,279 @@
           <a href="partners.html" class="font-body text-sm font-semibold text-gray-700 no-underline transition-colors duration-200 hover:text-aw-blue">Partners</a>
         </div>
       </header>
+    </div>
+  </section>
 
+  <!-- Google Reviews -->
+  <section class="pt-0 pb-6 bg-white">
+    <div class="md:container md:max-w-container mx-auto md:px-8">
+      <div class="testimonials-grid flex gap-4 overflow-x-auto pb-4 px-4 md:px-0 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:pb-0 snap-x snap-mandatory scroll-pl-4 md:scroll-pl-0 scrollbar-hide">
+        <div class="google-review-card group bg-white p-8 rounded-lg border border-gray-100 relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 w-[75vw] flex-shrink-0 snap-start md:w-auto md:flex-shrink">
+          <div class="absolute left-0 top-0 bottom-0 w-[0.12rem] bg-[#f1f2f2]"></div>
+          <div class="flex items-center gap-3 mb-6">
+            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+            </svg>
+            <div class="flex items-center gap-0.5">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+          </div>
+          <blockquote class="relative z-[1] mb-6">
+            <p class="font-body text-lg leading-relaxed text-gray-700">
+              "I was truly impressed with the <strong>dedication</strong> these people show their clients. Their enthusiasm is above par. The empathy shown to me was awesome."
+            </p>
+          </blockquote>
+          <footer class="flex items-center justify-between">
+            <span class="font-display text-base text-gray-900">Carlos</span>
+            <span class="font-mono text-xs text-gray-500 uppercase tracking-wider">Google Review</span>
+          </footer>
+        </div>
+
+        <div class="google-review-card group bg-white p-8 rounded-lg border border-gray-100 relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 w-[75vw] flex-shrink-0 snap-start md:w-auto md:flex-shrink">
+          <div class="absolute left-0 top-0 bottom-0 w-[0.12rem] bg-[#f1f2f2]"></div>
+          <div class="flex items-center gap-3 mb-6">
+            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+            </svg>
+            <div class="flex items-center gap-0.5">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+          </div>
+          <blockquote class="relative z-[1] mb-6">
+            <p class="font-body text-lg leading-relaxed text-gray-700">
+              "What an organization. I have felt like <strong>I matter</strong> there more than anywhere in a long time. The staff are professional professionals if that makes sense."
+            </p>
+          </blockquote>
+          <footer class="flex items-center justify-between">
+            <span class="font-display text-base text-gray-900">John</span>
+            <span class="font-mono text-xs text-gray-500 uppercase tracking-wider">Google Review</span>
+          </footer>
+        </div>
+
+        <div class="google-review-card group bg-white p-8 rounded-lg border border-gray-100 relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 w-[75vw] flex-shrink-0 snap-start md:w-auto md:flex-shrink">
+          <div class="absolute left-0 top-0 bottom-0 w-[0.12rem] bg-[#f1f2f2]"></div>
+          <div class="flex items-center gap-3 mb-6">
+            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+            </svg>
+            <div class="flex items-center gap-0.5">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+          </div>
+          <blockquote class="relative z-[1] mb-6">
+            <p class="font-body text-lg leading-relaxed text-gray-700">
+              "Great experience for people re-entering the workforce. The environment is <strong>friendly and welcoming</strong> and everyone is ready to help."
+            </p>
+          </blockquote>
+          <footer class="flex items-center justify-between">
+            <span class="font-display text-base text-gray-900">Angela</span>
+            <span class="font-mono text-xs text-gray-500 uppercase tracking-wider">Google Review</span>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works pt-16 pb-16 bg-gray-50 relative">
+    <div class="container max-w-container mx-auto px-8">
+      <header class="section-header text-center mb-24">
+        <span class="label-system font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4 block">Process</span>
+        <h2 class="display-md font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Three steps to your next paycheck</h2>
+        <p class="display-subhead max-w-3xl mx-auto text-xl text-gray-600 leading-relaxed">
+          Most participants start working within weeks. Here's how:
+        </p>
+      </header>
+
+      <div class="steps-grid relative flex flex-col gap-16">
+        <!-- Progressive timeline -->
+        <div class="timeline-track">
+          <div class="timeline-line-bg"></div>
+          <div class="timeline-line-fill"></div>
+          <div class="timeline-dot" data-step="1"></div>
+          <div class="timeline-dot" data-step="2"></div>
+          <div class="timeline-dot" data-step="3"></div>
+        </div>
+
+        <article class="step-card grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-16 items-center relative mb-8 lg:mb-32 opacity-0" data-step="1">
+          <div class="step-number-large">01</div>
+          <div class="step-accent"></div>
+
+          <div class="step-content">
+            <div class="step-number">Step 01</div>
+            <h3 class="step-title">We start with you</h3>
+            <p class="step-description">
+              Tell us your goals. Share your challenges. We'll create a personalized plan that addresses everything from childcare to confidence.
+            </p>
+          </div>
+
+          <div class="step-icon-wrapper">
+            <div class="step-icon">
+              <img src="images/resume-coaching.jpg" alt="Connect" loading="lazy">
+            </div>
+          </div>
+        </article>
+
+        <article class="step-card grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-16 items-center relative mb-8 lg:mb-32 opacity-0" data-step="2">
+          <div class="step-number-large">02</div>
+          <div class="step-accent"></div>
+
+          <div class="step-content">
+            <div class="step-number">Step 02</div>
+            <h3 class="step-title">Get job-ready fast</h3>
+            <p class="step-description">
+              Polish your resume. Nail your interviews. Learn new skills. We'll connect you directly with employers who are hiring now. No endless applications.
+            </p>
+          </div>
+
+          <div class="step-icon-wrapper">
+            <div class="step-icon">
+              <img src="images/business-career-and-placement.jpg" alt="Prepare" loading="lazy">
+            </div>
+          </div>
+        </article>
+
+        <article class="step-card grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative mb-0 opacity-0" data-step="3">
+          <div class="step-number-large">03</div>
+          <div class="step-accent"></div>
+
+          <div class="step-content">
+            <div class="step-number">Step 03</div>
+            <h3 class="step-title">Keep growing</h3>
+            <p class="step-description">
+              Your first day isn't our last day. We stick around to help you solve problems, earn raises, and build the career you deserve.
+            </p>
+          </div>
+
+          <div class="step-icon-wrapper">
+            <div class="step-icon">
+              <img src="images/opportunities.jpg" alt="Succeed" loading="lazy">
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="section-cta">
+        <a href="#jobseekers" class="btn-primary"><span>Join millions who found their path</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Google Reviews: Exceeded Expectations -->
+  <section class="py-6 bg-gray-50">
+    <div class="container max-w-container mx-auto px-8">
+      <div class="testimonials-grid grid grid-cols-1 md:grid-cols-3 gap-8 mt-0">
+        <div class="google-review-card group bg-white p-8 rounded-lg border border-gray-100 relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 w-[75vw] flex-shrink-0 snap-start md:w-auto md:flex-shrink">
+          <div class="absolute left-0 top-0 bottom-0 w-[0.12rem] bg-[#f1f2f2]"></div>
+          <div class="flex items-center gap-3 mb-6">
+            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+            </svg>
+            <div class="flex items-center gap-0.5">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+          </div>
+          <blockquote class="relative z-[1] mb-6">
+            <p class="font-body text-lg leading-relaxed text-gray-700">
+              "I am a very skeptical person when it comes to people offering assistance, but America Works was <strong>much more</strong>."
+            </p>
+          </blockquote>
+          <footer class="flex items-center justify-between">
+            <span class="font-display text-base text-gray-900">Anthony</span>
+            <span class="font-mono text-xs text-gray-500 uppercase tracking-wider">Google Review</span>
+          </footer>
+        </div>
+
+        <div class="google-review-card group bg-white p-8 rounded-lg border border-gray-100 relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 w-[75vw] flex-shrink-0 snap-start md:w-auto md:flex-shrink">
+          <div class="absolute left-0 top-0 bottom-0 w-[0.12rem] bg-[#f1f2f2]"></div>
+          <div class="flex items-center gap-3 mb-6">
+            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+            </svg>
+            <div class="flex items-center gap-0.5">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+          </div>
+          <blockquote class="relative z-[1] mb-6">
+            <p class="font-body text-lg leading-relaxed text-gray-700">
+              "I've learned a lot about myself working with the job trainer and developers. <strong>Highly recommended</strong> for those interested in their job search."
+            </p>
+          </blockquote>
+          <footer class="flex items-center justify-between">
+            <span class="font-display text-base text-gray-900">Mecia</span>
+            <span class="font-mono text-xs text-gray-500 uppercase tracking-wider">Google Review</span>
+          </footer>
+        </div>
+
+        <div class="google-review-card group bg-white p-8 rounded-lg border border-gray-100 relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 w-[75vw] flex-shrink-0 snap-start md:w-auto md:flex-shrink">
+          <div class="absolute left-0 top-0 bottom-0 w-[0.12rem] bg-[#f1f2f2]"></div>
+          <div class="flex items-center gap-3 mb-6">
+            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+            </svg>
+            <div class="flex items-center gap-0.5">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+          </div>
+          <blockquote class="relative z-[1] mb-6">
+            <p class="font-body text-lg leading-relaxed text-gray-700">
+              "America Works really <strong>takes their time</strong> with their clients and gives us more understanding on job searching."
+            </p>
+          </blockquote>
+          <footer class="flex items-center justify-between">
+            <span class="font-display text-base text-gray-900">Tatyanna</span>
+            <span class="font-mono text-xs text-gray-500 uppercase tracking-wider">Google Review</span>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Audience Path Cards -->
+  <section class="audience-path-cards py-0 relative">
+    <div class="container max-w-container mx-auto px-8">
       <div class="paths-grid flex flex-col gap-32">
         <article class="path-card grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[75vh] relative overflow-visible opacity-0" id="jobseekers">
           <div class="path-image" data-number="01">
@@ -2979,7 +3259,7 @@
           </div>
 
           <div class="path-content">
-            <div class="path-number font-mono text-sm font-semibold tracking-wider text-aw-blue mb-4">01 — Jobseekers</div>
+            <div class="path-number font-mono text-sm font-semibold tracking-wider text-aw-blue mb-4">01 Jobseekers</div>
             <h3 class="h2 font-display text-4xl font-normal leading-tight tracking-tight text-gray-900 mb-6">Your career starts here</h3>
 
             <p class="path-description text-lg text-gray-600 leading-relaxed mb-8">
@@ -3005,7 +3285,7 @@
           </div>
 
           <div class="path-content lg:order-1">
-            <div class="path-number font-mono text-sm font-semibold tracking-wider text-aw-blue mb-4">02 — Government & Partners</div>
+            <div class="path-number font-mono text-sm font-semibold tracking-wider text-aw-blue mb-4">02 Government & Partners</div>
             <h3 class="h2 font-display text-4xl font-normal leading-tight tracking-tight text-gray-900 mb-6">Performance you can measure</h3>
 
             <p class="path-description text-lg text-gray-600 leading-relaxed mb-8">
@@ -3026,131 +3306,6 @@
               <a href="partners.html" class="btn-link inline-flex items-center gap-2 font-body text-sm font-semibold uppercase tracking-wider text-gray-900 no-underline transition-all duration-200 hover:text-aw-blue">For Partners</a>
             </div>
           </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- How It Works -->
-  <section class="how-it-works pt-32 pb-16 bg-gray-50 relative">
-    <div class="container max-w-container mx-auto px-8">
-      <header class="section-header text-center mb-24">
-        <span class="label-system font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4 block">Process</span>
-        <h2 class="display-md font-display text-display-md font-normal leading-tight tracking-tight text-gray-900 mb-6">Three steps to your next paycheck</h2>
-        <p class="display-subhead max-w-3xl mx-auto text-xl text-gray-600 leading-relaxed">
-          Most participants start working within weeks. Here's how:
-        </p>
-      </header>
-
-      <div class="steps-grid relative flex flex-col gap-16">
-        <!-- Progressive timeline -->
-        <div class="timeline-track">
-          <div class="timeline-line-bg"></div>
-          <div class="timeline-line-fill"></div>
-          <div class="timeline-dot" data-step="1"></div>
-          <div class="timeline-dot" data-step="2"></div>
-          <div class="timeline-dot" data-step="3"></div>
-        </div>
-
-        <article class="step-card grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative mb-32 opacity-0" data-step="1">
-          <div class="step-number-large">01</div>
-          <div class="step-accent"></div>
-
-          <div class="step-content">
-            <div class="step-number">Step 01</div>
-            <h3 class="step-title">We start with you</h3>
-            <p class="step-description">
-              Tell us your goals. Share your challenges. We'll create a personalized plan that addresses everything—from childcare to criminal records to confidence.
-            </p>
-          </div>
-
-          <div class="step-icon-wrapper">
-            <div class="step-icon">
-              <img src="images/resume-coaching.jpg" alt="Connect" loading="lazy">
-            </div>
-          </div>
-        </article>
-
-        <article class="step-card grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative mb-32 opacity-0" data-step="2">
-          <div class="step-number-large">02</div>
-          <div class="step-accent"></div>
-
-          <div class="step-content">
-            <div class="step-number">Step 02</div>
-            <h3 class="step-title">Get job-ready fast</h3>
-            <p class="step-description">
-              Polish your resume. Nail your interviews. Learn new skills. We'll connect you directly with employers who are hiring now—no endless applications.
-            </p>
-          </div>
-
-          <div class="step-icon-wrapper">
-            <div class="step-icon">
-              <img src="images/business-career-and-placement.jpg" alt="Prepare" loading="lazy">
-            </div>
-          </div>
-        </article>
-
-        <article class="step-card grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative mb-32 opacity-0" data-step="3">
-          <div class="step-number-large">03</div>
-          <div class="step-accent"></div>
-
-          <div class="step-content">
-            <div class="step-number">Step 03</div>
-            <h3 class="step-title">Keep growing</h3>
-            <p class="step-description">
-              Your first day isn't our last day. We stick around to help you solve problems, earn raises, and build the career you deserve.
-            </p>
-          </div>
-
-          <div class="step-icon-wrapper">
-            <div class="step-icon">
-              <img src="images/opportunities.jpg" alt="Succeed" loading="lazy">
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="section-cta">
-        <a href="#jobseekers" class="btn-primary"><span>Join thousands who found their path</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Google Reviews: Personal Service -->
-  <section class="py-8 bg-gray-50">
-    <div class="container max-w-container mx-auto px-8">
-      <div class="testimonials-grid grid grid-cols-1 md:grid-cols-3 gap-8">
-        <article class="testimonial-card is-visible">
-          <div class="testimonial-quote">"</div>
-          <blockquote>
-            <p>I was truly impressed with the dedication these people show their clients. Their enthusiasm is above par. The empathy shown to me was awesome.</p>
-            <footer>
-              <cite>Carlos</cite>
-              <span class="testimonial-role">Google Reviews</span>
-            </footer>
-          </blockquote>
-        </article>
-
-        <article class="testimonial-card is-visible">
-          <div class="testimonial-quote">"</div>
-          <blockquote>
-            <p>What an organization. I have felt like I matter there than anywhere in a long time. The staff are professional professionals if that makes sense.</p>
-            <footer>
-              <cite>John</cite>
-              <span class="testimonial-role">Google Reviews</span>
-            </footer>
-          </blockquote>
-        </article>
-
-        <article class="testimonial-card is-visible">
-          <div class="testimonial-quote">"</div>
-          <blockquote>
-            <p>Great experience for people re-entering the workforce. The environment is friendly and welcoming and everyone is ready to help.</p>
-            <footer>
-              <cite>Angela</cite>
-              <span class="testimonial-role">Google Reviews</span>
-            </footer>
-          </blockquote>
         </article>
       </div>
     </div>
@@ -3188,46 +3343,6 @@
       <div class="section-cta text-center">
         <a href="#contact" class="btn-link inline-flex items-center gap-2 font-body text-sm font-semibold uppercase tracking-wider text-gray-900 no-underline transition-all duration-200 hover:text-aw-blue">Find your local office →</a>
         <p class="cta-subtext mt-3 text-sm text-gray-600">In-person and virtual services available</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Google Reviews: Exceeded Expectations -->
-  <section class="py-24 bg-gray-50">
-    <div class="container max-w-container mx-auto px-8">
-      <div class="testimonials-grid grid grid-cols-1 md:grid-cols-3 gap-8 mt-0">
-        <article class="testimonial-card is-visible">
-          <div class="testimonial-quote">"</div>
-          <blockquote>
-            <p>I am a very skeptical person when it comes to people offering assistance, but America Works was much more.</p>
-            <footer>
-              <cite>Anthony</cite>
-              <span class="testimonial-role">Google Reviews</span>
-            </footer>
-          </blockquote>
-        </article>
-
-        <article class="testimonial-card is-visible">
-          <div class="testimonial-quote">"</div>
-          <blockquote>
-            <p>I tried to get a job on my own for months without any luck, and they had me going on interviews by my second day!</p>
-            <footer>
-              <cite>Joshua</cite>
-              <span class="testimonial-role">Google Reviews</span>
-            </footer>
-          </blockquote>
-        </article>
-
-        <article class="testimonial-card is-visible">
-          <div class="testimonial-quote">"</div>
-          <blockquote>
-            <p>America Works really takes their time with their clients and gives us more understanding on job searching.</p>
-            <footer>
-              <cite>Tatyanna</cite>
-              <span class="testimonial-role">Google Reviews</span>
-            </footer>
-          </blockquote>
-        </article>
       </div>
     </div>
   </section>
@@ -3379,7 +3494,7 @@
         <article class="testimonial-card">
           <div class="testimonial-quote">"</div>
           <blockquote>
-            <p>Six months ago, I was sleeping in my car. Today, I'm a supervisor with benefits and a future. America Works didn't just find me a job—they gave me hope.</p>
+            <p>Six months ago, I was sleeping in my car. Today, I'm a supervisor with benefits and a future. America Works didn't just find me a job. They gave me hope.</p>
             <footer>
               <cite>Marcus, Georgia</cite>
               <span class="testimonial-role">Jobseeker</span>
@@ -3401,7 +3516,7 @@
         <article class="testimonial-card">
           <div class="testimonial-quote">"</div>
           <blockquote>
-            <p>America Works doesn't just send us applicants—they send us prepared, motivated employees who stay.</p>
+            <p>America Works doesn't just send us applicants. They send us prepared, motivated employees who stay.</p>
             <footer>
               <cite>Regional HR Manager</cite>
               <span class="testimonial-role">Employer</span>
