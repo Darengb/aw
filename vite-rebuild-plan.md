@@ -115,7 +115,7 @@ The current Vite site components are "approximations" rather than faithful conve
 - [x] 6.3 Build `FAQAccordion.tsx` (expandable Q&A)
 - [x] 6.4 Assemble `Employers.tsx` matching original exactly
 - [x] 6.5 Verify Employers.tsx matches employers.html
-- [ ] 6.6 Commit Phase 6
+- [x] 6.6 Commit Phase 6
 
 ---
 
@@ -123,12 +123,12 @@ The current Vite site components are "approximations" rather than faithful conve
 
 **Objective:** Build components unique to partners.html, then assemble page.
 
-- [ ] 7.1 Build `TrustStrip.tsx` (stats with large numbers)
-- [ ] 7.2 Build `ProgramGrid.tsx` (label + content rows)
-- [ ] 7.3 Build `FeatureGrid.tsx` (2-col icon/title/desc)
-- [ ] 7.4 Build `ListGrid.tsx` (icon + text items)
-- [ ] 7.5 Assemble `Partners.tsx` matching original exactly
-- [ ] 7.6 Verify Partners.tsx matches partners.html
+- [x] 7.1 Build `TrustStrip.tsx` (stats with large numbers)
+- [x] 7.2 Build `StepsGrid.tsx` (numbered steps grid)
+- [x] 7.3 Build `FeatureGrid.tsx` (2-col icon/title/desc)
+- [x] 7.4 Build `ListGrid.tsx` (icon + text items)
+- [x] 7.5 Assemble `Partners.tsx` matching original exactly
+- [x] 7.6 Verify Partners.tsx matches partners.html
 - [ ] 7.7 Commit Phase 7
 
 ---
