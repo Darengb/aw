@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import Nav from './components/layout/Nav'
 import Footer from './components/layout/Footer'
 import Home from './pages/Home'
+import Jobseekers from './pages/Jobseekers'
 
 // Placeholder pages until they are built
 const PlaceholderPage = ({ name }: { name: string }) => (
@@ -35,7 +36,7 @@ function AppContent() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/jobseekers" element={<PlaceholderPage name="Jobseekers" />} />
+          <Route path="/jobseekers" element={<Jobseekers />} />
           <Route path="/employers" element={<PlaceholderPage name="Employers" />} />
           <Route path="/partners" element={<PlaceholderPage name="Partners" />} />
           <Route path="/about" element={<PlaceholderPage name="About" />} />

@@ -88,7 +88,7 @@ The current Vite site components are "approximations" rather than faithful conve
   CTASection
   ```
 - [x] 4D.2 Verify Home.tsx matches index.html exactly
-- [ ] 4D.3 Commit Phase 4
+- [x] 4D.3 Commit Phase 4
 
 ---
 
@@ -96,12 +96,12 @@ The current Vite site components are "approximations" rather than faithful conve
 
 **Objective:** Build components unique to jobseekers.html, then assemble page.
 
-- [ ] 5.1 Build `PageHero.tsx` (shared subpage hero)
-- [ ] 5.2 Build `SplitSection.tsx` (image + content, reversible)
-- [ ] 5.3 Build `CaseStudiesTabs.tsx` (tabbed scrollable content)
-- [ ] 5.4 Build `ProcessGrid.tsx` (numbered cards)
-- [ ] 5.5 Assemble `Jobseekers.tsx` matching original exactly
-- [ ] 5.6 Verify Jobseekers.tsx matches jobseekers.html
+- [x] 5.1 Build `PageHero.tsx` (shared subpage hero)
+- [x] 5.2 Build `SplitSection.tsx` (image + content, reversible)
+- [x] 5.3 Build `CaseStudiesTabs.tsx` (tabbed scrollable content)
+- [x] 5.4 Build `ProcessGrid.tsx` (numbered cards)
+- [x] 5.5 Assemble `Jobseekers.tsx` matching original exactly
+- [x] 5.6 Verify Jobseekers.tsx matches jobseekers.html
 - [ ] 5.7 Commit Phase 5
 
 ---
