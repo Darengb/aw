@@ -102,7 +102,7 @@ The current Vite site components are "approximations" rather than faithful conve
 - [x] 5.4 Build `ProcessGrid.tsx` (numbered cards)
 - [x] 5.5 Assemble `Jobseekers.tsx` matching original exactly
 - [x] 5.6 Verify Jobseekers.tsx matches jobseekers.html
-- [ ] 5.7 Commit Phase 5
+- [x] 5.7 Commit Phase 5
 
 ---
 
@@ -110,11 +110,11 @@ The current Vite site components are "approximations" rather than faithful conve
 
 **Objective:** Build components unique to employers.html, then assemble page.
 
-- [ ] 6.1 Build `ValueCard.tsx` (number + title + desc)
-- [ ] 6.2 Build `RoleItem.tsx` (icon + label pills)
-- [ ] 6.3 Build `FAQAccordion.tsx` (expandable Q&A)
-- [ ] 6.4 Assemble `Employers.tsx` matching original exactly
-- [ ] 6.5 Verify Employers.tsx matches employers.html
+- [x] 6.1 Build `ValueCard.tsx` (number + title + desc)
+- [x] 6.2 Build `RoleItem.tsx` (icon + label pills)
+- [x] 6.3 Build `FAQAccordion.tsx` (expandable Q&A)
+- [x] 6.4 Assemble `Employers.tsx` matching original exactly
+- [x] 6.5 Verify Employers.tsx matches employers.html
 - [ ] 6.6 Commit Phase 6
 
 ---
