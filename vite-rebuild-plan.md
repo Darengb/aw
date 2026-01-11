@@ -32,10 +32,10 @@ The current Vite site components are "approximations" rather than faithful conve
 
 **Objective:** Remove existing approximation components to start fresh.
 
-- [ ] 2.1 Delete all files in `site/src/components/`
-- [ ] 2.2 Delete all files in `site/src/pages/`
-- [ ] 2.3 Create empty directory structure per vite-spec.md
-- [ ] 2.4 Commit Phase 2
+- [x] 2.1 Delete all files in `site/src/components/`
+- [x] 2.2 Delete all files in `site/src/pages/`
+- [x] 2.3 Create empty directory structure per vite-spec.md
+- [x] 2.4 Commit Phase 2
 
 ---
 
