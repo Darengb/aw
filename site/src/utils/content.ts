@@ -1,4 +1,4 @@
-import matter from 'gray-matter';
+import fm from 'front-matter';
 
 // Types for content
 export interface NewsArticle {
@@ -37,15 +37,15 @@ export function getNewsArticles(): NewsArticle[] {
   const articles: NewsArticle[] = [];
 
   for (const [path, content] of Object.entries(newsModules)) {
-    const { data } = matter(content);
+    const { attributes } = fm<Record<string, string>>(content);
     const slug = path.split('/').pop()?.replace('.md', '') || '';
 
     articles.push({
-      title: data.title,
-      source: data.source,
-      excerpt: data.excerpt,
-      url: data.url,
-      linkText: data.linkText,
+      title: attributes.title,
+      source: attributes.source,
+      excerpt: attributes.excerpt,
+      url: attributes.url,
+      linkText: attributes.linkText,
       slug,
     });
   }
@@ -65,22 +65,22 @@ export function getEvents(): EventItem[] {
   const events: EventItem[] = [];
 
   for (const [path, rawContent] of Object.entries(eventModules)) {
-    const { data, content } = matter(rawContent);
+    const { attributes, body } = fm<Record<string, unknown>>(rawContent);
     const slug = path.split('/').pop()?.replace('.md', '') || '';
 
     events.push({
-      title: data.title,
-      type: data.type,
-      category: data.category,
-      featured: data.featured || false,
-      date: data.date,
-      month: data.month,
-      day: data.day,
-      year: data.year,
-      time: data.time,
-      location: data.location,
-      description: data.description,
-      content: content.trim(),
+      title: attributes.title as string,
+      type: attributes.type as string,
+      category: attributes.category as string,
+      featured: (attributes.featured as boolean) || false,
+      date: attributes.date as string,
+      month: attributes.month as string,
+      day: attributes.day as string,
+      year: attributes.year as string,
+      time: attributes.time as string,
+      location: attributes.location as string,
+      description: attributes.description as string,
+      content: body.trim(),
       slug,
     });
   }

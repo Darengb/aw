@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 import HomeHero from '../components/home/HomeHero';
 import SectionHeader from '../components/home/SectionHeader';
 import GoogleReviewCard from '../components/home/GoogleReviewCard';
@@ -124,8 +125,39 @@ const testimonials = [
 ];
 
 export default function Home() {
+  const pageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    // Observe all elements that need scroll-triggered visibility
+    const selectors = [
+      '.section-header',
+      '.path-card',
+      '.population-item',
+      '.value-prop-item',
+      '.testimonial-card'
+    ];
+
+    selectors.forEach((selector) => {
+      const elements = pageRef.current?.querySelectorAll(selector);
+      elements?.forEach((el) => observer.observe(el));
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <>
+    <div ref={pageRef}>
       {/* Hero Section */}
       <HomeHero />
 
@@ -280,6 +312,6 @@ export default function Home() {
 
       {/* CTA Section */}
       <CTASection />
-    </>
+    </div>
   );
 }
