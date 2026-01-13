@@ -1535,6 +1535,7 @@
       left: 50%;
       top: 120px;
       bottom: 120px;
+      width: 2px;
       transform: translateX(-50%);
       z-index: 0;
       pointer-events: none;
@@ -1543,23 +1544,21 @@
     /* Static background line */
     .timeline-line-bg {
       position: absolute;
-      left: 50%;
+      left: 0;
       top: 0;
       bottom: 0;
-      width: 2px;
+      width: 100%;
       background: var(--gray-200);
-      transform: translateX(-50%);
     }
 
     /* Progressive fill line */
     .timeline-line-fill {
       position: absolute;
-      left: 50%;
+      left: 0;
       top: 0;
-      width: 2px;
+      width: 100%;
       height: 0%;
       background: var(--aw-red);
-      transform: translateX(-50%);
       transition: height 0.1s linear;
       will-change: height;
     }
@@ -2758,4 +2757,11 @@
       width: 3px;
       background: #ec140c;
       border-radius: 2px;
+    }
+
+    /* News & Event Cards Fade-in Animation */
+    .news-card.is-visible,
+    .event-card.is-visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
     }

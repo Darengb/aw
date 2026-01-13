@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import Nav from './components/layout/Nav'
 import Footer from './components/layout/Footer'
@@ -6,6 +7,8 @@ import Jobseekers from './pages/Jobseekers'
 import Employers from './pages/Employers'
 import Partners from './pages/Partners'
 import About from './pages/About'
+import News from './pages/News'
+import Events from './pages/Events'
 import { useScrollProgress } from './hooks/useScrollProgress'
 
 // Placeholder pages until they are built
@@ -31,6 +34,11 @@ function AppContent() {
   const theme = routeThemes[location.pathname] || 'red'
   const scrollProgress = useScrollProgress()
 
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.pathname])
+
   return (
     <div className={`theme-${theme}`}>
       {/* Scroll Progress Bar */}
@@ -48,8 +56,8 @@ function AppContent() {
           <Route path="/employers" element={<Employers />} />
           <Route path="/partners" element={<Partners />} />
           <Route path="/about" element={<About />} />
-          <Route path="/events" element={<PlaceholderPage name="Events" />} />
-          <Route path="/news" element={<PlaceholderPage name="News" />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/events" element={<Events />} />
           <Route path="*" element={<PlaceholderPage name="404 - Not Found" />} />
         </Routes>
       </main>
