@@ -9,6 +9,7 @@ import PopulationItem from '../components/home/PopulationItem';
 import ValueProp from '../components/home/ValueProp';
 import TestimonialCard from '../components/home/TestimonialCard';
 import CTASection from '../components/home/CTASection';
+import { US_MAP_SVG } from '../data/usMapSvg';
 
 // Google Reviews Data
 const googleReviews1 = [
@@ -154,6 +155,43 @@ export default function Home() {
     });
 
     return () => observer.disconnect();
+  }, []);
+
+  // Initialize US Coverage Map
+  useEffect(() => {
+    const container = document.getElementById('us-coverage-map');
+    if (!container) return;
+
+    // Insert the SVG
+    container.innerHTML = US_MAP_SVG;
+
+    // Get the SVG element
+    const svg = container.querySelector('svg');
+    if (!svg) return;
+
+    // Update SVG attributes
+    svg.setAttribute('id', 'us-map-svg');
+    svg.style.width = '100%';
+    svg.style.height = 'auto';
+
+    // Process all path elements
+    const paths = svg.querySelectorAll('path');
+    paths.forEach((path) => {
+      const originalClass = path.getAttribute('class');
+      // cls-1 = served states (originally red)
+      // cls-2 = non-served states (originally tan)
+      if (originalClass && originalClass.includes('cls-1')) {
+        path.classList.add('state-active');
+      } else {
+        path.classList.add('state-inactive');
+      }
+    });
+
+    // Remove the old style defs since we're using our own CSS
+    const defs = svg.querySelector('defs');
+    if (defs) {
+      defs.remove();
+    }
   }, []);
 
   return (

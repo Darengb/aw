@@ -43,10 +43,10 @@ export default function HomeHero() {
           <div className="dashboard-grid p-0 grid grid-cols-2 gap-4 relative">
             <MetricCard
               tag="EST. 1984"
-              value="4,000,000"
+              value="10,000,000"
               symbol="+"
               symbolPosition="right"
-              label="Placed in Jobs"
+              label="Clients Served"
               isHero={true}
             />
             <MetricCard
