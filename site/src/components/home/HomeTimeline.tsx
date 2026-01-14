@@ -155,29 +155,23 @@ export default function HomeTimeline() {
           </p>
         </header>
 
-        <div className="steps-grid relative flex flex-col gap-16" ref={containerRef}>
+        <div className="steps-grid relative flex flex-col gap-16 pl-8 md:pl-0" ref={containerRef}>
           {/* Progressive timeline */}
           <div
             ref={trackRef}
-            className="timeline-track"
+            className="timeline-track absolute left-[1.5rem] md:left-1/2 md:-translate-x-1/2 w-[2px] z-0 pointer-events-none"
             style={{
-              position: 'absolute',
-              left: '50%',
               top: `${trackStyle.top}px`,
               height: `${trackStyle.height}px`,
-              width: '2px',
-              transform: 'translateX(-50%)',
-              zIndex: 0,
-              pointerEvents: 'none'
             }}
           >
             {/* Gray background line */}
-            <div className="timeline-line-bg" style={{ position: 'absolute', inset: 0, backgroundColor: '#e4e4e7' }}></div>
+            <div className="timeline-line-bg absolute inset-0 bg-gray-200"></div>
             {/* Red fill line that animates on scroll */}
-            <div ref={fillRef} className="timeline-line-fill" style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '0%', backgroundColor: '#ec140c' }}></div>
+            <div ref={fillRef} className="timeline-line-fill absolute left-0 top-0 w-full bg-aw-red" style={{ height: '0%' }}></div>
             {/* Dots positioned at each step */}
             {steps.map((step, index) => (
-              <div key={index} className="timeline-dot" style={{ position: 'absolute', left: '50%', top: `${dotPositions[index]}%`, transform: 'translate(-50%, -50%)', width: '8px', height: '8px', backgroundColor: '#ec140c', borderRadius: '50%', zIndex: 2 }} data-step={step.number}></div>
+              <div key={index} className="timeline-dot absolute left-1/2 -translate-x-1/2 w-2 h-2 bg-aw-red rounded-full z-[2]" style={{ top: `${dotPositions[index]}%` }} data-step={step.number}></div>
             ))}
           </div>
 
