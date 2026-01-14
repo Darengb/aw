@@ -76,10 +76,20 @@ export default function Nav() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`mobile-menu fixed inset-0 z-[999] bg-gray-950 transition-all duration-300 ${
+        className={`mobile-menu fixed inset-0 z-[1001] bg-gray-950 transition-all duration-300 ${
           isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
       >
+        {/* Close button */}
+        <button
+          className="absolute top-5 right-8 w-10 h-10 flex items-center justify-center text-white"
+          onClick={() => setIsMenuOpen(false)}
+          aria-label="Close menu"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
         <div className="flex flex-col items-center justify-center h-full gap-8 px-8">
           {navLinks.map((link, index) => (
             <Link

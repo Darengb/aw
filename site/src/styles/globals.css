@@ -2638,6 +2638,10 @@
         display: none;
       }
 
+      .nav-logo {
+        font-size: 1.15rem;
+      }
+
       .hero {
         padding-top: 6rem;
       }
