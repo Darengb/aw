@@ -145,7 +145,7 @@ export default function HomeTimeline() {
   }, [trackStyle]);
 
   return (
-    <section className="how-it-works pt-16 pb-16 bg-gray-50 relative">
+    <section className="how-it-works pt-16 md:pb-16 bg-gray-50 relative">
       <div className="container max-w-container mx-auto px-8">
         <header className="section-header text-center mb-24">
           <span className="label-system font-mono text-xs font-bold uppercase tracking-[0.15em] text-aw-blue mb-4 block">Process</span>
