@@ -14,7 +14,7 @@ export function useNavScrollState(): NavState {
     const handleScroll = () => {
       const scrollY = window.scrollY
       // Get actual hero element height
-      const hero = document.querySelector('.hero')
+      const hero = document.querySelector('.hero') as HTMLElement | null
       const heroHeight = hero ? hero.offsetHeight : window.innerHeight
 
       if (scrollY === 0) {

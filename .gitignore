@@ -1,3 +1,6 @@
 .DS_Store
 ignore/
 transcripts/
+
+# Local Netlify folder
+.netlify
