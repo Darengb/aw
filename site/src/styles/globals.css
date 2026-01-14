@@ -2591,6 +2591,7 @@
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         -ms-overflow-style: none;
+        margin-top: 2rem;
       }
 
       .testimonials-grid::-webkit-scrollbar {
