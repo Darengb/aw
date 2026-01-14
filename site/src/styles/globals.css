@@ -263,6 +263,19 @@
       color: var(--black);
     }
 
+    /* Mobile menu toggle */
+    .mobile-menu-toggle {
+      color: var(--white);
+    }
+
+    .navigation.below-hero .mobile-menu-toggle {
+      color: var(--black);
+    }
+
+    .no-hero .navigation .mobile-menu-toggle {
+      color: var(--black);
+    }
+
     .nav-container {
       max-width: var(--container-xl);
       margin: 0 auto;
