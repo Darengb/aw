@@ -7,19 +7,24 @@ import type { NavState } from '../lib/types'
  * - 'in-hero': Scrolled but still within hero section (blur effect)
  * - 'below-hero': Scrolled past hero section (solid background, dark text)
  */
-export function useNavScrollState(heroHeight: number = 100): NavState {
+export function useNavScrollState(): NavState {
   const [state, setState] = useState<NavState>('top')
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY
-      const heroThreshold = typeof heroHeight === 'number' ? heroHeight : window.innerHeight
+      // Get actual hero element height
+      const hero = document.querySelector('.hero')
+      const heroHeight = hero ? hero.offsetHeight : window.innerHeight
 
-      if (scrollY < 50) {
+      if (scrollY === 0) {
+        // Step 1: At very top - transparent, no blur
         setState('top')
-      } else if (scrollY < heroThreshold - 100) {
+      } else if (scrollY > 0 && scrollY < heroHeight - 100) {
+        // Step 2: In hero - blur with white text
         setState('in-hero')
       } else {
+        // Step 3: Below hero - blur with dark text
         setState('below-hero')
       }
     }
@@ -29,7 +34,7 @@ export function useNavScrollState(heroHeight: number = 100): NavState {
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [heroHeight])
+  }, [])
 
   return state
 }

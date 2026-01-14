@@ -3,6 +3,26 @@ import SplitSection from '../components/shared/SplitSection';
 import ValueCard from '../components/shared/ValueCard';
 import RoleItem from '../components/shared/RoleItem';
 import FAQAccordion from '../components/shared/FAQAccordion';
+import TestimonialCard from '../components/home/TestimonialCard';
+
+// Testimonials Data
+const testimonials = [
+  {
+    quote: "The candidates we've received through America Works have been well-prepared and motivated. The follow-up support after hiring has made a real difference in retention.",
+    author: "HR Manager",
+    role: "Retail Chain"
+  },
+  {
+    quote: "We've used America Works to fill multiple positions and have been impressed by how quickly they respond and how thoroughly they screen candidates.",
+    author: "Operations Director",
+    role: "Logistics Company"
+  },
+  {
+    quote: "We've found motivated employees who are eager to grow with our company. The post-placement support helps new hires settle in and stay with us longer.",
+    author: "Franchise Owner",
+    role: "Food Service"
+  }
+];
 
 // Value Props Data
 const valueProps = [
@@ -219,26 +239,9 @@ export default function Employers() {
           </header>
 
           <div className="testimonials-grid grid grid-cols-1 lg:grid-cols-3 gap-8 mt-16">
-            <div className="testimonial-card bg-gray-50 p-12 rounded relative">
-              <p className="testimonial-text relative z-[1] text-base leading-relaxed text-gray-800 mb-6 italic">
-                The candidates we've received through America Works have been well-prepared and motivated. The follow-up support after hiring has made a real difference in retention.
-              </p>
-              <p className="testimonial-author text-sm text-gray-600 font-semibold not-italic">— HR Manager, Retail Chain</p>
-            </div>
-
-            <div className="testimonial-card bg-gray-50 p-12 rounded relative">
-              <p className="testimonial-text relative z-[1] text-base leading-relaxed text-gray-800 mb-6 italic">
-                We've used America Works to fill multiple positions and have been impressed by how quickly they respond and how thoroughly they screen candidates.
-              </p>
-              <p className="testimonial-author text-sm text-gray-600 font-semibold not-italic">— Operations Director, Logistics Company</p>
-            </div>
-
-            <div className="testimonial-card bg-gray-50 p-12 rounded relative">
-              <p className="testimonial-text relative z-[1] text-base leading-relaxed text-gray-800 mb-6 italic">
-                We've found motivated employees who are eager to grow with our company. The post-placement support helps new hires settle in and stay with us longer.
-              </p>
-              <p className="testimonial-author text-sm text-gray-600 font-semibold not-italic">— Franchise Owner, Food Service</p>
-            </div>
+            {testimonials.map((testimonial, index) => (
+              <TestimonialCard key={index} quote={testimonial.quote} author={testimonial.author} role={testimonial.role} />
+            ))}
           </div>
         </div>
       </section>

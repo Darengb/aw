@@ -3,6 +3,7 @@ import SplitSection from '../components/shared/SplitSection';
 import CaseStudiesTabs from '../components/jobseekers/CaseStudiesTabs';
 import ProcessGrid from '../components/shared/ProcessGrid';
 import GoogleReviewCard from '../components/home/GoogleReviewCard';
+import TestimonialCard from '../components/home/TestimonialCard';
 
 // Google Reviews Data
 const googleReviews1 = [
@@ -263,12 +264,7 @@ export default function Jobseekers() {
 
           <div className="testimonials-grid grid grid-cols-1 lg:grid-cols-3 gap-8 mt-16">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="testimonial-card bg-gray-50 p-12 rounded relative">
-                <p className="testimonial-text relative z-[1] text-base leading-relaxed text-gray-800 mb-6 italic">
-                  {testimonial.quote}
-                </p>
-                <p className="testimonial-author text-sm text-gray-600 font-semibold not-italic">— {testimonial.author}</p>
-              </div>
+              <TestimonialCard key={index} quote={testimonial.quote} author={testimonial.author} role={testimonial.role} />
             ))}
           </div>
         </div>

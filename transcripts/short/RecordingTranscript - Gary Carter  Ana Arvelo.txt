@@ -1,0 +1,11 @@
+[Gary Carter] {00:00:00}
+Your call has been forwarded to an automatic voice message system.
+
+[Ana Arvelo] {00:00:03}
+Gary Carter.
+
+[Gary Carter] {00:00:06}
+is not available. At the tone, please record your message. When you have finished recording, you may hang up or press 1 for more options.
+
+[Ana Arvelo] {00:00:16}
+Hello, Mr. Carter, it's Ana from A Miracle Works. Looks like we're playing phone tag. My apologies, I was in a meeting, but hopefully all is well. Um, I'll be here for another 20 minutes. Um, if we do not talk, then I'll try you again next week, okay? Hope all is well. Take care. Bye.

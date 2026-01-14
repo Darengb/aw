@@ -250,6 +250,19 @@
       color: var(--black);
     }
 
+    /* Pages without hero - nav starts with dark text */
+    .no-hero .navigation .nav-logo {
+      color: var(--black);
+    }
+
+    .no-hero .navigation .nav-links a {
+      color: var(--gray-700);
+    }
+
+    .no-hero .navigation .nav-links a:hover {
+      color: var(--black);
+    }
+
     .nav-container {
       max-width: var(--container-xl);
       margin: 0 auto;
@@ -560,7 +573,9 @@
       overflow: hidden;
       transition: all 0.3s var(--ease-primary);
       text-decoration: none;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       box-shadow: 0 4px 20px rgba(50, 59, 151, 0.3);
     }
 
@@ -600,7 +615,9 @@
       cursor: pointer;
       transition: all 0.3s var(--ease-primary);
       text-decoration: none;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .btn-secondary:hover {
@@ -612,6 +629,15 @@
 
     .btn-primary span,
     .btn-secondary span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-primary svg,
+    .btn-secondary svg,
+    .btn-primary i,
+    .btn-secondary i {
+      flex-shrink: 0;
       position: relative;
       z-index: 1;
     }
@@ -1644,7 +1670,7 @@
       transform: scale(1) rotate(0deg);
     }
 
-    .step-number {
+    .step-card .step-number {
       display: inline-block;
       font-family: var(--font-dashboard);
       font-size: 0.75rem;

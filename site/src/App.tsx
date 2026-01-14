@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { createIcons, icons } from 'lucide'
 import Nav from './components/layout/Nav'
 import Footer from './components/layout/Footer'
 import Home from './pages/Home'
@@ -29,9 +30,13 @@ const routeThemes: Record<string, 'red' | 'blue'> = {
   '/news': 'blue',
 }
 
+// Pages without a dark hero (nav should start with dark text)
+const noHeroPages = ['/news', '/events']
+
 function AppContent() {
   const location = useLocation()
   const theme = routeThemes[location.pathname] || 'red'
+  const hasHero = !noHeroPages.includes(location.pathname)
   const scrollProgress = useScrollProgress()
 
   // Scroll to top on route change
@@ -39,8 +44,55 @@ function AppContent() {
     window.scrollTo(0, 0)
   }, [location.pathname])
 
+  // Global IntersectionObserver for scroll-triggered visibility
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+          }
+        })
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    )
+
+    const selectors = [
+      '.section-header',
+      '.path-card',
+      '.population-item',
+      '.value-prop',
+      '.testimonial-card',
+      '.metric-card',
+      '.step-card'
+    ]
+
+    const observeElements = () => {
+      selectors.forEach((selector) => {
+        document.querySelectorAll(selector).forEach((el) => observer.observe(el))
+      })
+    }
+
+    // Observe after a short delay to ensure DOM is ready
+    const timeoutId = setTimeout(observeElements, 100)
+
+    return () => {
+      clearTimeout(timeoutId)
+      observer.disconnect()
+    }
+  }, [location.pathname])
+
+  // Initialize Lucide icons after route changes
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      createIcons({ icons })
+    }, 100)
+
+    return () => clearTimeout(timeoutId)
+  }, [location.pathname])
+
   return (
-    <div className={`theme-${theme}`}>
+    <div className={`theme-${theme}${hasHero ? '' : ' no-hero'}`}>
       {/* Scroll Progress Bar */}
       <div
         className="scroll-progress-bar"

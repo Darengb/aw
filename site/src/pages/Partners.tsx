@@ -4,6 +4,7 @@ import ListGrid from '../components/shared/ListGrid';
 import FeatureGrid from '../components/shared/FeatureGrid';
 import StepsGrid from '../components/shared/StepsGrid';
 import FAQAccordion from '../components/shared/FAQAccordion';
+import TestimonialCard from '../components/home/TestimonialCard';
 
 // Trust Strip Data
 const trustItems = [
@@ -100,16 +101,19 @@ const implementationSteps = [
 // Testimonials
 const testimonials = [
   {
-    text: "America Works is a program that has the best staff. They helped me close my TANF case and move into steady employment.",
-    author: "Congressional Testimony"
+    quote: "America Works is a program that has the best staff. They helped me close my TANF case and move into steady employment.",
+    author: "Congressional Testimony",
+    role: "Government Partner"
   },
   {
-    text: "I remember when I was a member of America Works, the reps really helped me through rough times and helped me find employment—really nice people.",
-    author: "Former Client"
+    quote: "I remember when I was a member of America Works, the reps really helped me through rough times and helped me find employment—really nice people.",
+    author: "Former Client",
+    role: "Program Participant"
   },
   {
-    text: "After decades in the welfare-to-work field, America Works' leadership has been at the forefront of advocating for performance-based contracts that tie funding to results.",
-    author: "Policy Research Analysis"
+    quote: "After decades in the welfare-to-work field, America Works' leadership has been at the forefront of advocating for performance-based contracts that tie funding to results.",
+    author: "Policy Research Analysis",
+    role: "Industry Report"
   }
 ];
 
@@ -282,12 +286,7 @@ export default function Partners() {
 
           <div className="testimonials-grid grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="testimonial-card bg-gray-50 p-8 rounded-lg">
-                <p className="testimonial-text text-lg text-gray-700 leading-relaxed mb-6 italic">
-                  {testimonial.text}
-                </p>
-                <p className="testimonial-author text-sm font-semibold text-gray-600">— {testimonial.author}</p>
-              </div>
+              <TestimonialCard key={index} quote={testimonial.quote} author={testimonial.author} role={testimonial.role} />
             ))}
           </div>
         </div>
