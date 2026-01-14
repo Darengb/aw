@@ -564,10 +564,20 @@
     }
 
     .hero-ctas {
-      display: flex;
       gap: 1.25rem;
       opacity: 0;
       animation: fadeInUp 0.8s var(--ease-primary) 0.8s forwards;
+    }
+
+    .hero-ctas-mobile {
+      opacity: 0;
+      animation: fadeInUp 0.8s var(--ease-primary) 0.8s forwards;
+    }
+
+    .hero-ctas-mobile .btn-secondary {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
     }
 
     /* Buttons */
