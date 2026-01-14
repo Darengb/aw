@@ -1916,6 +1916,15 @@
     }
 
     @media (max-width: 768px) {
+      .timeline-track {
+        left: 1.5rem;
+        transform: none;
+      }
+
+      .steps-grid {
+        padding-left: 3rem;
+      }
+
       .step-number-large {
         font-size: 6rem;
         opacity: 0.5 !important;
