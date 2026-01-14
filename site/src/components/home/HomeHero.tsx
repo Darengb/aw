@@ -78,8 +78,8 @@ export default function HomeHero() {
         </aside>
 
         {/* Mobile CTA - shown below stats */}
-        <div className="hero-ctas-mobile flex md:hidden gap-5 order-3 justify-center">
-          <a href="#paths" className="btn-secondary"><span>Get Started</span></a>
+        <div className="hero-ctas-mobile flex md:hidden gap-5 order-3 w-full">
+          <a href="#paths" className="btn-secondary w-full text-center justify-center"><span>Get Started</span></a>
         </div>
       </div>
     </section>
