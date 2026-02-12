@@ -1576,12 +1576,12 @@
       overflow: hidden;
     }
 
-    /* Perfect Progressive Timeline */
+    /* Perfect Progressive Timeline - JS positions via inline styles */
     .timeline-track {
       position: absolute;
       left: 50%;
-      top: 120px;
-      bottom: 120px;
+      top: 0;
+      height: 0;
       width: 2px;
       transform: translateX(-50%);
       z-index: 0;

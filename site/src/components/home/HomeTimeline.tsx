@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface TimelineStep {
   number: string;
@@ -36,11 +36,19 @@ export default function HomeTimeline() {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const fillRef = useRef<HTMLDivElement>(null);
-  const [trackStyle, setTrackStyle] = useState({ top: 120, height: 0 });
-  const [dotPositions, setDotPositions] = useState<number[]>([0, 50, 100]);
+  const dotRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Intersection observer for step cards visibility
   useEffect(() => {
+    const container = containerRef.current;
+    const track = trackRef.current;
+    const fill = fillRef.current;
+    if (!container || !track || !fill) return;
+
+    const stepCards = container.querySelectorAll<HTMLElement>('.step-card[data-step]');
+    const dots = dotRefs.current;
+    if (stepCards.length === 0) return;
+
+    // Intersection observer for step card fade-in
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -51,84 +59,71 @@ export default function HomeTimeline() {
       },
       { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
     );
+    stepCards.forEach((card) => observer.observe(card));
 
-    const items = containerRef.current?.querySelectorAll('.step-card');
-    items?.forEach((item) => observer.observe(item));
+    // Position timeline track and dots — matches index.html TimelineAnimation.positionDots()
+    function positionDots() {
+      if (stepCards.length === 0) return;
 
-    return () => observer.disconnect();
-  }, []);
+      const isMobile = window.innerWidth <= 1024;
+      const firstCard = stepCards[0];
+      const lastCard = stepCards[stepCards.length - 1];
 
-  // Position timeline and dots based on step card positions
-  useEffect(() => {
-    const positionTimeline = () => {
-      const stepCards = containerRef.current?.querySelectorAll('.step-card');
-      if (!stepCards || stepCards.length === 0) return;
+      let firstCardCenter: number;
+      let lastCardCenter: number;
 
-      const firstCard = stepCards[0] as HTMLElement;
-      const lastCard = stepCards[stepCards.length - 1] as HTMLElement;
+      if (isMobile) {
+        const firstContent = firstCard.querySelector('.step-content') as HTMLElement;
+        const lastContent = lastCard.querySelector('.step-content') as HTMLElement;
+        firstCardCenter = firstContent.offsetTop + firstCard.offsetTop + 40;
+        lastCardCenter = lastContent.offsetTop + lastCard.offsetTop + 40;
+      } else {
+        firstCardCenter = firstCard.offsetTop + (firstCard.offsetHeight / 2);
+        lastCardCenter = lastCard.offsetTop + (lastCard.offsetHeight / 2);
+      }
 
-      const firstCardCenter = firstCard.offsetTop + (firstCard.offsetHeight / 2);
-      const lastCardCenter = lastCard.offsetTop + (lastCard.offsetHeight / 2);
+      track.style.top = `${firstCardCenter}px`;
+      track.style.height = `${lastCardCenter - firstCardCenter}px`;
+      track.style.bottom = 'auto';
 
-      setTrackStyle({
-        top: firstCardCenter,
-        height: lastCardCenter - firstCardCenter
+      const trackTop = firstCardCenter;
+      stepCards.forEach((card, index) => {
+        const dot = dots[index];
+        if (!dot) return;
+        let cardCenter: number;
+        if (isMobile) {
+          const content = card.querySelector('.step-content') as HTMLElement;
+          cardCenter = card.offsetTop + content.offsetTop + 40;
+        } else {
+          cardCenter = card.offsetTop + (card.offsetHeight / 2);
+        }
+        dot.style.top = `${cardCenter - trackTop}px`;
       });
+    }
 
-      // Position dots
-      const positions: number[] = [];
-      stepCards.forEach((card) => {
-        const htmlCard = card as HTMLElement;
-        const cardCenter = htmlCard.offsetTop + (htmlCard.offsetHeight / 2);
-        const relativePosition = ((cardCenter - firstCardCenter) / (lastCardCenter - firstCardCenter)) * 100;
-        positions.push(relativePosition);
-      });
-      setDotPositions(positions);
-    };
-
-    // Initial position after render
-    const timer = setTimeout(positionTimeline, 100);
-    window.addEventListener('resize', positionTimeline);
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('resize', positionTimeline);
-    };
-  }, []);
-
-  // Scroll-based fill animation - directly manipulate DOM for smooth animation
-  useEffect(() => {
-    const updateProgress = () => {
-      const track = trackRef.current;
-      const fill = fillRef.current;
-      if (!track || !fill) return;
-
+    // Scroll-based fill — matches index.html TimelineAnimation.updateProgress()
+    function updateProgress() {
       const trackRect = track.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+      const viewportCenter = window.innerHeight / 2;
       const trackHeight = track.offsetHeight;
 
-      const viewportCenter = windowHeight / 2;
       const trackTopRelativeToCenter = trackRect.top - viewportCenter;
       const trackBottomRelativeToCenter = trackRect.bottom - viewportCenter;
 
-      let fillPercentage = 0;
-
+      let fillPct = 0;
       if (trackBottomRelativeToCenter < 0) {
-        fillPercentage = 100;
+        fillPct = 100;
       } else if (trackTopRelativeToCenter > 0) {
-        fillPercentage = 0;
+        fillPct = 0;
       } else {
-        const scrolledDistance = -trackTopRelativeToCenter;
-        fillPercentage = (scrolledDistance / trackHeight) * 100;
-        fillPercentage = Math.max(0, Math.min(100, fillPercentage));
+        fillPct = (-trackTopRelativeToCenter / trackHeight) * 100;
+        fillPct = Math.max(0, Math.min(100, fillPct));
       }
-
-      // Directly set style for immediate update (no React state delay)
-      fill.style.height = `${fillPercentage}%`;
-    };
+      fill.style.height = `${fillPct}%`;
+    }
 
     let ticking = false;
-    const handleScroll = () => {
+    function handleScroll() {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           updateProgress();
@@ -136,13 +131,20 @@ export default function HomeTimeline() {
         });
         ticking = true;
       }
-    };
+    }
 
+    const timer = setTimeout(positionDots, 100);
+    window.addEventListener('resize', positionDots, { passive: true });
     window.addEventListener('scroll', handleScroll, { passive: true });
-    updateProgress(); // Initial call
+    updateProgress();
 
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [trackStyle]);
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+      window.removeEventListener('resize', positionDots);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <section className="how-it-works pt-16 md:pb-16 bg-gray-50 relative">
@@ -155,23 +157,18 @@ export default function HomeTimeline() {
           </p>
         </header>
 
-        <div className="steps-grid relative flex flex-col gap-16 pl-8 md:pl-0" ref={containerRef}>
+        <div className="steps-grid relative flex flex-col gap-16" ref={containerRef}>
           {/* Progressive timeline */}
-          <div
-            ref={trackRef}
-            className="timeline-track absolute left-[1.5rem] md:left-1/2 md:-translate-x-1/2 w-[2px] z-0 pointer-events-none"
-            style={{
-              top: `${trackStyle.top}px`,
-              height: `${trackStyle.height}px`,
-            }}
-          >
-            {/* Gray background line */}
-            <div className="timeline-line-bg absolute inset-0 bg-gray-200"></div>
-            {/* Red fill line that animates on scroll */}
-            <div ref={fillRef} className="timeline-line-fill absolute left-0 top-0 w-full bg-aw-red" style={{ height: '0%' }}></div>
-            {/* Dots positioned at each step */}
+          <div ref={trackRef} className="timeline-track">
+            <div className="timeline-line-bg"></div>
+            <div ref={fillRef} className="timeline-line-fill"></div>
             {steps.map((step, index) => (
-              <div key={index} className="timeline-dot absolute left-1/2 -translate-x-1/2 w-2 h-2 bg-aw-red rounded-full z-[2]" style={{ top: `${dotPositions[index]}%` }} data-step={step.number}></div>
+              <div
+                key={index}
+                ref={(el) => { dotRefs.current[index] = el; }}
+                className="timeline-dot"
+                data-step={step.number}
+              ></div>
             ))}
           </div>
 
