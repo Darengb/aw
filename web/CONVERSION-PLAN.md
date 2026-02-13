@@ -922,19 +922,19 @@ Apply these during migration, ordered by impact.
 - [x] Copy `styles/animations.css` — as-is
 - [x] Copy `styles/components.css` — as-is
 - [x] **Do NOT copy** `index.css`, `App.css` (Vite scaffold files)
-- [ ] Git commit: `"Phase 1: Scaffold Next.js project with config and static assets"`
+- [x] Git commit: `"Phase 1: Scaffold Next.js project with config and static assets"`
 
 ### Phase 2: Foundation
 
-- [ ] Create `app/layout.tsx` — `next/font/google` (4 fonts with `--font-instrument`, `--font-inter`, `--font-jbmono`, `--font-crimson` variables), metadata, CSS imports, `<ClientShell>` wrapper
-- [ ] Create `lib/types.ts` — copy from `/site/src/lib/types.ts`, no changes needed
-- [ ] Create `lib/icons.ts` — new file with `iconMap: Record<string, LucideIcon>` mapping all 42 icon strings to components (see Icon Migration section)
-- [ ] Create `hooks/useNavScrollState.ts` — copy from site, add `startTransition` wrapping `setState` calls, update import path to `@/lib/types`
-- [ ] Create `hooks/useCountUp.ts` — copy from site, no changes
-- [ ] Create `hooks/useIntersectionObserver.ts` — copy from site, no changes
-- [ ] Create `utils/content.ts` — rewrite with Node.js `fs` + `path` + `front-matter` (see Content Loading section). Exports: `getNewsArticles()`, `getEvents()`, `parseEventContent()`
-- [ ] Copy `data/usMapSvg.ts` — as-is from site
-- [ ] Git commit: `"Phase 2: Foundation — layout, types, icons, hooks, content utils"`
+- [x] Create `app/layout.tsx` — `next/font/google` (4 fonts with `--font-instrument`, `--font-inter`, `--font-jbmono`, `--font-crimson` variables), metadata, CSS imports, `<ClientShell>` wrapper
+- [x] Create `lib/types.ts` — copy from `/site/src/lib/types.ts`, no changes needed
+- [x] Create `lib/icons.ts` — new file with `iconMap: Record<string, LucideIcon>` mapping all 42 icon strings to components (see Icon Migration section)
+- [x] Create `hooks/useNavScrollState.ts` — copy from site, add `startTransition` wrapping `setState` calls, update import path to `@/lib/types`
+- [x] Create `hooks/useCountUp.ts` — copy from site, no changes
+- [x] Create `hooks/useIntersectionObserver.ts` — copy from site, no changes
+- [x] Create `utils/content.ts` — rewrite with Node.js `fs` + `path` + `front-matter` (see Content Loading section). Exports: `getNewsArticles()`, `getEvents()`, `parseEventContent()`
+- [x] Copy `data/usMapSvg.ts` — as-is from site
+- [x] Git commit: `"Phase 2: Foundation — layout, types, icons, hooks, content utils"`
 
 ### Phase 3: Layout Components
 
