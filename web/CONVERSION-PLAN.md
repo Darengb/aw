@@ -946,25 +946,25 @@ Apply these during migration, ordered by impact.
 ### Phase 4: Shared Components (can be parallelized)
 
 Components with icon changes:
-- [ ] `shared/PageHero.tsx` — replace 2 inline `data-lucide` (`arrow-right`, `chevron-down`) with `<ArrowRight size={18} />` and `<ChevronDown size={18} />`
-- [ ] `shared/SplitSection.tsx` — replace 1 inline `data-lucide` (`arrow-right`) with `<ArrowRight size={16} />`
-- [ ] `shared/RoleItem.tsx` — replace `<i data-lucide={icon}>` with `iconMap` lookup
-- [ ] `shared/FAQAccordion.tsx` — `"use client"`, replace `<i data-lucide="chevron-down">` with `<ChevronDown className="faq-icon" />`
-- [ ] `shared/FeatureGrid.tsx` — replace `<i data-lucide={item.icon}>` with `iconMap` lookup (both `card` and `simple` variants)
-- [ ] `shared/GlanceGrid.tsx` — replace `<i data-lucide={item.icon}>` with `iconMap` lookup
-- [ ] `shared/ListGrid.tsx` — replace `<i data-lucide={item.icon}>` with `iconMap` lookup
+- [x] `shared/PageHero.tsx` — replace 2 inline `data-lucide` (`arrow-right`, `chevron-down`) with `<ArrowRight size={18} />` and `<ChevronDown size={18} />`
+- [x] `shared/SplitSection.tsx` — replace 1 inline `data-lucide` (`arrow-right`) with `<ArrowRight size={16} />`
+- [x] `shared/RoleItem.tsx` — replace `<i data-lucide={icon}>` with `iconMap` lookup
+- [x] `shared/FAQAccordion.tsx` — `"use client"`, replace `<i data-lucide="chevron-down">` with `<ChevronDown className="faq-icon" />`
+- [x] `shared/FeatureGrid.tsx` — replace `<i data-lucide={item.icon}>` with `iconMap` lookup (both `card` and `simple` variants)
+- [x] `shared/GlanceGrid.tsx` — replace `<i data-lucide={item.icon}>` with `iconMap` lookup
+- [x] `shared/ListGrid.tsx` — replace `<i data-lucide={item.icon}>` with `iconMap` lookup
 
 Components with no icon changes (copy + minor path updates):
-- [ ] `shared/AboutTimeline.tsx` — `"use client"`, copy as-is (uses `useEffect`, `useRef`, IntersectionObserver)
-- [ ] `shared/ProcessGrid.tsx` — copy as-is, no hooks
-- [ ] `shared/StepsGrid.tsx` — copy as-is, no hooks
-- [ ] `shared/ValueCard.tsx` — copy as-is, no hooks
-- [ ] `shared/EvidenceGrid.tsx` — copy as-is, no hooks (uses `dangerouslySetInnerHTML`)
-- [ ] `shared/MatrixGrid.tsx` — copy as-is, no hooks
-- [ ] `shared/ScorecardGrid.tsx` — copy as-is, no hooks
-- [ ] `shared/TrustStrip.tsx` — copy as-is, no hooks
-- [ ] `jobseekers/CaseStudiesTabs.tsx` — `"use client"`, copy as-is (uses `useState`)
-- [ ] Git commit: `"Phase 4: Shared components — icons, accordions, grids"`
+- [x] `shared/AboutTimeline.tsx` — `"use client"`, copy as-is (uses `useEffect`, `useRef`, IntersectionObserver)
+- [x] `shared/ProcessGrid.tsx` — copy as-is, no hooks
+- [x] `shared/StepsGrid.tsx` — copy as-is, no hooks
+- [x] `shared/ValueCard.tsx` — copy as-is, no hooks
+- [x] `shared/EvidenceGrid.tsx` — copy as-is, no hooks (uses `dangerouslySetInnerHTML`)
+- [x] `shared/MatrixGrid.tsx` — copy as-is, no hooks
+- [x] `shared/ScorecardGrid.tsx` — copy as-is, no hooks
+- [x] `shared/TrustStrip.tsx` — copy as-is, no hooks
+- [x] `jobseekers/CaseStudiesTabs.tsx` — `"use client"`, copy as-is (uses `useState`)
+- [x] Git commit: `"Phase 4: Shared components — icons, accordions, grids"`
 
 ### Phase 5: Home Components & Page
 
