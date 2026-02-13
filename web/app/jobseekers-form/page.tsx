@@ -91,7 +91,7 @@ export default function JobseekersFormPage() {
             Start your <span className="italic">journey.</span>
           </h1>
           <p className="text-lg text-gray-600 leading-relaxed">
-            Fill out the form below and a career specialist will contact you to discuss your goals and how we can help — at no cost to you.
+            Fill out the form below and a career specialist will contact you to discuss your goals and how we can help, at no cost to you.
           </p>
         </div>
 
@@ -198,7 +198,7 @@ export default function JobseekersFormPage() {
                     name={`situation_${i}`}
                     className="w-4 h-4 rounded border-gray-300 text-aw-red focus:ring-aw-red/20 cursor-pointer"
                   />
-                  <span className="text-sm text-gray-700 group-hover:text-black transition-colors">{option}</span>
+                  <span className="text-base text-gray-700 group-hover:text-black transition-colors">{option}</span>
                 </label>
               ))}
             </div>
