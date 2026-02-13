@@ -3,7 +3,7 @@ import path from 'path'
 import fm from 'front-matter'
 
 // Re-export types and pure functions from client-safe module
-export type { NewsArticle, EventItem } from './content-shared'
+export type { NewsArticle, EventItem, OfficeLocation } from './content-shared'
 export { parseEventContent } from './content-shared'
 
 const contentDir = path.join(process.cwd(), 'content')
@@ -23,6 +23,33 @@ export function getNewsArticles() {
       excerpt: attributes.excerpt,
       url: attributes.url,
       linkText: attributes.linkText,
+      slug,
+    }
+  })
+}
+
+// Load all offices from markdown files
+export function getOffices() {
+  const dir = path.join(contentDir, 'offices')
+  const files = fs.readdirSync(dir).filter(f => f.endsWith('.md')).sort()
+
+  return files.map(file => {
+    const raw = fs.readFileSync(path.join(dir, file), 'utf-8')
+    const { attributes } = fm<Record<string, unknown>>(raw)
+    const slug = file.replace('.md', '')
+    return {
+      title: attributes.title as string,
+      address: attributes.address as string,
+      city: attributes.city as string,
+      state: attributes.state as string,
+      stateCode: attributes.stateCode as string,
+      zip: attributes.zip as string,
+      phone: (attributes.phone as string) || '',
+      fax: (attributes.fax as string) || '',
+      email: (attributes.email as string) || 'info@americaworks.com',
+      notes: (attributes.notes as string) || '',
+      lat: attributes.lat as number,
+      lng: attributes.lng as number,
       slug,
     }
   })

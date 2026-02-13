@@ -2804,8 +2804,14 @@
 
     /* News & Event Cards Fade-in Animation */
     .news-card.is-visible,
-    .event-card.is-visible {
+    .event-card.is-visible,
+    .office-card.is-visible {
       opacity: 1 !important;
       transform: translateY(0) !important;
     }
+
+    .office-card {
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s var(--ease-primary), border-color 0.4s var(--ease-primary);
+    }
+
 } /* end @layer components */

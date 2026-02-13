@@ -13,11 +13,13 @@ function EventCard({
   event,
   index,
   isExpanded,
+  isVisible,
   onToggle
 }: {
   event: EventItem;
   index: number;
   isExpanded: boolean;
+  isVisible: boolean;
   onToggle: () => void;
 }) {
   const isEven = index % 2 === 1;
@@ -25,8 +27,9 @@ function EventCard({
 
   return (
     <div
-      className={`event-card group bg-white border border-gray-200 rounded overflow-hidden relative transition-all duration-400 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_rgba(0,0,0,0.08),0_8px_16px_rgba(0,0,0,0.04)] hover:border-gray-300 ${isExpanded ? 'expanded' : ''}`}
+      className={`event-card group bg-white border border-gray-200 rounded overflow-hidden relative transition-all duration-400 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_rgba(0,0,0,0.08),0_8px_16px_rgba(0,0,0,0.04)] hover:border-gray-300 ${isExpanded ? 'expanded' : ''} ${isVisible ? 'is-visible' : ''}`}
       data-category={event.category}
+      data-slug={event.slug}
     >
       {/* Top accent bar */}
       <div
@@ -131,6 +134,7 @@ export default function EventsClient({ events: allEvents }: { events: EventItem[
   const pageRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState<FilterCategory>('all');
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
+  const [visibleCards, setVisibleCards] = useState<Set<string>>(new Set());
 
   const filteredEvents = activeFilter === 'all'
     ? allEvents
@@ -141,13 +145,18 @@ export default function EventsClient({ events: allEvents }: { events: EventItem[
   };
 
   useEffect(() => {
+    setVisibleCards(new Set());
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry, index) => {
           if (entry.isIntersecting) {
-            setTimeout(() => {
-              entry.target.classList.add('is-visible');
-            }, index * 100);
+            const slug = (entry.target as HTMLElement).dataset.slug;
+            if (slug) {
+              setTimeout(() => {
+                setVisibleCards(prev => new Set(prev).add(slug));
+              }, index * 100);
+            }
             observer.unobserve(entry.target);
           }
         });
@@ -156,11 +165,7 @@ export default function EventsClient({ events: allEvents }: { events: EventItem[
     );
 
     const cards = pageRef.current?.querySelectorAll('.event-card');
-    cards?.forEach((card) => {
-      (card as HTMLElement).style.opacity = '0';
-      (card as HTMLElement).style.transform = 'translateY(30px)';
-      observer.observe(card);
-    });
+    cards?.forEach((card) => observer.observe(card));
 
     return () => observer.disconnect();
   }, [activeFilter]);
@@ -225,6 +230,7 @@ export default function EventsClient({ events: allEvents }: { events: EventItem[
                 event={event}
                 index={index}
                 isExpanded={expandedCard === event.slug}
+                isVisible={visibleCards.has(event.slug)}
                 onToggle={() => handleToggle(event.slug)}
               />
             ))}

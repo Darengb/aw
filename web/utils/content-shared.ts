@@ -25,6 +25,22 @@ export interface EventItem {
   slug: string;
 }
 
+export interface OfficeLocation {
+  title: string;
+  address: string;
+  city: string;
+  state: string;
+  stateCode: string;
+  zip: string;
+  phone: string;
+  fax: string;
+  email: string;
+  notes: string;
+  lat: number;
+  lng: number;
+  slug: string;
+}
+
 // Parse markdown content to HTML-ready structure (bullet points)
 export function parseEventContent(content: string): { intro: string; bullets: string[] } {
   const lines = content.split('\n').filter(line => line.trim())

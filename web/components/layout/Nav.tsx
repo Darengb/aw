@@ -29,7 +29,7 @@ export default function Nav() {
 
   const navClasses = `navigation ${
     scrollState === 'in-hero' ? 'scrolled backdrop-blur-[12px]' : ''
-  } ${scrollState === 'below-hero' ? 'below-hero' : ''}`
+  } ${scrollState === 'below-hero' ? 'below-hero backdrop-blur-[12px]' : ''}`
 
   const navLinks = [
     { href: '/jobseekers', label: 'Jobseekers' },
@@ -38,6 +38,7 @@ export default function Nav() {
     { href: '/news', label: 'News' },
     { href: '/events', label: 'Events' },
     { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
   ]
 
   return (
