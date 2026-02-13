@@ -274,9 +274,9 @@ export default function HomeClient() {
             subhead="Whether you're seeking employment or seeking outcomes, we deliver with precision and care."
           >
             <div className="section-nav-links flex gap-6 justify-center">
-              <Link href="/jobseekers" className="font-body text-sm font-semibold text-gray-700 no-underline transition-colors duration-200 hover:text-aw-blue">Jobseekers</Link>
-              <Link href="/employers" className="font-body text-sm font-semibold text-gray-700 no-underline transition-colors duration-200 hover:text-aw-blue">Employers</Link>
-              <Link href="/partners" className="font-body text-sm font-semibold text-gray-700 no-underline transition-colors duration-200 hover:text-aw-blue">Partners</Link>
+              <Link href="/jobseekers" className="font-body text-base font-semibold text-gray-700 underline transition-colors duration-200 hover:text-aw-blue">Jobseekers</Link>
+              <Link href="/employers" className="font-body text-base font-semibold text-gray-700 underline transition-colors duration-200 hover:text-aw-blue">Employers</Link>
+              <Link href="/partners" className="font-body text-base font-semibold text-gray-700 underline transition-colors duration-200 hover:text-aw-blue">Partners</Link>
             </div>
           </SectionHeader>
         </div>

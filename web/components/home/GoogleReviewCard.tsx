@@ -38,8 +38,8 @@ export default function GoogleReviewCard({ quote, author }: GoogleReviewCardProp
         </p>
       </blockquote>
       <footer className="flex items-center justify-between">
-        <span className="font-display text-base text-gray-900">{author}</span>
-        <span className="font-mono text-xs text-gray-500 uppercase tracking-wider">Google Review</span>
+        <span className="font-display text-lg text-gray-900">{author}</span>
+        <span className="font-mono text-sm text-gray-500 uppercase tracking-wider">Google Review</span>
       </footer>
     </div>
   );
