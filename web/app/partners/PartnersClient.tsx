@@ -1,6 +1,7 @@
 'use client'
 
 import { ArrowRight, FileText } from 'lucide-react';
+import Link from 'next/link';
 import PageHero from '@/components/shared/PageHero';
 import TrustStrip from '@/components/shared/TrustStrip';
 import ListGrid from '@/components/shared/ListGrid';
@@ -158,8 +159,8 @@ export default function PartnersClient() {
         subheadline="Partnering with government agencies for 40+ years to deliver performance-based workforce programs that achieve measurable outcomes."
         image="/images/business-career-and-placement.jpg"
         imageAlt="Government partnership success"
-        primaryCta={{ href: "#contact", label: "Talk to our partnerships team" }}
-        secondaryCta={{ href: "#contact", label: "Discuss your program or RFP" }}
+        primaryCta={{ href: "/partners-form", label: "Talk to our partnerships team" }}
+        secondaryCta={{ href: "/partners-form?type=rfp", label: "Discuss your program or RFP" }}
       />
 
       {/* Trust Strip */}
@@ -271,10 +272,10 @@ export default function PartnersClient() {
           <StepsGrid items={implementationSteps} />
 
           <div className="text-center mt-16">
-            <a href="#contact" className="btn-primary inline-flex items-center gap-2 bg-aw-blue text-white px-8 py-4 rounded font-semibold hover:bg-aw-blue-dark transition-colors">
+            <Link href="/partners-form?type=rfp" className="btn-primary inline-flex items-center gap-2 bg-aw-blue text-white px-8 py-4 rounded font-semibold hover:bg-aw-blue-dark transition-colors no-underline">
               <span>Discuss your program or upcoming RFP</span>
               <ArrowRight className="w-[18px] h-[18px]" />
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -312,14 +313,14 @@ export default function PartnersClient() {
               Whether you&rsquo;re planning a new initiative, redesigning an existing program, or exploring performance-based contracting, America Works can be a partner in designing and delivering workforce services that move people into sustainable employment.
             </p>
             <div className="cta-buttons flex gap-5 justify-center flex-wrap">
-              <a href="#" className="btn-white inline-flex items-center gap-2 py-5 px-12 bg-white text-gray-950 rounded-md font-body text-sm font-semibold no-underline shadow-lg">
+              <Link href="/partners-form" className="btn-white inline-flex items-center gap-2 py-5 px-12 bg-white text-gray-950 rounded-md font-body text-sm font-semibold no-underline shadow-lg">
                 <span>Talk to our partnerships team</span>
                 <ArrowRight style={{ width: '18px', height: '18px' }} />
-              </a>
-              <a href="#" className="btn-outline-white inline-flex items-center gap-2 py-5 px-12 bg-transparent text-white border-2 border-white/50 rounded-md font-body text-sm font-semibold no-underline">
+              </Link>
+              <Link href="/partners-form?type=rfp" className="btn-outline-white inline-flex items-center gap-2 py-5 px-12 bg-transparent text-white border-2 border-white/50 rounded-md font-body text-sm font-semibold no-underline">
                 <span>Share details about your program or RFP</span>
                 <FileText style={{ width: '18px', height: '18px' }} />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

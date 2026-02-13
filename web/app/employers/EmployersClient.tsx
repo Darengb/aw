@@ -1,6 +1,7 @@
 'use client'
 
 import { ArrowRight, Phone, MapPin } from 'lucide-react';
+import Link from 'next/link';
 import PageHero from '@/components/shared/PageHero';
 import SplitSection from '@/components/shared/SplitSection';
 import ValueCard from '@/components/shared/ValueCard';
@@ -126,8 +127,8 @@ export default function EmployersClient() {
         subheadline="America Works connects you with job-ready candidates and supports them for months after hire, helping you save time, reduce turnover, and build a more reliable workforce."
         image="/images/team-of-workers-celebrating-success-at-a-shipping.jpg"
         imageAlt="Successful team at work"
-        primaryCta={{ href: "#contact", label: "Submit a job order" }}
-        secondaryCta={{ href: "#contact", label: "Talk to our staffing team" }}
+        primaryCta={{ href: "/employers-form", label: "Submit a job order" }}
+        secondaryCta={{ href: "/contact", label: "Talk to our staffing team" }}
       />
 
       {/* Why Partner */}
@@ -227,7 +228,7 @@ export default function EmployersClient() {
         ]}
         image="/images/business-career-and-placement.jpg"
         imageAlt="Business partnership"
-        linkHref="#contact"
+        linkHref="/employers-form"
         linkLabel="Explore employer partnership"
         reversed={true}
         blue={true}
@@ -266,18 +267,18 @@ export default function EmployersClient() {
               Whether you need to fill a single role or manage ongoing hiring across multiple sites, America Works can help you find motivated, supported candidates at no cost.
             </p>
             <div className="cta-buttons flex gap-5 justify-center flex-wrap">
-              <a href="#" className="btn-white inline-flex items-center gap-2 py-5 px-12 bg-white text-gray-950 rounded-md font-body text-sm font-semibold no-underline shadow-lg">
+              <Link href="/employers-form" className="btn-white inline-flex items-center gap-2 py-5 px-12 bg-white text-gray-950 rounded-md font-body text-sm font-semibold no-underline shadow-lg">
                 <span>Submit a job order</span>
                 <ArrowRight style={{ width: '18px', height: '18px' }} />
-              </a>
-              <a href="#" className="btn-outline-white inline-flex items-center gap-2 py-5 px-12 bg-transparent text-white border-2 border-white/50 rounded-md font-body text-sm font-semibold no-underline">
+              </Link>
+              <Link href="/contact" className="btn-outline-white inline-flex items-center gap-2 py-5 px-12 bg-transparent text-white border-2 border-white/50 rounded-md font-body text-sm font-semibold no-underline">
                 <span>Talk to our staffing team</span>
                 <Phone style={{ width: '18px', height: '18px' }} />
-              </a>
-              <a href="#" className="btn-outline-white inline-flex items-center gap-2 py-5 px-12 bg-transparent text-white border-2 border-white/50 rounded-md font-body text-sm font-semibold no-underline">
+              </Link>
+              <Link href="/contact" className="btn-outline-white inline-flex items-center gap-2 py-5 px-12 bg-transparent text-white border-2 border-white/50 rounded-md font-body text-sm font-semibold no-underline">
                 <span>Find your nearest office</span>
                 <MapPin style={{ width: '18px', height: '18px' }} />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

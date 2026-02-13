@@ -12,14 +12,16 @@ const routeThemes: Record<string, 'red' | 'blue'> = {
   '/about': 'red',
   '/contact': 'red',
   '/jobseekers-form': 'red',
+  '/employers-form': 'blue',
   '/employers': 'blue',
   '/partners': 'blue',
+  '/partners-form': 'blue',
   '/events': 'blue',
   '/news': 'blue',
 }
 
 // Pages without a dark hero (nav should start with dark text)
-const noHeroPages = ['/news', '/events', '/contact', '/jobseekers-form']
+const noHeroPages = ['/news', '/events', '/contact', '/jobseekers-form', '/employers-form', '/partners-form']
 
 export default function ClientShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
