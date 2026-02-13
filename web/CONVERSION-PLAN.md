@@ -908,20 +908,20 @@ Apply these during migration, ordered by impact.
 
 ### Phase 1: Scaffold & Config
 
-- [ ] Initialize Next.js 16 in `/web` — `npx create-next-app@latest . --typescript --tailwind --app --no-src-dir --no-import-alias`
-- [ ] Clean scaffold files — remove default `page.tsx`, `globals.css`, `layout.tsx`, `favicon.ico` etc.
-- [ ] Install dependencies — `npm install lucide-react front-matter`
-- [ ] Write `next.config.ts` per Config section
-- [ ] Write `tailwind.config.ts` per Config section (font vars, custom sizes, colors, shadows, maxWidth)
-- [ ] Write `postcss.config.js` per Config section
-- [ ] Verify `tsconfig.json` has `@/*` path alias and Next.js plugin
-- [ ] Copy `/site/content/` → `/web/content/` (news + events markdown files)
-- [ ] Copy `/site/public/images/` → `/web/public/images/` (all images, videos, PDFs)
-- [ ] Copy `/site/public/vite.svg` → `/web/public/favicon.svg`
-- [ ] Copy `styles/globals.css` — apply font variable fixes: rename `:root` `--font-*` to reference `--font-instrument`, `--font-inter`, `--font-jbmono`; fix hardcoded `General Sans` (lines 1370, 1425) → `var(--font-body)`; fix `Playfair Display` (line 1325) → `var(--font-display)`; remove all 4 duplicate keyframes (`fadeInUp` line 459, `underlineExpand` line 549, `fadeInSlide` line 676, `pulse` line 744 — its box-shadow effect is already overridden by animations.css at runtime)
-- [ ] Copy `styles/animations.css` — as-is
-- [ ] Copy `styles/components.css` — as-is
-- [ ] **Do NOT copy** `index.css`, `App.css` (Vite scaffold files)
+- [x] Initialize Next.js 16 in `/web` — `npx create-next-app@latest . --typescript --tailwind --app --no-src-dir --no-import-alias`
+- [x] Clean scaffold files — remove default `page.tsx`, `globals.css`, `layout.tsx`, `favicon.ico` etc.
+- [x] Install dependencies — `npm install lucide-react front-matter`
+- [x] Write `next.config.ts` per Config section
+- [x] Write `tailwind.config.ts` per Config section (font vars, custom sizes, colors, shadows, maxWidth)
+- [x] Write `postcss.config.js` per Config section (kept scaffolded postcss.config.mjs with @tailwindcss/postcss for v4)
+- [x] Verify `tsconfig.json` has `@/*` path alias and Next.js plugin
+- [x] Copy `/site/content/` → `/web/content/` (news + events markdown files)
+- [x] Copy `/site/public/images/` → `/web/public/images/` (all images, videos, PDFs)
+- [x] Copy `/site/public/vite.svg` → `/web/public/favicon.svg`
+- [x] Copy `styles/globals.css` — apply font variable fixes: rename `:root` `--font-*` to reference `--font-instrument`, `--font-inter`, `--font-jbmono`; fix hardcoded `General Sans` (lines 1370, 1425) → `var(--font-body)`; fix `Playfair Display` (line 1325) → `var(--font-display)`; remove all 4 duplicate keyframes (`fadeInUp` line 459, `underlineExpand` line 549, `fadeInSlide` line 676, `pulse` line 744 — its box-shadow effect is already overridden by animations.css at runtime). Also updated `@tailwind` directives to `@import "tailwindcss"` + `@config` for Tailwind v4.
+- [x] Copy `styles/animations.css` — as-is
+- [x] Copy `styles/components.css` — as-is
+- [x] **Do NOT copy** `index.css`, `App.css` (Vite scaffold files)
 - [ ] Git commit: `"Phase 1: Scaffold Next.js project with config and static assets"`
 
 ### Phase 2: Foundation
