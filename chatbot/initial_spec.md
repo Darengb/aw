@@ -15,10 +15,10 @@ Below is a concrete blueprint you can hand to an engineer.
   - `lookupZipServiceLevel(zip)` (your coverage table)
   - `sendEmailToStaff(payload)` (handoff + intake)
 
-**LLM**
+**LLM** (see `model-decisions.md` for pricing + rationale)
 
-- **NLU**: convert free text into structured fields (`yes/no`, `zip`, `ssi_ssdi`, `question_text`, `is_america_works_related`)
-- **Web search**: only in branches you listed (non–America Works questions, or “not in service area → suggested resources”)
+- **NLU + Classification → GPT-5 Nano** ($0.05/$0.40 per 1M tokens): convert free text into structured fields (`yes/no`, `zip`, `ssi_ssdi`, `question_text`, `is_america_works_related`). Fast, cheap, called on every message.
+- **Web search + answer → GPT-5.2** ($1.75/$14.00 per 1M tokens): only in branches where users may be in crisis (homeless, in danger, etc.) — non–America Works questions, or "not in service area → suggested resources". Needs nuanced, empathetic, accurate responses.
 
 Key win: your flow stays rigid even if the user rambles.
 
@@ -73,6 +73,7 @@ const STATES = {
   ASK_ZIP: "ASK_ZIP",
   ASK_SSI_SSDI: "ASK_SSI_SSDI",
   ASK_HELP: "ASK_HELP",
+  ASK_RESOURCE_NEEDS: "ASK_RESOURCE_NEEDS",
   DONE: "DONE",
 };
 
@@ -133,11 +134,19 @@ async function handleMessage({ state, memory, userText, nowET }) {
     case STATES.ASK_SSI_SSDI: {
       if (parsed.yesNo === "yes") return { state: STATES.DONE, memory, reply: "You can enroll here: <SIGNUP_FORM_LINK>" };
       if (parsed.yesNo === "no") {
-        // out of area → web-search resources
-        const resources = await webSearchResources(memory.zip);
-        return { state: STATES.DONE, memory, reply: formatOutOfArea(resources) };
+        // out of area → ask what kind of resources they need
+        return { state: STATES.ASK_RESOURCE_NEEDS, memory, reply: "Unfortunately, we don't currently offer services in your area. We can help you find resources nearby.\n\nWhat kind of help are you looking for?" };
+        // Show buttons: Job search, Housing, Food, Benefits, Mental health, Other
       }
       return { state, memory, reply: "Do you currently receive SSI/SSDI? (Yes/No)" };
+    }
+
+    case STATES.ASK_RESOURCE_NEEDS: {
+      // User selects one or more resource categories (buttons or free text)
+      memory.resourceNeeds = parsed.categories || [userText]; // array of selected categories
+      // Now use GPT-5.2 with web search to find relevant resources
+      const resources = await webSearchResources(memory.zip, memory.resourceNeeds); // GPT-5.2
+      return { state: STATES.DONE, memory, reply: formatResources(resources) };
     }
 
     case STATES.ASK_HELP: {
@@ -169,30 +178,31 @@ async function handleMessage({ state, memory, userText, nowET }) {
 
 ## 5) What to prompt the model to do (so it behaves)
 
-### A) “Parse” call (no web search)
+### A) "Parse" call — GPT-5 Nano (no web search)
 
 Use a strict instruction like:
 
-- “You are an intake parser. Return JSON only.”
+- "You are an intake parser. Return JSON only."
 - JSON fields vary by state:
-  - `yesNo` (“yes” | “no” | null)
+  - `yesNo` ("yes" | "no" | null)
   - `zip` (string|null)
   - `fullName` (string|null)
   - `phone` (string|null)
+  - `categories` (string[]|null) — for resource needs step
 
-This keeps the model from trying to “help” early.
+This keeps the model from trying to "help" early.
 
-### B) “Classify America Works related?” call (no web search)
+### B) "Classify America Works related?" call — GPT-5 Nano (no web search)
 
 Return `{ "isAmericaWorksRelated": true/false, "confidence": 0-1 }`.
 
-### C) Web-search answer call (web_search enabled)
+### C) Web-search answer call — GPT-5.2 (web_search enabled)
 
 System rule:
 
-- “Answer succinctly. Prefer authoritative sources (gov, major nonprofits). Include citations. If uncertain, say so.”
+- "Answer with empathy and clarity. The user may be in a difficult situation (homeless, in danger, in crisis). Prefer authoritative sources (gov, major nonprofits). Include citations. If uncertain, say so. If the user selected 'Mental health & crisis support', always lead with crisis hotlines (988, Crisis Text Line)."
 
-Also: put a **domain allowlist** if you want (e.g., SSA.gov, CareerOneStop.org, state workforce sites).
+Domain allowlist: SSA.gov, CareerOneStop.org, 211.org, HUD.gov, benefits.gov, SAMHSA.gov, feedingamerica.org, state workforce sites.
 
 ------
 
@@ -212,4 +222,31 @@ Also: put a **domain allowlist** if you want (e.g., SSA.gov, CareerOneStop.org, 
 
 ------
 
-If you tell me what platform you’re deploying this on (Twilio SMS, website chat widget, Intercom, Zendesk, etc.), I can adapt this into a concrete “drop-in” implementation plan (including exact JSON schemas for each state and the minimal set of API calls).
+## 8) Deployment Architecture
+
+**Platform:** Next.js on Vercel (web chat widget embedded in the existing America Works site)
+
+**Approach:** Remove `output: 'export'` from `next.config.ts` and switch to standard Vercel deployment. This allows server-side API routes (`app/api/`) alongside the existing static pages.
+
+- **All existing pages remain static** — they are prerendered at build time, no behavior change.
+- **API route `app/api/chat/route.ts`** handles the chatbot state machine server-side. The OpenAI API key lives in Vercel environment variables, never exposed to the client.
+- **Chat widget** (client component) sends user messages to `/api/chat` via fetch POST. The API route runs the deterministic workflow, calls GPT-5 Nano or GPT-5.2 as needed, and returns the next message + UI state (buttons, form fields, etc.).
+
+### Why this works
+
+Vercel auto-detects which routes are static vs serverless. Existing pages (`/`, `/jobseekers`, `/employers`, etc.) continue to be served as static HTML. Only `/api/chat` runs as a serverless function. Zero additional infrastructure.
+
+### API route shape
+
+```
+POST /api/chat
+Request:  { state, memory, userText }
+Response: { state, memory, reply, inputType, buttons?, formFields? }
+```
+
+The client holds `state` and `memory` in React state (or sessionStorage for persistence across page navigations). Each message round-trips to the server, which returns the next state and reply.
+
+### Environment variables (Vercel dashboard)
+
+- `OPENAI_API_KEY` — OpenAI API key
+- `ESCALATION_EMAIL` — staff email for after-hours handoff
