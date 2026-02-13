@@ -27,7 +27,7 @@ export default function Nav() {
     }
   }, [isMenuOpen])
 
-  const navClasses = `navigation fixed top-0 left-0 right-0 bg-transparent z-[1000] transition-all duration-300 ${
+  const navClasses = `navigation ${
     scrollState === 'in-hero' ? 'scrolled' : ''
   } ${scrollState === 'below-hero' ? 'below-hero' : ''}`
 
@@ -44,7 +44,7 @@ export default function Nav() {
     <>
       <nav className={navClasses}>
         <div className="max-w-container mx-auto py-5 px-8 flex justify-between items-center">
-          <Link href="/" className="nav-logo flex items-center gap-3 font-crimson text-2xl font-semibold tracking-tight text-white no-underline transition-opacity duration-200 hover:opacity-70">
+          <Link href="/" className="nav-logo flex items-center gap-3 font-crimson text-2xl font-semibold tracking-tight no-underline transition-opacity duration-200 hover:opacity-70">
             <img src="/images/aw-logo-simple.png" alt="AW" className="h-10 w-auto block" />
             <span>AMERICA WORKS</span>
           </Link>
@@ -55,7 +55,7 @@ export default function Nav() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="relative font-body text-[0.9375rem] font-semibold tracking-[0.01em] text-white/80 no-underline transition-colors duration-200 hover:text-white"
+                className="relative font-body text-[0.9375rem] font-semibold tracking-[0.01em] no-underline transition-colors duration-200"
               >
                 {link.label}
               </Link>

@@ -6,12 +6,7 @@
        America Works - Refined Edition
        ============================================ */
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+@layer base {
     :root {
       /* Typography */
       --font-display: var(--font-instrument), serif;
@@ -19,22 +14,25 @@
       --font-mono: var(--font-jbmono), monospace;
       --font-dashboard: var(--font-jbmono), monospace;
 
-      /* Type Scale */
+      /* Type Scale — custom values (non-conflicting with TW v4) */
       --text-display-xl: 7rem;
       --text-display-lg: 4rem;
       --text-display-md: 3rem;
       --text-h1: 2.5rem;
       --text-h2: 2rem;
       --text-h3: 1.5rem;
+      --text-mono-xl: 3.5rem;
+      --text-mono-lg: 1.75rem;
+      --text-mono-base: 1rem;
+      --text-mono-sm: 0.875rem;
+
+      /* Type Scale — temporarily commented out (conflict with TW v4 theme vars)
       --text-xl: 1.5rem;
       --text-lg: 1.25rem;
       --text-base: 1.0625rem;
       --text-sm: 0.9375rem;
       --text-xs: 0.8125rem;
-      --text-mono-xl: 3.5rem;
-      --text-mono-lg: 1.75rem;
-      --text-mono-base: 1rem;
-      --text-mono-sm: 0.875rem;
+      */
 
       /* Brand Colors */
       --aw-red: #ec140c;
@@ -87,7 +85,9 @@
       --ease-primary: cubic-bezier(0.4, 0, 0.2, 1);
       --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
+} /* end @layer base */
 
+@layer components {
     /* Mobile Typography Overrides */
     @media (max-width: 768px) {
       :root {
@@ -225,16 +225,16 @@
     /* Step 2: In hero with blur */
     .navigation.scrolled {
       background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(12px) saturate(100%);
-      -webkit-backdrop-filter: blur(12px) saturate(100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
     }
 
     /* Step 3: Below hero with blur and dark text */
     .navigation.below-hero {
       background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(12px) saturate(100%);
-      -webkit-backdrop-filter: blur(12px) saturate(100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .navigation.below-hero .nav-logo {
@@ -727,8 +727,8 @@
 
     /* Metric Cards - Backdrop filter only (other styles in Tailwind classes) */
     .metric-card-dash {
-      backdrop-filter: blur(12px) saturate(100%);
-      -webkit-backdrop-filter: blur(12px) saturate(100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     /* Corner Brackets */
@@ -2808,3 +2808,4 @@
       opacity: 1 !important;
       transform: translateY(0) !important;
     }
+} /* end @layer components */

@@ -178,7 +178,7 @@ export default function HomeTimeline() {
           {steps.map((step, index) => (
             <article
               key={index}
-              className={`step-card grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-16 items-center relative ${index < steps.length - 1 ? 'mb-8 lg:mb-32' : 'mb-0'} opacity-0`}
+              className={`step-card grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-16 items-center relative ${index < steps.length - 1 ? 'mb-8 lg:mb-32' : 'mb-0'}`}
               data-step={step.number}
             >
               <div className="step-number-large">{step.number}</div>

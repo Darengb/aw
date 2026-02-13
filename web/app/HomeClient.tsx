@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Check } from 'lucide-react';
 import HomeHero from '@/components/home/HomeHero';
 import SectionHeader from '@/components/home/SectionHeader';
@@ -127,7 +127,105 @@ const testimonials = [
   }
 ];
 
+function formatNumber(num: number) {
+  return num.toLocaleString('en-US');
+}
+
+function animateCounter(element: HTMLElement, target: number, duration = 7000) {
+  element.textContent = '0';
+  const startTime = performance.now();
+
+  const update = (currentTime: number) => {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 6);
+    const calculated = eased * target;
+    const currentCount = (target - calculated) < 0.5 ? target : Math.floor(calculated);
+    const formatted = formatNumber(currentCount);
+
+    if (element.textContent !== formatted) {
+      element.textContent = formatted;
+    }
+
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      const symbolEl = element.parentElement?.querySelector('.metric-symbol-right') as HTMLElement | null;
+      if (symbolEl) symbolEl.style.opacity = '0.5';
+    }
+  };
+
+  requestAnimationFrame(update);
+}
+
 export default function HomeClient() {
+  const pageRef = useRef<HTMLDivElement>(null);
+
+  // Scroll reveal for home page elements
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('is-visible');
+            }, index * 100);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    const selectors = '.metric-card, .path-card, .step-card, .testimonial-card, .value-prop, .population-item, .state-badge, .audience-paths .section-header';
+    const elements = pageRef.current?.querySelectorAll(selectors);
+    elements?.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Stat counter animation
+  useEffect(() => {
+    const counters: { element: HTMLElement; target: number; animated: boolean }[] = [];
+
+    pageRef.current?.querySelectorAll<HTMLElement>('[data-stat-target]').forEach((el) => {
+      counters.push({
+        element: el,
+        target: parseInt(el.dataset.statTarget?.replace(/,/g, '') || '0'),
+        animated: false,
+      });
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const counter = counters.find((c) => c.element === entry.target);
+          if (counter && !counter.animated) {
+            counter.animated = true;
+            animateCounter(counter.element, counter.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    counters.forEach((c) => {
+      observer.observe(c.element);
+      // Check if already in view
+      const rect = c.element.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0 && !c.animated) {
+        setTimeout(() => {
+          if (!c.animated) {
+            c.animated = true;
+            animateCounter(c.element, c.target);
+          }
+        }, 500);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   // Initialize US Coverage Map with dynamic import
   useEffect(() => {
     let cancelled = false;
@@ -163,7 +261,7 @@ export default function HomeClient() {
   }, []);
 
   return (
-    <div>
+    <div ref={pageRef}>
       {/* Hero Section */}
       <HomeHero />
 

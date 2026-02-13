@@ -29,7 +29,7 @@ export default function PathCard({
 }: PathCardProps) {
   return (
     <article
-      className="path-card grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[75vh] relative overflow-visible opacity-0"
+      className="path-card grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[75vh] relative overflow-visible"
       id={id}
     >
       <div className="path-image" data-number={number}>

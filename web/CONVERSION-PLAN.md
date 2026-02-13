@@ -999,7 +999,7 @@ Components with no icon changes (copy + minor path updates):
 - [x] Test all 7 routes load without errors: `/`, `/jobseekers`, `/employers`, `/partners`, `/about`, `/news`, `/events`
 - [ ] Verify interactive features: nav scroll states, mobile menu open/close, FAQ accordion, case study tabs, scroll animations (`.is-visible`), timeline fill, US map rendering
 - [x] Run `npx next lint` on relevant files, fix any lint errors (Next.js 16 removed `next lint` — TypeScript checked via `next build`)
-- [ ] Final git commit: `"Phase 7: Build verified, all routes working"`
+- [x] Final git commit: `"Phase 7: Build verified, all routes working"`
 
 ---
 
