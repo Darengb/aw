@@ -32,7 +32,7 @@ export default function Footer() {
               <li className="mb-3"><Link href="/partners" className="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Why Choose Us</Link></li>
               <li className="mb-3"><Link href="/partners" className="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Performance Model</Link></li>
               <li className="mb-3"><Link href="/partners" className="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Case Studies</Link></li>
-              <li className="mb-3"><a href="#contact" className="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Contact</a></li>
+              <li className="mb-3"><Link href="/jobseekers-form" className="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Contact</Link></li>
             </ul>
           </div>
 
@@ -40,8 +40,8 @@ export default function Footer() {
             <h4 className="font-body text-sm font-semibold text-white mb-6 uppercase tracking-wide">Company</h4>
             <ul className="footer-links list-none">
               <li className="mb-3"><Link href="/about" className="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">About</Link></li>
-              <li className="mb-3"><a href="#contact" className="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Locations</a></li>
-              <li className="mb-3"><a href="#contact" className="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Contact</a></li>
+              <li className="mb-3"><Link href="/contact" className="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Locations</Link></li>
+              <li className="mb-3"><Link href="/jobseekers-form" className="text-gray-500 no-underline text-sm transition-colors duration-200 hover:text-white">Contact</Link></li>
             </ul>
           </div>
         </div>

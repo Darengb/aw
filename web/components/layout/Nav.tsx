@@ -61,7 +61,7 @@ export default function Nav() {
                 {link.label}
               </Link>
             ))}
-            <a href="#contact" className="nav-cta px-7 py-3 bg-aw-blue text-white font-semibold rounded-md shadow-[0_2px_10px_rgba(50,59,151,0.2)] transition-all duration-300 hover:bg-aw-blue-dark hover:-translate-y-0.5 hover:shadow-[0_4px_16px_rgba(50,59,151,0.3)]">Contact</a>
+            <Link href="/jobseekers-form" className="nav-cta px-7 py-3 bg-aw-blue text-white font-semibold rounded-md shadow-[0_2px_10px_rgba(50,59,151,0.2)] transition-all duration-300 hover:bg-aw-blue-dark hover:-translate-y-0.5 hover:shadow-[0_4px_16px_rgba(50,59,151,0.3)]">Contact</Link>
           </div>
 
           {/* Hamburger Button - Mobile Only */}
@@ -108,16 +108,16 @@ export default function Nav() {
               {link.label}
             </Link>
           ))}
-          <a
-            href="#contact"
-            className={`mt-4 px-8 py-4 bg-aw-blue text-white font-semibold rounded-md text-lg transition-all duration-300 hover:bg-aw-blue-dark ${
+          <Link
+            href="/jobseekers-form"
+            className={`mt-4 px-8 py-4 bg-aw-blue text-white font-semibold rounded-md text-lg transition-all duration-300 hover:bg-aw-blue-dark no-underline ${
               isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
             style={{ transitionDelay: isMenuOpen ? `${navLinks.length * 50}ms` : '0ms' }}
             onClick={() => setIsMenuOpen(false)}
           >
             Contact
-          </a>
+          </Link>
         </div>
       </div>
     </>

@@ -117,7 +117,7 @@ export default function JobseekersClient() {
         subheadline="We've spent 40 years perfecting the path from unemployment to meaningful work. Personal coaching, direct employer access, and unwavering support—at no cost to you."
         image="/images/young-professional-working.jpg"
         imageAlt="Professional career development"
-        primaryCta={{ href: "#contact", label: "Start your journey" }}
+        primaryCta={{ href: "/jobseekers-form", label: "Start your journey" }}
         secondaryCta={{ href: "#how-we-help", label: "Explore our services" }}
       />
 
