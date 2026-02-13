@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import Nav from './Nav'
 import Footer from './Footer'
+import ChatWidget from '../chat/ChatWidget'
 
 // Theme configuration per route
 const routeThemes: Record<string, 'red' | 'blue'> = {
@@ -101,6 +102,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
       </main>
 
       <Footer />
+      <ChatWidget />
     </div>
   )
 }

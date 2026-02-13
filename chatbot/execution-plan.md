@@ -22,9 +22,9 @@ Build a deterministic workflow chatbot (state machine) embedded as a floating wi
 
 ## Phase 1: Infrastructure
 
-- [ ] Remove `output: 'export'` from `/web/next.config.ts` (keep `images: { unoptimized: true }` and `experimental`)
-- [ ] Install `openai` npm package in `/web`
-- [ ] Add `OPENAI_API_KEY` to `.env.local` for local dev (gitignored — already in Vercel prod env)
+- [x] Remove `output: 'export'` from `/web/next.config.ts` (keep `images: { unoptimized: true }` and `experimental`)
+- [x] Install `openai` npm package in `/web`
+- [x] Add `OPENAI_API_KEY` to `.env.local` for local dev (gitignored — already in Vercel prod env)
 
 ---
 
@@ -32,7 +32,7 @@ Build a deterministic workflow chatbot (state machine) embedded as a floating wi
 
 ### 2a) Types & constants
 
-- [ ] Create `/web/app/api/chat/types.ts`:
+- [x] Create `/web/app/api/chat/types.ts`:
 
   ```ts
   // States
@@ -87,14 +87,14 @@ Build a deterministic workflow chatbot (state machine) embedded as a floating wi
 
 ### 2b) Utility functions
 
-- [ ] Create `/web/app/api/chat/utils.ts`:
+- [x] Create `/web/app/api/chat/utils.ts`:
   - `isBusinessHoursET(): boolean` — Mon–Fri 9:00–17:00 America/New_York using `Intl.DateTimeFormat` (no extra deps)
   - `isFullServiceState(stateCode: string): boolean` — checks if `stateCode` is in `SERVICE_STATES`
   - `isValidPhone(phone: string): boolean` — basic US phone regex (10 digits, optional formatting)
 
 ### 2c) State machine handler
 
-- [ ] Create `/web/app/api/chat/handleMessage.ts` — the core switch/case state machine.
+- [x] Create `/web/app/api/chat/handleMessage.ts` — the core switch/case state machine.
 
   **LLM gating rule**: Only call LLM when the input is free text (`ASK_STATE`, `ASK_HELP`, and `ASK_RESOURCE_NEEDS` with "Other"). For button/form states, use the `userText` value directly — no LLM.
 
@@ -232,7 +232,7 @@ Build a deterministic workflow chatbot (state machine) embedded as a floating wi
 
 ### 2d) API route
 
-- [ ] Create `/web/app/api/chat/route.ts` — POST handler:
+- [x] Create `/web/app/api/chat/route.ts` — POST handler:
   - Parse JSON body as `ChatRequest`
   - Call `handleMessage()` with state, memory, userText
   - Return `ChatResponse` as JSON
@@ -243,7 +243,7 @@ Build a deterministic workflow chatbot (state machine) embedded as a floating wi
 
 ## Phase 3: OpenAI Integration
 
-- [ ] Create `/web/app/api/chat/llm.ts` — OpenAI client + four functions:
+- [x] Create `/web/app/api/chat/llm.ts` — OpenAI client + four functions:
 
   **OpenAI client setup:**
   ```ts
@@ -283,7 +283,7 @@ Build a deterministic workflow chatbot (state machine) embedded as a floating wi
 
 ### 4a) Widget shell
 
-- [ ] Create `/web/components/chat/ChatWidget.tsx` — floating launcher + expandable chat panel:
+- [x] Create `/web/components/chat/ChatWidget.tsx` — floating launcher + expandable chat panel:
 
   **Collapsed state (launcher button):**
   - Fixed `bottom-right` — `bottom: 20px; right: 20px` (desktop + mobile)
@@ -340,7 +340,7 @@ Build a deterministic workflow chatbot (state machine) embedded as a floating wi
 
 ### 4b) Message bubbles
 
-- [ ] Create `/web/components/chat/ChatMessage.tsx` — individual message bubble:
+- [x] Create `/web/components/chat/ChatMessage.tsx` — individual message bubble:
   - **Bot messages:** left-aligned, light gray background (`#f3f4f6`), dark text, max-width ~85%
   - **User messages:** right-aligned, `aw-red` background, white text, max-width ~85%
   - Both: rounded corners (16px, with sharp corner on sender's side — `border-bottom-left-radius: 4px` for bot, `border-bottom-right-radius: 4px` for user)
@@ -350,7 +350,7 @@ Build a deterministic workflow chatbot (state machine) embedded as a floating wi
 
 ### 4c) Dynamic input area
 
-- [ ] Create `/web/components/chat/ChatInput.tsx` — renders dynamically based on `inputType` prop:
+- [x] Create `/web/components/chat/ChatInput.tsx` — renders dynamically based on `inputType` prop:
 
   **`buttons` mode:**
   - Vertical stack of pill-shaped buttons (full width of input area, 8px gap)
@@ -382,8 +382,8 @@ Build a deterministic workflow chatbot (state machine) embedded as a floating wi
 
 ## Phase 5: Integrate Widget into Layout
 
-- [ ] Add `<ChatWidget />` to `/web/components/layout/ClientShell.tsx` — render inside the root `<div>` after `<Footer />`, outside `<main>`. Fixed positioning so it doesn't affect layout.
-- [ ] Add chat widget styles to `/web/styles/globals.css` (or keep in component with Tailwind — use whichever is cleaner):
+- [x] Add `<ChatWidget />` to `/web/components/layout/ClientShell.tsx` — render inside the root `<div>` after `<Footer />`, outside `<main>`. Fixed positioning so it doesn't affect layout.
+- [x] Add chat widget styles to `/web/styles/globals.css` (or keep in component with Tailwind — use whichever is cleaner):
   - **Launcher:** `.chat-launcher` — fixed bottom-right, 56px circle, `aw-red`, white icon, shadow, z-9999, scale hover
   - **Panel (desktop):** `.chat-panel` — fixed `bottom: 24px; right: 24px`, 380×560px, rounded-2xl, shadow-xl, flex column, slide-up + fade-in animation on open
   - **Panel (mobile):** `@media (max-width: 639px)` → `.chat-panel` becomes `inset: 0`, no border-radius, full viewport
@@ -401,7 +401,7 @@ Build a deterministic workflow chatbot (state machine) embedded as a floating wi
 
 ## Phase 6: Build & Verify
 
-- [ ] Run `npm run build` — confirm all routes compile (static pages + serverless API route)
+- [x] Run `npm run build` — confirm all routes compile (static pages + serverless API route)
 - [ ] Test locally with `npm run dev`:
   - **Happy path (full service):** New user → enroll → select "New York" → full service → signup link shown
   - **Out-of-area path:** enroll → select "Ohio" → not full → no SSI/SSDI → out of area → find resources → select "Housing & shelter" + "Food" → GPT-5.2 returns Ohio-specific resources
