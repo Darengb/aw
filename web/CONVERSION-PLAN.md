@@ -938,10 +938,10 @@ Apply these during migration, ordered by impact.
 
 ### Phase 3: Layout Components
 
-- [ ] Build `components/layout/ClientShell.tsx` — `"use client"`, `usePathname`, theme derivation (`routeThemes` map), scroll progress via `useRef` + direct DOM (no `useScrollProgress` hook), global `IntersectionObserver` for `.section-header`, `.path-card`, `.population-item`, `.value-prop`, `.testimonial-card`, `.metric-card`, `.step-card`, scroll-to-top on route change
-- [ ] Migrate `components/layout/Nav.tsx` — `"use client"`, `next/link`, `usePathname` (replaces `useLocation`), rename `navLinks[].to` → `.href`, all `<Link to=` → `<Link href=`
-- [ ] Migrate `components/layout/Footer.tsx` — `"use client"`, `next/link`, 8× `<Link to=` → `<Link href=`
-- [ ] Git commit: `"Phase 3: Layout components — ClientShell, Nav, Footer"`
+- [x] Build `components/layout/ClientShell.tsx` — `"use client"`, `usePathname`, theme derivation (`routeThemes` map), scroll progress via `useRef` + direct DOM (no `useScrollProgress` hook), global `IntersectionObserver` for `.section-header`, `.path-card`, `.population-item`, `.value-prop`, `.testimonial-card`, `.metric-card`, `.step-card`, scroll-to-top on route change
+- [x] Migrate `components/layout/Nav.tsx` — `"use client"`, `next/link`, `usePathname` (replaces `useLocation`), rename `navLinks[].to` → `.href`, all `<Link to=` → `<Link href=`
+- [x] Migrate `components/layout/Footer.tsx` — `"use client"`, `next/link`, 8× `<Link to=` → `<Link href=`
+- [x] Git commit: `"Phase 3: Layout components — ClientShell, Nav, Footer"`
 
 ### Phase 4: Shared Components (can be parallelized)
 
