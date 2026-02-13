@@ -968,17 +968,17 @@ Components with no icon changes (copy + minor path updates):
 
 ### Phase 5: Home Components & Page
 
-- [ ] `home/HomeHero.tsx` — copy as-is (imports `MetricCard`, no hooks, no icons)
-- [ ] `home/MetricCard.tsx` — copy as-is
-- [ ] `home/SectionHeader.tsx` — copy as-is
-- [ ] `home/GoogleReviewCard.tsx` — copy as-is
-- [ ] `home/TestimonialCard.tsx` — copy as-is
-- [ ] `home/PopulationItem.tsx` — replace `<i data-lucide={icon}>` with `iconMap` lookup
-- [ ] `home/ValueProp.tsx` — replace `<i data-lucide={icon}>` with `iconMap` lookup
-- [ ] `home/PathCard.tsx` — `"use client"`, `next/link`, `<Link to=` → `<Link href=`
-- [ ] `home/CTASection.tsx` — `"use client"`, `next/link`, 2× `<Link to=` → `<Link href=`
-- [ ] `home/HomeTimeline.tsx` — `"use client"`, copy as-is (already uses refs + passive listeners), update import paths only
-- [ ] Create `app/page.tsx` (server wrapper) + `app/HomeClient.tsx` (`"use client"`) — move Home page logic here. Replace `import { Link }` → `next/link`, 3× `to=` → `href=`. Replace static `US_MAP_SVG` import with dynamic `import('@/data/usMapSvg')` in `useEffect`. Replace `<i data-lucide="check">` with `<Check />`.
+- [x] `home/HomeHero.tsx` — copy as-is (imports `MetricCard`, no hooks, no icons)
+- [x] `home/MetricCard.tsx` — copy as-is
+- [x] `home/SectionHeader.tsx` — copy as-is
+- [x] `home/GoogleReviewCard.tsx` — copy as-is
+- [x] `home/TestimonialCard.tsx` — copy as-is
+- [x] `home/PopulationItem.tsx` — replace `<i data-lucide={icon}>` with `iconMap` lookup
+- [x] `home/ValueProp.tsx` — replace `<i data-lucide={icon}>` with `iconMap` lookup
+- [x] `home/PathCard.tsx` — `"use client"`, `next/link`, `<Link to=` → `<Link href=`
+- [x] `home/CTASection.tsx` — `"use client"`, `next/link`, 2× `<Link to=` → `<Link href=`
+- [x] `home/HomeTimeline.tsx` — `"use client"`, copy as-is (already uses refs + passive listeners), update import paths only
+- [x] Create `app/page.tsx` (server wrapper) + `app/HomeClient.tsx` (`"use client"`) — move Home page logic here. Replace `import { Link }` → `next/link`, 3× `to=` → `href=`. Replace static `US_MAP_SVG` import with dynamic `import('@/data/usMapSvg')` in `useEffect`. Replace `<i data-lucide="check">` with `<Check />`.
 - [ ] Git commit: `"Phase 5: Home page and components"`
 
 ### Phase 6: Subpages
