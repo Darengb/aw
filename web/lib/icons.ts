@@ -4,7 +4,7 @@ import {
   Map, Award, Landmark, Building2, Users, HeartPulse, Monitor, Church,
   HeartHandshake, Building, HandHelping, UserCheck, MessageCircle,
   Briefcase, Headphones, ShoppingBag, Utensils, Truck, Wrench, User,
-  CircleCheck, BookOpen, TrendingUp, Sliders, DollarSign,
+  CircleCheck, BookOpen, TrendingUp, Sliders, DollarSign, FileText,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -47,4 +47,5 @@ export const iconMap: Record<string, LucideIcon> = {
   'trending-up': TrendingUp,
   'sliders': Sliders,
   'dollar-sign': DollarSign,
+  'file-text': FileText,
 }

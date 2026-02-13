@@ -979,17 +979,17 @@ Components with no icon changes (copy + minor path updates):
 - [x] `home/CTASection.tsx` — `"use client"`, `next/link`, 2× `<Link to=` → `<Link href=`
 - [x] `home/HomeTimeline.tsx` — `"use client"`, copy as-is (already uses refs + passive listeners), update import paths only
 - [x] Create `app/page.tsx` (server wrapper) + `app/HomeClient.tsx` (`"use client"`) — move Home page logic here. Replace `import { Link }` → `next/link`, 3× `to=` → `href=`. Replace static `US_MAP_SVG` import with dynamic `import('@/data/usMapSvg')` in `useEffect`. Replace `<i data-lucide="check">` with `<Check />`.
-- [ ] Git commit: `"Phase 5: Home page and components"`
+- [x] Git commit: `"Phase 5: Home page and components"`
 
 ### Phase 6: Subpages
 
-- [ ] **Jobseekers** — `app/jobseekers/page.tsx` (server) + `JobseekersClient.tsx` (`"use client"`). Convert `experienceCards` icons (`user-check`, `hand-helping`, `building`, `message-circle`) via `iconMap`. Convert 2 inline icons (`arrow-right`, `map-pin`). No `Link` changes needed.
-- [ ] **Employers** — `app/employers/page.tsx` (server) + `EmployersClient.tsx` (`"use client"`). Convert `roles` icons (9 icons: `briefcase`, `headphones`, `shopping-bag`, `utensils`, `shield`, `truck`, `wrench`, `heart`, `user`) via `iconMap`. Convert 3 inline icons (`arrow-right`, `phone`, `map-pin`). No `Link` changes needed.
-- [ ] **Partners** — `app/partners/page.tsx` (server) + `PartnersClient.tsx` (`"use client"`). Convert icons in 4 data arrays (`partnerTypes`, `serviceModelFeatures`, `whyAgenciesFeatures`, `performanceFeatures`) via `iconMap`. Convert 3 inline icons (`arrow-right` ×2, `file-text`). No `Link` changes needed.
-- [ ] **About** — `app/about/page.tsx` (server) + `AboutClient.tsx` (`"use client"`). Convert icons in 3 data arrays (`glanceItems`, `innovationItems`, `clientExperienceItems`) via `iconMap`. Convert 4 inline icons (`settings-2`, `flask-conical`, `arrow-right`, `file-text`). No `Link` changes needed.
-- [ ] **News** — `app/news/page.tsx` (server, calls `getNewsArticles()`, passes `articles` prop) + `app/news/NewsClient.tsx` (`"use client"`, receives `articles` as prop). Already uses `lucide-react` (`ExternalLink`). Add `useEffect`/`useRef`/IntersectionObserver logic.
-- [ ] **Events** — `app/events/page.tsx` (server, calls `getEvents()`, passes `events` prop) + `app/events/EventsClient.tsx` (`"use client"`, receives `events` as prop). Already uses `lucide-react` (`MapPin`, `Clock`, `ChevronDown`, `ArrowRight`). Convert 1 `<Link to="/jobseekers">` → `<Link href="/jobseekers">`. Import `parseEventContent` directly (pure function, no `fs`).
-- [ ] **404** — Create `app/not-found.tsx` with basic "Page Not Found" message and link to home
+- [x] **Jobseekers** — `app/jobseekers/page.tsx` (server) + `JobseekersClient.tsx` (`"use client"`). Convert `experienceCards` icons (`user-check`, `hand-helping`, `building`, `message-circle`) via `iconMap`. Convert 2 inline icons (`arrow-right`, `map-pin`). No `Link` changes needed.
+- [x] **Employers** — `app/employers/page.tsx` (server) + `EmployersClient.tsx` (`"use client"`). Convert `roles` icons (9 icons: `briefcase`, `headphones`, `shopping-bag`, `utensils`, `shield`, `truck`, `wrench`, `heart`, `user`) via `iconMap`. Convert 3 inline icons (`arrow-right`, `phone`, `map-pin`). No `Link` changes needed.
+- [x] **Partners** — `app/partners/page.tsx` (server) + `PartnersClient.tsx` (`"use client"`). Convert icons in 4 data arrays (`partnerTypes`, `serviceModelFeatures`, `whyAgenciesFeatures`, `performanceFeatures`) via `iconMap`. Convert 3 inline icons (`arrow-right` ×2, `file-text`). No `Link` changes needed.
+- [x] **About** — `app/about/page.tsx` (server) + `AboutClient.tsx` (`"use client"`). Convert icons in 3 data arrays (`glanceItems`, `innovationItems`, `clientExperienceItems`) via `iconMap`. Convert 4 inline icons (`settings-2`, `flask-conical`, `arrow-right`, `file-text`). No `Link` changes needed.
+- [x] **News** — `app/news/page.tsx` (server, calls `getNewsArticles()`, passes `articles` prop) + `app/news/NewsClient.tsx` (`"use client"`, receives `articles` as prop). Already uses `lucide-react` (`ExternalLink`). Add `useEffect`/`useRef`/IntersectionObserver logic.
+- [x] **Events** — `app/events/page.tsx` (server, calls `getEvents()`, passes `events` prop) + `app/events/EventsClient.tsx` (`"use client"`, receives `events` as prop). Already uses `lucide-react` (`MapPin`, `Clock`, `ChevronDown`, `ArrowRight`). Convert 1 `<Link to="/jobseekers">` → `<Link href="/jobseekers">`. Import `parseEventContent` directly (pure function, no `fs`).
+- [x] **404** — Create `app/not-found.tsx` with basic "Page Not Found" message and link to home
 - [ ] Git commit: `"Phase 6: All subpages — Jobseekers, Employers, Partners, About, News, Events, 404"`
 
 ### Phase 7: Build & Verify
