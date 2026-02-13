@@ -65,7 +65,7 @@ export default function HomeTimeline() {
 
     // Position timeline track and dots
     function positionDots() {
-      if (stepCards.length === 0) return;
+      if (stepCards.length === 0 || !track || !fill) return;
 
       const isMobile = window.innerWidth <= 1024;
       const firstCard = stepCards[0];
@@ -105,6 +105,7 @@ export default function HomeTimeline() {
 
     // Scroll-based fill
     function updateProgress() {
+      if (!track || !fill) return;
       const trackRect = track.getBoundingClientRect();
       const viewportCenter = window.innerHeight / 2;
       const trackHeight = track.offsetHeight;

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { ExternalLink } from 'lucide-react';
-import type { NewsArticle } from '@/utils/content';
+import type { NewsArticle } from '@/utils/content-shared';
 import CTASection from '@/components/home/CTASection';
 
 // NewsCard component

@@ -990,15 +990,15 @@ Components with no icon changes (copy + minor path updates):
 - [x] **News** — `app/news/page.tsx` (server, calls `getNewsArticles()`, passes `articles` prop) + `app/news/NewsClient.tsx` (`"use client"`, receives `articles` as prop). Already uses `lucide-react` (`ExternalLink`). Add `useEffect`/`useRef`/IntersectionObserver logic.
 - [x] **Events** — `app/events/page.tsx` (server, calls `getEvents()`, passes `events` prop) + `app/events/EventsClient.tsx` (`"use client"`, receives `events` as prop). Already uses `lucide-react` (`MapPin`, `Clock`, `ChevronDown`, `ArrowRight`). Convert 1 `<Link to="/jobseekers">` → `<Link href="/jobseekers">`. Import `parseEventContent` directly (pure function, no `fs`).
 - [x] **404** — Create `app/not-found.tsx` with basic "Page Not Found" message and link to home
-- [ ] Git commit: `"Phase 6: All subpages — Jobseekers, Employers, Partners, About, News, Events, 404"`
+- [x] Git commit: `"Phase 6: All subpages — Jobseekers, Employers, Partners, About, News, Events, 404"`
 
 ### Phase 7: Build & Verify
 
-- [ ] Run `next build` — fix any TypeScript or build errors
-- [ ] Run `npx serve out/` — verify static export serves correctly
-- [ ] Test all 7 routes load without errors: `/`, `/jobseekers`, `/employers`, `/partners`, `/about`, `/news`, `/events`
+- [x] Run `next build` — fix any TypeScript or build errors
+- [x] Run `npx serve out/` — verify static export serves correctly
+- [x] Test all 7 routes load without errors: `/`, `/jobseekers`, `/employers`, `/partners`, `/about`, `/news`, `/events`
 - [ ] Verify interactive features: nav scroll states, mobile menu open/close, FAQ accordion, case study tabs, scroll animations (`.is-visible`), timeline fill, US map rendering
-- [ ] Run `npx next lint` on relevant files, fix any lint errors
+- [x] Run `npx next lint` on relevant files, fix any lint errors (Next.js 16 removed `next lint` — TypeScript checked via `next build`)
 - [ ] Final git commit: `"Phase 7: Build verified, all routes working"`
 
 ---

@@ -2,36 +2,14 @@ import fs from 'fs'
 import path from 'path'
 import fm from 'front-matter'
 
+// Re-export types and pure functions from client-safe module
+export type { NewsArticle, EventItem } from './content-shared'
+export { parseEventContent } from './content-shared'
+
 const contentDir = path.join(process.cwd(), 'content')
 
-// Types for content
-export interface NewsArticle {
-  title: string;
-  source: string;
-  excerpt: string;
-  url: string;
-  linkText: string;
-  slug: string;
-}
-
-export interface EventItem {
-  title: string;
-  type: string;
-  category: string;
-  featured: boolean;
-  date: string;
-  month: string;
-  day: string;
-  year: string;
-  time: string;
-  location: string;
-  description: string;
-  content: string;
-  slug: string;
-}
-
 // Load all news articles from markdown files
-export function getNewsArticles(): NewsArticle[] {
+export function getNewsArticles() {
   const dir = path.join(contentDir, 'news')
   const files = fs.readdirSync(dir).filter(f => f.endsWith('.md')).sort()
 
@@ -51,7 +29,7 @@ export function getNewsArticles(): NewsArticle[] {
 }
 
 // Load all events from markdown files
-export function getEvents(): EventItem[] {
+export function getEvents() {
   const dir = path.join(contentDir, 'events')
   const files = fs.readdirSync(dir).filter(f => f.endsWith('.md')).sort()
 
@@ -75,21 +53,4 @@ export function getEvents(): EventItem[] {
       slug,
     }
   })
-}
-
-// Parse markdown content to HTML-ready structure (bullet points)
-export function parseEventContent(content: string): { intro: string; bullets: string[] } {
-  const lines = content.split('\n').filter(line => line.trim())
-  let intro = ''
-  const bullets: string[] = []
-
-  for (const line of lines) {
-    if (line.startsWith('- ')) {
-      bullets.push(line.substring(2).trim())
-    } else if (!bullets.length) {
-      intro += (intro ? ' ' : '') + line.trim()
-    }
-  }
-
-  return { intro, bullets }
 }

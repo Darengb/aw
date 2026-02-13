@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { MapPin, Clock, ChevronDown, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { parseEventContent } from '@/utils/content';
-import type { EventItem } from '@/utils/content';
+import { parseEventContent } from '@/utils/content-shared';
+import type { EventItem } from '@/utils/content-shared';
 
 type FilterCategory = 'all' | 'job-fair' | 'workshop';
 
