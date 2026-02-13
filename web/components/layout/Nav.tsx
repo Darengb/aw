@@ -28,7 +28,7 @@ export default function Nav() {
   }, [isMenuOpen])
 
   const navClasses = `navigation ${
-    scrollState === 'in-hero' ? 'scrolled' : ''
+    scrollState === 'in-hero' ? 'scrolled backdrop-blur-[12px]' : ''
   } ${scrollState === 'below-hero' ? 'below-hero' : ''}`
 
   const navLinks = [
@@ -44,7 +44,7 @@ export default function Nav() {
     <>
       <nav className={navClasses}>
         <div className="max-w-container mx-auto py-5 px-8 flex justify-between items-center">
-          <Link href="/" className="nav-logo flex items-center gap-3 font-crimson text-2xl font-semibold tracking-tight no-underline transition-opacity duration-200 hover:opacity-70">
+          <Link href="/" className="nav-logo flex items-center gap-3 font-crimson text-[1.15rem] md:text-2xl font-semibold tracking-tight no-underline transition-opacity duration-200 hover:opacity-70 whitespace-nowrap">
             <img src="/images/aw-logo-simple.png" alt="AW" className="h-10 w-auto block" />
             <span>AMERICA WORKS</span>
           </Link>
