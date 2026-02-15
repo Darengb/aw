@@ -2,12 +2,14 @@ export type ChatState =
   | 'ASK_SERVED_BEFORE'
   | 'ASK_CURRENTLY_SERVED'
   | 'COLLECT_NAME_PHONE'
+  | 'ASK_PROGRAM'
   | 'ASK_ENROLL'
   | 'ASK_STATE'
   | 'ASK_SSI_SSDI'
   | 'OUT_OF_AREA'
   | 'ASK_RESOURCE_NEEDS'
   | 'ASK_HELP'
+  | 'SMART_INTAKE'
   | 'DONE'
 
 export type InputType = 'buttons' | 'text' | 'form' | 'multi-select' | 'none'
@@ -15,15 +17,23 @@ export type InputType = 'buttons' | 'text' | 'form' | 'multi-select' | 'none'
 export interface ChatMemory {
   fullName?: string
   phone?: string
+  program?: string
   state?: string
   resourceNeeds?: string[]
   helpText?: string
+  webSearchActive?: boolean
+}
+
+export interface ChatMessage {
+  role: 'bot' | 'user'
+  text: string
 }
 
 export interface ChatRequest {
   state: ChatState
   memory: ChatMemory
   userText: string
+  messages?: ChatMessage[]
 }
 
 export interface ChatResponse {
@@ -33,6 +43,7 @@ export interface ChatResponse {
   inputType: InputType
   buttons?: ButtonOption[]
   formFields?: FormField[]
+  offerConnect?: boolean
 }
 
 export interface ButtonOption {

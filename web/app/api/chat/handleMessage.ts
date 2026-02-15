@@ -1,7 +1,7 @@
-import type { ChatState, ChatMemory, ChatResponse, ButtonOption, FormField } from './types'
+import type { ChatState, ChatMemory, ChatMessage, ChatResponse, ButtonOption, FormField } from './types'
 import { SIGNUP_FORM_URL } from './types'
 import { isBusinessHoursET, isFullServiceState, isValidPhone } from './utils'
-import { parseState, classifyAmericaWorksRelated, webSearchAnswer, webSearchResources } from './llm'
+import { parseState, classifyCaseSpecific, webSearchAnswer, smartIntakeChat, webSearchResources } from './llm'
 
 const YES_NO_NOTSURE: ButtonOption[] = [
   { label: 'Yes', value: 'yes' },
@@ -38,7 +38,7 @@ function reply(
   memory: ChatMemory,
   text: string,
   inputType: ChatResponse['inputType'],
-  options?: { buttons?: ButtonOption[]; formFields?: FormField[] }
+  options?: { buttons?: ButtonOption[]; formFields?: FormField[]; offerConnect?: boolean }
 ): ChatResponse {
   return {
     state,
@@ -47,13 +47,15 @@ function reply(
     inputType,
     buttons: options?.buttons,
     formFields: options?.formFields,
+    offerConnect: options?.offerConnect,
   }
 }
 
 export async function handleMessage(
   state: ChatState,
   memory: ChatMemory,
-  userText: string
+  userText: string,
+  messages: ChatMessage[] = []
 ): Promise<ChatResponse> {
   const val = userText.trim().toLowerCase()
 
@@ -67,7 +69,7 @@ export async function handleMessage(
       if (val === 'no' || val === 'not_sure') {
         return reply('ASK_ENROLL', memory, 'Are you looking to enroll in our services?', 'buttons', { buttons: YES_NO_NOTSURE })
       }
-      return reply('ASK_SERVED_BEFORE', memory, 'Have you ever been served by America Works before?', 'buttons', { buttons: YES_NO_NOTSURE })
+      return reply('ASK_SERVED_BEFORE', memory, 'Hi! I am here to help you. Before we start, I have a quick question: **Have you ever received services from America Works?**', 'buttons', { buttons: YES_NO_NOTSURE })
     }
 
     // ── ASK_CURRENTLY_SERVED ────────────────────────────────────────
@@ -91,9 +93,18 @@ export async function handleMessage(
       if (fullName && phone && isValidPhone(phone)) {
         memory.fullName = fullName
         memory.phone = phone
-        return reply('DONE', memory, `Thanks, ${fullName}. Someone will follow up with you if needed.`, 'none')
+        return reply('ASK_PROGRAM', memory, `Thanks, ${fullName}. What America Works program are you currently enrolled in?`, 'text')
       }
       return reply('COLLECT_NAME_PHONE', memory, 'Please share your full name and a phone number we can reach you at.', 'form', { formFields: NAME_PHONE_FIELDS })
+    }
+
+    // ── ASK_PROGRAM ───────────────────────────────────────────────
+    case 'ASK_PROGRAM': {
+      if (!userText.trim()) {
+        return reply('ASK_PROGRAM', memory, 'What America Works program are you currently enrolled in?', 'text')
+      }
+      memory.program = userText.trim()
+      return reply('ASK_HELP', memory, 'Got it. What can I help you with today?', 'text')
     }
 
     // ── ASK_ENROLL ──────────────────────────────────────────────────
@@ -101,8 +112,11 @@ export async function handleMessage(
       if (val === 'yes') {
         return reply('ASK_STATE', memory, 'What state do you live in?', 'text')
       }
-      if (val === 'no' || val === 'not_sure') {
+      if (val === 'no') {
         return reply('ASK_HELP', memory, 'What can I help you with today?', 'text')
+      }
+      if (val === 'not_sure') {
+        return reply('SMART_INTAKE', memory, 'No problem! Tell me a bit about your situation and what kind of help you\'re looking for, and I\'ll point you in the right direction.', 'text')
       }
       return reply('ASK_ENROLL', memory, 'Are you looking to enroll in our services?', 'buttons', { buttons: YES_NO_NOTSURE })
     }
@@ -185,8 +199,9 @@ export async function handleMessage(
       }
 
       memory.resourceNeeds = categories
-      const resources = await webSearchResources(memory.state ?? 'unknown', categories)
-      return reply('DONE', memory, resources, 'none')
+      memory.webSearchActive = true
+      const resources = await webSearchResources(memory.state ?? 'unknown', categories, messages)
+      return reply('ASK_HELP', memory, resources, 'text')
     }
 
     // ── ASK_HELP ────────────────────────────────────────────────────
@@ -195,35 +210,79 @@ export async function handleMessage(
         return reply('ASK_HELP', memory, 'What can I help you with today?', 'text')
       }
 
+      // Handle connect-to-support trigger from inline button
+      if (val === '__connect_to_support') {
+        if (isBusinessHoursET()) {
+          return reply('DONE', memory, '[Placeholder] I\'m connecting you with a team member now. A staff member will be in touch shortly.', 'none')
+        }
+        return reply('DONE', memory, '[Placeholder] Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. A team member will get in touch with you during the next business day.', 'none')
+      }
+
       memory.helpText = userText
-      const isAW = await classifyAmericaWorksRelated(userText)
+
+      // Once GPT-5.2 is engaged, skip the Nano classifier — GPT-5.2 handles
+      // reclassification via [HARD_HANDOFF] (immediate) or [OFFER_CONNECT] (soft)
+      if (memory.webSearchActive) {
+        const { text: answer, offerConnect, hardHandoff } = await webSearchAnswer(userText, messages, { program: memory.program })
+        if (hardHandoff) {
+          if (isBusinessHoursET()) {
+            return reply('DONE', memory, '[Placeholder] I\'m connecting you with a team member now. A staff member will be in touch shortly.', 'none')
+          }
+          return reply('DONE', memory, '[Placeholder] Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. A team member will get in touch with you during the next business day.', 'none')
+        }
+        return reply('ASK_HELP', memory, answer, 'text', { offerConnect })
+      }
+
+      // First message in ASK_HELP — use Nano classifier
+      const isAW = await classifyCaseSpecific(userText)
 
       if (isAW) {
         if (isBusinessHoursET()) {
-          return reply(
-            'DONE',
-            memory,
-            '[Placeholder] I\'m connecting you with a team member now. A staff member will be in touch shortly.',
-            'none'
-          )
+          return reply('DONE', memory, '[Placeholder] I\'m connecting you with a team member now. A staff member will be in touch shortly.', 'none')
         }
-        return reply(
-          'DONE',
-          memory,
-          '[Placeholder] Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. A team member will get in touch with you during the next business day.',
-          'none'
-        )
+        return reply('DONE', memory, '[Placeholder] Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. A team member will get in touch with you during the next business day.', 'none')
       }
 
-      // Not AW-related → web search
-      const answer = await webSearchAnswer(userText)
-      return reply('DONE', memory, answer, 'none')
+      // Not case-specific → web search; activate web search mode for subsequent messages
+      memory.webSearchActive = true
+      const { text: answer, offerConnect, hardHandoff } = await webSearchAnswer(userText, messages, { program: memory.program })
+      if (hardHandoff) {
+        if (isBusinessHoursET()) {
+          return reply('DONE', memory, '[Placeholder] I\'m connecting you with a team member now. A staff member will be in touch shortly.', 'none')
+        }
+        return reply('DONE', memory, '[Placeholder] Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. A team member will get in touch with you during the next business day.', 'none')
+      }
+      return reply('ASK_HELP', memory, answer, 'text', { offerConnect })
+    }
+
+    // ── SMART_INTAKE ──────────────────────────────────────────────
+    case 'SMART_INTAKE': {
+      if (!userText.trim()) {
+        return reply('SMART_INTAKE', memory, 'What can I help you with?', 'text')
+      }
+
+      // Handle connect-to-support trigger from inline button
+      if (val === '__connect_to_support') {
+        if (isBusinessHoursET()) {
+          return reply('DONE', memory, '[Placeholder] I\'m connecting you with a team member now. A staff member will be in touch shortly.', 'none')
+        }
+        return reply('DONE', memory, '[Placeholder] Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. A team member will get in touch with you during the next business day.', 'none')
+      }
+
+      const { text: intakeAnswer, offerConnect: intakeOffer, hardHandoff: intakeHardHandoff } = await smartIntakeChat(userText, messages)
+      if (intakeHardHandoff) {
+        if (isBusinessHoursET()) {
+          return reply('DONE', memory, '[Placeholder] I\'m connecting you with a team member now. A staff member will be in touch shortly.', 'none')
+        }
+        return reply('DONE', memory, '[Placeholder] Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. A team member will get in touch with you during the next business day.', 'none')
+      }
+      return reply('SMART_INTAKE', memory, intakeAnswer, 'text', { offerConnect: intakeOffer })
     }
 
     // ── DONE ────────────────────────────────────────────────────────
     case 'DONE': {
       if (val === 'start_over') {
-        return reply('ASK_SERVED_BEFORE', {}, 'Have you ever been served by America Works before?', 'buttons', { buttons: YES_NO_NOTSURE })
+        return reply('ASK_SERVED_BEFORE', {}, 'Hi! I am here to help you. Before we start, I have a quick question: **Have you ever received services from America Works?**', 'buttons', { buttons: YES_NO_NOTSURE })
       }
       return reply('DONE', memory, 'Is there anything else I can help with?', 'buttons', {
         buttons: [{ label: 'Start over', value: 'start_over' }],
@@ -231,6 +290,6 @@ export async function handleMessage(
     }
 
     default:
-      return reply('ASK_SERVED_BEFORE', {}, 'Have you ever been served by America Works before?', 'buttons', { buttons: YES_NO_NOTSURE })
+      return reply('ASK_SERVED_BEFORE', {}, 'Hi! I am here to help you. Before we start, I have a quick question: **Have you ever received services from America Works?**', 'buttons', { buttons: YES_NO_NOTSURE })
   }
 }

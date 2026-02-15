@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { MessageCircle, X, ArrowLeft } from 'lucide-react'
+import { MessageCircle, X, RotateCcw } from 'lucide-react'
 import type { ChatState, ChatMemory, InputType, ButtonOption, FormField } from '@/app/api/chat/types'
 import ChatMessage from './ChatMessage'
 import ChatInput from './ChatInput'
@@ -38,11 +38,12 @@ export default function ChatWidget() {
   const [chatState, setChatState] = useState<ChatState>('ASK_SERVED_BEFORE')
   const [memory, setMemory] = useState<ChatMemory>({})
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'bot', text: 'Have you ever been served by America Works before?' },
+    { role: 'bot', text: 'Hi! I am here to help you. Before we start, I have a quick question: **Have you ever received services from America Works?**' },
   ])
   const [currentInputType, setCurrentInputType] = useState<InputType>('buttons')
   const [currentButtons, setCurrentButtons] = useState<ButtonOption[] | undefined>(INITIAL_BUTTONS)
   const [currentFormFields, setCurrentFormFields] = useState<FormField[] | undefined>()
+  const [offerConnect, setOfferConnect] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [hydrated, setHydrated] = useState(false)
 
@@ -104,8 +105,12 @@ export default function ChatWidget() {
 
   const handleSend = useCallback(
     async (userText: string) => {
-      // Don't show user message for "start_over" in DONE state
-      const showUserMessage = chatState !== 'DONE' || userText !== 'start_over'
+      // Don't show user message for internal triggers
+      const showUserMessage =
+        userText !== '__connect_to_support' &&
+        (chatState !== 'DONE' || userText !== 'start_over')
+
+      setOfferConnect(false)
 
       // Map button values to display labels for user messages
       let displayText = userText
@@ -124,7 +129,7 @@ export default function ChatWidget() {
         const res = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ state: chatState, memory, userText }),
+          body: JSON.stringify({ state: chatState, memory, userText, messages }),
         })
 
         const data = await res.json()
@@ -141,6 +146,7 @@ export default function ChatWidget() {
           setCurrentInputType(data.inputType)
           setCurrentButtons(data.buttons)
           setCurrentFormFields(data.formFields)
+          setOfferConnect(!!data.offerConnect)
         }
       } catch {
         setMessages((prev) => [
@@ -168,7 +174,10 @@ export default function ChatWidget() {
         aria-label="Chat with us"
         title="Chat with us"
       >
-        <MessageCircle size={28} strokeWidth={2} />
+        <span className="chat-launcher-label">Chat with us</span>
+        <span className="chat-launcher-icon">
+          <MessageCircle size={28} strokeWidth={2} />
+        </span>
       </button>
     )
   }
@@ -179,15 +188,25 @@ export default function ChatWidget() {
       {/* Header */}
       <div className="chat-header">
         <button
-          className="chat-header-close sm:hidden"
-          onClick={() => setIsOpen(false)}
-          aria-label="Close chat"
+          className="chat-header-clear"
+          onClick={() => {
+            setChatState('ASK_SERVED_BEFORE')
+            setMemory({})
+            setMessages([{ role: 'bot', text: 'Hi! I am here to help you. Before we start, I have a quick question: **Have you ever received services from America Works?**' }])
+            setCurrentInputType('buttons')
+            setCurrentButtons(INITIAL_BUTTONS)
+            setCurrentFormFields(undefined)
+            setOfferConnect(false)
+          }}
+          aria-label="Clear chat"
+          title="Clear chat"
         >
-          <ArrowLeft size={20} />
+          <RotateCcw size={16} />
+          <span>Clear</span>
         </button>
         <span className="chat-header-title">America Works</span>
         <button
-          className="chat-header-close hidden sm:flex"
+          className="chat-header-close"
           onClick={() => setIsOpen(false)}
           aria-label="Close chat"
         >
@@ -200,6 +219,16 @@ export default function ChatWidget() {
         {messages.map((msg, i) => (
           <ChatMessage key={i} role={msg.role} text={msg.text} />
         ))}
+        {offerConnect && !isLoading && (
+          <div className="chat-message-row chat-message-row--bot">
+            <button
+              className="chat-connect-btn"
+              onClick={() => handleSend('__connect_to_support')}
+            >
+              Click here for live support
+            </button>
+          </div>
+        )}
         {isLoading && (
           <div className="chat-message-row chat-message-row--bot">
             <div className="chat-bubble chat-bubble--bot">

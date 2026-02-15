@@ -2826,23 +2826,50 @@
   bottom: 20px;
   right: 20px;
   z-index: 9999;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.chat-launcher:hover .chat-launcher-icon {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.chat-launcher:hover .chat-launcher-label {
+  transform: translateX(-4px);
+}
+
+.chat-launcher-label {
+  background: white;
+  color: #1a1a1a;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+  white-space: nowrap;
+  transition: transform 0.2s ease;
+}
+
+.chat-launcher-icon {
   width: 56px;
   height: 56px;
   border-radius: 50%;
   background: var(--aw-red);
   color: white;
-  border: none;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.chat-launcher:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  flex-shrink: 0;
 }
 
 /* Panel */
@@ -2904,6 +2931,26 @@
   font-size: 16px;
   flex: 1;
   text-align: center;
+}
+
+.chat-header-clear {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.chat-header-clear:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
 }
 
 .chat-header-close {
@@ -2987,6 +3034,29 @@
 
 .chat-bubble--user a {
   color: white;
+}
+
+/* Inline connect button */
+.chat-connect-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border: 1.5px solid rgb(31 41 55 / 10%);
+  border-radius: 16px;
+  background: #fff;
+  color: #1f2937;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: background 0.15s, color 0.15s;
+  margin-top: -4px;
+}
+
+.chat-connect-btn:hover {
+  background: #f3f4f6;
 }
 
 /* Typing indicator */
@@ -3097,7 +3167,7 @@
 .chat-text-field {
   flex: 1;
   padding: 10px 12px;
-  border: 1.5px solid #d1d5db;
+  border: 1.5px solid #9ca3af;
   border-radius: 12px;
   font-size: 14px;
   font-family: var(--font-body);

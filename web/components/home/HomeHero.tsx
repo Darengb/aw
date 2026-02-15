@@ -20,7 +20,7 @@ export default function HomeHero() {
 
           {/* Desktop CTA */}
           <div className="hero-ctas hidden md:flex gap-5">
-            <a href="#paths" className="btn-secondary"><span>Get Started</span></a>
+            <a href="#paths" className="btn-secondary text-white"><span>Get Started</span></a>
           </div>
         </div>
 
@@ -65,7 +65,7 @@ export default function HomeHero() {
 
         {/* Mobile CTA - shown below stats */}
         <div className="hero-ctas-mobile flex md:hidden gap-5 order-3 w-full">
-          <a href="#paths" className="btn-secondary w-full text-center justify-center"><span>Get Started</span></a>
+          <a href="#paths" className="btn-secondary text-white w-full text-center justify-center"><span>Get Started</span></a>
         </div>
       </div>
     </section>

@@ -416,7 +416,7 @@ Build a deterministic workflow chatbot (state machine) embedded as a floating wi
   - **Error handling:** temporarily break API key → verify friendly error message appears
   - **Session persistence:** start conversation → navigate to different page → return → conversation preserved
   - **"Start over":** reach DONE → click "Start over" → resets to beginning
-- [ ] Commit all chatbot work
+- [x] Commit all chatbot work
 
 ---
 

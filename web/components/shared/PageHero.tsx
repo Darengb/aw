@@ -41,7 +41,7 @@ export default function PageHero({
                 </a>
               )}
               {secondaryCta && (
-                <a href={secondaryCta.href} className="btn-secondary inline-flex items-center gap-2">
+                <a href={secondaryCta.href} className="btn-secondary text-white inline-flex items-center gap-2">
                   <span>{secondaryCta.label}</span>
                   <ChevronDown size={18} />
                 </a>
