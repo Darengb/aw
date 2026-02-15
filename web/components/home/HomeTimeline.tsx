@@ -200,7 +200,7 @@ export default function HomeTimeline() {
         </div>
 
         <div className="section-cta">
-          <a href="#jobseekers" className="btn-primary"><span>Join millions who found their path</span></a>
+          <a href="/jobseekers" className="btn-primary"><span>Join millions who found their path</span></a>
         </div>
       </div>
     </section>

@@ -346,7 +346,7 @@ export default function HomeClient() {
           </div>
 
           <div className="section-cta text-center">
-            <a href="#contact" className="btn-link inline-flex items-center gap-2 font-body text-sm font-semibold uppercase tracking-wider text-gray-900 no-underline transition-all duration-200 hover:text-aw-blue">Find your local office</a>
+            <a href="/contact" className="btn-link inline-flex items-center gap-2 font-body text-sm font-semibold uppercase tracking-wider text-gray-900 no-underline transition-all duration-200 hover:text-aw-blue">Find your local office</a>
             <p className="cta-subtext mt-3 text-sm text-gray-600">In-person and virtual services available</p>
           </div>
         </div>
@@ -393,7 +393,7 @@ export default function HomeClient() {
           </div>
 
           <div className="text-center mt-12">
-            <a href="#contact" className="btn-primary"><span>Schedule a partnership call</span></a>
+            <a href="/partners-form" className="btn-primary"><span>Schedule a partnership call</span></a>
           </div>
         </div>
       </section>
