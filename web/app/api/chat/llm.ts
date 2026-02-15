@@ -1,7 +1,11 @@
 import OpenAI from 'openai'
 import type { ChatMessage } from './types'
 
-const openai = new OpenAI()
+let _openai: OpenAI | null = null
+function getClient() {
+  if (!_openai) _openai = new OpenAI()
+  return _openai
+}
 
 // Convert recent chat history to OpenAI message format (last 10 messages max)
 function buildHistory(messages: ChatMessage[]): { role: 'user' | 'assistant'; content: string }[] {
@@ -12,7 +16,7 @@ function buildHistory(messages: ChatMessage[]): { role: 'user' | 'assistant'; co
 }
 
 export async function parseState(userText: string): Promise<string | null> {
-  const response = await openai.chat.completions.create({
+  const response = await getClient().chat.completions.create({
     model: 'gpt-5-nano',
     response_format: { type: 'json_object' },
     messages: [
@@ -39,7 +43,7 @@ export async function parseState(userText: string): Promise<string | null> {
 export async function classifyCaseSpecific(
   userText: string
 ): Promise<boolean> {
-  const response = await openai.chat.completions.create({
+  const response = await getClient().chat.completions.create({
     model: 'gpt-5-nano',
     response_format: { type: 'json_object' },
     messages: [
@@ -72,7 +76,7 @@ export async function webSearchAnswer(userText: string, messages: ChatMessage[] 
   const programContext = context?.program
     ? `\n\nUSER CONTEXT: This user is currently enrolled in the "${context.program}" program at America Works. Use this information to give them accurate, program-specific answers.`
     : ''
-  const response = await openai.responses.create({
+  const response = await getClient().responses.create({
     model: 'gpt-5.2',
     tools: [{ type: 'web_search_preview' }],
     input: [
@@ -121,7 +125,7 @@ export async function webSearchResources(
     : ''
 
   const history = buildHistory(messages)
-  const response = await openai.responses.create({
+  const response = await getClient().responses.create({
     model: 'gpt-5.2',
     tools: [{ type: 'web_search_preview' }],
     input: [
@@ -142,7 +146,7 @@ export async function webSearchResources(
 
 export async function smartIntakeChat(userText: string, messages: ChatMessage[] = []): Promise<WebSearchResult> {
   const history = buildHistory(messages)
-  const response = await openai.responses.create({
+  const response = await getClient().responses.create({
     model: 'gpt-5.2',
     tools: [{ type: 'web_search_preview' }],
     input: [
