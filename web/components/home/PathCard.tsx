@@ -53,7 +53,7 @@ export default function PathCard({
         {links.length === 1 ? (
           <Link
             href={links[0].href}
-            className="btn-link inline-flex items-center gap-2 font-body text-sm font-semibold uppercase tracking-wider text-gray-900 no-underline transition-all duration-200 hover:text-aw-blue"
+            className="btn-link"
           >
             {links[0].label}
           </Link>
@@ -63,7 +63,7 @@ export default function PathCard({
               <Link
                 key={index}
                 href={link.href}
-                className="btn-link inline-flex items-center gap-2 font-body text-sm font-semibold uppercase tracking-wider text-gray-900 no-underline transition-all duration-200 hover:text-aw-blue"
+                className="btn-link"
               >
                 {link.label}
               </Link>
