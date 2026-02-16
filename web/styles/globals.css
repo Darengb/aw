@@ -2336,35 +2336,59 @@
     /* Override original SVG colors */
     #us-coverage-map path.cls-1,
     #us-coverage-map path.cls-2 {
-      fill: var(--gray-100) !important;
-      stroke: var(--gray-300) !important;
+      fill: #c8c8c8 !important;
+      stroke: var(--gray-100) !important;
       stroke-width: 1px !important;
     }
 
-    /* Non-served states - Light grayscale */
+    /* Non-served states - lighter grey */
     #us-coverage-map path.state-inactive {
-      fill: var(--gray-100) !important;
-      stroke: var(--gray-300) !important;
+      fill: #c8c8c8 !important;
+      stroke: var(--gray-100) !important;
       stroke-width: 1px !important;
+      cursor: pointer;
     }
 
-    /* Served states - Darker grey */
+    /* Served states - darker grey */
     #us-coverage-map path.state-active {
-      fill: var(--gray-700) !important;
-      stroke: var(--gray-600) !important;
+      fill: #999 !important;
+      stroke: var(--gray-100) !important;
       stroke-width: 1px !important;
+      cursor: pointer;
     }
 
-    /* Inactive states - no hover effect */
-    #us-coverage-map path.state-inactive {
-      pointer-events: none;
-    }
-
-    /* Active states hover - AW blue */
+    /* Hover states */
     #us-coverage-map path.state-active:hover {
-      fill: var(--aw-blue) !important;
-      stroke: var(--aw-blue) !important;
-      stroke-width: 2px !important;
+      fill: #888 !important;
+    }
+
+    #us-coverage-map path.state-inactive:hover {
+      fill: #bbb !important;
+    }
+
+    /* Map tooltip */
+    .map-tooltip {
+      position: absolute;
+      pointer-events: none;
+      background: var(--gray-900);
+      color: var(--white);
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 0.5rem 0.875rem;
+      border-radius: 0;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+      z-index: 10;
+      transform: translate(-50%, -100%);
+      margin-top: -8px;
+    }
+
+    .map-tooltip.visible {
+      opacity: 1;
     }
 
     /* Map Legend */
@@ -2388,14 +2412,14 @@
     .legend-dot {
       width: 24px;
       height: 16px;
-      background: var(--gray-100);
-      border: 1px solid var(--gray-300);
+      background: #c8c8c8;
+      border: 1px solid #b0b0b0;
       border-radius: 2px;
     }
 
     .legend-dot.active {
-      background: var(--gray-700);
-      border-color: var(--gray-600);
+      background: #999;
+      border-color: #888;
     }
 
     .legend-item span {

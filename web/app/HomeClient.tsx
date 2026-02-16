@@ -245,13 +245,32 @@ export default function HomeClient() {
       svg.style.width = '100%';
       svg.style.height = 'auto';
 
+      const tooltip = document.getElementById('map-tooltip');
+
       svg.querySelectorAll('path').forEach((path) => {
         const originalClass = path.getAttribute('class');
-        if (originalClass && originalClass.includes('cls-1')) {
-          path.classList.add('state-active');
-        } else {
-          path.classList.add('state-inactive');
-        }
+        const isActive = originalClass && originalClass.includes('cls-1');
+        path.classList.add(isActive ? 'state-active' : 'state-inactive');
+
+        const label = isActive ? 'Local Programs + Ticket To Work' : 'Ticket To Work';
+
+        path.addEventListener('mouseenter', (e) => {
+          if (!tooltip) return;
+          tooltip.textContent = label;
+          tooltip.classList.add('visible');
+        });
+
+        path.addEventListener('mousemove', (e) => {
+          if (!tooltip) return;
+          const containerRect = container.getBoundingClientRect();
+          tooltip.style.left = `${e.clientX - containerRect.left}px`;
+          tooltip.style.top = `${e.clientY - containerRect.top}px`;
+        });
+
+        path.addEventListener('mouseleave', () => {
+          if (!tooltip) return;
+          tooltip.classList.remove('visible');
+        });
       });
 
       svg.querySelector('defs')?.remove();
@@ -333,13 +352,15 @@ export default function HomeClient() {
               {/* SVG will be loaded here by JavaScript */}
             </div>
 
+            <div className="map-tooltip" id="map-tooltip"></div>
+
             <div className="map-legend flex gap-10 justify-center mt-8 pt-8">
               <div className="legend-item">
                 <div className="legend-dot active"></div>
                 <span>Local Programs + Ticket To Work</span>
               </div>
               <div className="legend-item">
-                <div className="legend-dot bg-white border-2 border-gray-400"></div>
+                <div className="legend-dot"></div>
                 <span>Ticket To Work</span>
               </div>
             </div>
