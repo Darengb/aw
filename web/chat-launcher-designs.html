@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat Launcher — Design Variations</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C81E2D;
+    --red-dark: #a81825;
+    --red-light: #e8354a;
+    --bg: #f0efec;
+    --card-bg: #fafaf9;
+    --text: #1a1a1a;
+    --text-muted: #6b6b6b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 40px 32px 80px;
+    min-height: 100vh;
+  }
+
+  .page-header {
+    max-width: 900px;
+    margin: 0 auto 48px;
+    text-align: center;
+  }
+
+  .page-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+
+  .page-header p {
+    color: var(--text-muted);
+    font-size: 15px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 580px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .card-label {
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .card-label span {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+  }
+
+  .card-label h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  /* Each preview simulates a mini page corner */
+  .preview {
+    position: relative;
+    height: 220px;
+    background: linear-gradient(135deg, #ffffff 0%, #f7f7f5 100%);
+    overflow: hidden;
+  }
+
+  /* Fake page content lines */
+  .preview::before {
+    content: '';
+    position: absolute;
+    top: 24px; left: 24px; right: 80px;
+    height: 8px;
+    background: rgba(0,0,0,0.06);
+    border-radius: 4px;
+    box-shadow:
+      0 18px 0 rgba(0,0,0,0.04),
+      0 36px 0 rgba(0,0,0,0.03),
+      0 54px 0 rgba(0,0,0,0.04),
+      -20px 72px 0 rgba(0,0,0,0.03);
+  }
+
+  /* Chat icon SVG for reuse */
+  .chat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .chat-icon svg {
+    fill: none;
+    stroke: white;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ─── Variation 1: Compact Pill ─── */
+  .v1-launcher {
+    position: absolute;
+    bottom: 20px; right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--red);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 20px 12px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(200, 30, 45, 0.35), 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .v1-launcher:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(200, 30, 45, 0.4), 0 3px 8px rgba(0,0,0,0.1);
+  }
+
+  .v1-launcher svg { width: 20px; height: 20px; }
+
+  /* ─── Variation 2: Rounded Square Stack ─── */
+  .v2-launcher {
+    position: absolute;
+    bottom: 20px; right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: var(--red);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    padding: 14px 18px 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(200, 30, 45, 0.35), 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .v2-launcher:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(200, 30, 45, 0.4), 0 3px 8px rgba(0,0,0,0.1);
+  }
+
+  .v2-launcher svg { width: 24px; height: 24px; }
+
+  /* ─── Variation 3: Wide Pill ─── */
+  .v3-launcher {
+    position: absolute;
+    bottom: 20px; right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--red);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 22px 12px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(200, 30, 45, 0.35), 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .v3-launcher:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(200, 30, 45, 0.4), 0 3px 8px rgba(0,0,0,0.1);
+  }
+
+  .v3-launcher .icon-wrap {
+    width: 32px; height: 32px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .v3-launcher svg { width: 18px; height: 18px; }
+
+  /* ─── Variation 4: Circle + Floating Label ─── */
+  .v4-launcher {
+    position: absolute;
+    bottom: 20px; right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .v4-label {
+    background: white;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06);
+    white-space: nowrap;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .v4-circle {
+    width: 52px; height: 52px;
+    background: var(--red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(200, 30, 45, 0.35), 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .v4-launcher:hover .v4-circle {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(200, 30, 45, 0.4);
+  }
+
+  .v4-launcher:hover .v4-label {
+    transform: translateX(-4px);
+  }
+
+  .v4-circle svg { width: 24px; height: 24px; }
+
+  /* ─── Variation 5: Expand on Hover ─── */
+  .v5-launcher {
+    position: absolute;
+    bottom: 20px; right: 20px;
+    display: flex;
+    align-items: center;
+    background: var(--red);
+    color: white;
+    border: none;
+    border-radius: 28px;
+    padding: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(200, 30, 45, 0.35), 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+    max-width: 56px;
+    transition: max-width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                padding 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .v5-launcher svg {
+    width: 28px; height: 28px;
+    flex-shrink: 0;
+  }
+
+  .v5-launcher span {
+    opacity: 0;
+    margin-left: 0;
+    transition: opacity 0.2s ease 0s, margin-left 0.3s ease;
+  }
+
+  .v5-launcher:hover {
+    max-width: 200px;
+    padding: 14px 22px 14px 16px;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(200, 30, 45, 0.4);
+  }
+
+  .v5-launcher:hover span {
+    opacity: 1;
+    margin-left: 10px;
+    transition: opacity 0.25s ease 0.1s, margin-left 0.3s ease;
+  }
+
+  /* ─── Variation 6: Stacked Vertical Capsule ─── */
+  .v6-launcher {
+    position: absolute;
+    bottom: 20px; right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    background: var(--red);
+    color: white;
+    border: none;
+    border-radius: 28px;
+    padding: 16px 14px 12px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(200, 30, 45, 0.35), 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .v6-launcher:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(200, 30, 45, 0.4), 0 3px 8px rgba(0,0,0,0.1);
+  }
+
+  .v6-launcher svg { width: 24px; height: 24px; }
+
+  .v6-launcher span {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Chat Launcher — Design Variations</h1>
+  <p>6 options for the collapsed chat widget button. Hover each to see interaction.</p>
+</div>
+
+<div class="grid">
+
+  <!-- 1: Compact Pill -->
+  <div class="card">
+    <div class="card-label">
+      <span>Variation 1</span>
+      <h3>Compact Pill</h3>
+    </div>
+    <div class="preview">
+      <button class="v1-launcher">
+        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        Chat
+      </button>
+    </div>
+  </div>
+
+  <!-- 2: Rounded Square Stack -->
+  <div class="card">
+    <div class="card-label">
+      <span>Variation 2</span>
+      <h3>Rounded Square</h3>
+    </div>
+    <div class="preview">
+      <button class="v2-launcher">
+        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        Chat with us
+      </button>
+    </div>
+  </div>
+
+  <!-- 3: Wide Pill with Icon Circle -->
+  <div class="card">
+    <div class="card-label">
+      <span>Variation 3</span>
+      <h3>Wide Pill + Icon Circle</h3>
+    </div>
+    <div class="preview">
+      <button class="v3-launcher">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        Chat with us
+      </button>
+    </div>
+  </div>
+
+  <!-- 4: Circle + Floating Label -->
+  <div class="card">
+    <div class="card-label">
+      <span>Variation 4</span>
+      <h3>Circle + Floating Label</h3>
+    </div>
+    <div class="preview">
+      <button class="v4-launcher">
+        <div class="v4-label">Chat with us</div>
+        <div class="v4-circle">
+          <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- 5: Expand on Hover -->
+  <div class="card">
+    <div class="card-label">
+      <span>Variation 5</span>
+      <h3>Expand on Hover</h3>
+    </div>
+    <div class="preview">
+      <button class="v5-launcher">
+        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <span>Chat with us</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 6: Vertical Capsule -->
+  <div class="card">
+    <div class="card-label">
+      <span>Variation 6</span>
+      <h3>Vertical Capsule</h3>
+    </div>
+    <div class="preview">
+      <button class="v6-launcher">
+        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <span>Chat</span>
+      </button>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
