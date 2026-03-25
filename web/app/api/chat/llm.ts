@@ -91,7 +91,7 @@ STYLE: The user is often from a less educated population. Write at a 6th-grade r
 
 HANDOFF SIGNALS (use at most one, on its own line at the end of your response):
 - [OFFER_CONNECT] — The user might benefit from speaking with America Works staff (e.g. their situation is complex, they are in crisis, or their question touches on AW services). This shows them a button to connect. Only include when genuinely appropriate — not for simple factual questions.
-- [HARD_HANDOFF] — The user is asking about their specific case, account, caseworker, appointment, or enrollment with America Works — something only an AW staff member can answer. This ends your conversation and immediately routes them to staff. Only use this when you cannot help and a staff member is the only option.` + programContext,
+- [HARD_HANDOFF] — The user is asking about their specific case, account, caseworker, appointment, or enrollment with America Works — something only an AW staff member can answer — OR the user is explicitly asking to speak with a person / talk to someone / get live support. This ends your conversation and immediately routes them to staff.` + programContext,
       },
       ...history,
       { role: 'user', content: userText },
@@ -177,7 +177,7 @@ STYLE: The user is often from a less educated population. Write at a 6th-grade r
 
 HANDOFF SIGNALS (use at most one, on its own line at the end of your response):
 - [OFFER_CONNECT] — The user might benefit from speaking with America Works staff (e.g. their situation is complex, they are in crisis, or their question touches on AW services). This shows them a button to connect.
-- [HARD_HANDOFF] — The user is asking about their specific case, account, caseworker, appointment, or enrollment with America Works — something only an AW staff member can answer. This immediately routes them to staff.`,
+- [HARD_HANDOFF] — The user is asking about their specific case, account, caseworker, appointment, or enrollment with America Works — something only an AW staff member can answer — OR the user is explicitly asking to speak with a person / talk to someone / get live support. This immediately routes them to staff.`,
       },
       ...history,
       { role: 'user', content: userText },
