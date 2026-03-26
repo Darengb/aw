@@ -9,7 +9,8 @@
  *   - UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN set in .env.local
  */
 
-import 'dotenv/config'
+import dotenv from 'dotenv'
+dotenv.config({ path: '.env.local' })
 import { Redis } from '@upstash/redis'
 
 const TENANT_ID = process.env.TEAMS_TENANT_ID!
@@ -51,6 +52,9 @@ async function main() {
   // Step 2: Poll for token
   const pollInterval = (interval ?? 5) * 1000
   const expiresAt = Date.now() + (expires_in ?? 900) * 1000
+
+  const clientSecret = process.env.TEAMS_CLIENT_SECRET
+  console.log(`Client secret loaded: ${clientSecret ? 'yes (' + clientSecret.length + ' chars)' : 'NO — MISSING'}`)
 
   while (Date.now() < expiresAt) {
     await new Promise((r) => setTimeout(r, pollInterval))

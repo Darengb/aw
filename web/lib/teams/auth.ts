@@ -2,7 +2,6 @@ import { redis } from './redis'
 
 const TENANT_ID = process.env.TEAMS_TENANT_ID!
 const CLIENT_ID = process.env.TEAMS_CLIENT_ID!
-const CLIENT_SECRET = process.env.TEAMS_CLIENT_SECRET!
 
 const TOKEN_URL = `https://login.microsoftonline.com/${TENANT_ID}/oauth2/v2.0/token`
 
@@ -32,7 +31,6 @@ export async function getAccessToken(): Promise<string> {
   const body = new URLSearchParams({
     grant_type: 'refresh_token',
     client_id: CLIENT_ID,
-    client_secret: CLIENT_SECRET,
     scope: 'https://graph.microsoft.com/.default offline_access',
     refresh_token: refreshToken,
   })
