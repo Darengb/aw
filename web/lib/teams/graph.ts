@@ -1,5 +1,5 @@
-import { getAccessToken } from './auth'
-import { htmlToText } from './utils'
+import { getAccessToken, getServiceAccountUserId } from './auth'
+import { htmlToText, escapeHtml } from './utils'
 import type { ChatMemory, ChatMessage } from '@/app/api/chat/types'
 
 const TEAM_ID = process.env.TEAMS_TEAM_ID!
@@ -33,7 +33,7 @@ async function graphFetch(url: string, options: RequestInit = {}): Promise<Respo
 function buildTranscript(messages: ChatMessage[]): string {
   return messages
     .slice(-20)
-    .map((m) => `<b>${m.role === 'user' ? 'User' : 'Bot'}:</b> ${m.text}`)
+    .map((m) => `<b>${m.role === 'user' ? 'User' : 'Bot'}:</b> ${escapeHtml(m.text)}`)
     .join('<br/>')
 }
 
@@ -83,7 +83,7 @@ export async function postReply(
     body: JSON.stringify({
       body: {
         contentType: 'html',
-        content: `<b>${senderLabel}:</b> ${text}`,
+        content: `<b>${escapeHtml(senderLabel)}:</b> ${escapeHtml(text)}`,
       },
     }),
   })
@@ -101,18 +101,14 @@ export async function getReplies(
   const res = await graphFetch(url)
   const data = await res.json()
 
-  const serviceUsername = process.env.TEAMS_USERNAME?.split('@')[0]?.toLowerCase() ?? ''
+  // Get the service account's user ID to filter out forwarded messages
+  const serviceUserId = await getServiceAccountUserId()
 
   const replies: TeamsReply[] = []
   for (const msg of data.value ?? []) {
     // Skip messages from the service account (these are forwarded user messages)
-    const displayName: string = msg.from?.user?.displayName ?? ''
-    const email: string = msg.from?.user?.email ?? ''
-    if (
-      email.toLowerCase().startsWith(serviceUsername) ||
-      displayName.toLowerCase().includes('website') ||
-      displayName.toLowerCase().includes('chatbot')
-    ) {
+    const senderId: string = msg.from?.user?.id ?? ''
+    if (serviceUserId && senderId === serviceUserId) {
       continue
     }
 
@@ -124,7 +120,7 @@ export async function getReplies(
     replies.push({
       id: msg.id,
       text: htmlToText(msg.body?.content ?? ''),
-      from: displayName || 'Support Agent',
+      from: (msg.from?.user?.displayName as string) || 'Support Agent',
       createdDateTime: msg.createdDateTime,
     })
   }
