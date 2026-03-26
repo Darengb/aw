@@ -139,14 +139,14 @@ ROPC auth fails because the Azure AD tenant requires MFA for the service account
 
 ### 6.1 Add Upstash Redis
 
-- [ ] Install `@upstash/redis` in `web/package.json`
-- [ ] Create an Upstash Redis database at [upstash.com](https://upstash.com) (free tier: 10K commands/day)
-- [ ] Add env vars to `web/.env.local` and Vercel dashboard:
+- [x] Install `@upstash/redis` in `web/package.json`
+- [ ] Create an Upstash Redis database (manual step) at [upstash.com](https://upstash.com) (free tier: 10K commands/day)
+- [x] Add env vars to `web/.env.local` and Vercel dashboard:
   ```
   UPSTASH_REDIS_REST_URL=<from upstash dashboard>
   UPSTASH_REDIS_REST_TOKEN=<from upstash dashboard>
   ```
-- [ ] Create `web/lib/teams/redis.ts` — thin wrapper around Upstash client:
+- [x] Create `web/lib/teams/redis.ts` — thin wrapper around Upstash client:
   ```typescript
   import { Redis } from '@upstash/redis'
   export const redis = new Redis({
@@ -157,7 +157,7 @@ ROPC auth fails because the Azure AD tenant requires MFA for the service account
 
 ### 6.2 One-time OAuth setup endpoint
 
-- [ ] Create `web/app/api/chat/teams-auth/route.ts` — two handlers:
+- [x] Create `web/app/api/chat/teams-auth/route.ts` — two handlers:
 
   **GET `/api/chat/teams-auth`** — Redirects to Microsoft's authorization page:
   ```
@@ -182,7 +182,7 @@ ROPC auth fails because the Azure AD tenant requires MFA for the service account
 
 ### 6.3 Rewrite `web/lib/teams/auth.ts`
 
-- [ ] Replace ROPC flow with refresh token flow:
+- [x] Replace ROPC flow with refresh token flow:
 
   **`getAccessToken(): Promise<string>`**
   1. Check Redis for `teams:access_token`. If present and not expired, return it.
