@@ -7,13 +7,12 @@ The website chatbot has 12 `[Placeholder]` handoff messages (6 during-hours + 6 
 ## Architecture
 
 - **Teams channel threads** via Microsoft Graph API (one thread per escalation)
-- **ROPC OAuth** with the service account (username/password available, no interactive sign-in needed)
-- **In-memory token cache** (module-level variable, re-authenticates on serverless cold start)
+- **Delegated OAuth** with a service account — one-time interactive sign-in (authorization code flow), then refresh token for ongoing access
+- **Upstash Redis** — stores refresh token, access token cache, and service account user ID. Required because delegated permissions need a signed-in user context and refresh tokens must persist across serverless cold starts.
 - **Client-side state** — conversation mapping (`conversationId`, `rootMessageId`) lives in `ChatMemory` on the client, sent with each request
 - **Client-side polling** (3s interval) for agent replies — polls Graph API directly via our API route
-- **No Redis/KV** — low volume expected. Polling hits Graph directly each time. If volume grows or we want webhooks, add Upstash Redis later (see Future section).
 
-> **Future: Redis + Webhooks.** If we need to reduce Graph API calls or add webhook-driven reply delivery, add Upstash Redis to buffer replies and store reverse thread→conversation mappings. This also enables an admin dashboard for monitoring active sessions.
+> **Future: Webhooks.** If we need to reduce Graph API calls, add webhook-driven reply delivery by subscribing to channel message notifications and buffering replies in Redis. This also enables an admin dashboard for monitoring active sessions.
 
 ## Implementation Order
 
@@ -125,6 +124,110 @@ Response: { replies: [{ text, from, timestamp }] }
 | `web/app/api/chat/handleMessage.ts` | Replace 12 placeholder lines, add LIVE_SUPPORT handler |
 | `web/app/api/chat/route.ts` | Escalation orchestration + Teams message forwarding |
 | `web/components/chat/ChatWidget.tsx` | Polling loop, live support UI, session persistence |
+
+---
+
+## Phase 6: Fix Auth — Switch from ROPC to Authorization Code Flow
+
+ROPC auth fails because the Azure AD tenant requires MFA for the service account. The original spec (`/aw/credentials/chatbot.md`) correctly called for a one-time interactive sign-in with refresh token storage. This phase brings the implementation in line with that spec.
+
+### What needs to change
+
+**Problem:** ROPC (`grant_type=password`) is blocked by MFA. We need `grant_type=authorization_code` for the initial login, then `grant_type=refresh_token` for ongoing access.
+
+**Solution:** One-time interactive OAuth login → store refresh token in Upstash Redis → use refresh token to get access tokens silently.
+
+### 6.1 Add Upstash Redis
+
+- [ ] Install `@upstash/redis` in `web/package.json`
+- [ ] Create an Upstash Redis database at [upstash.com](https://upstash.com) (free tier: 10K commands/day)
+- [ ] Add env vars to `web/.env.local` and Vercel dashboard:
+  ```
+  UPSTASH_REDIS_REST_URL=<from upstash dashboard>
+  UPSTASH_REDIS_REST_TOKEN=<from upstash dashboard>
+  ```
+- [ ] Create `web/lib/teams/redis.ts` — thin wrapper around Upstash client:
+  ```typescript
+  import { Redis } from '@upstash/redis'
+  export const redis = new Redis({
+    url: process.env.UPSTASH_REDIS_REST_URL!,
+    token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+  })
+  ```
+
+### 6.2 One-time OAuth setup endpoint
+
+- [ ] Create `web/app/api/chat/teams-auth/route.ts` — two handlers:
+
+  **GET `/api/chat/teams-auth`** — Redirects to Microsoft's authorization page:
+  ```
+  https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize?
+    client_id={clientId}
+    &response_type=code
+    &redirect_uri={our callback URL}
+    &scope=ChannelMessage.Send ChannelMessage.Read.All offline_access
+    &state={random CSRF token}
+  ```
+  The `offline_access` scope is required to receive a refresh token.
+
+  **GET `/api/chat/teams-auth/callback/route.ts`** — Handles the OAuth callback:
+  1. Receive `code` query parameter from Microsoft
+  2. Exchange code for tokens: POST to token endpoint with `grant_type=authorization_code`
+  3. Store `refresh_token` in Redis key `teams:refresh_token`
+  4. Store `access_token` in Redis key `teams:access_token` with TTL matching `expires_in`
+  5. Extract `oid` (user ID) from the access token JWT, store in Redis key `teams:user_id`
+  6. Return a success page: "Teams auth complete. You can close this tab."
+
+  This endpoint is only used once during setup (and again if the refresh token expires after ~90 days).
+
+### 6.3 Rewrite `web/lib/teams/auth.ts`
+
+- [ ] Replace ROPC flow with refresh token flow:
+
+  **`getAccessToken(): Promise<string>`**
+  1. Check Redis for `teams:access_token`. If present and not expired, return it.
+  2. If expired/missing, read `teams:refresh_token` from Redis.
+  3. POST to token endpoint with `grant_type=refresh_token`, the refresh token, client_id, client_secret, scope.
+  4. Microsoft returns a new access token AND a new refresh token (token rotation).
+  5. Store the new `access_token` in Redis with TTL.
+  6. Store the new `refresh_token` in Redis (overwriting the old one).
+  7. Return the access token.
+  8. If no refresh token exists in Redis, throw an error with a message: "Teams auth not configured. Visit /api/chat/teams-auth to set up."
+
+  **`getServiceAccountUserId(): Promise<string>`**
+  - Read `teams:user_id` from Redis (stored during the OAuth callback).
+
+  Remove: `TEAMS_USERNAME` and `TEAMS_PASSWORD` env vars (no longer needed).
+
+### 6.4 Setup procedure
+
+1. Ensure env vars are set: `TEAMS_TENANT_ID`, `TEAMS_CLIENT_ID`, `TEAMS_CLIENT_SECRET`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`
+2. In Azure Portal, add a redirect URI to the app registration: `http://localhost:3002/api/chat/teams-auth/callback` (local) and `https://americaworks.com/api/chat/teams-auth/callback` (production)
+3. Visit `http://localhost:3002/api/chat/teams-auth` in a browser
+4. Sign in as `websitechatbot@americaworks.com`, complete MFA
+5. Callback stores tokens in Redis
+6. Live support is now operational — refresh token auto-renews on each use
+
+### Files changed
+
+| File | Action |
+|------|--------|
+| `web/package.json` | Add `@upstash/redis` |
+| `web/lib/teams/redis.ts` | New — Upstash Redis client |
+| `web/lib/teams/auth.ts` | Rewrite — refresh token flow instead of ROPC |
+| `web/app/api/chat/teams-auth/route.ts` | New — OAuth redirect to Microsoft login |
+| `web/app/api/chat/teams-auth/callback/route.ts` | New — OAuth callback, stores tokens in Redis |
+
+### Env var changes
+
+| Variable | Status |
+|----------|--------|
+| `TEAMS_USERNAME` | Remove (no longer needed) |
+| `TEAMS_PASSWORD` | Remove (no longer needed) |
+| `UPSTASH_REDIS_REST_URL` | Add |
+| `UPSTASH_REDIS_REST_TOKEN` | Add |
+
+---
 
 ## Verification
 
