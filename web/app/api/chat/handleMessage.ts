@@ -213,9 +213,9 @@ export async function handleMessage(
       // Handle connect-to-support trigger from inline button
       if (val === '__connect_to_support') {
         if (isBusinessHoursET()) {
-          return reply('DONE', memory, '[Placeholder] I\'m connecting you with a team member now. A staff member will be in touch shortly.', 'none')
+          return reply('LIVE_SUPPORT', memory, 'I\'m connecting you with a team member now. You\'ll see their responses here shortly.', 'text')
         }
-        return reply('DONE', memory, '[Placeholder] Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. A team member will get in touch with you during the next business day.', 'none')
+        return reply('LIVE_SUPPORT', memory, 'Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. Your message has been sent to our team and someone will respond during the next business day.', 'text')
       }
 
       memory.helpText = userText
@@ -226,9 +226,9 @@ export async function handleMessage(
         const { text: answer, offerConnect, hardHandoff } = await webSearchAnswer(userText, messages, { program: memory.program })
         if (hardHandoff) {
           if (isBusinessHoursET()) {
-            return reply('DONE', memory, '[Placeholder] I\'m connecting you with a team member now. A staff member will be in touch shortly.', 'none')
+            return reply('LIVE_SUPPORT', memory, 'I\'m connecting you with a team member now. You\'ll see their responses here shortly.', 'text')
           }
-          return reply('DONE', memory, '[Placeholder] Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. A team member will get in touch with you during the next business day.', 'none')
+          return reply('LIVE_SUPPORT', memory, 'Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. Your message has been sent to our team and someone will respond during the next business day.', 'text')
         }
         return reply('ASK_HELP', memory, answer, 'text', { offerConnect })
       }
@@ -238,9 +238,9 @@ export async function handleMessage(
 
       if (isAW) {
         if (isBusinessHoursET()) {
-          return reply('DONE', memory, '[Placeholder] I\'m connecting you with a team member now. A staff member will be in touch shortly.', 'none')
+          return reply('LIVE_SUPPORT', memory, 'I\'m connecting you with a team member now. You\'ll see their responses here shortly.', 'text')
         }
-        return reply('DONE', memory, '[Placeholder] Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. A team member will get in touch with you during the next business day.', 'none')
+        return reply('LIVE_SUPPORT', memory, 'Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. Your message has been sent to our team and someone will respond during the next business day.', 'text')
       }
 
       // Not case-specific → web search; activate web search mode for subsequent messages
@@ -248,9 +248,9 @@ export async function handleMessage(
       const { text: answer, offerConnect, hardHandoff } = await webSearchAnswer(userText, messages, { program: memory.program })
       if (hardHandoff) {
         if (isBusinessHoursET()) {
-          return reply('DONE', memory, '[Placeholder] I\'m connecting you with a team member now. A staff member will be in touch shortly.', 'none')
+          return reply('LIVE_SUPPORT', memory, 'I\'m connecting you with a team member now. You\'ll see their responses here shortly.', 'text')
         }
-        return reply('DONE', memory, '[Placeholder] Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. A team member will get in touch with you during the next business day.', 'none')
+        return reply('LIVE_SUPPORT', memory, 'Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. Your message has been sent to our team and someone will respond during the next business day.', 'text')
       }
       return reply('ASK_HELP', memory, answer, 'text', { offerConnect })
     }
@@ -264,19 +264,28 @@ export async function handleMessage(
       // Handle connect-to-support trigger from inline button
       if (val === '__connect_to_support') {
         if (isBusinessHoursET()) {
-          return reply('DONE', memory, '[Placeholder] I\'m connecting you with a team member now. A staff member will be in touch shortly.', 'none')
+          return reply('LIVE_SUPPORT', memory, 'I\'m connecting you with a team member now. You\'ll see their responses here shortly.', 'text')
         }
-        return reply('DONE', memory, '[Placeholder] Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. A team member will get in touch with you during the next business day.', 'none')
+        return reply('LIVE_SUPPORT', memory, 'Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. Your message has been sent to our team and someone will respond during the next business day.', 'text')
       }
 
       const { text: intakeAnswer, offerConnect: intakeOffer, hardHandoff: intakeHardHandoff } = await smartIntakeChat(userText, messages)
       if (intakeHardHandoff) {
         if (isBusinessHoursET()) {
-          return reply('DONE', memory, '[Placeholder] I\'m connecting you with a team member now. A staff member will be in touch shortly.', 'none')
+          return reply('LIVE_SUPPORT', memory, 'I\'m connecting you with a team member now. You\'ll see their responses here shortly.', 'text')
         }
-        return reply('DONE', memory, '[Placeholder] Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. A team member will get in touch with you during the next business day.', 'none')
+        return reply('LIVE_SUPPORT', memory, 'Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. Your message has been sent to our team and someone will respond during the next business day.', 'text')
       }
       return reply('SMART_INTAKE', memory, intakeAnswer, 'text', { offerConnect: intakeOffer })
+    }
+
+    // ── LIVE_SUPPORT ─────────────────────────────────────────────────
+    case 'LIVE_SUPPORT': {
+      if (val === 'start_over') {
+        return reply('ASK_SERVED_BEFORE', {}, 'Hi! I am here to help you. Before we start, I have a quick question: **Have you ever received services from America Works?**', 'buttons', { buttons: YES_NO_NOTSURE })
+      }
+      // User text is forwarded to Teams by the API route; return empty reply
+      return reply('LIVE_SUPPORT', memory, '', 'text')
     }
 
     // ── DONE ────────────────────────────────────────────────────────

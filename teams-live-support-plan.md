@@ -19,7 +19,7 @@ The website chatbot has 12 `[Placeholder]` handoff messages (6 during-hours + 6 
 
 ### Phase 1: Infrastructure
 
-- [ ] **1.1 Environment variables** (`web/.env.local` + Vercel dashboard)
+- [x] **1.1 Environment variables** (`web/.env.local` + Vercel dashboard)
 ```
 TEAMS_TENANT_ID=9b2fe9f2-3bf0-46bb-ab42-2256d42b7ec0
 TEAMS_CLIENT_ID=18a17fe4-129b-4682-9868-40de8b6f8d3d
@@ -36,30 +36,30 @@ No external dependencies to install. No KV store to provision.
 
 ### Phase 2: Teams Graph Client (new files)
 
-- [ ] **2.1 `web/lib/teams/auth.ts`** — OAuth token management
+- [x] **2.1 `web/lib/teams/auth.ts`** — OAuth token management
   - `getAccessToken(): Promise<string>`
   - ROPC flow: POST to `login.microsoftonline.com/{tenantId}/oauth2/v2.0/token` with `grant_type=password`, username, password, client_id, client_secret, scope=`https://graph.microsoft.com/.default`
   - Module-level in-memory cache: `{ accessToken, expiresAt }`. If token is valid (with 5-min buffer), return cached. Otherwise re-authenticate.
   - On serverless cold start, token is re-fetched on first request — acceptable for low volume.
 
-- [ ] **2.2 `web/lib/teams/graph.ts`** — Graph API calls
+- [x] **2.2 `web/lib/teams/graph.ts`** — Graph API calls
   - `createThread(conversationId, summary, memory): Promise<string>` — POST `/teams/{teamId}/channels/{channelId}/messages`, returns rootMessageId. Body: HTML with conversation ID, user name/phone, program, state, transcript.
   - `postReply(rootMessageId, senderLabel, text): Promise<void>` — POST `.../messages/{rootMessageId}/replies`
   - `getReplies(rootMessageId, since?): Promise<TeamsReply[]>` — GET `.../messages/{rootMessageId}/replies`, filter by timestamp. Returns `{ id, text, from, createdDateTime }`.
 
-- [ ] **2.3 `web/lib/teams/utils.ts`** — HTML-to-text for Teams messages
+- [x] **2.3 `web/lib/teams/utils.ts`** — HTML-to-text for Teams messages
   - Strip HTML tags, decode entities (`&amp;`, `&lt;`, `&gt;`, `&nbsp;`)
 
 ---
 
 ### Phase 3: State Machine Changes (modify existing files)
 
-- [ ] **3.1 `web/app/api/chat/types.ts`**
+- [x] **3.1 `web/app/api/chat/types.ts`**
   - Add `'LIVE_SUPPORT'` to `ChatState` union
   - Add to `ChatMemory`: `conversationId?: string`, `rootMessageId?: string`
   - Add to `ChatResponse`: `isLiveSupport?: boolean`
 
-- [ ] **3.2 `web/app/api/chat/handleMessage.ts`**
+- [x] **3.2 `web/app/api/chat/handleMessage.ts`**
   - Replace all 12 `[Placeholder]` lines (6 pairs):
     - During hours: `reply('LIVE_SUPPORT', memory, "I'm connecting you with a team member now. You'll see their responses here shortly.", 'text')`
     - After hours: `reply('LIVE_SUPPORT', memory, "Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. Your message has been sent to our team and someone will respond during the next business day.", 'text')`
@@ -67,7 +67,7 @@ No external dependencies to install. No KV store to provision.
     - `start_over` → reset to `ASK_SERVED_BEFORE`
     - User text → `reply('LIVE_SUPPORT', memory, '', 'text')` (empty reply = forwarded, no bot message)
 
-- [ ] **3.3 `web/app/api/chat/route.ts`**
+- [x] **3.3 `web/app/api/chat/route.ts`**
   - **On transition to LIVE_SUPPORT** (response.state === 'LIVE_SUPPORT' && request.state !== 'LIVE_SUPPORT'):
     - Generate `conversationId` via `crypto.randomUUID()`
     - Call `createThread()` with conversation transcript
@@ -82,7 +82,7 @@ No external dependencies to install. No KV store to provision.
 
 ### Phase 4: Polling Endpoint (new file)
 
-- [ ] **4.1 `web/app/api/chat/poll/route.ts`**
+- [x] **4.1 `web/app/api/chat/poll/route.ts`**
 ```
 GET /api/chat/poll?rootMessageId={id}&since={iso-timestamp}
 Response: { replies: [{ text, from, timestamp }] }
@@ -95,7 +95,7 @@ Response: { replies: [{ text, from, timestamp }] }
 
 ### Phase 5: Frontend Changes (modify existing)
 
-- [ ] **5.1 `web/components/chat/ChatWidget.tsx`**
+- [x] **5.1 `web/components/chat/ChatWidget.tsx`**
   - Add polling `useEffect` when `chatState === 'LIVE_SUPPORT'`:
     - 3-second interval, fetch `/api/chat/poll?rootMessageId=...&since=...`
     - Append agent replies as bot messages

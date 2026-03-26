@@ -30,6 +30,7 @@ const INITIAL_BUTTONS: ButtonOption[] = [
 
 function getPlaceholder(chatState: ChatState): string {
   if (chatState === 'ASK_STATE') return 'Type your state (e.g. New York)...'
+  if (chatState === 'LIVE_SUPPORT') return 'Type a message to the support team...'
   return 'Type your message...'
 }
 
@@ -48,6 +49,7 @@ export default function ChatWidget() {
   const [hydrated, setHydrated] = useState(false)
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const lastPollTimeRef = useRef<string>(new Date().toISOString())
 
   // Restore from sessionStorage on mount
   useEffect(() => {
@@ -103,12 +105,45 @@ export default function ChatWidget() {
     }
   }, [isOpen])
 
+  // Poll for agent replies when in LIVE_SUPPORT state
+  useEffect(() => {
+    if (chatState !== 'LIVE_SUPPORT' || !memory.rootMessageId) return
+
+    const interval = setInterval(async () => {
+      try {
+        const params = new URLSearchParams({
+          rootMessageId: memory.rootMessageId!,
+          since: lastPollTimeRef.current,
+        })
+        const res = await fetch(`/api/chat/poll?${params}`)
+        const data = await res.json()
+        if (data.replies?.length > 0) {
+          setMessages((prev) => [
+            ...prev,
+            ...data.replies.map((r: { text: string }) => ({
+              role: 'bot' as const,
+              text: r.text,
+            })),
+          ])
+          lastPollTimeRef.current = data.replies[data.replies.length - 1].timestamp
+        }
+      } catch {
+        // Ignore polling errors silently
+      }
+    }, 3000)
+
+    return () => clearInterval(interval)
+  }, [chatState, memory.rootMessageId])
+
   const handleSend = useCallback(
     async (userText: string) => {
+      const isLiveSupport = chatState === 'LIVE_SUPPORT'
+
       // Don't show user message for internal triggers
       const showUserMessage =
         userText !== '__connect_to_support' &&
-        (chatState !== 'DONE' || userText !== 'start_over')
+        (chatState !== 'DONE' || userText !== 'start_over') &&
+        (chatState !== 'LIVE_SUPPORT' || userText !== 'start_over')
 
       setOfferConnect(false)
 
@@ -123,7 +158,10 @@ export default function ChatWidget() {
         setMessages((prev) => [...prev, { role: 'user', text: displayText }])
       }
 
-      setIsLoading(true)
+      // In live support, don't show typing indicator — message is just forwarded
+      if (!isLiveSupport) {
+        setIsLoading(true)
+      }
 
       try {
         const res = await fetch('/api/chat', {
@@ -142,11 +180,19 @@ export default function ChatWidget() {
         } else {
           setChatState(data.state)
           setMemory(data.memory)
-          setMessages((prev) => [...prev, { role: 'bot', text: data.reply }])
+          // Don't add empty bot replies (live support forwarded messages return empty)
+          if (data.reply) {
+            setMessages((prev) => [...prev, { role: 'bot', text: data.reply }])
+          }
           setCurrentInputType(data.inputType)
           setCurrentButtons(data.buttons)
           setCurrentFormFields(data.formFields)
           setOfferConnect(!!data.offerConnect)
+
+          // Reset poll timestamp when entering live support
+          if (data.isLiveSupport && chatState !== 'LIVE_SUPPORT') {
+            lastPollTimeRef.current = new Date().toISOString()
+          }
         }
       } catch {
         setMessages((prev) => [
@@ -160,7 +206,7 @@ export default function ChatWidget() {
         setIsLoading(false)
       }
     },
-    [chatState, memory, currentButtons]
+    [chatState, memory, currentButtons, messages]
   )
 
   if (!hydrated) return null
@@ -213,6 +259,14 @@ export default function ChatWidget() {
           <X size={20} />
         </button>
       </div>
+
+      {/* Live support banner */}
+      {chatState === 'LIVE_SUPPORT' && (
+        <div className="chat-live-banner">
+          <span className="chat-live-dot" />
+          Connected to live support
+        </div>
+      )}
 
       {/* Messages */}
       <div className="chat-messages">

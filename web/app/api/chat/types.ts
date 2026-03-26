@@ -10,6 +10,7 @@ export type ChatState =
   | 'ASK_RESOURCE_NEEDS'
   | 'ASK_HELP'
   | 'SMART_INTAKE'
+  | 'LIVE_SUPPORT'
   | 'DONE'
 
 export type InputType = 'buttons' | 'text' | 'form' | 'multi-select' | 'none'
@@ -22,6 +23,8 @@ export interface ChatMemory {
   resourceNeeds?: string[]
   helpText?: string
   webSearchActive?: boolean
+  conversationId?: string
+  rootMessageId?: string
 }
 
 export interface ChatMessage {
@@ -44,6 +47,7 @@ export interface ChatResponse {
   buttons?: ButtonOption[]
   formFields?: FormField[]
   offerConnect?: boolean
+  isLiveSupport?: boolean
 }
 
 export interface ButtonOption {
