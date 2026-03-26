@@ -48,10 +48,10 @@ export async function createThread(
 ): Promise<string> {
   const meta = [
     `<b>Conversation ID:</b> ${conversationId}`,
-    memory.fullName ? `<b>Name:</b> ${memory.fullName}` : null,
-    memory.phone ? `<b>Phone:</b> ${memory.phone}` : null,
-    memory.program ? `<b>Program:</b> ${memory.program}` : null,
-    memory.state ? `<b>State:</b> ${memory.state}` : null,
+    memory.fullName ? `<b>Name:</b> ${escapeHtml(memory.fullName)}` : null,
+    memory.phone ? `<b>Phone:</b> ${escapeHtml(memory.phone)}` : null,
+    memory.program ? `<b>Program:</b> ${escapeHtml(memory.program)}` : null,
+    memory.state ? `<b>State:</b> ${escapeHtml(memory.state)}` : null,
   ]
     .filter(Boolean)
     .join('<br/>')
@@ -97,7 +97,7 @@ export async function getReplies(
   rootMessageId: string,
   since?: string
 ): Promise<TeamsReply[]> {
-  const url = `${BASE}/${rootMessageId}/replies?$orderby=createdDateTime asc&$top=50`
+  const url = `${BASE}/${rootMessageId}/replies?$top=50`
   const res = await graphFetch(url)
   const data = await res.json()
 

@@ -40,8 +40,10 @@ export async function POST(request: Request) {
     if (response.state === 'LIVE_SUPPORT' && state !== 'LIVE_SUPPORT') {
       try {
         const conversationId = crypto.randomUUID()
-        // Include the triggering message in the transcript
-        const fullMessages = [...(messages ?? []), { role: 'user' as const, text: userText }]
+        // Include the triggering message in the transcript (skip internal triggers)
+        const fullMessages = userText === '__connect_to_support'
+          ? (messages ?? [])
+          : [...(messages ?? []), { role: 'user' as const, text: userText }]
         const rootMessageId = await createThread(conversationId, fullMessages, response.memory)
         response.memory.conversationId = conversationId
         response.memory.rootMessageId = rootMessageId
