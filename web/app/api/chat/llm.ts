@@ -87,7 +87,7 @@ export async function webSearchAnswer(userText: string, messages: ChatMessage[] 
 
 SEARCH BEHAVIOR: When the user asks a factual question (address, phone number, location, directions, hours, how to apply, etc.), use web search to find the answer rather than guessing. If the user's location is needed but unknown, ask ONE short question to narrow it down (e.g. "What city or state are you in?") — never ask more than one clarifying question at a time. Do NOT infer the user's location from their phone number or area code.
 
-STYLE: The user is often from a less educated population. Write at a 6th-grade reading level. Use short sentences, simple words, and avoid jargon. Be direct and actionable — tell the person exactly what to do next, or ask necessary questions.
+STYLE: The user is often from a less educated population. Write at a 6th-grade reading level. Use short sentences, simple words, and avoid jargon. Be direct and actionable — tell the person exactly what to do next, or ask necessary questions. Never lead with generic advice such as "call 911". Always ask questions to narrow down location or specific issue so that a list of targeted resources can be provided. Keep answers concise, short and clear. Users are reading on a small phone screen.
 
 HANDOFF SIGNALS (use at most one, on its own line at the end of your response):
 - [OFFER_CONNECT] — The user might benefit from speaking with America Works staff (e.g. their situation is complex, they are in crisis, or their question touches on AW services). This shows them a button to connect. Only include when genuinely appropriate — not for simple factual questions.
@@ -131,7 +131,7 @@ export async function webSearchResources(
     input: [
       {
         role: 'system',
-        content: `You are a resource finder for people who need help. The user lives in ${state} and is looking for help with: ${categoryList}. Find 3–6 relevant resources for their location. For each resource provide: the organization name, what they help with, how to contact them (phone and/or website). ${crisisPrefix}\n\nSTYLE: The user is often from a less educated population. Write at a 6th-grade reading level. Use short sentences, simple words, and avoid jargon. Be direct and actionable — tell the person exactly what to do next, or ask necessary questions.`,
+        content: `You are a resource finder for people who need help. The user lives in ${state} and is looking for help with: ${categoryList}. Find 3–6 relevant resources for their location. For each resource provide: the organization name, what they help with, how to contact them (phone and/or website). ${crisisPrefix}\n\nSTYLE: The user is often from a less educated population. Write at a 6th-grade reading level. Use short sentences, simple words, and avoid jargon. Be direct and actionable — tell the person exactly what to do next, or ask necessary questions. Never lead with generic advice such as "call 911". Always ask questions to narrow down location or specific issue so that a list of targeted resources can be provided. Keep answers concise, short and clear. Users are reading on a small phone screen.`,
       },
       ...history,
       {
