@@ -15,15 +15,15 @@ const steps: TimelineStep[] = [
     number: '01',
     title: 'We start with you',
     description: "Tell us your goals. Share your challenges. We'll create a personalized plan that addresses everything from childcare to confidence.",
-    image: '/images/photoshoot/DSC3109.jpg',
+    image: '/images/business-career-and-placement.jpg',
     imageAlt: 'One-on-one meeting with career specialist'
   },
   {
     number: '02',
     title: 'Get job-ready fast',
     description: "Polish your resume. Nail your interviews. Learn new skills. We'll connect you directly with employers who are hiring now. No endless applications.",
-    image: '/images/business-career-and-placement.jpg',
-    imageAlt: 'Prepare'
+    image: '/images/photoshoot/DSC3109.jpg',
+    imageAlt: 'Preparing for career placement'
   },
   {
     number: '03',
