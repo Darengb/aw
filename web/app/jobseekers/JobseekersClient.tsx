@@ -171,8 +171,8 @@ export default function JobseekersClient() {
           "Direct introductions and advocacy",
           "Opportunities across multiple industries"
         ]}
-        image="/images/business-career-and-placement.jpg"
-        imageAlt="Professional workplace"
+        image="/images/photoshoot/DSC4238.jpg"
+        imageAlt="Jobseeker meeting employer at hiring event"
         linkHref="#contact"
         linkLabel="See opportunities"
         reversed={true}
@@ -193,8 +193,8 @@ export default function JobseekersClient() {
           "Job search strategy that fits your life",
           "Skills assessment and career path planning"
         ]}
-        image="/images/resume-coaching.jpg"
-        imageAlt="Career coaching session"
+        image="/images/photoshoot/DSC3513.jpg"
+        imageAlt="Career specialist coaching at computer"
         linkHref="#contact"
         linkLabel="Get started"
         id="how-we-help"
@@ -222,8 +222,8 @@ export default function JobseekersClient() {
           "Career advancement guidance",
           "Long-term relationship and re-engagement"
         ]}
-        image="/images/intern.jpg"
-        imageAlt="New employee receiving support"
+        image="/images/photoshoot/DSC3998.jpg"
+        imageAlt="Staff member at front desk helping a visitor"
         linkHref="#contact"
         linkLabel="Learn more"
       />
@@ -241,8 +241,8 @@ export default function JobseekersClient() {
           "Youth aging out of foster care",
           "Anyone facing barriers to employment"
         ]}
-        image="/images/opportunities.jpg"
-        imageAlt="Diverse professionals"
+        image="/images/photoshoot/DSC2745.jpg"
+        imageAlt="Diverse group of professionals in training"
         linkHref="#contact"
         linkLabel="Check eligibility"
         reversed={true}

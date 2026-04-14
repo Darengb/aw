@@ -15,8 +15,8 @@ const steps: TimelineStep[] = [
     number: '01',
     title: 'We start with you',
     description: "Tell us your goals. Share your challenges. We'll create a personalized plan that addresses everything from childcare to confidence.",
-    image: '/images/resume-coaching.jpg',
-    imageAlt: 'Connect'
+    image: '/images/photoshoot/DSC3109.jpg',
+    imageAlt: 'One-on-one meeting with career specialist'
   },
   {
     number: '02',
@@ -29,8 +29,8 @@ const steps: TimelineStep[] = [
     number: '03',
     title: 'Keep growing',
     description: "Your first day isn't our last day. We stick around to help you solve problems, earn raises, and build the career you deserve.",
-    image: '/images/opportunities.jpg',
-    imageAlt: 'Succeed'
+    image: '/images/photoshoot/DSC2753.jpg',
+    imageAlt: 'Professional woman thriving in her career'
   }
 ];
 

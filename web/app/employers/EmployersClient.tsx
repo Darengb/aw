@@ -125,8 +125,8 @@ export default function EmployersClient() {
         label="Staffing with America Works"
         headline="Fill your open roles with motivated, pre-screened talent—at no cost."
         subheadline="America Works connects you with job-ready candidates and supports them for months after hire, helping you save time, reduce turnover, and build a more reliable workforce."
-        image="/images/team-of-workers-celebrating-success-at-a-shipping.jpg"
-        imageAlt="Successful team at work"
+        image="/images/photoshoot/DSC3556.jpg"
+        imageAlt="Team working at computer workstations"
         primaryCta={{ href: "/employers-form", label: "Submit a job order" }}
         secondaryCta={{ href: "/contact", label: "Talk to our staffing team" }}
       />
@@ -176,7 +176,7 @@ export default function EmployersClient() {
       {/* Candidates Different */}
       <section className="split-section grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[75vh] relative">
         <div className="split-image relative overflow-hidden bg-gray-100 h-full min-h-[400px] lg:min-h-full">
-          <img src="/images/resume-coaching.jpg" alt="Job readiness training" className="absolute inset-0 w-full h-full object-cover object-center" />
+          <img src="/images/photoshoot/_DSC4442.jpg" alt="Workshop presenter training candidates" className="absolute inset-0 w-full h-full object-cover object-center" />
         </div>
         <div className="split-content">
           <div className="split-content-inner">
@@ -226,8 +226,8 @@ export default function EmployersClient() {
           "We help federal contractors broaden their talent pipeline and support Section 503 and diversity-related workforce goals",
           "Reduced time-to-hire with pre-screened, motivated candidates"
         ]}
-        image="/images/business-career-and-placement.jpg"
-        imageAlt="Business partnership"
+        image="/images/photoshoot/DSC4334.jpg"
+        imageAlt="Professional handshake at hiring event"
         linkHref="/employers-form"
         linkLabel="Explore employer partnership"
         reversed={true}

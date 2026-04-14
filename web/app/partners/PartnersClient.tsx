@@ -157,8 +157,8 @@ export default function PartnersClient() {
         label="Government Partnerships"
         headline="Proven performance-based workforce outcomes."
         subheadline="Partnering with government agencies for 40+ years to deliver performance-based workforce programs that achieve measurable outcomes."
-        image="/images/business-career-and-placement.jpg"
-        imageAlt="Government partnership success"
+        image="/images/photoshoot/DSC4287.jpg"
+        imageAlt="Professional intake process at America Works"
         primaryCta={{ href: "/partners-form", label: "Talk to our partnerships team" }}
         secondaryCta={{ href: "/partners-form?type=rfp", label: "Discuss your program or RFP" }}
       />
@@ -186,7 +186,7 @@ export default function PartnersClient() {
       {/* Service Model */}
       <section className="split-section grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[80vh] relative" id="service-model">
         <div className="split-image relative overflow-hidden bg-gray-100 h-full min-h-[400px] lg:min-h-full">
-          <img src="/images/resume-coaching.jpg" alt="Blended service model" className="absolute inset-0 w-full h-full object-cover object-center" />
+          <img src="/images/photoshoot/_DSC4490.jpg" alt="Participants in structured training program" className="absolute inset-0 w-full h-full object-cover object-center" />
         </div>
         <div className="split-content flex items-center p-12 lg:p-20 bg-white">
           <div className="split-content-inner max-w-xl">
@@ -218,7 +218,7 @@ export default function PartnersClient() {
       {/* Why Agencies Choose Us */}
       <section className="split-section grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[80vh] relative" id="why-partner">
         <div className="split-image relative overflow-hidden bg-gray-100 h-full min-h-[400px] lg:min-h-full order-2 lg:order-1">
-          <img src="/images/business-career-and-placement.jpg" alt="Agency partnership" className="absolute inset-0 w-full h-full object-cover object-center" />
+          <img src="/images/photoshoot/_DSC4145.jpg" alt="America Works office entrance" className="absolute inset-0 w-full h-full object-cover object-center" />
         </div>
         <div className="split-content flex items-center p-12 lg:p-20 bg-gray-50 order-1 lg:order-2">
           <div className="split-content-inner max-w-xl">

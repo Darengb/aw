@@ -189,8 +189,8 @@ export default function AboutClient() {
         label="Impact & About"
         headline="Proven impact for the hardest-to-serve."
         subheadline="America Works delivers performance-based employment outcomes for welfare, disability, reentry, and homelessness programs across multiple states under rigorous oversight and evaluation."
-        image="/images/young-professional-working.jpg"
-        imageAlt="Proven impact"
+        image="/images/photoshoot/DSC2847.jpg"
+        imageAlt="Client engaged in workshop at America Works"
         primaryCta={{ href: "#contact", label: "Request a government partnership briefing" }}
         secondaryCta={{ href: "#contact", label: "Ask for references & evaluation summaries" }}
       />
