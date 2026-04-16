@@ -29,7 +29,7 @@ const steps: TimelineStep[] = [
     number: '03',
     title: 'Keep growing',
     description: "Your first day isn't our last day. We stick around to help you solve problems, earn raises, and build the career you deserve.",
-    image: '/images/photoshoot/DSC2753.jpg',
+    image: '/images/photoshoot/DSC2829.jpg',
     imageAlt: 'Professional woman thriving in her career'
   }
 ];

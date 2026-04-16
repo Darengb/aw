@@ -57,7 +57,7 @@ const pathCards = [
       "Skills training aligned with market demand",
       "90+ days of post-placement support"
     ],
-    image: "/images/photoshoot/DSC2829.jpg",
+    image: "/images/photoshoot/DSC2753.jpg",
     imageAlt: "Jobseeker smiling during a workshop",
     links: [{ href: "/jobseekers", label: "Get started" }],
     id: "jobseekers"
@@ -73,7 +73,7 @@ const pathCards = [
       "Real-time data and transparent reporting",
       "Local execution, national infrastructure"
     ],
-    image: "/images/photoshoot/DSC2966.jpg",
+    image: "/images/photoshoot/DSC3513.jpg",
     imageAlt: "America Works office in action",
     links: [
       { href: "/employers", label: "For Employers" },
