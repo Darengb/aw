@@ -4,7 +4,7 @@ export default function HomeHero() {
   return (
     <section className="hero min-h-screen flex items-center relative bg-transparent overflow-hidden isolate">
       <div className="hero-video-background absolute inset-0 -z-20 overflow-hidden">
-        <video autoPlay muted loop playsInline>
+        <video autoPlay muted loop playsInline poster="/images/hero-bg-poster.jpg">
           <source src="/images/hero-bg-vid.webm" type="video/webm" />
           <source src="/images/hero-bg-vid.mp4" type="video/mp4" />
         </video>
