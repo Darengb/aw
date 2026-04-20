@@ -1,6 +1,7 @@
 interface MetricCardProps {
   tag?: string;
   value: string;
+  suffix?: string;
   symbol?: string;
   symbolPosition?: 'left' | 'right';
   label: string;
@@ -10,6 +11,7 @@ interface MetricCardProps {
 export default function MetricCard({
   tag,
   value,
+  suffix,
   symbol,
   symbolPosition = 'right',
   label,
@@ -36,6 +38,7 @@ export default function MetricCard({
           <span className="metric-symbol">{symbol}</span>
         )}
         <span data-stat-target={value.replace(/,/g, '')}>{value}</span>
+        {suffix && <span className="metric-suffix">{suffix}</span>}
         {symbol && symbolPosition === 'right' && (
           <span className="metric-symbol metric-symbol-right">{symbol}</span>
         )}
