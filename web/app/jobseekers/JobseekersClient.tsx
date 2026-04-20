@@ -286,11 +286,11 @@ export default function JobseekersClient() {
               You don&rsquo;t have to do this alone. Whether you&rsquo;re looking for your first job, starting over, or trying to move into something better, we&rsquo;re here.
             </p>
             <div className="cta-buttons flex gap-5 justify-center flex-wrap">
-              <a href="#" className="btn-white inline-flex items-center gap-2 py-5 px-12 bg-white text-gray-950 rounded-md font-body text-sm font-semibold no-underline shadow-lg">
+              <a href="/jobseekers-form" className="btn-white inline-flex items-center gap-2 py-5 px-12 bg-white text-gray-950 rounded-md font-body text-sm font-semibold no-underline shadow-lg">
                 <span>Get started today</span>
                 <ArrowRight style={{ width: '18px', height: '18px' }} />
               </a>
-              <a href="#" className="btn-outline-white inline-flex items-center gap-2 py-5 px-12 bg-transparent text-white border-2 border-white/50 rounded-md font-body text-sm font-semibold no-underline">
+              <a href="/contact" className="btn-outline-white inline-flex items-center gap-2 py-5 px-12 bg-transparent text-white border-2 border-white/50 rounded-md font-body text-sm font-semibold no-underline">
                 <span>Find a location</span>
                 <MapPin style={{ width: '18px', height: '18px' }} />
               </a>

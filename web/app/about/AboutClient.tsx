@@ -1,6 +1,6 @@
 'use client'
 
-import { Settings2, FlaskConical, ArrowRight, FileText } from 'lucide-react';
+import { Settings2, FlaskConical, MapPin } from 'lucide-react';
 import { iconMap } from '@/lib/icons';
 import PageHero from '@/components/shared/PageHero';
 import GlanceGrid from '@/components/shared/GlanceGrid';
@@ -191,8 +191,7 @@ export default function AboutClient() {
         subheadline="America Works delivers performance-based employment outcomes for welfare, disability, reentry, and homelessness programs across multiple states under rigorous oversight and evaluation."
         image="/images/photoshoot/_DSC4145.jpg"
         imageAlt="Client engaged in workshop at America Works"
-        primaryCta={{ href: "#contact", label: "Request a government partnership briefing" }}
-        secondaryCta={{ href: "#contact", label: "Ask for references & evaluation summaries" }}
+        primaryCta={{ href: "/contact", label: "Find a location near you" }}
       />
 
       {/* At A Glance */}
@@ -329,7 +328,7 @@ export default function AboutClient() {
       </section>
 
       {/* Timeline */}
-      <AboutTimeline items={timelineItems} />
+      {/* <AboutTimeline items={timelineItems} /> */}
 
       {/* History */}
       <section className="py-32 bg-gray-50">
@@ -361,53 +360,61 @@ export default function AboutClient() {
             <h2 className="font-display text-display-md font-normal leading-tight tracking-tight text-gray-900">Our Founders</h2>
           </header>
 
-          <div className="founders-grid grid grid-cols-1 lg:grid-cols-2 gap-16 mt-16">
+          <div className="founders-grid flex flex-col gap-20 md:gap-28 mt-16 max-w-6xl mx-auto">
             {/* Peter Cove */}
-            <div className="founder-card">
-              <div className="founder-image mb-8 overflow-hidden rounded border border-gray-200">
-                <img src="/images/PETER-COVE.jpg" alt="Peter Cove" className="w-full h-auto block transition-transform duration-400 hover:scale-102" />
+            <article className="founder-card grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+              <div className="founder-image md:col-span-5 md:sticky md:top-24">
+                <div className="overflow-hidden rounded-lg border border-gray-200 bg-gray-50 aspect-[4/5]">
+                  <img src="/images/PETER-COVE.jpg" alt="Peter Cove" className="w-full h-full object-cover object-center block transition-transform duration-500 hover:scale-[1.03]" />
+                </div>
               </div>
-              <div className="founder-header mb-8 pb-8 border-b-2 border-gray-200">
-                <h3 className="font-display text-3xl font-normal text-black mb-2 tracking-tight">Peter Cove</h3>
-                <div className="font-mono text-sm uppercase tracking-wide text-aw-red font-semibold">Founder</div>
+              <div className="md:col-span-7">
+                <div className="founder-header mb-6 pb-6 border-b-2 border-gray-200">
+                  <div className="font-mono text-xs uppercase tracking-[0.15em] text-aw-red font-semibold mb-3">Founder</div>
+                  <h3 className="font-display text-3xl md:text-4xl font-normal text-black tracking-tight">Peter Cove</h3>
+                </div>
+                <div className="founder-bio text-base md:text-lg text-gray-700 leading-relaxed space-y-5">
+                  <p>
+                    Peter Cove, a social activist and businessmen, is one of the nation&rsquo;s leading advocates for private solutions to workforce development and alleviating poverty.
+                  </p>
+                  <p>
+                    As the founder of America Works in 1984, Peter Cove has worked to link private-sector investment and employment with welfare reform. Peter Cove has also devoted his energy to prisoner reentry initiatives, advocating tirelessly for second chance legislation on a national level, to inform policy makers that the work first model of services is the answer for successful reintegration of ex-offenders into communities.
+                  </p>
+                  <p>
+                    Peter Cove has a book published, <em>Poor No More: Rethinking Dependency and the War on Poverty</em>, as well as numerous articles in the New York Post, Real Clear Policy, the Huffington Post, and elsewhere.
+                  </p>
+                </div>
               </div>
-              <div className="founder-bio text-base text-gray-700 leading-relaxed space-y-5">
-                <p>
-                  Peter Cove, a social activist and businessmen, is one of the nation&rsquo;s leading advocates for private solutions to workforce development and alleviating poverty.
-                </p>
-                <p>
-                  As the founder of America Works in 1984, Peter Cove has worked to link private-sector investment and employment with welfare reform. Peter Cove has also devoted his energy to prisoner reentry initiatives, advocating tirelessly for second chance legislation on a national level, to inform policy makers that the work first model of services is the answer for successful reintegration of ex-offenders into communities.
-                </p>
-                <p>
-                  Peter Cove has a book published, <em>Poor No More: Rethinking Dependency and the War on Poverty</em>, as well as numerous articles in the New York Post, Real Clear Policy, the Huffington Post, and elsewhere.
-                </p>
-              </div>
-            </div>
+            </article>
 
             {/* Dr. Lee Bowes */}
-            <div className="founder-card">
-              <div className="founder-image mb-8 overflow-hidden rounded border border-gray-200">
-                <img src="/images/DR.LEE-BOWES.jpg" alt="Dr. Lee Bowes" className="w-full h-auto block transition-transform duration-400 hover:scale-102" />
+            <article className="founder-card grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+              <div className="founder-image md:col-span-5 md:order-2 md:sticky md:top-24">
+                <div className="overflow-hidden rounded-lg border border-gray-200 bg-gray-50 aspect-[4/5]">
+                  <img src="/images/DR.LEE-BOWES.jpg" alt="Dr. Lee Bowes" className="w-full h-full object-cover object-center block transition-transform duration-500 hover:scale-[1.03]" />
+                </div>
               </div>
-              <div className="founder-header mb-8 pb-8 border-b-2 border-gray-200">
-                <h3 className="font-display text-3xl font-normal text-black mb-2 tracking-tight">Dr. Lee Bowes</h3>
-                <div className="font-mono text-sm uppercase tracking-wide text-aw-red font-semibold">CEO</div>
+              <div className="md:col-span-7 md:order-1">
+                <div className="founder-header mb-6 pb-6 border-b-2 border-gray-200">
+                  <div className="font-mono text-xs uppercase tracking-[0.15em] text-aw-red font-semibold mb-3">CEO</div>
+                  <h3 className="font-display text-3xl md:text-4xl font-normal text-black tracking-tight">Dr. Lee Bowes</h3>
+                </div>
+                <div className="founder-bio text-base md:text-lg text-gray-700 leading-relaxed space-y-5">
+                  <p>
+                    Dr. Lee Bowes is one of the leading experts on Welfare to Work and Prison to Work Workforce Development policies. In the 1990&rsquo;s, Dr. Lee Bowes and her husband, Peter Cove, were instrumental in educating both political parties about the merits of implementing a national &ldquo;Work First&rdquo; policy.
+                  </p>
+                  <p>
+                    She is a frequent guest and speaker at associations that deal with welfare to work policies. She has been a speaker at The Public Welfare Association, the Democratic Leadership Council, The Renaissance Weekend, and the Association of Community Development Corporations.
+                  </p>
+                  <p>
+                    Dr. Lee Bowes has held the position of CEO since 1987. Dr. Bowes was an adjunct professor at Columbia University&rsquo;s School of International and Public Affairs. She lectures on Human Resource Management, Social Policy, and Innovative Management Techniques.
+                  </p>
+                  <p>
+                    Dr. Lee Bowes has a book published, <em>No One Need Apply: Getting and Keeping the Best Workers</em>, as well as numerous articles in the New York Post, the Huffington Post, and elsewhere.
+                  </p>
+                </div>
               </div>
-              <div className="founder-bio text-base text-gray-700 leading-relaxed space-y-5">
-                <p>
-                  Dr. Lee Bowes is one of the leading experts on Welfare to Work and Prison to Work Workforce Development policies. In the 1990&rsquo;s, Dr. Lee Bowes and her husband, Peter Cove, were instrumental in educating both political parties about the merits of implementing a national &ldquo;Work First&rdquo; policy.
-                </p>
-                <p>
-                  She is a frequent guest and speaker at associations that deal with welfare to work policies. She has been a speaker at The Public Welfare Association, the Democratic Leadership Council, The Renaissance Weekend, and the Association of Community Development Corporations.
-                </p>
-                <p>
-                  Dr. Lee Bowes has held the position of CEO since 1987. Dr. Bowes was an adjunct professor at Columbia University&rsquo;s School of International and Public Affairs. She lectures on Human Resource Management, Social Policy, and Innovative Management Techniques.
-                </p>
-                <p>
-                  Dr. Lee Bowes has a book published, <em>No One Need Apply: Getting and Keeping the Best Workers</em>, as well as numerous articles in the New York Post, the Huffington Post, and elsewhere.
-                </p>
-              </div>
-            </div>
+            </article>
           </div>
         </div>
       </section>
@@ -432,13 +439,9 @@ export default function AboutClient() {
               </li>
             </ul>
             <div className="cta-buttons flex gap-5 justify-center flex-wrap">
-              <a href="#" className="btn-white inline-flex items-center gap-2 py-5 px-12 bg-white text-gray-950 rounded-md font-body text-sm font-semibold no-underline shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all duration-300">
-                <span>Request a government partnership briefing</span>
-                <ArrowRight style={{ width: '18px', height: '18px' }} />
-              </a>
-              <a href="#" className="btn-outline-white inline-flex items-center gap-2 py-5 px-12 bg-transparent text-white border-2 border-white/50 rounded-md font-body text-sm font-semibold no-underline hover:bg-white/10 hover:border-white hover:-translate-y-0.5 transition-all duration-300">
-                <span>Ask for references &amp; evaluation summaries</span>
-                <FileText style={{ width: '18px', height: '18px' }} />
+              <a href="/contact" className="btn-white inline-flex items-center gap-2 py-5 px-12 bg-white text-gray-950 rounded-md font-body text-sm font-semibold no-underline shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all duration-300">
+                <span>Find a location near you</span>
+                <MapPin style={{ width: '18px', height: '18px' }} />
               </a>
             </div>
           </div>
