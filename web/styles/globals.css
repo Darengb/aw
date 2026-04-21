@@ -2140,6 +2140,34 @@
     }
 
     @media (max-width: 768px) {
+      .population-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 1.5rem 1rem;
+        min-width: 0;
+      }
+
+      .population-item p {
+        overflow-wrap: anywhere;
+      }
+
+      .value-prop {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1.5rem 1rem;
+        min-width: 0;
+      }
+
+      .value-prop-content {
+        min-width: 0;
+      }
+
+      .value-prop h3,
+      .value-prop p {
+        overflow-wrap: anywhere;
+      }
+
       .ticket-to-work-badge {
         width: 340px;
         height: 340px;
