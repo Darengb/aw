@@ -2268,13 +2268,6 @@
     .value-prop:nth-child(5) { transition-delay: 0.25s; }
 
 
-    @media (max-width: 768px) {
-      .value-props-grid {
-        grid-template-columns: 1fr;
-      }
-
-    }
-
     /* Locations */
     .locations-section {
       padding: 8rem 0;
