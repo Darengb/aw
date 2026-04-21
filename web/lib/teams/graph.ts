@@ -46,18 +46,30 @@ export async function createThread(
   messages: ChatMessage[],
   memory: ChatMemory
 ): Promise<string> {
+  const isAfterHours = !!memory.afterHoursQuestion
+  const contactInstruction = memory.contactMethod === 'phone'
+    ? `<b>Contact by TEXT:</b> ${escapeHtml(memory.phone ?? '')}`
+    : memory.contactMethod === 'email'
+    ? `<b>Contact by EMAIL:</b> ${escapeHtml(memory.email ?? '')}`
+    : null
+
   const meta = [
     `<b>Conversation ID:</b> ${conversationId}`,
+    isAfterHours ? `<b>⚠️ AFTER-HOURS REQUEST — user is offline, reach out directly</b>` : null,
     memory.fullName ? `<b>Name:</b> ${escapeHtml(memory.fullName)}` : null,
-    memory.phone ? `<b>Phone:</b> ${escapeHtml(memory.phone)}` : null,
+    contactInstruction,
+    !contactInstruction && memory.phone ? `<b>Phone:</b> ${escapeHtml(memory.phone)}` : null,
+    !contactInstruction && memory.email ? `<b>Email:</b> ${escapeHtml(memory.email)}` : null,
     memory.program ? `<b>Program:</b> ${escapeHtml(memory.program)}` : null,
     memory.state ? `<b>State:</b> ${escapeHtml(memory.state)}` : null,
+    memory.afterHoursQuestion ? `<b>Their Question:</b> ${escapeHtml(memory.afterHoursQuestion)}` : null,
   ]
     .filter(Boolean)
     .join('<br/>')
 
   const transcript = buildTranscript(messages)
-  const content = `<b>New Live Chat Handoff</b><br/><br/>${meta}<br/><br/><b>Transcript:</b><br/>${transcript}`
+  const heading = isAfterHours ? 'New After-Hours Message' : 'New Live Chat Handoff'
+  const content = `<b>${heading}</b><br/><br/>${meta}<br/><br/><b>Transcript:</b><br/>${transcript}`
 
   const res = await graphFetch(BASE, {
     method: 'POST',

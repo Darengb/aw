@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ArrowRight, CheckCircle, Loader2, DollarSign, ClipboardCheck, Receipt, Heart, Quote } from 'lucide-react';
 import Link from 'next/link';
+import { HoneypotField, useHoneypot } from '@/components/forms/Honeypot';
 
 const scheduleOptions = [
   'Rotating',
@@ -86,6 +87,7 @@ export default function EmployersFormPage() {
   const [errorMsg, setErrorMsg] = useState('');
   const [emailUpdates, setEmailUpdates] = useState(false);
   const [selectedSchedule, setSelectedSchedule] = useState<string[]>([]);
+  const { trapRef, isLikelyBot } = useHoneypot();
 
   function toggleSchedule(day: string) {
     setSelectedSchedule(prev =>
@@ -95,12 +97,21 @@ export default function EmployersFormPage() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus('submitting');
     setErrorMsg('');
 
     const form = e.currentTarget;
     const data = new FormData(form);
 
+    if (isLikelyBot()) {
+      setStatus('success');
+      form.reset();
+      setSelectedSchedule([]);
+      setEmailUpdates(false);
+      return;
+    }
+
+    setStatus('submitting');
+    data.delete('website');
     data.append('schedule', selectedSchedule.join(', '));
     data.append('email_updates', emailUpdates ? 'Yes' : 'No');
     data.append('_form_type', 'employer_job_order');
@@ -170,6 +181,8 @@ export default function EmployersFormPage() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-16">
           {/* Form Column */}
           <form onSubmit={handleSubmit} className="space-y-6">
+            <HoneypotField inputRef={trapRef} />
+
             {/* Name Row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>

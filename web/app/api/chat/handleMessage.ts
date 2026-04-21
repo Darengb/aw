@@ -1,6 +1,6 @@
 import type { ChatState, ChatMemory, ChatMessage, ChatResponse, ButtonOption, FormField } from './types'
 import { SIGNUP_FORM_URL } from './types'
-import { isBusinessHoursET, isFullServiceState, isValidPhone } from './utils'
+import { isBusinessHoursET, isFullServiceState, isValidPhone, isValidEmail, nextBusinessDayPhrase } from './utils'
 import { parseState, classifyCaseSpecific, webSearchAnswer, smartIntakeChat, webSearchResources } from './llm'
 
 const YES_NO_NOTSURE: ButtonOption[] = [
@@ -32,6 +32,27 @@ const OUT_OF_AREA_BUTTONS: ButtonOption[] = [
   { label: 'Find resources near me', value: 'find_resources' },
   { label: 'Try a different state', value: 'try_different' },
 ]
+
+const AFTER_HOURS_CONTACT_BUTTONS: ButtonOption[] = [
+  { label: '📱 Text me', value: 'phone' },
+  { label: '✉️ Email me', value: 'email' },
+]
+
+// Routes a support handoff: live-connect during business hours, else start
+// the after-hours contact collection flow so the team can follow up.
+function handoffReply(memory: ChatMemory): ChatResponse {
+  if (isBusinessHoursET()) {
+    return reply('LIVE_SUPPORT', memory, "I'm connecting you with a team member now. You'll see their responses here shortly.", 'text')
+  }
+  const when = nextBusinessDayPhrase()
+  return reply(
+    'AFTER_HOURS_CONTACT_METHOD',
+    memory,
+    `Our team is off right now. They'll be back ${when}.\n\nIf you leave your info, someone will get back to you. How should we reach you?`,
+    'buttons',
+    { buttons: AFTER_HOURS_CONTACT_BUTTONS }
+  )
+}
 
 function reply(
   state: ChatState,
@@ -212,10 +233,7 @@ export async function handleMessage(
 
       // Handle connect-to-support trigger from inline button
       if (val === '__connect_to_support') {
-        if (isBusinessHoursET()) {
-          return reply('LIVE_SUPPORT', memory, 'I\'m connecting you with a team member now. You\'ll see their responses here shortly.', 'text')
-        }
-        return reply('LIVE_SUPPORT', memory, 'Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. Your message has been sent to our team and someone will respond during the next business day.', 'text')
+        return handoffReply(memory)
       }
 
       memory.helpText = userText
@@ -225,10 +243,7 @@ export async function handleMessage(
       if (memory.webSearchActive) {
         const { text: answer, offerConnect, hardHandoff } = await webSearchAnswer(userText, messages, { program: memory.program })
         if (hardHandoff) {
-          if (isBusinessHoursET()) {
-            return reply('LIVE_SUPPORT', memory, 'I\'m connecting you with a team member now. You\'ll see their responses here shortly.', 'text')
-          }
-          return reply('LIVE_SUPPORT', memory, 'Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. Your message has been sent to our team and someone will respond during the next business day.', 'text')
+          return handoffReply(memory)
         }
         return reply('ASK_HELP', memory, answer, 'text', { offerConnect })
       }
@@ -237,20 +252,14 @@ export async function handleMessage(
       const isAW = await classifyCaseSpecific(userText)
 
       if (isAW) {
-        if (isBusinessHoursET()) {
-          return reply('LIVE_SUPPORT', memory, 'I\'m connecting you with a team member now. You\'ll see their responses here shortly.', 'text')
-        }
-        return reply('LIVE_SUPPORT', memory, 'Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. Your message has been sent to our team and someone will respond during the next business day.', 'text')
+        return handoffReply(memory)
       }
 
       // Not case-specific → web search; activate web search mode for subsequent messages
       memory.webSearchActive = true
       const { text: answer, offerConnect, hardHandoff } = await webSearchAnswer(userText, messages, { program: memory.program })
       if (hardHandoff) {
-        if (isBusinessHoursET()) {
-          return reply('LIVE_SUPPORT', memory, 'I\'m connecting you with a team member now. You\'ll see their responses here shortly.', 'text')
-        }
-        return reply('LIVE_SUPPORT', memory, 'Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. Your message has been sent to our team and someone will respond during the next business day.', 'text')
+        return handoffReply(memory)
       }
       return reply('ASK_HELP', memory, answer, 'text', { offerConnect })
     }
@@ -263,20 +272,105 @@ export async function handleMessage(
 
       // Handle connect-to-support trigger from inline button
       if (val === '__connect_to_support') {
-        if (isBusinessHoursET()) {
-          return reply('LIVE_SUPPORT', memory, 'I\'m connecting you with a team member now. You\'ll see their responses here shortly.', 'text')
-        }
-        return reply('LIVE_SUPPORT', memory, 'Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. Your message has been sent to our team and someone will respond during the next business day.', 'text')
+        return handoffReply(memory)
       }
 
       const { text: intakeAnswer, offerConnect: intakeOffer, hardHandoff: intakeHardHandoff } = await smartIntakeChat(userText, messages)
       if (intakeHardHandoff) {
-        if (isBusinessHoursET()) {
-          return reply('LIVE_SUPPORT', memory, 'I\'m connecting you with a team member now. You\'ll see their responses here shortly.', 'text')
-        }
-        return reply('LIVE_SUPPORT', memory, 'Thank you for reaching out. Our office hours are 9:00 AM – 5:00 PM ET, Monday through Friday. Your message has been sent to our team and someone will respond during the next business day.', 'text')
+        return handoffReply(memory)
       }
       return reply('SMART_INTAKE', memory, intakeAnswer, 'text', { offerConnect: intakeOffer })
+    }
+
+    // ── AFTER_HOURS_CONTACT_METHOD ──────────────────────────────────
+    case 'AFTER_HOURS_CONTACT_METHOD': {
+      if (val === 'phone') {
+        memory.contactMethod = 'phone'
+        return reply(
+          'AFTER_HOURS_CONTACT_VALUE',
+          memory,
+          "What's the best phone number to reach you? We'll send you a text.",
+          'text'
+        )
+      }
+      if (val === 'email') {
+        memory.contactMethod = 'email'
+        return reply(
+          'AFTER_HOURS_CONTACT_VALUE',
+          memory,
+          "What's your email address?",
+          'text'
+        )
+      }
+      return reply(
+        'AFTER_HOURS_CONTACT_METHOD',
+        memory,
+        'How should we reach you?',
+        'buttons',
+        { buttons: AFTER_HOURS_CONTACT_BUTTONS }
+      )
+    }
+
+    // ── AFTER_HOURS_CONTACT_VALUE ───────────────────────────────────
+    case 'AFTER_HOURS_CONTACT_VALUE': {
+      if (memory.contactMethod === 'phone') {
+        if (!isValidPhone(userText)) {
+          return reply(
+            'AFTER_HOURS_CONTACT_VALUE',
+            memory,
+            "That doesn't look like a phone number. Please enter 10 digits, like (555) 555-5555.",
+            'text'
+          )
+        }
+        memory.phone = userText.trim()
+      } else {
+        if (!isValidEmail(userText)) {
+          return reply(
+            'AFTER_HOURS_CONTACT_VALUE',
+            memory,
+            "That doesn't look like an email. Please try again, like name@example.com.",
+            'text'
+          )
+        }
+        memory.email = userText.trim()
+      }
+      return reply('AFTER_HOURS_NAME', memory, "Got it. What's your name?", 'text')
+    }
+
+    // ── AFTER_HOURS_NAME ────────────────────────────────────────────
+    case 'AFTER_HOURS_NAME': {
+      if (!userText.trim()) {
+        return reply('AFTER_HOURS_NAME', memory, "What's your name?", 'text')
+      }
+      memory.fullName = userText.trim()
+      return reply(
+        'AFTER_HOURS_QUESTION',
+        memory,
+        "Last thing — what's your question? We'll get back to you with an answer.",
+        'text'
+      )
+    }
+
+    // ── AFTER_HOURS_QUESTION ────────────────────────────────────────
+    case 'AFTER_HOURS_QUESTION': {
+      if (!userText.trim()) {
+        return reply(
+          'AFTER_HOURS_QUESTION',
+          memory,
+          'Please tell us your question so we can help.',
+          'text'
+        )
+      }
+      memory.afterHoursQuestion = userText.trim()
+      const when = nextBusinessDayPhrase()
+      const verb = memory.contactMethod === 'phone' ? 'text you' : 'email you'
+      const contact = memory.contactMethod === 'phone' ? memory.phone : memory.email
+      return reply(
+        'LIVE_SUPPORT',
+        memory,
+        `Thanks, ${memory.fullName}. We'll ${verb} at ${contact} ${when}.`,
+        'text'
+      )
     }
 
     // ── LIVE_SUPPORT ─────────────────────────────────────────────────

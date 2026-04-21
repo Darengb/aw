@@ -10,6 +10,10 @@ export type ChatState =
   | 'ASK_RESOURCE_NEEDS'
   | 'ASK_HELP'
   | 'SMART_INTAKE'
+  | 'AFTER_HOURS_CONTACT_METHOD'
+  | 'AFTER_HOURS_CONTACT_VALUE'
+  | 'AFTER_HOURS_NAME'
+  | 'AFTER_HOURS_QUESTION'
   | 'LIVE_SUPPORT'
   | 'DONE'
 
@@ -18,6 +22,9 @@ export type InputType = 'buttons' | 'text' | 'form' | 'multi-select' | 'none'
 export interface ChatMemory {
   fullName?: string
   phone?: string
+  email?: string
+  contactMethod?: 'phone' | 'email'
+  afterHoursQuestion?: string
   program?: string
   state?: string
   resourceNeeds?: string[]

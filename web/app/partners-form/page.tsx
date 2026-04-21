@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { ArrowRight, CheckCircle, Loader2, MessageSquare, FileText } from 'lucide-react';
 import Link from 'next/link';
+import { HoneypotField, useHoneypot } from '@/components/forms/Honeypot';
 
 const programTypes = [
   'TANF Employment & Training',
@@ -24,14 +25,23 @@ function PartnersFormContent() {
   const [mode, setMode] = useState<'discuss' | 'rfp'>(isRfp ? 'rfp' : 'discuss');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const { trapRef, isLikelyBot } = useHoneypot();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus('submitting');
     setErrorMsg('');
 
     const form = e.currentTarget;
     const data = new FormData(form);
+
+    if (isLikelyBot()) {
+      setStatus('success');
+      form.reset();
+      return;
+    }
+
+    setStatus('submitting');
+    data.delete('website');
     data.append('_form_type', mode === 'rfp' ? 'partner_rfp' : 'partner_inquiry');
 
     try {
@@ -129,6 +139,8 @@ function PartnersFormContent() {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
+          <HoneypotField inputRef={trapRef} />
+
           {/* Name Row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>

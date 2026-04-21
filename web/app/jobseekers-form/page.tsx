@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ArrowRight, CheckCircle, Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import { HoneypotField, useHoneypot } from '@/components/forms/Honeypot';
 
 const situationOptions = [
   'Receiving Unemployment',
@@ -16,16 +17,17 @@ const situationOptions = [
   'Non Custodial Parent',
   'Justice Involved',
   'Other',
+  'None of the above',
 ];
 
 export default function JobseekersFormPage() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
-  const [emailUpdates, setEmailUpdates] = useState(false);
+  const [situationError, setSituationError] = useState(false);
+  const { trapRef, isLikelyBot } = useHoneypot();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus('submitting');
     setErrorMsg('');
 
     const form = e.currentTarget;
@@ -33,10 +35,23 @@ export default function JobseekersFormPage() {
 
     // Collect checked situations into a single string
     const situations = situationOptions.filter((_, i) => data.get(`situation_${i}`) === 'on');
-    data.delete('_situations'); // placeholder
+    if (situations.length === 0) {
+      setSituationError(true);
+      return;
+    }
+    setSituationError(false);
+
+    // Silent bot trap — fake success without hitting Formspree
+    if (isLikelyBot()) {
+      setStatus('success');
+      form.reset();
+      return;
+    }
+
+    setStatus('submitting');
+    data.delete('website');
     situationOptions.forEach((_, i) => data.delete(`situation_${i}`));
     data.append('situation', situations.join(', '));
-    data.append('email_updates', emailUpdates ? 'Yes' : 'No');
 
     try {
       const res = await fetch('https://formspree.io/f/xeelalar', {
@@ -97,6 +112,8 @@ export default function JobseekersFormPage() {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
+          <HoneypotField inputRef={trapRef} />
+
           {/* Name Row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
@@ -161,24 +178,26 @@ export default function JobseekersFormPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
               <label htmlFor="zip" className="block text-sm font-semibold text-gray-700 mb-2">
-                Zip Code
+                Zip Code <span className="text-aw-red">*</span>
               </label>
               <input
                 id="zip"
                 name="zip"
                 type="text"
+                required
                 placeholder="e.g. 10001"
                 className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-aw-red focus:ring-2 focus:ring-aw-red/20 transition-all"
               />
             </div>
             <div>
               <label htmlFor="age" className="block text-sm font-semibold text-gray-700 mb-2">
-                Age
+                Age <span className="text-aw-red">*</span>
               </label>
               <input
                 id="age"
                 name="age"
                 type="text"
+                required
                 placeholder="e.g. 28"
                 className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-aw-red focus:ring-2 focus:ring-aw-red/20 transition-all"
               />
@@ -188,7 +207,7 @@ export default function JobseekersFormPage() {
           {/* Situation Checkboxes */}
           <fieldset>
             <legend className="block text-sm font-semibold text-gray-700 mb-3">
-              Does any of the following apply to you?
+              Does any of the following apply to you? <span className="text-aw-red">*</span>
             </legend>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {situationOptions.map((option, i) => (
@@ -196,24 +215,17 @@ export default function JobseekersFormPage() {
                   <input
                     type="checkbox"
                     name={`situation_${i}`}
+                    onChange={() => setSituationError(false)}
                     className="w-4 h-4 rounded border-gray-300 text-aw-red focus:ring-aw-red/20 cursor-pointer"
                   />
                   <span className="text-base text-gray-700 group-hover:text-black transition-colors">{option}</span>
                 </label>
               ))}
             </div>
+            {situationError && (
+              <p className="mt-3 text-sm text-aw-red">Please select at least one option.</p>
+            )}
           </fieldset>
-
-          {/* Email Updates */}
-          <label className="flex items-center gap-3 cursor-pointer group pt-2">
-            <input
-              type="checkbox"
-              checked={emailUpdates}
-              onChange={(e) => setEmailUpdates(e.target.checked)}
-              className="w-4 h-4 rounded border-gray-300 text-aw-red focus:ring-aw-red/20 cursor-pointer"
-            />
-            <span className="text-sm text-gray-700 group-hover:text-black transition-colors">Sign up to receive email updates</span>
-          </label>
 
           {/* Error Message */}
           {status === 'error' && (

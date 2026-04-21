@@ -28,9 +28,14 @@ const INITIAL_BUTTONS: ButtonOption[] = [
   { label: 'Not sure', value: 'not_sure' },
 ]
 
-function getPlaceholder(chatState: ChatState): string {
+function getPlaceholder(chatState: ChatState, memory?: ChatMemory): string {
   if (chatState === 'ASK_STATE') return 'Type your state (e.g. New York)...'
   if (chatState === 'LIVE_SUPPORT') return 'Type a message to the support team...'
+  if (chatState === 'AFTER_HOURS_CONTACT_VALUE') {
+    return memory?.contactMethod === 'email' ? 'name@example.com' : '(555) 555-5555'
+  }
+  if (chatState === 'AFTER_HOURS_NAME') return 'Your name'
+  if (chatState === 'AFTER_HOURS_QUESTION') return 'What would you like to ask?'
   return 'Type your message...'
 }
 
@@ -302,7 +307,7 @@ export default function ChatWidget() {
         formFields={currentFormFields}
         isLoading={isLoading}
         onSend={handleSend}
-        placeholder={getPlaceholder(chatState)}
+        placeholder={getPlaceholder(chatState, memory)}
       />
     </div>
   )

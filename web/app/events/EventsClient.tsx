@@ -238,33 +238,6 @@ export default function EventsClient({ events: allEvents }: { events: EventItem[
         </div>
       </section>
 
-      {/* Newsletter CTA */}
-      <section className="py-24 bg-white">
-        <div className="max-w-container mx-auto px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="font-mono text-xs uppercase tracking-[0.15em] text-gray-500 mb-4">// Stay Updated</div>
-            <h2 className="font-display text-display-md font-normal leading-tight tracking-tight text-black mb-6">Never miss an opportunity.</h2>
-            <p className="text-xl text-gray-600 mb-10">
-              Subscribe to get notified about upcoming job fairs, workshops, and hiring events in your area.
-            </p>
-            <form className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-5 py-4 bg-gray-50 border border-gray-300 rounded text-base focus:outline-none focus:border-aw-red focus:ring-2 focus:ring-aw-red/20 transition-all"
-              />
-              <button
-                type="submit"
-                className="px-8 py-4 bg-aw-red text-white font-semibold rounded transition-all hover:bg-aw-red-dark hover:shadow-lg"
-              >
-                Subscribe
-              </button>
-            </form>
-            <p className="text-sm text-gray-500 mt-4">We respect your privacy. Unsubscribe at any time.</p>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-24 bg-gray-950 text-white text-center relative overflow-hidden" id="contact">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
