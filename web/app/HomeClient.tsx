@@ -382,7 +382,7 @@ export default function HomeClient() {
             subhead="We specialize in helping people overcome real barriers"
           />
 
-          <div className="populations-grid grid grid-cols-4 gap-0 mt-16 relative">
+          <div className="populations-grid mt-16 relative">
             {populations.map((pop, index) => (
               <PopulationItem key={index} icon={pop.icon} description={pop.description} />
             ))}
@@ -407,7 +407,7 @@ export default function HomeClient() {
             subhead="When success is measured in human outcomes, not just compliance metrics, you need a partner who delivers both. America Works brings four decades of experience turning complex program requirements into simple results: employment that lasts."
           />
 
-          <div className="value-props-grid grid grid-cols-3 gap-0 mt-16 mb-20">
+          <div className="value-props-grid mt-16 mb-20">
             {valueProps.map((prop, index) => (
               <ValueProp key={index} icon={prop.icon} title={prop.title} description={prop.description} />
             ))}
