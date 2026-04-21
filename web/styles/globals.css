@@ -2140,22 +2140,6 @@
     }
 
     @media (max-width: 768px) {
-      .populations-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .population-item {
-        border-right: none;
-      }
-
-      .value-props-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .value-prop {
-        border-right: none;
-      }
-
       .ticket-to-work-badge {
         width: 340px;
         height: 340px;
@@ -2768,14 +2752,6 @@
 
       .path-card .h2 {
         font-size: 2.5rem;
-      }
-
-      .populations-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .value-props-grid {
-        grid-template-columns: 1fr;
       }
 
       .ticket-to-work-badge {
