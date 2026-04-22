@@ -230,7 +230,11 @@ export default function HomeClient() {
   useEffect(() => {
     let cancelled = false;
 
-    import('@/data/usMapSvg').then(({ US_MAP_SVG }) => {
+    Promise.all([
+      import('@/data/usMapSvg'),
+      import('@/data/stateCodes'),
+      import('@/data/stateCoverage'),
+    ]).then(([{ US_MAP_SVG }, { STATE_CODES, STATE_NAMES }, { STATE_COVERAGE }]) => {
       if (cancelled) return;
 
       const container = document.getElementById('us-coverage-map');
@@ -247,14 +251,17 @@ export default function HomeClient() {
 
       const tooltip = document.getElementById('map-tooltip');
 
-      svg.querySelectorAll('path').forEach((path) => {
-        const originalClass = path.getAttribute('class');
-        const isActive = originalClass && originalClass.includes('cls-1');
-        path.classList.add(isActive ? 'state-active' : 'state-inactive');
+      Array.from(svg.querySelectorAll('path')).forEach((path, i) => {
+        const code = STATE_CODES[i];
+        if (!code) return;
 
-        const label = isActive ? 'Local Programs + Ticket To Work' : 'Ticket To Work';
+        const coverage = STATE_COVERAGE[code];
+        path.dataset.state = code;
+        path.classList.add(coverage === 'local' ? 'state-active' : 'state-inactive');
 
-        path.addEventListener('mouseenter', (e) => {
+        const label = `${STATE_NAMES[code]} — ${coverage === 'local' ? 'Local Programs + Ticket To Work' : 'Ticket To Work'}`;
+
+        path.addEventListener('mouseenter', () => {
           if (!tooltip) return;
           tooltip.textContent = label;
           tooltip.classList.add('visible');

@@ -2346,22 +2346,22 @@
     /* Override original SVG colors */
     #us-coverage-map path.cls-1,
     #us-coverage-map path.cls-2 {
-      fill: #c8c8c8 !important;
+      fill: hsl(225, 4%, 60%) !important;
       stroke: var(--gray-100) !important;
       stroke-width: 1px !important;
     }
 
-    /* Non-served states - lighter grey */
+    /* Non-served states - warm-toned grey */
     #us-coverage-map path.state-inactive {
-      fill: #c8c8c8 !important;
+      fill: hsl(225, 4%, 60%) !important;
       stroke: var(--gray-100) !important;
       stroke-width: 1px !important;
       cursor: pointer;
     }
 
-    /* Served states - darker grey */
+    /* Served states - cool-toned grey */
     #us-coverage-map path.state-active {
-      fill: #999 !important;
+      fill: hsl(1, 4%, 60%) !important;
       stroke: var(--gray-100) !important;
       stroke-width: 1px !important;
       cursor: pointer;
@@ -2369,11 +2369,11 @@
 
     /* Hover states */
     #us-coverage-map path.state-active:hover {
-      fill: #888 !important;
+      fill: hsl(1, 4%, 55%) !important;
     }
 
     #us-coverage-map path.state-inactive:hover {
-      fill: #bbb !important;
+      fill: hsl(225, 4%, 55%) !important;
     }
 
     /* Map tooltip */
@@ -2422,14 +2422,14 @@
     .legend-dot {
       width: 24px;
       height: 16px;
-      background: #c8c8c8;
-      border: 1px solid #b0b0b0;
+      background: hsl(225, 4%, 60%);
+      border: 1px solid hsl(225, 4%, 50%);
       border-radius: 2px;
     }
 
     .legend-dot.active {
-      background: #999;
-      border-color: #888;
+      background: hsl(1, 4%, 60%);
+      border-color: hsl(1, 4%, 50%);
     }
 
     .legend-item span {
