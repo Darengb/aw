@@ -1,11 +1,13 @@
 'use client'
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { ArrowRight, CheckCircle, Loader2, MessageSquare, FileText } from 'lucide-react';
 import Link from 'next/link';
+import type { TurnstileInstance } from '@marsidev/react-turnstile';
 import { HoneypotField, useHoneypot } from '@/components/forms/Honeypot';
+import { TurnstileWidget } from '@/components/forms/TurnstileWidget';
 
 const programTypes = [
   'TANF Employment & Training',
@@ -25,6 +27,8 @@ function PartnersFormContent() {
   const [mode, setMode] = useState<'discuss' | 'rfp'>(isRfp ? 'rfp' : 'discuss');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileRef = useRef<TurnstileInstance | null>(null);
   const { trapRef, isLikelyBot } = useHoneypot();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -40,12 +44,19 @@ function PartnersFormContent() {
       return;
     }
 
+    if (!turnstileToken) {
+      setErrorMsg('Please complete the verification before submitting.');
+      setStatus('error');
+      return;
+    }
+
     setStatus('submitting');
     data.delete('website');
     data.append('_form_type', mode === 'rfp' ? 'partner_rfp' : 'partner_inquiry');
+    data.append('cf-turnstile-response', turnstileToken);
 
     try {
-      const res = await fetch('https://formspree.io/f/xeelalar', {
+      const res = await fetch('/api/forms/submit', {
         method: 'POST',
         body: data,
         headers: { Accept: 'application/json' },
@@ -54,13 +65,17 @@ function PartnersFormContent() {
         setStatus('success');
         form.reset();
       } else {
-        const json = await res.json();
+        const json = await res.json().catch(() => ({}));
         setErrorMsg(json?.errors?.[0]?.message || 'Something went wrong. Please try again.');
         setStatus('error');
+        turnstileRef.current?.reset();
+        setTurnstileToken(null);
       }
     } catch {
       setErrorMsg('Network error. Please check your connection and try again.');
       setStatus('error');
+      turnstileRef.current?.reset();
+      setTurnstileToken(null);
     }
   }
 
@@ -250,7 +265,7 @@ function PartnersFormContent() {
           {/* Submit */}
           <button
             type="submit"
-            disabled={status === 'submitting'}
+            disabled={status === 'submitting' || !turnstileToken}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-10 py-4 bg-aw-blue text-white font-semibold rounded transition-all hover:bg-aw-blue-dark hover:shadow-lg hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
           >
             {status === 'submitting' ? (
@@ -265,6 +280,9 @@ function PartnersFormContent() {
               </>
             )}
           </button>
+
+          {/* Verification */}
+          <TurnstileWidget ref={turnstileRef} onToken={setTurnstileToken} />
         </form>
       </div>
     </div>

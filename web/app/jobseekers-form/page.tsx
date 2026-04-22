@@ -1,11 +1,15 @@
 'use client'
 
-import { useState } from 'react';
+import { Suspense, useRef, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { ArrowRight, CheckCircle, Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import type { TurnstileInstance } from '@marsidev/react-turnstile';
 import { HoneypotField, useHoneypot } from '@/components/forms/Honeypot';
+import { TurnstileWidget } from '@/components/forms/TurnstileWidget';
 
 const situationOptions = [
+  'None of these',
   'Receiving Unemployment',
   'Veteran',
   'Receiving SSI/SSDI',
@@ -17,13 +21,16 @@ const situationOptions = [
   'Non Custodial Parent',
   'Justice Involved',
   'Other',
-  'None of the above',
 ];
 
-export default function JobseekersFormPage() {
+function JobseekersFormContent() {
+  const searchParams = useSearchParams();
+  const source = searchParams.get('from');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
   const [situationError, setSituationError] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileRef = useRef<TurnstileInstance | null>(null);
   const { trapRef, isLikelyBot } = useHoneypot();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -41,10 +48,16 @@ export default function JobseekersFormPage() {
     }
     setSituationError(false);
 
-    // Silent bot trap — fake success without hitting Formspree
+    // Silent bot trap — fake success without hitting the server
     if (isLikelyBot()) {
       setStatus('success');
       form.reset();
+      return;
+    }
+
+    if (!turnstileToken) {
+      setErrorMsg('Please complete the verification before submitting.');
+      setStatus('error');
       return;
     }
 
@@ -52,9 +65,11 @@ export default function JobseekersFormPage() {
     data.delete('website');
     situationOptions.forEach((_, i) => data.delete(`situation_${i}`));
     data.append('situation', situations.join(', '));
+    if (source) data.append('source', source);
+    data.append('cf-turnstile-response', turnstileToken);
 
     try {
-      const res = await fetch('https://formspree.io/f/xeelalar', {
+      const res = await fetch('/api/forms/submit', {
         method: 'POST',
         body: data,
         headers: { Accept: 'application/json' },
@@ -63,13 +78,17 @@ export default function JobseekersFormPage() {
         setStatus('success');
         form.reset();
       } else {
-        const json = await res.json();
+        const json = await res.json().catch(() => ({}));
         setErrorMsg(json?.errors?.[0]?.message || 'Something went wrong. Please try again.');
         setStatus('error');
+        turnstileRef.current?.reset();
+        setTurnstileToken(null);
       }
     } catch {
       setErrorMsg('Network error. Please check your connection and try again.');
       setStatus('error');
+      turnstileRef.current?.reset();
+      setTurnstileToken(null);
     }
   }
 
@@ -227,6 +246,21 @@ export default function JobseekersFormPage() {
             )}
           </fieldset>
 
+          {/* About You */}
+          <div>
+            <label htmlFor="about" className="block text-sm font-semibold text-gray-700 mb-2">
+              Tell us about yourself <span className="text-aw-red">*</span>
+            </label>
+            <textarea
+              id="about"
+              name="about"
+              required
+              rows={5}
+              placeholder="Share a bit about your background, goals, or what kind of help you're looking for."
+              className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-aw-red focus:ring-2 focus:ring-aw-red/20 transition-all resize-y"
+            />
+          </div>
+
           {/* Error Message */}
           {status === 'error' && (
             <div className="p-4 bg-red-50 border border-red-200 rounded text-sm text-red-700">
@@ -237,7 +271,7 @@ export default function JobseekersFormPage() {
           {/* Submit */}
           <button
             type="submit"
-            disabled={status === 'submitting'}
+            disabled={status === 'submitting' || !turnstileToken}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-10 py-4 bg-aw-red text-white font-semibold rounded transition-all hover:bg-aw-red-dark hover:shadow-lg hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
           >
             {status === 'submitting' ? (
@@ -252,8 +286,19 @@ export default function JobseekersFormPage() {
               </>
             )}
           </button>
+
+          {/* Verification */}
+          <TurnstileWidget ref={turnstileRef} onToken={setTurnstileToken} />
         </form>
       </div>
     </div>
+  );
+}
+
+export default function JobseekersFormPage() {
+  return (
+    <Suspense fallback={<div className="pt-32 pb-24 bg-white min-h-screen" />}>
+      <JobseekersFormContent />
+    </Suspense>
   );
 }

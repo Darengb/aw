@@ -1,9 +1,11 @@
 'use client'
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ArrowRight, CheckCircle, Loader2, DollarSign, ClipboardCheck, Receipt, Heart, Quote } from 'lucide-react';
 import Link from 'next/link';
+import type { TurnstileInstance } from '@marsidev/react-turnstile';
 import { HoneypotField, useHoneypot } from '@/components/forms/Honeypot';
+import { TurnstileWidget } from '@/components/forms/TurnstileWidget';
 
 const scheduleOptions = [
   'Rotating',
@@ -87,6 +89,8 @@ export default function EmployersFormPage() {
   const [errorMsg, setErrorMsg] = useState('');
   const [emailUpdates, setEmailUpdates] = useState(false);
   const [selectedSchedule, setSelectedSchedule] = useState<string[]>([]);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileRef = useRef<TurnstileInstance | null>(null);
   const { trapRef, isLikelyBot } = useHoneypot();
 
   function toggleSchedule(day: string) {
@@ -110,14 +114,21 @@ export default function EmployersFormPage() {
       return;
     }
 
+    if (!turnstileToken) {
+      setErrorMsg('Please complete the verification before submitting.');
+      setStatus('error');
+      return;
+    }
+
     setStatus('submitting');
     data.delete('website');
     data.append('schedule', selectedSchedule.join(', '));
     data.append('email_updates', emailUpdates ? 'Yes' : 'No');
     data.append('_form_type', 'employer_job_order');
+    data.append('cf-turnstile-response', turnstileToken);
 
     try {
-      const res = await fetch('https://formspree.io/f/xeelalar', {
+      const res = await fetch('/api/forms/submit', {
         method: 'POST',
         body: data,
         headers: { Accept: 'application/json' },
@@ -128,13 +139,17 @@ export default function EmployersFormPage() {
         setSelectedSchedule([]);
         setEmailUpdates(false);
       } else {
-        const json = await res.json();
+        const json = await res.json().catch(() => ({}));
         setErrorMsg(json?.errors?.[0]?.message || 'Something went wrong. Please try again.');
         setStatus('error');
+        turnstileRef.current?.reset();
+        setTurnstileToken(null);
       }
     } catch {
       setErrorMsg('Network error. Please check your connection and try again.');
       setStatus('error');
+      turnstileRef.current?.reset();
+      setTurnstileToken(null);
     }
   }
 
@@ -371,7 +386,7 @@ export default function EmployersFormPage() {
             {/* Submit */}
             <button
               type="submit"
-              disabled={status === 'submitting'}
+              disabled={status === 'submitting' || !turnstileToken}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-10 py-4 bg-aw-blue text-white font-semibold rounded transition-all hover:bg-aw-blue-dark hover:shadow-lg hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
             >
               {status === 'submitting' ? (
@@ -386,6 +401,9 @@ export default function EmployersFormPage() {
                 </>
               )}
             </button>
+
+            {/* Verification */}
+            <TurnstileWidget ref={turnstileRef} onToken={setTurnstileToken} />
           </form>
 
           {/* Marketing Sidebar */}

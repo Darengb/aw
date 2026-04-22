@@ -69,7 +69,7 @@ export interface FormField {
   required: boolean
 }
 
-export const SIGNUP_FORM_URL = '/jobseekers-form'
+export const SIGNUP_FORM_URL = '/jobseekers-form?from=chatbot'
 
 export const SERVICE_STATES = [
   'CA', 'DC', 'GA', 'LA', 'MD', 'NJ', 'NY', 'PA', 'TN', 'VT', 'WI',
