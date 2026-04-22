@@ -6,7 +6,7 @@ import PageHero from '@/components/shared/PageHero';
 import SplitSection from '@/components/shared/SplitSection';
 import CaseStudiesTabs from '@/components/jobseekers/CaseStudiesTabs';
 import ProcessGrid from '@/components/shared/ProcessGrid';
-import GoogleReviewCard from '@/components/home/GoogleReviewCard';
+import GoogleReviewsCarousel from '@/components/home/GoogleReviewsCarousel';
 import TestimonialCard from '@/components/home/TestimonialCard';
 
 // Google Reviews Data
@@ -123,13 +123,7 @@ export default function JobseekersClient() {
 
       {/* Google Reviews */}
       <section className="py-6 bg-white">
-        <div className="md:container md:max-w-container mx-auto md:px-8">
-          <div className="testimonials-grid flex gap-4 overflow-x-auto pb-4 px-4 md:px-0 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:pb-0 snap-x snap-mandatory scroll-pl-4 md:scroll-pl-0 scrollbar-hide">
-            {googleReviews1.map((review, index) => (
-              <GoogleReviewCard key={index} quote={review.quote} author={review.author} />
-            ))}
-          </div>
-        </div>
+        <GoogleReviewsCarousel reviews={googleReviews1} />
       </section>
 
       {/* Client Experience */}
@@ -202,13 +196,7 @@ export default function JobseekersClient() {
 
       {/* Google Reviews 2 */}
       <section className="py-6 bg-white">
-        <div className="md:container md:max-w-container mx-auto md:px-8">
-          <div className="testimonials-grid flex gap-4 overflow-x-auto pb-4 px-4 md:px-0 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:pb-0 snap-x snap-mandatory scroll-pl-4 md:scroll-pl-0 scrollbar-hide">
-            {googleReviews2.map((review, index) => (
-              <GoogleReviewCard key={index} quote={review.quote} author={review.author} />
-            ))}
-          </div>
-        </div>
+        <GoogleReviewsCarousel reviews={googleReviews2} />
       </section>
 
       {/* Ongoing Support */}

@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react';
 import { Check } from 'lucide-react';
 import HomeHero from '@/components/home/HomeHero';
 import SectionHeader from '@/components/home/SectionHeader';
-import GoogleReviewCard from '@/components/home/GoogleReviewCard';
+import GoogleReviewsCarousel from '@/components/home/GoogleReviewsCarousel';
 import HomeTimeline from '@/components/home/HomeTimeline';
 import PathCard from '@/components/home/PathCard';
 import PopulationItem from '@/components/home/PopulationItem';
@@ -303,13 +303,7 @@ export default function HomeClient() {
 
       {/* Google Reviews */}
       <section className="pt-0 pb-6 bg-white">
-        <div className="md:container md:max-w-container mx-auto md:px-8">
-          <div className="testimonials-grid flex gap-4 overflow-x-auto pb-4 px-4 md:px-0 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:pb-0 snap-x snap-mandatory scroll-pl-4 md:scroll-pl-0 scrollbar-hide">
-            {googleReviews1.map((review, index) => (
-              <GoogleReviewCard key={index} quote={review.quote} author={review.author} />
-            ))}
-          </div>
-        </div>
+        <GoogleReviewsCarousel reviews={googleReviews1} />
       </section>
 
       {/* How It Works Timeline */}
@@ -317,13 +311,7 @@ export default function HomeClient() {
 
       {/* Google Reviews: Exceeded Expectations */}
       <section className="py-6 bg-gray-50">
-        <div className="container max-w-container mx-auto px-8">
-          <div className="testimonials-grid grid grid-cols-1 md:grid-cols-3 gap-8 mt-0">
-            {googleReviews2.map((review, index) => (
-              <GoogleReviewCard key={index} quote={review.quote} author={review.author} />
-            ))}
-          </div>
-        </div>
+        <GoogleReviewsCarousel reviews={googleReviews2} />
       </section>
 
       {/* Audience Path Cards */}

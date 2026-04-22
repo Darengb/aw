@@ -343,7 +343,7 @@ export default function AboutClient() {
               Called &ldquo;a company with a conscience&rdquo;, America Works was founded in 1984 by social activist and entrepreneur, Peter Cove, who wanted to put his ideals about poverty and the American dream into practice.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed mb-8">
-              Joined by Dr. Lee Bowes as the CEO, America Works has helped nearly 2,000,000 individuals increase their self-sufficiency through gainful employment, including military veterans, welfare and SNAP recipients, young adults, the criminal justice involved, homeless, non-custodial parents, persons receiving disability, among others.
+              Joined by Dr. Lee Bowes as the CEO, America Works has helped over 10 million individuals increase their self-sufficiency through gainful employment, including military veterans, welfare and SNAP recipients, young adults, the criminal justice involved, homeless, non-custodial parents, persons receiving disability, among others.
             </p>
             <div className="history-highlight p-8 bg-white border-l-4 border-aw-red text-base text-gray-800 leading-relaxed mt-8">
               <strong className="text-black font-semibold">America Works is a 100% Women-Owned Business.</strong> Our mission is to equip each individual who comes to our offices with the right tools so that they are able to provide for themselves and their loved ones. We believe the most effective approach in helping people out of poverty is by assisting them in finding meaningful employment. Our proven methods, services and experienced staff offer the right combination for success.

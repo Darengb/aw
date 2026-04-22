@@ -2125,18 +2125,6 @@
       .population-item:nth-child(2n) {
         border-right: none;
       }
-
-      .value-props-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .value-prop:nth-child(3n) {
-        border-right: 1px solid var(--gray-200);
-      }
-
-      .value-prop:nth-child(2n) {
-        border-right: none;
-      }
     }
 
     @media (max-width: 768px) {
@@ -2149,22 +2137,6 @@
       }
 
       .population-item p {
-        overflow-wrap: anywhere;
-      }
-
-      .value-prop {
-        flex-direction: column;
-        gap: 0.75rem;
-        padding: 1.5rem 1rem;
-        min-width: 0;
-      }
-
-      .value-prop-content {
-        min-width: 0;
-      }
-
-      .value-prop h3,
-      .value-prop p {
         overflow-wrap: anywhere;
       }
 
@@ -2294,6 +2266,38 @@
     .value-prop:nth-child(3) { transition-delay: 0.15s; }
     .value-prop:nth-child(4) { transition-delay: 0.2s; }
     .value-prop:nth-child(5) { transition-delay: 0.25s; }
+
+    @media (max-width: 1024px) {
+      .value-props-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .value-prop:nth-child(3n) {
+        border-right: 1px solid var(--gray-200);
+      }
+
+      .value-prop:nth-child(2n) {
+        border-right: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .value-prop {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1.5rem 1rem;
+        min-width: 0;
+      }
+
+      .value-prop-content {
+        min-width: 0;
+      }
+
+      .value-prop h3,
+      .value-prop p {
+        overflow-wrap: anywhere;
+      }
+    }
 
 
     /* Locations */
