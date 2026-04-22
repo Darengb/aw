@@ -1,6 +1,6 @@
 ---
-title: "5th Avenue Office"
-address: "286 5th Avenue 2nd Floor"
+title: "Chelsea Office"
+address: "122 West 27th Street, FL 7"
 city: "New York"
 state: "New York"
 stateCode: "NY"
@@ -9,6 +9,6 @@ phone: "212-947-5627"
 fax: "212-358-2519"
 email: "info@americaworks.com"
 notes: ""
-lat: 40.7468
-lng: -73.9867
+lat: 40.7451
+lng: -73.9926
 ---

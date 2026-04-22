@@ -44,10 +44,20 @@ export default function Nav() {
     <>
       <nav className={navClasses}>
         <div className="max-w-container mx-auto py-5 px-8 flex justify-between items-center">
-          <Link href="/" className="nav-logo flex items-center gap-3 font-crimson text-[1.15rem] md:text-2xl font-semibold tracking-tight no-underline transition-opacity duration-200 hover:opacity-70 whitespace-nowrap">
-            <img src="/images/aw-logo-simple.png" alt="AW" className="h-10 w-auto block" />
-            <span>AMERICA WORKS</span>
-          </Link>
+          <div className="flex items-start">
+            <Link href="/" className="nav-logo flex items-center gap-3 font-crimson text-[1.15rem] md:text-2xl font-semibold tracking-tight no-underline transition-opacity duration-200 hover:opacity-70 whitespace-nowrap">
+              <img src="/images/aw-logo-simple.png" alt="AW" className="h-10 w-auto block" />
+              <span>AMERICA WORKS</span>
+            </Link>
+            <Link
+              href="/#network-of-companies"
+              aria-label="Network of companies disclosure"
+              title="Network of companies"
+              className="ml-0.5 mt-[7px] text-[0.65rem] leading-none text-white/75 no-underline hover:text-white transition-colors"
+            >
+              *
+            </Link>
+          </div>
 
           {/* Desktop Nav */}
           <div className="nav-links hidden md:flex items-center gap-12">
