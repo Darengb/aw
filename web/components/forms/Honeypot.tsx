@@ -38,7 +38,7 @@ export function useHoneypot() {
 
   const isLikelyBot = useCallback(() => {
     if (trapRef.current?.value?.trim()) return true
-    if (Date.now() - renderedAt.current < 7000) return true
+    if (Date.now() - renderedAt.current < 10000) return true
     return false
   }, [])
 
