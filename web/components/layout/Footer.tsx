@@ -65,7 +65,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-sm">
-          <div>&copy; 2026 America Works Network of Companies. All rights reserved.</div>
+          <div>&copy; 2026. All rights reserved.</div>
           <div className="footer-credentials flex flex-col md:flex-row gap-8 md:gap-8 font-mono text-xs">
             <span>Est. 1984</span>
             <span>Federal Vendor</span>
