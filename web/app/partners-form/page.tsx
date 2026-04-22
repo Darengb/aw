@@ -255,6 +255,9 @@ function PartnersFormContent() {
             />
           </div>
 
+          {/* Verification */}
+          <TurnstileWidget ref={turnstileRef} onToken={setTurnstileToken} />
+
           {/* Error Message */}
           {status === 'error' && (
             <div className="p-4 bg-red-50 border border-red-200 rounded text-sm text-red-700">
@@ -280,9 +283,6 @@ function PartnersFormContent() {
               </>
             )}
           </button>
-
-          {/* Verification */}
-          <TurnstileWidget ref={turnstileRef} onToken={setTurnstileToken} />
         </form>
       </div>
     </div>

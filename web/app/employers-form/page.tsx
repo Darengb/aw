@@ -376,6 +376,9 @@ export default function EmployersFormPage() {
               <span className="text-sm text-gray-700 group-hover:text-black transition-colors">Sign up to receive email updates</span>
             </label>
 
+            {/* Verification */}
+            <TurnstileWidget ref={turnstileRef} onToken={setTurnstileToken} />
+
             {/* Error Message */}
             {status === 'error' && (
               <div className="p-4 bg-red-50 border border-red-200 rounded text-sm text-red-700">
@@ -401,9 +404,6 @@ export default function EmployersFormPage() {
                 </>
               )}
             </button>
-
-            {/* Verification */}
-            <TurnstileWidget ref={turnstileRef} onToken={setTurnstileToken} />
           </form>
 
           {/* Marketing Sidebar */}
