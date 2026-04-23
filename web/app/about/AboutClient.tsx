@@ -186,7 +186,7 @@ export default function AboutClient() {
     <>
       {/* Hero */}
       <PageHero
-        label="Impact & About"
+        label="Our Impact"
         headline="Proven impact for the hardest-to-serve."
         subheadline="America Works delivers performance-based employment outcomes for welfare, disability, reentry, and homelessness programs across multiple states under rigorous oversight and evaluation."
         image="/images/photoshoot/_DSC4145.jpg"
