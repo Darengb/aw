@@ -87,7 +87,6 @@ const featuredTestimonials = [
 export default function EmployersFormPage() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
-  const [emailUpdates, setEmailUpdates] = useState(false);
   const [selectedSchedule, setSelectedSchedule] = useState<string[]>([]);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const turnstileRef = useRef<TurnstileInstance | null>(null);
@@ -110,7 +109,6 @@ export default function EmployersFormPage() {
       setStatus('success');
       form.reset();
       setSelectedSchedule([]);
-      setEmailUpdates(false);
       return;
     }
 
@@ -123,8 +121,9 @@ export default function EmployersFormPage() {
     setStatus('submitting');
     data.delete('website');
     data.append('schedule', selectedSchedule.join(', '));
-    data.append('email_updates', emailUpdates ? 'Yes' : 'No');
-    data.append('_form_type', 'employer_job_order');
+    const state = (data.get('state')?.toString() || '').trim();
+    data.append('form', 'employer_job_order');
+    data.append('_subject', `Employer job order — ${state || 'No state given'}`);
     data.append('cf-turnstile-response', turnstileToken);
 
     try {
@@ -137,7 +136,6 @@ export default function EmployersFormPage() {
         setStatus('success');
         form.reset();
         setSelectedSchedule([]);
-        setEmailUpdates(false);
       } else {
         const json = await res.json().catch(() => ({}));
         setErrorMsg(json?.errors?.[0]?.message || 'Something went wrong. Please try again.');
@@ -307,9 +305,9 @@ export default function EmployersFormPage() {
             {/* Rate of Pay */}
             <div>
               <label htmlFor="rateOfPay" className="block text-sm font-semibold text-gray-700 mb-2">
-                Rate of Pay
+                Rate of Pay <span className="text-aw-blue">*</span>
               </label>
-              <input id="rateOfPay" name="rateOfPay" type="text" placeholder="e.g. $18-22/hr" className={inputClass} />
+              <input id="rateOfPay" name="rateOfPay" type="text" required placeholder="e.g. $18-22/hr" className={inputClass} />
             </div>
 
             {/* Schedule */}
@@ -354,27 +352,17 @@ export default function EmployersFormPage() {
             {/* Additional Details */}
             <div>
               <label htmlFor="additionalDetails" className="block text-sm font-semibold text-gray-700 mb-2">
-                Additional Details
+                Additional Details <span className="text-aw-blue">*</span>
               </label>
               <textarea
                 id="additionalDetails"
                 name="additionalDetails"
                 rows={4}
+                required
                 placeholder="Any additional information about the position, requirements, or your hiring timeline..."
                 className={inputClass}
               />
             </div>
-
-            {/* Email Updates */}
-            <label className="flex items-center gap-3 cursor-pointer group pt-2">
-              <input
-                type="checkbox"
-                checked={emailUpdates}
-                onChange={(e) => setEmailUpdates(e.target.checked)}
-                className="w-4 h-4 rounded border-gray-300 text-aw-blue focus:ring-aw-blue/20 cursor-pointer"
-              />
-              <span className="text-sm text-gray-700 group-hover:text-black transition-colors">Sign up to receive email updates</span>
-            </label>
 
             {/* Verification */}
             <TurnstileWidget ref={turnstileRef} onToken={setTurnstileToken} />

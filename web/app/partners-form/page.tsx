@@ -52,7 +52,9 @@ function PartnersFormContent() {
 
     setStatus('submitting');
     data.delete('website');
-    data.append('_form_type', mode === 'rfp' ? 'partner_rfp' : 'partner_inquiry');
+    const geography = (data.get('geography')?.toString() || '').trim();
+    data.append('form', mode === 'rfp' ? 'partner_rfp' : 'partner_inquiry');
+    data.append('_subject', `${mode === 'rfp' ? 'Partner RFP' : 'Partner inquiry'} — ${geography || 'No area given'}`);
     data.append('cf-turnstile-response', turnstileToken);
 
     try {
@@ -204,10 +206,18 @@ function PartnersFormContent() {
             </div>
           </div>
 
+          {/* Geographic Area (common) */}
+          <div>
+            <label htmlFor="geography" className="block text-sm font-semibold text-gray-700 mb-2">
+              Geographic Area <span className="text-aw-blue">*</span>
+            </label>
+            <input id="geography" name="geography" type="text" required placeholder="e.g. New York City, State of Maryland" className={inputClass} />
+          </div>
+
           {/* RFP-specific fields */}
           {mode === 'rfp' && (
             <>
-              {/* Program Type & Geographic Area */}
+              {/* Program Type & Timeline */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="programType" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -221,19 +231,11 @@ function PartnersFormContent() {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="geography" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Geographic Area
+                  <label htmlFor="timeline" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Timeline / RFP Deadline
                   </label>
-                  <input id="geography" name="geography" type="text" placeholder="e.g. New York City, State of Maryland" className={inputClass} />
+                  <input id="timeline" name="timeline" type="text" placeholder="e.g. RFP due March 2026" className={inputClass} />
                 </div>
-              </div>
-
-              {/* Timeline */}
-              <div>
-                <label htmlFor="timeline" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Timeline / RFP Deadline
-                </label>
-                <input id="timeline" name="timeline" type="text" placeholder="e.g. RFP due March 2026, or exploring options" className={inputClass} />
               </div>
             </>
           )}
