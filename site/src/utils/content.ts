@@ -85,8 +85,8 @@ export function getEvents(): EventItem[] {
     });
   }
 
-  // Sort by date
-  return events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  // Sort by date (newest first, oldest at bottom)
+  return events.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 // Parse markdown content to HTML-ready structure (bullet points)

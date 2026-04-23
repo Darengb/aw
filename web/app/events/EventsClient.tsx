@@ -104,21 +104,13 @@ function EventCard({
                 {bullets.map((bullet, i) => (
                   <li
                     key={i}
-                    className="relative pl-4 text-sm text-gray-700 mb-2 before:content-[''] before:absolute before:left-0 before:top-2 before:w-1 before:h-1 before:rounded-full"
-                    style={{
-                      '--before-bg': isEven ? '#323b97' : '#ec140c'
-                    } as React.CSSProperties}
+                    className="relative pl-5 text-sm text-gray-700 mb-2"
                   >
                     <span
-                      className="before:absolute before:left-0 before:top-2 before:w-1 before:h-1 before:rounded-full"
-                      style={{ position: 'relative' }}
-                    >
-                      <span
-                        className="absolute left-0 top-[6px] w-1 h-1 rounded-full"
-                        style={{ backgroundColor: isEven ? '#323b97' : '#ec140c' }}
-                      />
-                      {bullet}
-                    </span>
+                      className="absolute left-0 top-[7px] w-1.5 h-1.5 rounded-full"
+                      style={{ backgroundColor: isEven ? '#323b97' : '#ec140c' }}
+                    />
+                    {bullet}
                   </li>
                 ))}
               </ul>

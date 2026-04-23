@@ -55,10 +55,10 @@ export function getOffices() {
   })
 }
 
-// Load all events from markdown files
+// Load all events from markdown files (newest first, oldest at bottom)
 export function getEvents() {
   const dir = path.join(contentDir, 'events')
-  const files = fs.readdirSync(dir).filter(f => f.endsWith('.md')).sort()
+  const files = fs.readdirSync(dir).filter(f => f.endsWith('.md')).sort().reverse()
 
   return files.map(file => {
     const raw = fs.readFileSync(path.join(dir, file), 'utf-8')
