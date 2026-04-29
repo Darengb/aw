@@ -60,7 +60,7 @@ export default function HomeHero() {
               value="40"
               symbol="+"
               symbolPosition="right"
-              label="Years Operating"
+              label="Years of Service"
             />
           </div>
         </aside>
