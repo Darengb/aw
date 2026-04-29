@@ -38,20 +38,19 @@ export default function HomeHero() {
               isHero={true}
             />
             <MetricCard
-              value="4"
+              value="7"
               symbol="~"
               symbolPosition="left"
               label="Weeks to Place"
             />
             <MetricCard
-              value="60"
-              suffix="%"
+              value="70%"
               symbol=">"
               symbolPosition="left"
               label="Retention Rate"
             />
             <MetricCard
-              value="11"
+              value="50"
               symbol="+"
               symbolPosition="right"
               label="States Covered"
@@ -60,7 +59,7 @@ export default function HomeHero() {
               value="40"
               symbol="+"
               symbolPosition="right"
-              label="Years Operating"
+              label="Years of Service"
             />
           </div>
         </aside>
