@@ -44,14 +44,13 @@ export default function HomeHero() {
               label="Weeks to Place"
             />
             <MetricCard
-              value="60"
-              suffix="%"
+              value="70%"
               symbol=">"
               symbolPosition="left"
               label="Retention Rate"
             />
             <MetricCard
-              value="11"
+              value="50"
               symbol="+"
               symbolPosition="right"
               label="States Covered"
