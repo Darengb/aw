@@ -44,26 +44,26 @@ export default function HomeHero() {
           <div className="dashboard-grid p-0 grid grid-cols-2 gap-4 relative">
             <MetricCard
               tag="EST. 1984"
-              value="10,000,000"
+              value="30,000,000"
               symbol="+"
               symbolPosition="right"
               label="Clients Served"
               isHero={true}
             />
             <MetricCard
-              value="4"
+              value="7"
               symbol="~"
               symbolPosition="left"
               label="Weeks to Place"
             />
             <MetricCard
-              value="60%"
+              value="70%"
               symbol=">"
               symbolPosition="left"
               label="Retention Rate"
             />
             <MetricCard
-              value="11"
+              value="50"
               symbol="+"
               symbolPosition="right"
               label="States Covered"
@@ -72,7 +72,7 @@ export default function HomeHero() {
               value="40"
               symbol="+"
               symbolPosition="right"
-              label="Years Operating"
+              label="Years of Service"
             />
           </div>
         </aside>
