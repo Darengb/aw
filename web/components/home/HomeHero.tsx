@@ -38,7 +38,7 @@ export default function HomeHero() {
               isHero={true}
             />
             <MetricCard
-              value="4"
+              value="7"
               symbol="~"
               symbolPosition="left"
               label="Weeks to Place"
