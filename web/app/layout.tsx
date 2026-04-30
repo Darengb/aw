@@ -33,7 +33,7 @@ const crimsonText = Crimson_Text({
 export const metadata: Metadata = {
   title: 'America Works - Technical Workforce Excellence',
   description: 'America Works - 40 years of proven workforce development',
-  icons: { icon: '/favicon.svg' },
+  icons: { icon: '/images/aw-logo-simple.png' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
