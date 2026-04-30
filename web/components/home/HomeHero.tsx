@@ -44,7 +44,8 @@ export default function HomeHero() {
               label="Weeks to Place"
             />
             <MetricCard
-              value="70%"
+              value="70"
+              suffix="%"
               symbol=">"
               symbolPosition="left"
               label="Retention Rate"
