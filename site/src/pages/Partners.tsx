@@ -9,8 +9,8 @@ import TestimonialCard from '../components/home/TestimonialCard';
 // Trust Strip Data
 const trustItems = [
   { number: "40+", label: "Years in workforce solutions and welfare-to-work" },
-  { number: "~2M", label: "Individuals helped increase self-sufficiency through employment" },
-  { number: "100s", label: "Partnerships with local, state & federal agencies" },
+  { number: "~6M", label: "Individuals helped increase self-sufficiency through employment" },
+  { number: "1000s", label: "Partnerships with local, state & federal agencies" },
   { number: "Multi-state", label: "Hybrid performance-based contracts active in major cities" }
 ];
 
