@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react';
-import { MapPin, Phone, Printer, Mail, Navigation, ChevronDown } from 'lucide-react';
+import { MapPin, Phone, Printer, Mail, Navigation, ChevronDown, Clock } from 'lucide-react';
 import Link from 'next/link';
 import type { OfficeLocation } from '@/utils/content-shared';
 
@@ -94,6 +94,14 @@ function OfficeCard({ office, index, isVisible }: { office: OfficeLocation; inde
           <Mail className="w-4 h-4 text-gray-400 flex-shrink-0" />
           <a href={`mailto:${office.email}`} className="hover:text-black transition-colors no-underline text-gray-600">{office.email}</a>
         </div>
+
+        {/* Hours */}
+        {office.hours && (
+          <div className="flex items-start gap-2 text-[0.8125rem] text-gray-600 mb-2">
+            <Clock className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
+            <span className="whitespace-pre-line">{office.hours}</span>
+          </div>
+        )}
 
         {/* Notes */}
         {office.notes && (

@@ -8,6 +8,7 @@ zip: "21202"
 phone: "410-625-9675"
 fax: ""
 email: "info@americaworks.com"
+hours: "Mon-Fri, 9:00am-5:00pm"
 notes: ""
 lat: 39.2862
 lng: -76.6052

@@ -8,6 +8,7 @@ zip: "19103"
 phone: "215-774-3001"
 fax: "215-689-4369"
 email: "info@americaworks.com"
+hours: "Mon-Fri, 9:00am-5:00pm"
 notes: ""
 lat: 39.9536
 lng: -75.1715

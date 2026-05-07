@@ -8,6 +8,7 @@ zip: "92677"
 phone: ""
 fax: ""
 email: "info@americaworks.com"
+hours: "Mon-Fri, 9:00am-6:00pm\nSat, 9:00am-1:00pm"
 notes: ""
 lat: 33.5225
 lng: -117.7076

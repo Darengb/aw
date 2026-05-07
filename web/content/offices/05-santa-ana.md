@@ -8,6 +8,7 @@ zip: "92703"
 phone: "562-672-1352"
 fax: ""
 email: "info@americaworks.com"
+hours: "Mon-Fri, 9:00am-5:00pm"
 notes: ""
 lat: 33.7494
 lng: -117.8783
