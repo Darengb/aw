@@ -8,6 +8,7 @@ zip: "05301"
 phone: "(802) 308-7075"
 fax: ""
 email: "info@americaworks.com"
+hours: "Mon-Fri, 9:00am-5:00pm"
 notes: ""
 lat: 42.8509
 lng: -72.5579

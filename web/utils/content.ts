@@ -47,6 +47,7 @@ export function getOffices() {
       phone: (attributes.phone as string) || '',
       fax: (attributes.fax as string) || '',
       email: (attributes.email as string) || 'info@americaworks.com',
+      hours: (attributes.hours as string) || '',
       notes: (attributes.notes as string) || '',
       lat: attributes.lat as number,
       lng: attributes.lng as number,

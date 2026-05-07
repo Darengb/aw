@@ -35,6 +35,7 @@ export interface OfficeLocation {
   phone: string;
   fax: string;
   email: string;
+  hours: string;
   notes: string;
   lat: number;
   lng: number;

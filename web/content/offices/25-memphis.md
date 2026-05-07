@@ -8,6 +8,7 @@ zip: "38103"
 phone: "901-341-5627"
 fax: ""
 email: "info@americaworks.com"
+hours: "Mon-Fri, 9:00am-5:00pm"
 notes: ""
 lat: 35.1445
 lng: -90.0490
