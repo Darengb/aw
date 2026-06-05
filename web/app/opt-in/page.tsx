@@ -7,9 +7,22 @@ import type { TurnstileInstance } from '@marsidev/react-turnstile'
 import { HoneypotField, useHoneypot } from '@/components/forms/Honeypot'
 import { TurnstileWidget } from '@/components/forms/TurnstileWidget'
 
+function formatUSPhoneNumber(value: string) {
+  const digits = value.replace(/\D/g, '').slice(0, 10)
+
+  if (digits.length <= 3) return digits
+  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`
+}
+
+function getPhoneDigits(value: string) {
+  return value.replace(/\D/g, '')
+}
+
 export default function SmsOptInPage() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
+  const [phone, setPhone] = useState('')
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
   const turnstileRef = useRef<TurnstileInstance | null>(null)
   const { trapRef, isLikelyBot } = useHoneypot()
@@ -24,6 +37,14 @@ export default function SmsOptInPage() {
     if (isLikelyBot()) {
       setStatus('success')
       form.reset()
+      setPhone('')
+      return
+    }
+
+    const phoneDigits = getPhoneDigits(phone)
+    if (phoneDigits.length !== 10) {
+      setErrorMsg('Please enter a valid 10-digit phone number.')
+      setStatus('error')
       return
     }
 
@@ -35,6 +56,8 @@ export default function SmsOptInPage() {
 
     setStatus('submitting')
     data.delete('website')
+    data.set('phone', phone)
+    data.append('phone_e164', `+1${phoneDigits}`)
     data.append('form', 'sms_opt_in')
     data.append('_subject', 'SMS opt-in consent')
     data.append('consent_timestamp', new Date().toISOString())
@@ -52,6 +75,7 @@ export default function SmsOptInPage() {
       if (res.ok) {
         setStatus('success')
         form.reset()
+        setPhone('')
       } else {
         const json = await res.json().catch(() => ({}))
         setErrorMsg(json?.errors?.[0]?.message || 'Something went wrong. Please try again.')
@@ -137,9 +161,24 @@ export default function SmsOptInPage() {
               type="tel"
               required
               autoComplete="tel"
+              inputMode="tel"
+              pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}"
+              maxLength={14}
               placeholder="(555) 555-5555"
+              title="Enter a 10-digit U.S. phone number."
+              value={phone}
+              onChange={(e) => {
+                setPhone(formatUSPhoneNumber(e.target.value))
+                if (status === 'error') {
+                  setStatus('idle')
+                  setErrorMsg('')
+                }
+              }}
               className={inputClass}
             />
+            <p className="mt-2 text-xs text-gray-500">
+              Use a 10-digit U.S. mobile number, formatted as (555) 555-5555.
+            </p>
           </div>
 
           <section className="p-6 bg-gray-50 border border-gray-200 rounded space-y-4 text-sm text-gray-700 leading-relaxed">
