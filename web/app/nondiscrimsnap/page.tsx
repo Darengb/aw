@@ -18,7 +18,7 @@ export default function NondiscrimsnapPage() {
         </h1>
         <p className="text-xl text-gray-600 leading-relaxed mb-8">
           This page provides the USDA nondiscrimination statement for SNAP/FDPIR and related
-          nutrition assistance program materials. It is required for SNAP audit compliance.
+          nutrition assistance program materials.
         </p>
 
         <a
