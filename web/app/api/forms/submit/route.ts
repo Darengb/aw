@@ -1,7 +1,14 @@
 import { NextResponse } from 'next/server'
 import { verifyTurnstile } from '@/lib/turnstile'
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeelalar'
+const DEFAULT_FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeelalar'
+const SMS_OPT_IN_FORMSPREE_ENDPOINT = 'https://formspree.io/f/xbdelagr'
+
+function getFormspreeEndpoint(formType: FormDataEntryValue | null) {
+  return formType?.toString() === 'sms_opt_in'
+    ? SMS_OPT_IN_FORMSPREE_ENDPOINT
+    : DEFAULT_FORMSPREE_ENDPOINT
+}
 
 export async function POST(request: Request) {
   let form: FormData
@@ -27,10 +34,11 @@ export async function POST(request: Request) {
     )
   }
 
+  const formspreeEndpoint = getFormspreeEndpoint(form.get('form'))
   form.delete('cf-turnstile-response')
 
   try {
-    const res = await fetch(FORMSPREE_ENDPOINT, {
+    const res = await fetch(formspreeEndpoint, {
       method: 'POST',
       body: form,
       headers: { Accept: 'application/json' },

@@ -42,6 +42,9 @@ export default function Footer() {
               <li className="mb-3"><Link href="/about" className="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">About</Link></li>
               <li className="mb-3"><Link href="/contact" className="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Locations</Link></li>
               <li className="mb-3"><Link href="/jobseekers-form" className="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Contact</Link></li>
+              <li className="mb-3"><Link href="/smspolicy" className="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">SMS Policy</Link></li>
+              <li className="mb-3"><Link href="/opt-in" className="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">SMS Opt-In</Link></li>
+              <li className="mb-3"><Link href="/nondiscrimsnap" className="text-gray-400 no-underline text-sm transition-colors duration-200 hover:text-white">Nondiscrimination Statement</Link></li>
             </ul>
           </div>
         </div>
