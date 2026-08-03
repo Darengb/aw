@@ -9,9 +9,9 @@ import type { StateCode } from './stateCodes';
 export const STATE_COVERAGE: Record<StateCode, 'local' | 'ttw'> = {
   CA: 'local', GA: 'local', LA: 'local', MD: 'local', NJ: 'local',
   NY: 'local', PA: 'local', TN: 'local', VT: 'local', WI: 'local',
-  WA: 'local',
+  WA: 'local', IL: 'local',
   AL: 'ttw', AK: 'ttw', AZ: 'ttw', AR: 'ttw', CO: 'ttw', CT: 'ttw',
-  DE: 'ttw', FL: 'ttw', HI: 'ttw', ID: 'ttw', IL: 'ttw', IN: 'ttw',
+  DE: 'ttw', FL: 'ttw', HI: 'ttw', ID: 'ttw', IN: 'ttw',
   IA: 'ttw', KS: 'ttw', KY: 'ttw', ME: 'ttw', MA: 'ttw', MI: 'ttw',
   MN: 'ttw', MS: 'ttw', MO: 'ttw', MT: 'ttw', NE: 'ttw', NV: 'ttw',
   NH: 'ttw', NM: 'ttw', NC: 'ttw', ND: 'ttw', OH: 'ttw', OK: 'ttw',
