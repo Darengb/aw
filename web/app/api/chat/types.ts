@@ -72,5 +72,5 @@ export interface FormField {
 export const SIGNUP_FORM_URL = '/jobseekers-form?from=chatbot'
 
 export const SERVICE_STATES = [
-  'CA', 'DC', 'GA', 'LA', 'MD', 'NJ', 'NY', 'PA', 'TN', 'VT', 'WI',
+  'CA', 'DC', 'LA', 'MD', 'NJ', 'NY', 'PA', 'TN', 'VT', 'WI',
 ]
