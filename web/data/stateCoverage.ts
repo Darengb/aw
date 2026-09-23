@@ -4,12 +4,13 @@ import type { StateCode } from './stateCodes';
 // - 'local'  = Local Programs + Ticket To Work (dark)
 // - 'ttw'    = Ticket To Work only (light)
 // Edit this map to change which states render as Local Programs.
-// Offices (contact page) currently cover: CA, GA, LA, MD/DC, NJ, NY, PA, TN, VT, WI
+// Offices (contact page) currently cover: CA, LA, MD/DC, NJ, NY, PA, TN, VT, WI
 // (Note: the SVG has no separate DC path — DC is inside the MD path.)
 export const STATE_COVERAGE: Record<StateCode, 'local' | 'ttw'> = {
-  CA: 'local', GA: 'local', LA: 'local', MD: 'local', NJ: 'local',
+  CA: 'local', LA: 'local', MD: 'local', NJ: 'local',
   NY: 'local', PA: 'local', TN: 'local', VT: 'local', WI: 'local',
   WA: 'local', IL: 'local',
+  GA: 'ttw',
   AL: 'ttw', AK: 'ttw', AZ: 'ttw', AR: 'ttw', CO: 'ttw', CT: 'ttw',
   DE: 'ttw', FL: 'ttw', HI: 'ttw', ID: 'ttw', IN: 'ttw',
   IA: 'ttw', KS: 'ttw', KY: 'ttw', ME: 'ttw', MA: 'ttw', MI: 'ttw',
