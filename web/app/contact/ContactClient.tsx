@@ -177,7 +177,7 @@ export default function ContactClient({ offices }: { offices: OfficeLocation[] }
               Find an office <span className="italic">near you.</span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed max-w-2xl">
-              America Works operates {offices.length} offices across {states.length} states. Visit us for career services, employer partnerships, and workforce solutions.
+              Browse {offices.length} locations across {states.length} states and districts. Find career services, employer partnerships, and workforce solutions near you.
             </p>
           </div>
         </div>

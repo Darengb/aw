@@ -29,15 +29,16 @@ export function getNewsArticles() {
 }
 
 // Load all offices from markdown files
-export function getOffices() {
+export function getOffices({ includeDirectoryOnly = false } = {}) {
   const dir = path.join(contentDir, 'offices')
   const files = fs.readdirSync(dir).filter(f => f.endsWith('.md')).sort()
 
-  return files.map(file => {
+  return files.flatMap(file => {
     const raw = fs.readFileSync(path.join(dir, file), 'utf-8')
     const { attributes } = fm<Record<string, unknown>>(raw)
+    if (attributes.directoryOnly === true && !includeDirectoryOnly) return []
     const slug = file.replace('.md', '')
-    return {
+    return [{
       title: attributes.title as string,
       address: attributes.address as string,
       city: attributes.city as string,
@@ -52,7 +53,7 @@ export function getOffices() {
       lat: attributes.lat as number,
       lng: attributes.lng as number,
       slug,
-    }
+    }]
   })
 }
 
